@@ -1,0 +1,283 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Otros Aspectos
+
+{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+        <div class="col-md-6 col-md-offset-1">
+            <div class="form-group">
+                {{ form1.fichas }}
+                {{ form2.fichas }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form1.otros_hallazgos.name }}">{{ form1.otros_hallazgos.label }}</label>
+                {{ form1.otros_hallazgos }}
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <b>Estadios de Nolla</b><br><br>
+                <table border="1">
+                    <tr>
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form1.e_1_8.name }}">{{ form1.e_1_8.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_7.name }}">{{ form1.e_1_7.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_6.name }}">{{ form1.e_1_6.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_5.name }}">{{ form1.e_1_5.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_4.name }}">{{ form1.e_1_4.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_3.name }}">{{ form1.e_1_3.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_2.name }}">{{ form1.e_1_2.label }}</label></th>
+                                    <th><label for="{{ form1.e_1_1.name }}">{{ form1.e_1_1.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form1.e_1_8 }}</td>
+                                    <td>{{ form1.e_1_7 }}</td>
+                                    <td>{{ form1.e_1_6 }}</td>
+                                    <td>{{ form1.e_1_5 }}</td>
+                                    <td>{{ form1.e_1_4 }}</td>
+                                    <td>{{ form1.e_1_3 }}</td>
+                                    <td>{{ form1.e_1_2 }}</td>
+                                    <td>{{ form1.e_1_1 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form1.e_2_1.name }}">{{ form1.e_2_1.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_2.name }}">{{ form1.e_2_2.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_3.name }}">{{ form1.e_2_3.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_4.name }}">{{ form1.e_2_4.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_5.name }}">{{ form1.e_2_5.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_6.name }}">{{ form1.e_2_6.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_7.name }}">{{ form1.e_2_7.label }}</label></th>
+                                    <th><label for="{{ form1.e_2_8.name }}">{{ form1.e_2_8.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form1.e_2_1 }}</td>
+                                    <td>{{ form1.e_2_2 }}</td>
+                                    <td>{{ form1.e_2_3 }}</td>
+                                    <td>{{ form1.e_2_4 }}</td>
+                                    <td>{{ form1.e_2_5 }}</td>
+                                    <td>{{ form1.e_2_6 }}</td>
+                                    <td>{{ form1.e_2_7 }}</td>
+                                    <td>{{ form1.e_2_8 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form1.e_4_8.name }}">{{ form1.e_4_8.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_7.name }}">{{ form1.e_4_7.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_6.name }}">{{ form1.e_4_6.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_5.name }}">{{ form1.e_4_5.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_4.name }}">{{ form1.e_4_4.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_3.name }}">{{ form1.e_4_3.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_2.name }}">{{ form1.e_4_2.label }}</label></th>
+                                    <th><label for="{{ form1.e_4_1.name }}">{{ form1.e_4_1.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form1.e_4_8 }}</td>
+                                    <td>{{ form1.e_4_7 }}</td>
+                                    <td>{{ form1.e_4_6 }}</td>
+                                    <td>{{ form1.e_4_5 }}</td>
+                                    <td>{{ form1.e_4_4 }}</td>
+                                    <td>{{ form1.e_4_3 }}</td>
+                                    <td>{{ form1.e_4_2 }}</td>
+                                    <td>{{ form1.e_4_1 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                        <td>
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form1.e_3_1.name }}">{{ form1.e_3_1.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_2.name }}">{{ form1.e_3_2.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_3.name }}">{{ form1.e_3_3.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_4.name }}">{{ form1.e_3_4.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_5.name }}">{{ form1.e_3_5.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_6.name }}">{{ form1.e_3_6.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_7.name }}">{{ form1.e_3_7.label }}</label></th>
+                                    <th><label for="{{ form1.e_3_8.name }}">{{ form1.e_3_8.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form1.e_3_1 }}</td>
+                                    <td>{{ form1.e_3_2 }}</td>
+                                    <td>{{ form1.e_3_3 }}</td>
+                                    <td>{{ form1.e_3_4 }}</td>
+                                    <td>{{ form1.e_3_5 }}</td>
+                                    <td>{{ form1.e_3_6 }}</td>
+                                    <td>{{ form1.e_3_7 }}</td>
+                                    <td>{{ form1.e_3_8 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <br><br>
+        <div class="col-md-12">
+            <div class="form-group">
+                <b>Estadios de Nolla</b><br><br>
+                <table border="1">
+                    <tr>
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form2.o_1_8.name }}">{{ form2.o_1_8.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_7.name }}">{{ form2.o_1_7.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_6.name }}">{{ form2.o_1_6.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_5.name }}">{{ form2.o_1_5.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_4.name }}">{{ form2.o_1_4.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_3.name }}">{{ form2.o_1_3.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_2.name }}">{{ form2.o_1_2.label }}</label></th>
+                                    <th><label for="{{ form2.o_1_1.name }}">{{ form2.o_1_1.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form2.o_1_8 }}</td>
+                                    <td>{{ form2.o_1_7 }}</td>
+                                    <td>{{ form2.o_1_6 }}</td>
+                                    <td>{{ form2.o_1_5 }}</td>
+                                    <td>{{ form2.o_1_4 }}</td>
+                                    <td>{{ form2.o_1_3 }}</td>
+                                    <td>{{ form2.o_1_2 }}</td>
+                                    <td>{{ form2.o_1_1 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+
+                        <td>
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form2.o_2_1.name }}">{{ form2.o_2_1.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_2.name }}">{{ form2.o_2_2.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_3.name }}">{{ form2.o_2_3.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_4.name }}">{{ form2.o_2_4.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_5.name }}">{{ form2.o_2_5.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_6.name }}">{{ form2.o_2_6.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_7.name }}">{{ form2.o_2_7.label }}</label></th>
+                                    <th><label for="{{ form2.o_2_8.name }}">{{ form2.o_2_8.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form2.o_2_1 }}</td>
+                                    <td>{{ form2.o_2_2 }}</td>
+                                    <td>{{ form2.o_2_3 }}</td>
+                                    <td>{{ form2.o_2_4 }}</td>
+                                    <td>{{ form2.o_2_5 }}</td>
+                                    <td>{{ form2.o_2_6 }}</td>
+                                    <td>{{ form2.o_2_7 }}</td>
+                                    <td>{{ form2.o_2_8 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form2.o_4_8.name }}">{{ form2.o_4_8.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_7.name }}">{{ form2.o_4_7.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_6.name }}">{{ form2.o_4_6.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_5.name }}">{{ form2.o_4_5.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_4.name }}">{{ form2.o_4_4.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_3.name }}">{{ form2.o_4_3.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_2.name }}">{{ form2.o_4_2.label }}</label></th>
+                                    <th><label for="{{ form2.o_4_1.name }}">{{ form2.o_4_1.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form2.o_4_8 }}</td>
+                                    <td>{{ form2.o_4_7 }}</td>
+                                    <td>{{ form2.o_4_6 }}</td>
+                                    <td>{{ form2.o_4_5 }}</td>
+                                    <td>{{ form2.o_4_4 }}</td>
+                                    <td>{{ form2.o_4_3 }}</td>
+                                    <td>{{ form2.o_4_2 }}</td>
+                                    <td>{{ form2.o_4_1 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                        <td align="center">
+                            <table border="1">
+                                <tr>
+                                    <th><label for="{{ form2.o_3_1.name }}">{{ form2.o_3_1.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_2.name }}">{{ form2.o_3_2.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_3.name }}">{{ form2.o_3_3.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_4.name }}">{{ form2.o_3_4.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_5.name }}">{{ form2.o_3_5.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_6.name }}">{{ form2.o_3_6.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_7.name }}">{{ form2.o_3_7.label }}</label></th>
+                                    <th><label for="{{ form2.o_3_8.name }}">{{ form2.o_3_8.label }}</label></th>
+                                </tr>
+                                <tr>
+                                    <td>{{ form2.o_3_1 }}</td>
+                                    <td>{{ form2.o_3_2 }}</td>
+                                    <td>{{ form2.o_3_3 }}</td>
+                                    <td>{{ form2.o_3_4 }}</td>
+                                    <td>{{ form2.o_3_5 }}</td>
+                                    <td>{{ form2.o_3_6 }}</td>
+                                    <td>{{ form2.o_3_7 }}</td>
+                                    <td>{{ form2.o_3_8 }}</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-1">
+            <div class="form-group">
+                <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+            </div>
+        </div>
+    </form>
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
+{% endblock %}

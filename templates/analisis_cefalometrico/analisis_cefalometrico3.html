@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+	Funciones Sagitales
+{% endblock %}
+
+{% block header %}
+
+<h5>Este es el analisis cefalometrico </h5>
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype='multipart/form-data'>
+	{% csrf_token %}
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+                <table id="id_contact_info_table" cellpadding="0" cellspacing="5">
+                <thead>
+                    <tr>
+                        <th scope="col">1° Ex</th>
+                        <th scope="col">2° Ex</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in formset %}
+                    <tr>
+                        
+                        <td>{{ form.cuad_superior }}</td>
+      
+                        <td>{{ form.fichas }}</td>	
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>                
+                <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+        </form>
+<script>
+
+
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");
+
+         
+</script>
+
+{% endblock %}

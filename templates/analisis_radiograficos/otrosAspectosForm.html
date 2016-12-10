@@ -1,0 +1,125 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Otros Aspectos
+
+{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+
+    <h1 align="center">Analisis del Panorama Simoes de Simetria</h1>
+    <h2 align="center">Aspectos Mandibulares</h2><br><br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="col-md-6 col-md-offset-1">
+            <div class="form-group">
+                {{ form.fichas }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.aspectos_sinusales_simetrico.name }}">{{ form.aspectos_sinusales_simetrico.label }}</label>
+                {{ form.aspectos_sinusales_simetrico }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <b>Aspectos observados</b><br><br>
+                    <label for="{{ form.aspectos_sinusales_izq_aspect_observ.name }}">{{ form.aspectos_sinusales_izq_aspect_observ.label }}</label>
+                    {{ form.aspectos_sinusales_izq_aspect_observ }}
+                    <label for="{{ form.aspectos_sinusales_der_aspect_observ.name }}">{{ form.aspectos_sinusales_der_aspect_observ.label }}</label>
+                    {{ form.aspectos_sinusales_der_aspect_observ }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.ord_ori_simetrico.name }}">{{ form.ord_ori_simetrico.label }}</label>
+                {{ form.ord_ori_simetrico }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <b>Aspectos observados</b><br><br>
+                    <label for="{{ form.ord_ori_izq_aspect_observ.name }}">{{ form.ord_ori_izq_aspect_observ.label }}</label>
+                    {{ form.ord_ori_izq_aspect_observ }}
+                    <label for="{{ form.ord_ori_der_aspect_observ.name }}">{{ form.ord_ori_der_aspect_observ.label }}</label>
+                    {{ form.ord_ori_der_aspect_observ }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.fpgd_fpgi_simetrico.name }}">{{ form.fpgd_fpgi_simetrico.label }}</label>
+                {{ form.fpgd_fpgi_simetrico }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <b>Aspectos observados</b><br><br>
+                    <label for="{{ form.fpgd_fpgi_izq_aspect_observ.name }}">{{ form.fpgd_fpgi_izq_aspect_observ.label }}</label>
+                    {{ form.fpgd_fpgi_izq_aspect_observ }}
+                    <label for="{{ form.fpgd_fpgi_der_aspect_observ.name }}">{{ form.fpgd_fpgi_der_aspect_observ.label }}</label>
+                    {{ form.fpgd_fpgi_der_aspect_observ }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.veloc_erup_simetrico.name }}">{{ form.veloc_erup_simetrico.label }}</label>
+                {{ form.veloc_erup_simetrico }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <b>Aspectos observados</b><br><br>
+                    <label for="{{ form.veloc_erup_izq_aspect_observ.name }}">{{ form.veloc_erup_izq_aspect_observ.label }}</label>
+                    {{ form.veloc_erup_izq_aspect_observ }}
+                    <label for="{{ form.veloc_erup_der_aspect_observ.name }}">{{ form.veloc_erup_der_aspect_observ.label }}</label>
+                    {{ form.veloc_erup_der_aspect_observ }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.diagnostico.name }}">{{ form.diagnostico.label }}</label>
+                {{ form.diagnostico }}
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-1">
+            <div class="form-group">
+              <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+            </div>
+        </div>
+
+    </form>
+
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
+{% endblock %}

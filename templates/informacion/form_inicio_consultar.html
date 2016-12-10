@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+	Inicio
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+</form>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
+		{{form.codigo}}
+		<button class="btn btn-primary" onclick="buscar()">Buscar</button>
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group" >
+			<label for="ficha">Ficha</label>	
+		<select name="select" id="select" class="form-control"></select>
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<center>	<button type="submit" onclick="redireccionar()" class="btn btn-success">Consultar Expediente</button></center>
+		</div>
+	</div>
+
+<script>
+
+	function buscar(){
+
+		var codigo = $('#id_codigo').val();
+
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/reportes/numero/'+codigo+'/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					
+					$("#select").append('<option value='+(i+1)+'>'+data[i].fields.numero+'</option>');
+				}
+				if (data.length==0) {
+					
+					$('#select').empty();
+				}
+			}
+		});
+
+	}
+
+	function redireccionar(){
+
+		var codigo = $('#id_codigo').val();
+		var numero = $('#select').val();
+		location.href='/informacion/estado_general/consultar/'+codigo+'/'+numero+'/'	; 
+		$('#id_codigo').val("");
+		$('#nombre').val("");
+		$('#id_numero').empty();id_codigo
+		}
+</script>
+{% endblock %}

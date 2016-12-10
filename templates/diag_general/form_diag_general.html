@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+
+{% block header %}
+<h3>Diagnostico General</h3>
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+<div class="row">
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	</div>
+
+
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.diagnostico_ortodontico_general.name}}">{{form.diagnostico_ortodontico_general.label}}</label>
+			{{form.diagnostico_ortodontico_general}}
+		</div>
+	</div>
+
+
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.problemas.name}}">
+			{{form.problemas.label}}</label>
+			{{form.problemas}}
+		</div>
+	</div>
+
+
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.objetivos.name}}">
+			{{form.objetivos.label}}</label>
+			{{form.objetivos}}
+		</div>
+	</div>
+
+
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.tratamiento.name}}">
+			{{form.tratamiento.label}}</label>
+			{{form.tratamiento}}
+		</div>
+	</div>
+
+
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.descripcion_tratamiento.name}}">
+			{{form.descripcion_tratamiento.label}}</label>
+			{{form.descripcion_tratamiento}}
+		</div>
+	</div>
+
+
+
+
+	<div class="col-md-8 col-md-offset-1">
+		<div class="form-group">
+			<button type="button" onclick=" location.href='/informacion/estado_general/editar2/{{codi}}/{{num}}'" class="btn btn-warning">Cancelar</button>
+			<button type="submit" class="btn btn-success">Siguiente</button>
+		</div>
+	</div>
+
+
+	</form>
+	{% endblock %}

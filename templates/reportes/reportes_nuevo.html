@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title %}
+	Reportes
+{% endblock %}
+{% block header %}
+<script src="{% static 'js/DjangoAjax.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+</form>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
+			{{form.codigo}}
+			<button class="btn btn-primary" onclick="buscar()">Buscar</button>
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="nombre">Nombre Completo</label>	
+			<input type="text" class="form-control" id="nombre">
+			
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.numero.name}}">{{form.numero.label}}</label>	
+			{{form.numero}}
+			<br>
+			<button class="btn btn-success" onclick="generarReporte()">Generar Reporte</button>
+		</div>
+	</div>
+
+	
+<script>
+	function buscar(){
+
+		var codigo = $('#id_codigo').val();
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/reportes/nombre/'+codigo+'/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					
+					$('#nombre').val(data[i].fields.nombre_completo);
+					
+				}
+				if (data.length==0) {
+					alert("no se encontro expediente con ese codigo");
+					$('#nombre').val("");
+				}
+			}
+			
+		});
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/reportes/numero/'+codigo+'/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					
+					$("#id_numero").append('<option value='+(i+1)+'>'+data[i].fields.numero+'</option>');
+				}
+				if (data.length==0) {
+					
+					$('#id_numero').empty();
+				}
+			}
+		});
+
+	}
+
+	function generarReporte(){
+
+		var codigo = $('#id_codigo').val();
+		var numero = $('#id_numero').val();
+		location.href='/reportes/reportes/'+codigo+'/'+numero+'/'	; 
+		$('#id_codigo').val("");
+		$('#nombre').val("");
+		$('#id_numero').empty();id_codigo
+		}
+	  
+</script>
+{% endblock %}

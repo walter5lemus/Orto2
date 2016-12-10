@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
+		                  		</div>
+
+		                </div>
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>   
+    <div>
+    {% endblock %}
+{% block title %}
+	Registro de Cita
+
+{% endblock %}
+{% block header %}
+
+	<script>
+		$(document).ready(function(){
+    $("#id_fecha_cita").datepicker({
+        dateFormat: 'dd/mm/yy',
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+          $("#id_proxima_cita").datepicker("option","minDate", selected)
+        }
+    });
+    $("#id_proxima_cita").datepicker({ 
+        minDate: 1,
+        dateFormat: 'dd/mm/yy',
+        maxDate:"+60D",
+        numberOfMonths: 2,
+        onSelect: function(selected) {
+           $("#id_fecha_cita").datepicker("option","maxDate", selected)
+        }
+    });  
+});
+
+	</script>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
+			{{form2.fecha_cita}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
+			{{form2.proxima_cita}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.observaciones.name}}">{{form2.observaciones.label}}</label>	
+			{{form2.observaciones}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.resultados.name}}">{{form2.resultados.label}}</label>	
+			{{form2.resultados}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
+			{{form2.autorizacion}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form2.num_cita.name}}">{{form2.num_cita.label}}</label>	
+			{{form2.num_cita}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form2.codigo}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<button type="button" onclick="javascript:window.close();" class="btn btn-warning">Cancelar</button>
+			<button type="submit" class="btn btn-success" onclick="">Siguiente</button>
+		</div>
+	</div>
+	
+
+</form>
+<!-- <body onLoad="window.opener.location.reload();self.close()"> -->
+{% endblock %}

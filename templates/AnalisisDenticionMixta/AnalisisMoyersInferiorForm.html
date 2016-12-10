@@ -1,0 +1,365 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+    Analisis De Moyers Inferior
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+{% block extrajs %}
+
+    <script type="text/javascript">
+        a0 = 0;
+        b0 = 0;
+        c0 = 0;
+        d0 = 0;
+        t0 = 0;
+        sum1 = 0;
+        sum2 = 0;
+        divi = 0;
+
+        $('#id_form-0-fichas').val({{ids}});
+        $('#id_form-1-fichas').val({{ids}});
+        $('#id_form-2-fichas').val({{ids}});
+        $('#id_form-3-fichas').val({{ids}});
+        $('#id_form-0-posicion').val(1);
+        $('#id_form-1-posicion').val(2);
+        $('#id_form-2-posicion').val(3);
+        $('#id_form-3-posicion').val(4);
+
+        $('#id_form-0-ancho_mesiodistal').val(0);
+        $('#id_form-1-ancho_mesiodistal').val(0);
+        $('#id_form-2-ancho_mesiodistal').val(0);
+        $('#id_form-3-ancho_mesiodistal').val(0);
+
+
+        $('#id_form-0-ancho_mesiodistal').change(function () {
+            a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+            b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+            c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+            d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+            var t0 = a0 + b0 + c0 + d0;
+            sum1 = a0 + b0;
+            divi = t0 / 2;
+            $('#total').html(t0);
+            $('#t1').html(t0 + "/2");
+            $('#sum1').html(sum1);
+            $('#divi').html(divi);
+            ;
+        });
+
+        $('#id_form-1-ancho_mesiodistal').change(function () {
+            a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+            b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+            c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+            d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+            var t0 = a0 + b0 + c0 + d0;
+            sum1 = a0 + b0;
+            divi = t0 / 2;
+            $('#total').html(t0);
+            $('#t1').html(t0 + "/2");
+            $('#sum1').html(sum1);
+            $('#divi').html(divi);
+            ;
+        });
+
+        $('#id_form-2-ancho_mesiodistal').change(function () {
+            a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+            b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+            c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+            d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+            var t0 = a0 + b0 + c0 + d0;
+            sum2 = c0 + d0;
+            divi = t0 / 2;
+            $('#total').html(t0);
+            $('#t1').html(t0 + "/2");
+            $('#sum2').html(sum2);
+            $('#divi').html(divi);
+            ;
+        });
+
+        $('#id_form-3-ancho_mesiodistal').change(function () {
+            a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+            b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+            c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+            d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+            var t0 = a0 + b0 + c0 + d0;
+            sum2 = c0 + d0;
+            divi = t0 / 2;
+            $('#total').html(t0);
+            $('#t1').html(t0 + "/2");
+            $('#sum2').html(sum2);
+            $('#divi').html(divi);
+            ;
+        });
+
+
+        $('#id_form-0-ancho_mesiodistal').change(function () {
+            $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());
+        });
+        $('#id_form-1-ancho_mesiodistal').change(function () {
+            $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());
+        });
+        $('#id_form-2-ancho_mesiodistal').change(function () {
+            $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());
+        });
+        $('#id_form-3-ancho_mesiodistal').change(function () {
+            $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());
+        });
+
+
+    </script>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+        <div class="col-md-6 col-md-offset-1">
+            <div class="form-group">
+                {{ form.0.fichas }}
+                {{ form.1.fichas }}
+                {{ form.2.fichas }}
+                {{ form.3.fichas }}
+                {{ form1.fichas }}
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <h1 align="center">Análisis De Moyers</h1>
+            <h2 align="center">Espacio Disponible Arcada Inferior</h2><br>
+            <h3 align="center">Espacio Disponible Anterior</h3><br><br>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" align="right" style="align-items: center">
+                    <br><br><br>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>
+                                <div id="d3-2" align="center" style="height:20px"></div>
+                            </th>
+                            <th>
+                                <div id="d3-1" align="center" style="height:20px"></div>
+                            </th>
+                            <th>
+                                <div id="d4-1" align="center" style="height:20px"></div>
+                            </th>
+                            <th>
+                                <div id="d4-2" align="center" style="height:20px"></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td width="50"><img src=" {% static 'images/denticionMixta/3-2.png' %}"></td>
+                            <td width="50"><img src=" {% static 'images/denticionMixta/3-1.png' %}"></td>
+                            <td width="50"><img src=" {% static 'images/denticionMixta/4-1.png' %}"></td>
+                            <td width="50"><img src=" {% static 'images/denticionMixta/4-2.png' %}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-sm-6" align="left">
+                    <table class='table-bordered'>
+                        <tbody>
+                        <tr>
+                            <th>Pieza</th>
+                            <th>Medida</th>
+                        </tr>
+                        <tr>
+                            <td>{{ formset.0.posicion }}3-1</td>
+                            <td style="width: 105px">{{ formset.0.ancho_mesiodistal }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ formset.1.posicion }}3-2</td>
+                            <td style="width: 105px">{{ formset.1.ancho_mesiodistal }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ formset.2.posicion }}4-1</td>
+                            <td style="width: 105px">{{ formset.2.ancho_mesiodistal }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ formset.3.posicion }}4-2</td>
+                            <td style="width: 105px">{{ formset.3.ancho_mesiodistal }}</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>
+                                <div id="total" align="center" style="height:20px"></div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br><br>
+            <h3 align="center">Espacio Disponible Posterior</h3><br>
+
+            <div>
+                <table align="center" class="table-bordered">
+                    <tr>
+                        <td colspan="4"><img src="{% static 'images/denticionMixta/m1.PNG' %}"></td>
+                    </tr>
+                    <tr>
+                        <td width="40" align="right">{{ form1.ed_izquierdo }}</td>
+                        <td width="40" align="center">mm</td>
+                        <td width="40" align="right">{{ form1.ed_derecho }}</td>
+                        <td width="40" align="center">mm</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+
+            <h3 align="center">Espacio Necesario Arcada Inferior</h3><br>
+
+            <div>
+                <table align="center" class="table-bordered">
+                    <tr>
+                        <th>Ancho MD</th>
+                        <td width="40" align="right">19.5</td>
+                        <td width="40" align="right">20.0</td>
+                        <td width="40" align="right">20.5</td>
+                        <td width="40" align="right">21.0</td>
+                        <td width="40" align="right">21.5</td>
+                        <td width="40" align="right">22.0</td>
+                        <td width="40" align="right">22.5</td>
+                        <td width="40" align="right">23.0</td>
+                        <td width="40" align="right">23.5</td>
+                        <td width="40" align="right">24.0</td>
+                        <td width="40" align="right">24.5</td>
+                        <td width="40" align="right">25.0</td>
+                        <td width="40" align="right">26.0</td>
+                        <td width="40" align="right">26.5</td>
+                        <td width="40" align="right">27.0</td>
+                        <td width="40" align="right">27.5</td>
+                        <td width="40" align="right">28.0</td>
+                        <td width="40" align="right">28.5</td>
+                        <td width="40" align="right">29.0</td>
+                    </tr>
+                    <tr>
+                        <th>Varones</th>
+                        <td width="40" align="right">20.3</td>
+                        <td width="40" align="right">20.5</td>
+                        <td width="40" align="right">20.8</td>
+                        <td width="40" align="right">21.0</td>
+                        <td width="40" align="right">21.3</td>
+                        <td width="40" align="right">21.5</td>
+                        <td width="40" align="right">21.8</td>
+                        <td width="40" align="right">22.0</td>
+                        <td width="40" align="right">22.3</td>
+                        <td width="40" align="right">22.5</td>
+                        <td width="40" align="right">22.8</td>
+                        <td width="40" align="right">23.0</td>
+                        <td width="40" align="right">24.0</td>
+                        <td width="40" align="right">24.3</td>
+                        <td width="40" align="right">24.6</td>
+                        <td width="40" align="right">24.8</td>
+                        <td width="40" align="right">25.1</td>
+                        <td width="40" align="right">25.4</td>
+                        <td width="40" align="right">25.7</td>
+
+                    </tr>
+                    <tr>
+                        <th>Varones</th>
+                        <td width="40" align="right">19.6</td>
+                        <td width="40" align="right">19.8</td>
+                        <td width="40" align="right">20.1</td>
+                        <td width="40" align="right">20.3</td>
+                        <td width="40" align="right">20.6</td>
+                        <td width="40" align="right">20.8</td>
+                        <td width="40" align="right">21.1</td>
+                        <td width="40" align="right">21.3</td>
+                        <td width="40" align="right">21.6</td>
+                        <td width="40" align="right">21.9</td>
+                        <td width="40" align="right">22.1</td>
+                        <td width="40" align="right">22.9</td>
+                        <td width="40" align="right">24.0</td>
+                        <td width="40" align="right">24.3</td>
+                        <td width="40" align="right">24.6</td>
+                        <td width="40" align="right">24.8</td>
+                        <td width="40" align="right">25.1</td>
+                        <td width="40" align="right">25.4</td>
+                        <td width="40" align="right">25.7</td>
+
+                    </tr>
+                </table>
+            </div>
+            <br><br>
+
+            <h3 align="center">Tabla Acumulada De Datos</h3><br><br>
+            <div>
+                <table class="table-bordered" align="center">
+                    <tr>
+                        <td width="200">Espacio disponible posterior
+                            distal de lateral a mesial de 1º molar
+                        </td>
+                        <td width="100">Dato 1</td>
+                        <td rowspan="3"><img src="{% static 'images/denticionMixta/m2.PNG' %}"></td>
+                        <td width="200">Espacio disponible posterior
+                            distal de lateral a mesial de 1º molar
+                        </td>
+                        <td width="100">Dato 2</td>
+                    </tr>
+                    <tr>
+                        <td width="200">Tamaño predecible para 4-3, 4-4 y 4-5 según tabla de moyers</td>
+                        <td width="100">Dato 3</td>
+                        <td width="200">Tamaño predecible para 3-3, 3-4 y 3-5 según tabla de moyers</td>
+                        <td width="100">Dato 3</td>
+                    </tr>
+                    <tr>
+                        <td width="200">Diferencia</td>
+                        <td width="10">Dato 5</td>
+                        <td width="200">Diferencia</td>
+                        <td width="100">Dato 6</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Sumatoria de incisivos inferiores</td>
+                        <td width="40" align="right">Dato 1</td>
+                        <td width="40" align="right">Dato 2</td>
+                        <td width="40" align="right">Dato 3</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-8 col-md-offset-1">
+                <div class="form-group">
+                   <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+                </div>
+            </div>
+        </div>
+
+    </form>
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
+
+{% endblock %}

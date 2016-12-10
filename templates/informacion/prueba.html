@@ -1,0 +1,21 @@
+{% block content %}
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/media/admin/js/core.js"></script>
+<script type="text/javascript"
+src="/media/admin/js/admin/RelatedObjectLookups.js"></script>
+{{ form.media }}
+<form name="form" action="." method="post" enctype="multipart/form-data">
+<link href="/media/admin/css/widgets.css" rel="stylesheet" type="text/css">
+<link href="/media/css/forms.css" rel="stylesheet" type="text/css">
+<link href="/media/css/estilo_general.css" rel="stylesheet"
+type="text/css">
+<table>
+<br><br>
+
+{{ form }}
+<br><br>
+</table>
+<br><br>
+<input type="submit" value="Cargar" />
+</form>
+{% endblock %}

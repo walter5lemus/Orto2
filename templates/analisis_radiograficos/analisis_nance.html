@@ -1,0 +1,220 @@
+    {% extends 'base/base.html' %}
+    {% block header %}
+    {% endblock %}
+
+    {% load staticfiles %}
+
+    {% block title %}Nance{% endblock %}
+
+    {% block extrajs %}
+    	
+    	<script src="{% static 'js/jquery.formset.js' %}"></script>	
+        <script src="{% static 'js/analisis_nance.js' %}"></script>
+
+    	<style type="text/css">
+    	    
+    	    th {
+    	    	text-align: center;
+                margin: 0px;
+    	    }
+    	    td {
+    			width: 300px;
+                margin: 0px;
+    	    }
+    	    .form-control{
+    	    	width: 150px;
+                text-align: center;
+    	    }
+    	</style>
+
+    	
+    {% endblock %}
+
+    {% block content %}
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+
+    <div class="analisis_nance">
+    		
+    		<div class="col-md-10 col-md-offset-0">
+       		<!-- <h5>Nance</h5> -->
+
+            <form method="POST" action="">
+            	{% csrf_token %}
+    			 {{ formset.management_form }}		
+    			 {{form1.fichas}} 
+             <div class="col-md-8">
+                <div class="form-group">
+                <label for="{{form1.ed_maxi.name}}">{{form1.ed_maxi.label}}</label> 
+                    {{form1.ed_maxi}}
+                </div>
+            </div>
+             <div class="col-md-8">
+                <div class="form-group">
+                <label for="{{form1.ed_mand.name}}">{{form1.ed_mand.label}}</label> 
+                    {{form1.ed_mand}}
+                </div>
+            </div>
+            {{form1.total}}
+                           {{form1.total2}}  
+              
+    			<table id="1" cellpadding="0" cellspacing="5">
+                    <thead>
+                        <tr>
+                        	<th scope="col"></th>
+                            <th scope="col">Pieza</th>
+                            <th scope="col">MdM</th>
+                            <th scope="col">MpRx</th>
+                            <th scope="col">(MdM)(MpRx)</th>
+                            <th scope="col">/MdRx</th>
+                            <th scope="col">Valor x</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in formset %}
+    			                <tr>
+    			                	<td>{{ form.seleccion }}</td>
+    			                    <td>{{ form.posicion }}</td>
+    			                    <td>{{ form.mdm }}</td>
+    			                    <td>{{ form.mprx }}</td>
+    			                    <td>{{ form.multiplicacion }}</td>
+    			                    <td>{{ form.mdrx }}</td>
+    			                    <td>{{ form.valor_x }}</td>
+                                    <td>{{ form.fichas }}</td> 
+                                    <td>{{ form.tabla }}</td> 
+    			                </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+    	                <td></td>
+    	                <td><label style="">TOTAL</label></td>
+    	                <td></td>  
+    	                <td></td>
+    	                <td></td>
+                        <td><td><input id="total1" type="Number" step="0.01" class="form-control">
+                        </td>
+    	                <td></td>
+                    </tr>
+                    </tfoot>
+    			</table>
+                 
+               
+            {{ formset2.management_form }}
+            <table id="2" cellpadding="0" cellspacing="5">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>          
+                            <th scope="col">Pieza</th>
+                            <th scope="col">MdM</th>
+                            <th scope="col">MpRx</th>
+                            <th scope="col">(MdM)(MpRx)</th>
+                            <th scope="col">/MdRx</th>
+                            <th scope="col">Valor x</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in formset2 %}
+                                <tr>
+                                    <td>{{ form.seleccion }}</td>
+                                    <td>{{ form.posicion }}</td>
+                                    <td>{{ form.mdm }}</td>
+                                    <td>{{ form.mprx }}</td>
+                                    <td>{{ form.multiplicacion }}</td>
+                                    <td>{{ form.mdrx }}</td>
+                                    <td>{{ form.valor_x }}</td>
+                                    <td>{{ form.fichas }}</td> 
+                                    <td>{{ form.tabla }}</td> 
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><label style="">TOTAL</label></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><input id="total2" type="Number" step="0.01" class="form-control">
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tfoot>
+                </table> 
+            <div class="col-md-6 col-md-offset-3">
+                <table id="3" cellpadding="0" cellspacing="3">
+                    <thead>
+                        <tr>
+                            <th scope="col">DISCREPANCIA</th>          
+                            <th scope="col">ED-EN</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td><input id="maxilar" type="Texto" class="form-control"></td>
+                                <td><input id="maxilareden" type="Texto" class="form-control"></td>
+                                <td><input id="maxilartotal" type="Number" step="0.01" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><input id="mandibular" type="Texto" class="form-control"></td>
+                                <td><input id="mandibulareden" type="Texto" class="form-control"></td>
+                                <td><input id="mandibulartotal" type="Number" step="0.01" class="form-control"></td>
+                            </tr>
+                    </tbody>
+                  
+                </table>  
+            </div>
+            <div class="col-md-6 col-md-offset-3" >
+                <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+              
+                </div>
+            </form>
+        </div>
+    </div>      
+    <script>
+//alert({{max}});
+    for (var i = 0; i < {{max}}; i++) {
+        
+        $('#id_1tablas-'+i+'-fichas').val({{ids}});
+        $('#id_2tablas-'+i+'-fichas').val({{ids}});
+        $('#id_1tablas-'+i+'-tabla').val(1);
+        $('#id_2tablas-'+i+'-tabla').val(2); 
+    }
+
+    for (var i = 0; i < (({{max}})/2); i++) {
+        
+        $('#id_1tablas-'+i+'-posicion').val(1+"-"+(i+1));
+        $('#id_2tablas-'+i+'-posicion').val(3+"-"+(i+1));
+    }
+    var a =0;
+    for (var i = (({{max}})/2); i < {{max}}; i++) {
+        
+        $('#id_1tablas-'+i+'-posicion').val(2+"-"+(a+1)); 
+        $('#id_2tablas-'+i+'-posicion').val(4+"-"+(a+1)); 
+        a++;
+    }
+    $('#maxilar').val("Maxilar");
+    $('#mandibular').val("Mandibular");
+
+    
+$('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");
+    
+    </script>
+    {% endblock %}

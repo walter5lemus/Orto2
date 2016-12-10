@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title %}
+	Control de Citas
+
+{% endblock %}
+{% block header %}
+<script src="{% static 'js/DjangoAjax.js' %}">
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	</form>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
+			{{form.codigo}}
+			<button onclick="buscar()">Buscar</button>
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="cod_expediente">Nombre del Paciente</label>	
+			<input readonly type="text" class="form-control" id="id_nombre_estudiante">
+
+		</div>
+	</div>
+<script>
+
+    window.close();
+
+</script>
+
+{% endblock %}

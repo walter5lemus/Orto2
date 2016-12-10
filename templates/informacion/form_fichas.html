@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+	Fichas
+{% endblock %}
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>	
+		{{form.cod_expediente}}
+		</div>
+	</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.numero.name}}">{{form.numero.label}}</label>	
+			{{form.numero}}
+		</div>
+	</div>
+	
+	<script>
+	var codi = $('#{{form.cod_expediente.auto_id}}').val()
+	var numer = $('#{{form.numero.auto_id}}').val()
+	</script>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<button type="button" onclick=" location.href='/informacion/datos_generales/consultar/'+codi" class="btn btn-warning">Cancelar</button>
+			<button type="submit" class="btn btn-success">Siguiente</button>
+		</div>
+	</div>
+</form>
+
+	
+{% endblock %}

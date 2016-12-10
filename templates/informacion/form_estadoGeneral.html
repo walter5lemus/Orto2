@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Estado general
+{% endblock %}
+{% block header %}
+<style>
+	#id_cambio_salud {
+		column-count: 2;
+	}
+	#id_otras_enfermedades {
+		column-count: 2;
+	}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.cambio_salud.name}}">{{form.cambio_salud.label}}</label>	
+			{{form.cambio_salud}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+		
+			<label for="{{form.detalle_enf_operacion.name}}">{{form.detalle_enf_operacion.label}}</label>
+			{{form.detalle_enf_operacion}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.otras_enfermedades.name}}">{{form.otras_enfermedades.label}}</label>	
+			{{form.otras_enfermedades}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.detalle_otra_enfermedad.name}}">{{form.detalle_otra_enfermedad.label}}</label>	
+			{{form.detalle_otra_enfermedad}}
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+
+			<label for="{{form.detalle_medicamento.name}}">{{form.detalle_medicamento.label}}</label>	
+			{{form.detalle_medicamento}}
+				
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			
+			<center><button type="submit" class="btn btn-success">Siguiente</button></center>
+		</div>
+	</div>
+<script>
+
+	$('#{{form.fichas.auto_id}}').val({{fichas}});
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
+</form>
+
+
+	
+{% endblock %}

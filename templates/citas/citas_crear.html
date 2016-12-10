@@ -1,0 +1,214 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title %}
+	Control de Citas
+
+{% endblock %}
+{% block header %}
+<script src="{% static 'js/DjangoAjax.js' %}">
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	</form>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
+			{{form.codigo}}
+			<button onclick="buscar()">Buscar</button>
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="cod_expediente">Nombre del Paciente</label>	
+			<input readonly type="text" class="form-control" id="id_nombre_estudiante">
+
+		</div>
+	</div>
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.estudiante.name}}">{{form.estudiante.label}}</label>	
+			{{form.estudiante}}
+		</div>
+	</div>
+
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+				<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
+			{{form.aparato}}
+		</div>
+		<div class="form-group">
+			<label for="{{form.mx.name}}">{{form.mx.label}}</label>	
+			{{form.mx}}
+		</div>
+		<div class="form-group">
+				<label for="{{form.md.name}}">{{form.md.label}}</label>	
+			{{form.md}}
+		</div>	
+	</div>
+	<div class="table-responsive col-md-12">
+		<div id="conteiner">
+	
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-4">
+		<button onclick="urlss()">Registrar nueva cita del paciente</button>
+
+	</div>
+
+
+
+<script>
+	$( "html" ).focus(function() {
+  		alert( "Handler for .focus() called." );
+	});
+
+	function buscar(){
+		var codigo = $('#id_codigo').val();
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/citas/busqueda_ajax/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					
+					$('#id_nombre_estudiante').val(data[i].fields.nombre_completo);
+				}
+			}
+		});
+
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/citas/busqueda_ajax2/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					var apa = data[i].fields.aparato
+					
+				switch ((apa-1)) {
+				    case 0:
+				        day = "Ortodoncia Fija";
+				        break;
+				    case 1:
+				        day = "Boton de Nance";
+				        break;
+				    case 2:
+				        day = "Boton de Nance";
+				        break;
+				    case 3:
+				        day = "Arco Lingua";
+				        break;
+				    case 4:
+				        day = "Tornillo Hirax";
+				        break;
+				    case 5:
+				        day = "Barra Transpalatina";
+				        break;
+				    case 6:
+				        day = "Botones";
+				        break;
+				    case 7:
+				        day = "SN1";
+				        break;
+				    case 8:
+				        day = "SN2";
+				        break;
+				    case 9:
+				        day = "SN3";
+				        break;
+				    case 10:
+				        day = "SN4";
+				        break;
+				    case 11:
+				        day = "SN5";
+				        break;
+				    case 12:
+				        day = "SN6";
+				        break;
+				    case 13:
+				        day = "SN7";
+				        break;
+				    case 14:
+				        day = "SN8";
+				        break;
+				    case 15:
+				        day = "SN9";
+				        break;
+				    case 16:
+				        day = "SN10";
+				        break;
+				    case 17:
+				        day = "Pistas Planas Directas";
+				        break;
+				    case 18:
+				        day = "Pistas Planas Indirectas";
+				        break;
+				    case 19:
+				        day = "Aparato Bimler";
+				        break;
+				    case 20:
+				        day = "Bionator";
+				        break;
+				    case 21:
+				        day = "Otros";
+				        break;
+				}
+					$('#id_aparato').val(day);
+				}
+			}
+		});
+
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/citas/registro_listar_citas/',
+			type : 'get',	
+			success: function(data2){
+
+			    var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
+                tabla += '<thead>';
+                tabla += '<tr>';
+                tabla += '<th>N° de Control</th><th>Fecha de Cita</th><th>Aspectos Observados</th><th>Fecha proxima cita</th><th>Resultados Esperados</th><th>Aurorización del tutor</th>';		
+                tabla += '</tr>';
+                tabla += '</thead>';
+                tabla += '<tbody>';
+                tr = '';
+ 
+                for (i = 0; i < data2.length; i++){
+                    tr += '<tr>';
+                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td><td>'+data2[i].fields.autorizacion+'</td>';
+                    tr += '</tr>';
+                }
+ 
+                tabla += tr;
+                tabla += '</tbody></table>';
+ 
+                $('#conteiner').html( tabla );
+			}
+		});
+	}
+
+
+	function urlss(){
+
+		var codigo = $('#id_codigo').val();
+		if (codigo==''){
+			alert("Digite el codigo del Expediente");
+		}
+		else{
+			window.open("/citas/registro_cita/"+codigo+"/","ventana1","width=700,height=700,scrollbars=NO") 	
+		}
+		
+		
+	}
+  
+</script>
+
+
+{% endblock %}

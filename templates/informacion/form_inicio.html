@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+	Inicio
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
+		{{form.codigo}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Siguiente</button>
+		</div>
+	</div>
+</form>
+
+	
+{% endblock %}

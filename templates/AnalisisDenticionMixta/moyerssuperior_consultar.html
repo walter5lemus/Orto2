@@ -1,0 +1,328 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+
+{% block title %}
+	Moyers Superior
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block extrajs %}
+
+	<script type="text/javascript">
+		a0 = 0;
+		b0 = 0;
+		c0 = 0;
+		d0 = 0;
+		t0 = 0;
+		sum1 = 0;
+		sum2 = 0;
+		divi = 0;
+
+		$('#id_form-0-fichas').val({{ids}});
+		$('#id_form-1-fichas').val({{ids}});
+		$('#id_form-2-fichas').val({{ids}});
+		$('#id_form-3-fichas').val({{ids}});
+		$('#id_form-0-posicion').val(1);
+		$('#id_form-1-posicion').val(2);
+		$('#id_form-2-posicion').val(3);
+		$('#id_form-3-posicion').val(4);
+
+			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+			b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+			c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+			d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+			var t0 = a0+b0+c0+d0;
+			sum1 = a0 + b0;
+			divi=t0/2;
+        	$('#total').html(t0); 
+        	$('#t1').html(t0+"/2"); 
+        	$('#sum1').html(sum1);       
+        	$('#divi').html(divi); 	
+
+			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
+			b0 = parseFloat($('#id_form-1-ancho_mesiodistal').val());
+			c0 = parseFloat($('#id_form-2-ancho_mesiodistal').val());
+			d0 = parseFloat($('#id_form-3-ancho_mesiodistal').val());
+			var t0 = a0+b0+c0+d0;
+			sum2 = c0 + d0;
+			divi=t0/2;
+        	$('#total').html(t0);  
+        	$('#t1').html(t0+"/2");    
+        	$('#sum2').html(sum2); 
+        	$('#divi').html(divi);    	
+
+        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());
+        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());
+        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());     
+        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());
+
+
+	</script>
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<!-- CSS -->
+
+<form method="post">
+	{% csrf_token %}
+	{{ formset.management_form }}	 
+
+	<style type="text/css">
+
+	table, th, td {
+    	border-collapse: collapse;
+	}
+
+	th{
+		text-align: center;
+		vertical-align: middle;
+		padding: 4.9px;
+	}
+
+	td{
+		vertical-align: middle;
+		text-align: center;
+		align-items: center;
+		padding: 4.9px;
+	}
+
+	</style>
+	{% for form in formset %}
+ 		{{ form.id }}
+	{% endfor %}
+
+
+{{ formset.0.fichas }}
+{{ formset.1.fichas }}
+{{ formset.2.fichas }}
+{{ formset.3.fichas }}
+
+{{ form1.fichas }}
+
+	
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-6">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-6">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+
+<div class="container">
+    <div class="row">
+    <h4 align="center">ESPACIO DISPONIBLE ARCADA SUPERIOR</h4><br><br>
+	<h4 align="center">ESPACIO DISPONIBLE ANTERIOR</h4>
+	<div class="col-sm-6" align="right" style="align-items: center">
+	<br><br><br>
+		<table>
+			<tbody>
+				<tr>
+					<th><div id="d3-2" align="center" style="height:20px"></div></th>
+					<th><div id="d3-1" align="center" style="height:20px"></div></th> 
+					<th><div id="d4-1" align="center" style="height:20px"></div></th>
+					<th><div id="d4-2" align="center" style="height:20px"></div></th>   
+				</tr>
+				<tr>
+					<td><img src=" {% static 'images/3-2.png' %}"></td>
+					<td><img src=" {% static 'images/3-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-2.png' %}"></td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+       
+        <div class="col-sm-6" align="left">
+        <table class='table-bordered'>
+			<tbody>
+				<tr>
+					<th>Pieza</th>
+					<th>Medida</th>  
+				</tr>
+				<tr>
+					<td>{{ formset.0.posicion }}3-1</td>
+					<td style="width: 105px">{{ formset.0.ancho_mesiodistal }}</td>
+				</tr>
+				<tr>
+					<td>{{ formset.1.posicion }}3-2</td>
+					<td style="width: 105px">{{ formset.1.ancho_mesiodistal }}</td>
+				</tr>
+				<tr>
+					<td>{{ formset.2.posicion }}4-1</td>
+					<td style="width: 105px">{{ formset.2.ancho_mesiodistal }}</td>
+				</tr>
+				<tr>
+					<td>{{ formset.3.posicion }}4-2</td>
+					<td style="width: 105px" >{{ formset.3.ancho_mesiodistal }}</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td><div id="total" align="center" style="height:20px"></div></td>
+				</tr>				
+					
+			</tbody>
+		</table>
+		</div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-sm-12" align="center">
+        	<table>
+			<tbody>
+				<tr>
+					<td><div id="sum1" align="center" style="height:20px"></div></td>
+					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><div id="sum2" align="center" style="height:20px"></div></td>
+					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><div id="t1" align="center" style="height:20px"></div></td>
+					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td><div id="divi" align="center" style="height:20px"></div></td>				
+			</tbody>
+		</table>
+        </div>
+    </div>
+
+    <br><br><br><br>
+
+	<div class="row">
+        <div class="col-sm-12" align="center">
+        	<h4 align="center">ESPACIO DISPONIBLE POSTERIOR</h4>
+        	<img src=" {% static 'images/moysup2.jpg' %}">
+        	<br><br>
+        	<table>
+			<tbody>
+				<tr>
+					<td style="width: 105px">{{ form1.ed_izquierdo }} mm</td>
+					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td style="width: 105px">{{ form1.ed_derecho }} mm</td>
+		
+			</tbody>
+		</table>
+        </div>
+    </div>
+
+      <br><br><br><br>
+
+  <!--  <div class="row">
+        <div class="col-sm-12" align="center">
+
+        	<table class='table-bordered'>
+				<h4 align="center">ESPACIO NECESARIO ARCADA SUPERIOR</h4>
+			
+				<tbody>
+					<tr>
+						<th>Ancho MD</th>
+						<th>19.5</th>  
+						<th>20.0</th> 
+						<th>20.5</th>
+						<th>21.0</th>  
+						<th>21.5</th> 
+						<th>22.0</th>
+						<th>22.5</th>  
+						<th>23.0</th> 
+						<th>23.5</th>
+						<th>24.0</th>  
+						<th>24.5</th> 
+						<th>25.0</th>
+						<th>25.5</th>  
+						<th>26.0</th> 
+						<th>26.5</th>
+						<th>27.0</th>  
+						<th>27.5</th> 
+						<th>28.0</th>
+						<th>28.5</th>  
+						<th>29.0</th> 					
+					</tr>
+
+					<tr>
+						<th>Varones</th>
+						<td>20.3</td>
+						<td>20.5</td>
+						<td>20.8</td>
+						<td>21.0</td>
+						<td>21.3</td>
+						<td>21.5</td>
+						<td>21.8</td>
+						<td>22.0</td>
+						<td>22.3</td>
+						<td>22.5</td>
+						<td>22.8</td>
+						<td>23.0</td>
+						<td>23.3</td>
+						<td>24.2</td>
+						<td>24.5</td>
+						<td>24.8</td>
+						<td>25.0</td>
+						<td>25.3</td>
+						<td>25.6</td>
+						<td>25.9</td>
+					</tr>
+					<tr>
+						<th>Hembras</th>
+						<td>20.4</td>
+						<td>20.5</td>
+						<td>20.6</td>
+						<td>20.8</td>
+						<td>20.9</td>
+						<td>21.0</td>
+						<td>21.2</td>
+						<td>21.3</td>
+						<td>21.5</td>
+						<td>21.6</td>
+						<td>21.8</td>
+						<td>21.9</td>
+						<td>22.1</td>
+						<td>24.2</td>
+						<td>24.5</td>
+						<td>24.8</td>
+						<td>25.0</td>
+						<td>25.3</td>
+						<td>25.6</td>
+						<td>25.9</td>
+					</tr>
+		
+				</tbody>
+			</table>
+		</div>
+    </div>
+
+      <br><br><br><br>
+
+
+     <div class="row">
+        <div class="col-sm-12" align="center">
+        	<h4 align="center">TABLA ACUMULADORA DE DATOS</h4>
+        	<img src=" {% static 'images/moysup3.jpg' %}">
+        </div>
+    </div>-->
+</div>
+
+	<br><br>
+	<center><button type="submit" class="btn btn-success">Siguiente</button></center>
+	<br><br>
+</form>
+
+<script>
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");	 
+</script>
+{% endblock %}

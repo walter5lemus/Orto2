@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block header %}
+<h3>Diagnostico Cefalometrico</h3>
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+<div class="row">
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	</div>
+
+
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.patron_esqueletal.name}}">{{form.patron_esqueletal.label}}</label>
+			{{form.patron_esqueletal}}
+		</div>
+	</div>
+
+
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.tipo_de_crecimiento.name}}">{{form.tipo_de_crecimiento.label}}</label>
+			{{form.tipo_de_crecimiento}}
+		</div>
+	</div>
+
+    <br></br>
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.medidas_dentales.name}}">{{form.medidas_dentales.label}}</label>
+			{{form.medidas_dentales}}
+		</div>
+	</div>
+
+
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			<label for="{{form.medidas_esteticas.name}}">{{form.medidas_esteticas.label}}</label>
+			{{form.medidas_esteticas}}
+		</div>
+	</div>
+
+
+
+	<div class="col-md-8 col-md-offset-1">
+		<div class="form-group">
+			<button type="button" onclick=" location.href='/informacion/estado_general/editar2/{{codi}}/{{num}}'" class="btn btn-warning">Cancelar</button>
+			<button type="submit" class="btn btn-success">Siguiente</button>
+		</div>
+	</div>
+
+
+	</form>
+{% endblock %}

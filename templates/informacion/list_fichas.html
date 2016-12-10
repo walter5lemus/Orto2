@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<h5></h5>
+{% endblock%}
+
+{% block tabla %}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Codigo Expediente</td>
+			<td>Numero de Ficha</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for fichas in object_list %}
+		<tr>
+			<td>{{ fichas.cod_expediente }}</td>
+			<td>{{ fichas.numero }}</td>
+
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de expedientes</h1>
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+	{% if page_obj.has_previous %}
+
+		<a href="?page={{ page_obj.previous_page_number}}">Previous</a>
+	</li>
+	{% endif %}
+
+	{% if page_obj.has_next %}
+	<li>
+		<a href="?page={{ page_obj.next_page_number}}">Next</a>
+	</li>
+	{% endif %}
+</ul>
+
+{% endblock%}
