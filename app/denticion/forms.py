@@ -95,7 +95,7 @@ class denticionForm(forms.ModelForm):
 			'encias': forms.TextInput(attrs={'class':'form-control'}),
 			'frenillos': forms.TextInput(attrs={'class':'form-control'}),
 			'lengua': forms.TextInput(attrs={'class':'form-control'}),
-			'observaciones_generales': forms.Textarea(attrs={'class':'form-control','rows':3}),
+			'observaciones_generales': forms.Textarea(attrs={'class':'form-control','rows':8}),
 		}
 
 class denticionForm_consultar(forms.ModelForm):

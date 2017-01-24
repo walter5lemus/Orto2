@@ -1,9 +1,10 @@
-from __future__ import unicode_literals
+#!/usr/bin/env python
+# -*- coding: utf-8 -*
 
+from __future__ import unicode_literals
 from django.db import models
 from app.informacion.models import fichas
 from app.denticion.choices import *
-
 from PIL import Image
 from cStringIO import StringIO
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -16,6 +17,13 @@ class problema(models.Model):
 
 	def __unicode__(self):
 		return '{}'.format(self.nombre_problemas)
+
+problema1 = problema(id=1,nombre_problemas="Pérdidas prematuras")
+problema1.save()
+problema2 = problema(id=2,nombre_problemas="Anodoncias")
+problema2.save()
+problema3 = problema(id=3,nombre_problemas="Mordida telescópica")
+problema3.save()
 
 class registro(models.Model):
 	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
@@ -33,6 +41,13 @@ class tipo(models.Model):
 	def __unicode__(self):
 		return '{}'.format(self.nombre)
 
+tipo1 = tipo(id=1,nombre="Temporario")
+tipo1.save()
+tipo2 = tipo(id=2,nombre="Mixto")
+tipo2.save()
+tipo3 = tipo(id=3,nombre="Permanente")
+tipo3.save()
+
 class denticion(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
 	tipo = models.OneToOneField(tipo, null=False, blank=False, on_delete=models.CASCADE, default=2)
@@ -43,7 +58,7 @@ class denticion(models.Model):
 	encias = models.CharField(max_length=100)
 	frenillos = models.CharField(max_length=100)
 	lengua = models.CharField(max_length=100)
-	observaciones_generales = models.CharField(max_length=200)
+	observaciones_generales = models.CharField(max_length=384)
 
 	def __unicode__(self):
 		return '{}'.format(self.fichas)
@@ -75,7 +90,6 @@ class registro_mordidas(models.Model):
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
-
 
 class relaciones_sagitales(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
