@@ -10,7 +10,11 @@ from cStringIO import StringIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 import os
 
+
 # Create your models here.
+#######################
+#Decime si ves esto plox 
+###########################
 
 class problema(models.Model):
 	nombre_problemas = models.CharField(max_length=20)
