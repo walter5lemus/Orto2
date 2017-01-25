@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+Pfrom django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView,UpdateView
 from django.http import HttpResponse
@@ -28,7 +28,7 @@ def CodExpediente_crear(request):
 	 		try:
 	 			existe = datos_generales.objects.get(cod_expediente = codi)
 		 		if existe:
-		 			return HttpResponseRedirect('/informacion/datos_generales/consultar/%s/' %codi)
+		 			return HttpResponseRedirect('/informacion/datos_generales/consultar2/%s/' %codi)
 		 		else:
 		 			return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
 	 		except Exception, e:
@@ -40,6 +40,22 @@ def CodExpediente_crear(request):
 			return render(request, 'informacion/form_inicio.html', {'form':form})
 
 def CodExpediente_consular(request):
+
+	if request.method == 'POST':
+		form = CodigoExpedienteForm(request.POST)
+		codi = form.data['codigo'] 
+		if form.is_valid():
+		 	form.save()
+ 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
+	 	else:
+ 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
+
+	else:
+			form = CodigoExpedienteForm()
+
+			return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
+
+def CodExpediente_consular2(request):
 
 	if request.method == 'POST':
 		form = CodigoExpedienteForm(request.POST)
