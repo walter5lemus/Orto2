@@ -5,23 +5,189 @@
 {% endblock %}
 {% block header %}
 {% endblock %}
+{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
+		                  		</div>
+		                  		
+		                  		<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="{%url 'logout' %}" role="button" aria-expanded="false">Cerrar Sesión<span></span></a>
+		                        		
+		                      		</li>
+		                    	</ul>
+		                    	<div>	
+		                    	<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="#" class="navbar-brand" role="button" aria-expanded="false">{{user}}<span></span></a>
+		                      		</li>
+		                    	</ul>
+		                    	</div>
+		                  		<h1 style="color:white "> <center> </center></h1> 
+		                  		<h2 style="color:white "> <center>  </center></h2> 
+		                  		
 
+		                </div>
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>   
+    {% endblock %} 
 {% block content %}
+
+<style>
+	.ocultar{
+		display: none;
+	}
+</style>
+
 <form method="POST">
 	{% csrf_token %}
-	
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
-		{{form.codigo}}
-		</div>
-	</div>
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<button type="submit" class="btn btn-success">Siguiente</button>
-		</div>
-	</div>
 </form>
+	<div class="col-md-12">
+	<br><br>
+		<div class="form-group col-md-offset-1">
+			<div class="col-md-8">
+				<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>
+				{{form.cod_expediente}}
+			</div>	
+			<div class="col-md-3 form-group ">
+			<br>
+			<button class="btn btn-success" style="margin-top: 5px;" onclick="buscar()">Buscar</button>
+			</div>
+		
+		</div>				
+
+	</div>
+	
+		<div class="row ocultar ">
+			<div class="col-md-6 col-md-offset-1">
+				<div class="form-group">
+				<br><br><br>
+					<label for="{{form.nombre_completo.name}}">{{form.nombre_completo.label}}</label>
+					{{form.nombre_completo}}
+				</div>
+			</div> 
+			<div class="col-md-2 ">
+				<div class="form-group">
+				<br><br><br>
+					<label for="fichas"> N° Fichas </label>
+					<select class="form-control" name="fichas" id="select_fichas"></select>
+
+				</div>
+			</div>
+			<div class="col-md-3 ">
+				<div class="form-group">
+				<br><br><br>
+					<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="row ocultar">
+			<div class="col-md-3 col-md-offset-1 ">
+				<div class="form-group">
+					<label for="{{form.fechaRegistro.name}}">{{form.fechaRegistro.label}}</label>	
+					<input class="form-control" id="id_fecha_registro" name="fecha_registro" type="text" required="" vk_14476="subscribed">	
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
+				{{form.fecha_hora_creacion}}	
+				</div>
+			</div>
+			<div class="col-md-5 ">
+				<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2()">Crear Nueva Ficha</button>
+			</div>
+		</div>
+		</div>
+		<div class="row">
+
+ 
+
+<script>
+var codigo = $('#id_cod_expediente').val();
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever')
+$("#id_nombre_completo").prop('readonly', true);
+$("#id_fecha_registro").prop('readonly', true);
+$("#id_fecha_hora_creacion").prop('readonly', true);
+
+function redireccionar(){
+	var num= $( "#select_fichas" ).val();
+	var codigo = $('#id_cod_expediente').val();
+	window.location="/informacion/estado_general/consultar/"+codigo+"/"+num;
+}
+
+function redireccionar2(){
+	var id= $( "#select_fichas option:last" ).val();
+	var num=parseInt(id);
+	var codigo = $('#id_cod_expediente').val();
+	window.location="/informacion/estado_general/nuevo/"+codigo+"/"+(num+1);
+}
+
+function buscar(){
+
+
+	var codigo = $('#id_cod_expediente').val();
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever')
+;
+		
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/informacion/busqueda_ajax/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					$(".ocultar").css("display", "block");
+					$('#id_nombre_completo').val(data[i].fields.nombre_completo);
+					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
+					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
+				}
+				if(data==''){
+					
+					window.location="/informacion/datos_generales/nuevo/"+codigo;
+				}
+			},
+			
+		});
+
+		$.ajax({
+			data : {'codigo':codigo},
+			url : '/informacion/busqueda_ajax2/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					$('#select_fichas').append($('<option>', {
+					    value: i+1,
+					    text: i+1
+					}));
+				}
+				if(data==''){
+					alert("No se encontraron fichas con este expediente");
+					window.location="/informacion/datos_generales/nuevo/"+codigo;
+				}
+			},
+			
+		});
+}
+</script>
+
 
 	
 {% endblock %}

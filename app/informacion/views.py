@@ -1,4 +1,4 @@
-Pfrom django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView,UpdateView
 from django.http import HttpResponse
@@ -6,9 +6,10 @@ from django.views.generic import ListView
 from django.views.generic.base import RedirectView
 from django.http import HttpResponseRedirect	
 from collections import OrderedDict
-
+from django.views.generic import TemplateView
 from app.informacion.models import *
 from app.informacion.forms import *
+from django.core import serializers
 
 codi=""
 
@@ -19,7 +20,7 @@ class CodExpediente_List(ListView):
 def CodExpediente_crear(request):
 
 	if request.method == 'POST':
-		form = CodigoExpedienteForm(request.POST)
+		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
 		if form.is_valid():
 		 	form.save()
@@ -35,27 +36,35 @@ def CodExpediente_crear(request):
 				return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
 
 	else:
-			form = CodigoExpedienteForm()
+			form = DatosGeneralesForm()
 
 			return render(request, 'informacion/form_inicio.html', {'form':form})
+#		fi=list(fichas.objects.filter(cod_expediente=cod))
+
+class BusquedaAjaxView(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		datosGenerales = datos_generales.objects.filter(cod_expediente=cod)
+		data = serializers.serialize('json', datosGenerales, fields=('nombre_completo','fechaRegistro','fecha_hora_creacion'))
+		return HttpResponse(data, content_type='application/json')
+
+class BusquedaAjaxView2(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		fi=list(fichas.objects.filter(cod_expediente=cod))
+		for ficha in fi:
+			ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero)
+
+			if estado_general.objects.filter(fichas_id=ids.id).exists():{}
+			else:
+				fichas.objects.get(id=ids.id).delete();
+		data = serializers.serialize('json', fi, fields=('numero'))
+		return HttpResponse(data, content_type='application/json')
+
+
+
 
 def CodExpediente_consular(request):
-
-	if request.method == 'POST':
-		form = CodigoExpedienteForm(request.POST)
-		codi = form.data['codigo'] 
-		if form.is_valid():
-		 	form.save()
- 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-	 	else:
- 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-
-	else:
-			form = CodigoExpedienteForm()
-
-			return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
-
-def CodExpediente_consular2(request):
 
 	if request.method == 'POST':
 		form = CodigoExpedienteForm(request.POST)
@@ -126,6 +135,24 @@ def DatosGenerales_consultar(request,codi):
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente")
+
+def DatosGenerales_consultar2(request,codi):
+	#str(codi)
+	#try:
+	ids = datos_generales.objects.get(cod_expediente=codi)
+	if ids:
+		datos = datos_generales.objects.get(cod_expediente=codi)
+		if request.method == 'GET':
+			form = DatosGeneralesForm_consultar(instance=datos)
+		else: 
+			form = DatosGeneralesForm_consultar(request.POST, instance=datos)
+			if form.is_valid():
+				form.save()
+			return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi)
+		return render(request,'informacion/form_datosGenerales_existente.html',{'form':form})
+	return HttpResponse("No se encontro el Codigo de Expediente")
+	#except Exception, e:
+	#	return HttpResponse("No se encontro el Codigo de Expediente")
 
 def DatosGenerales_edit(request,codi):
 	str(codi)

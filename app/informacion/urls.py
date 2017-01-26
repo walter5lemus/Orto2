@@ -27,7 +27,8 @@ urlpatterns = [
 	url(r'^estado_general/editar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_edit2),name='estado_general_editar2'),
 
 
-
+	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
+	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
 
 
 ]
