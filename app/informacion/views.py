@@ -58,6 +58,7 @@ class BusquedaAjaxView2(TemplateView):
 			if estado_general.objects.filter(fichas_id=ids.id).exists():{}
 			else:
 				fichas.objects.get(id=ids.id).delete();
+		fi=list(fichas.objects.filter(cod_expediente=cod))
 		data = serializers.serialize('json', fi, fields=('numero'))
 		return HttpResponse(data, content_type='application/json')
 
