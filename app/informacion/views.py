@@ -105,7 +105,7 @@ class DatosGeneralesList(ListView):
 def DatosGeneral_crear(request,codi):
 	str(codi)
 	user = request.user.id
-
+	num = 1
 	if datos_generales.objects.filter(cod_expediente=codi).exists():
 		return HttpResponseRedirect('/informacion/datos_generales/editar/%s/' %codi)
 	
@@ -113,7 +113,7 @@ def DatosGeneral_crear(request,codi):
 			form = DatosGeneralesForm(request.POST)
 			if form.is_valid():
 			 	form.save()
-			return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi) 
+			return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num)) 
 	else:
 			form = DatosGeneralesForm(initial={'cod_expediente':codi,'usuario_creador':request.user.id})
 

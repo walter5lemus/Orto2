@@ -82,7 +82,7 @@ class DatosGeneralesForm(forms.ModelForm):
 		}
 
 		widgets={
-			'cod_expediente':forms.TextInput(attrs={'class':'form-control'}),
+			'cod_expediente':forms.TextInput(attrs={'class':'form-control','readonly':'true'}),
 			'nombre_completo':forms.TextInput(attrs={'class':'form-control','title':'El nombre no puede incluir numeros o caracteres especiales','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,100}'}),
 			'edad':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'edad_registro':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
@@ -94,9 +94,9 @@ class DatosGeneralesForm(forms.ModelForm):
 			'direccion':forms.TextInput(attrs={'class':'form-control'}),
 			'nombre_resp':forms.TextInput(attrs={'class':'form-control','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]{2,100}'}),
 			'motivo_consulta':forms.Textarea(attrs={'class':'form-control'}),
-			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control'}),
+			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control','style': 'width: 243px; display: inline-block;'}),
 			'usuario_creador':forms.HiddenInput(attrs={'class':'form-control'}),
-			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control'}),
+			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control','readonly':'true'}),
 		
 		}
 
