@@ -5,7 +5,9 @@
 
 {% endblock %}
 {% block header %}
+<style>
 
+</style>
 {% endblock %}
 
 {% block content %}
@@ -28,11 +30,11 @@
 		</div>
 	</div>
 
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-10 col-md-offset-2">
 		<div class="form-group">
-		
+			<label for="{{form.fecha_nac.name}}" >{{form.fecha_nac.label}}</label>
 			<div class='input-group date' class='form-control' >
-				<label for="{{form.fecha_nac.name}}" >{{form.fecha_nac.label}}</label>	
+					
 				{{form.fecha_nac}}
             </div>	
 		</div>

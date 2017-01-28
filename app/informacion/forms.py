@@ -87,7 +87,7 @@ class DatosGeneralesForm(forms.ModelForm):
 			'edad':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'edad_registro':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 
-			'fecha_nac':forms.SelectDateWidget(years=range(1950,this_year,1),attrs={'class':'form-control fecha'}),
+			'fecha_nac':forms.SelectDateWidget(years=range(1950,this_year,1),attrs={'class':'form-control fecha','style': 'width: 243px; display: inline-block;'}),
 
 			'telefono':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{8}','title':'Ejemplo: 77777777'}),
 			'genero':forms.Select(attrs={'class':'form-control'}),
