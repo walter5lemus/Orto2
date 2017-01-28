@@ -65,11 +65,11 @@ class Tipo_perfilForm(forms.ModelForm):
 			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control'}),
 
 			'tipoNariz': forms.TextInput(attrs={'class':'form-control'}),
-			'angulo_Naso_labial': forms.TextInput(attrs={'class':'form-control'}),
-			'tercio_superior': forms.TextInput(attrs={'class':'form-control'}),
-			'tercio_medio': forms.TextInput(attrs={'class':'form-control'}),
-			'tercio_inferior':forms.TextInput(attrs={'class':'form-control'}),
-			'tamanoSonrisa':forms.TextInput(attrs={'class':'form-control'}),
+			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control'}),
+			'tercio_superior': forms.NumberInput(attrs={'class':'form-control'}),
+			'tercio_medio': forms.NumberInput(attrs={'class':'form-control'}),
+			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control'}),
+			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control'}),
 			'grosorLabios':forms.TextInput(attrs={'class':'form-control'}),
 			'tamanoLabios': forms.TextInput(attrs={'class':'form-control'}),
 
