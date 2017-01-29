@@ -115,6 +115,8 @@
 		</div>
 	</div>
  <script>
+ $("#id_cod_expediente").prop('readonly', true);
+
 	$('.fecha').change(function() {
 		
 		var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());

@@ -38,8 +38,7 @@ def CodExpediente_crear(request):
 	else:
 			form = DatosGeneralesForm()
 
-			return render(request, 'informacion/form_inicio.html', {'form':form})
-#		fi=list(fichas.objects.filter(cod_expediente=cod))
+			return render(request, 'informacion/form_inicio.html', {'form':form,'codi':codi,'num':num})
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -117,7 +116,7 @@ def DatosGeneral_crear(request,codi):
 	else:
 			form = DatosGeneralesForm(initial={'cod_expediente':codi,'usuario_creador':request.user.id})
 
-	return render(request, 'informacion/form_datosGenerales.html', {'form':form})
+	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'codi':codi,'num':num})
 
 def DatosGenerales_consultar(request,codi):
 	str(codi)
@@ -150,7 +149,7 @@ def DatosGenerales_consultar2(request,codi):
 			if form.is_valid():
 				form.save()
 			return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi)
-		return render(request,'informacion/form_datosGenerales_existente.html',{'form':form})
+		return render(request,'informacion/form_datosGenerales_existente.html',{'form':form,'codi':codi,'num':num})
 	return HttpResponse("No se encontro el Codigo de Expediente")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente")
@@ -170,7 +169,7 @@ def DatosGenerales_edit(request,codi):
 					form.save()
 				#return redirect('informacion:datos_generales_listar')
 				return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %co)
-			return render(request,'informacion/form_datosGenerales.html',{'form':form})
+			return render(request,'informacion/form_datosGenerales.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente")

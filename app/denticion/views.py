@@ -49,7 +49,7 @@ def denticion_view(request,codi,num):
 				anodoncia_formset = anodonciaFormSet(prefix='anodoncias')
 				mordida_formset = mordidaFormSet(prefix='mordidas')
 				form1 = denticionForm(initial={'fichas':ids.id})
-		return render(request, 'denticion/aspectos_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, "num":num,'form1':form1, 'codi':codi, 'ids':ids.id, 'max':max_num})
+		return render(request, 'denticion/aspectos_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, "num":num,'form1':form1, 'codi':codi, 'ids':ids.id, 'max':max_num,'num':num})
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 
@@ -88,7 +88,7 @@ def denticion_editar(request,codi,num):
 
 				form1.save()							
 			return redirect('/denticion/mordidas/editar/%s/%s/' %(codi,num))
-		return render(request, 'denticion/aspectos_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, 'ids':ids.id, 'max':max_num})
+		return render(request, 'denticion/aspectos_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
@@ -114,7 +114,7 @@ def denticion_consultar(request,codi,num):
 				form1 = denticionForm_consultar(request.POST, instance=denticion1)
 			
 				return redirect('/denticion/mordidas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'denticion/aspectos_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1})
+			return render(request, 'denticion/aspectos_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")			
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
@@ -143,7 +143,7 @@ def mordidas_view(request,codi,num):
 				form1 = linea_media_facialForm(initial={'fichas':ids.id})
 				form2 = sobremordidasForm(initial={'fichas':ids.id})
 				formset = registro_mordidasFormSet()
-		return render(request, 'denticion/denticion_form.html', {'form1':form1, 'form2':form2, 'formset':formset, 'codi':codi,'ids':ids.id,'max':max_num})
+		return render(request, 'denticion/denticion_form.html', {'form1':form1, 'form2':form2, 'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
 
@@ -171,7 +171,7 @@ def mordidas_editar(request,codi,num):
 					print form
 					form.save()
 			return redirect('/denticion/sagitales/editar/%s/%s/'%(codi,num))		
-		return render(request, 'denticion/denticion_edit_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'ids':ids.id,'max':max_num})	
+		return render(request, 'denticion/denticion_edit_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})	
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 
 def mordidas_consultar(request, codi, num):
@@ -192,7 +192,7 @@ def mordidas_consultar(request, codi, num):
 				formset = registro_mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id),)
 				
 				return redirect('/denticion/sagitales/consultar/%s/%s/'%(codi,num))			
-			return render(request, 'denticion/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset})	
+			return render(request, 'denticion/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
@@ -245,7 +245,7 @@ def relacionsagital_edit(request,codi,num):
 				form2.save()
 				form3.save()
 			return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/editar/%s/%s/' %(codi,num))
-		return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3})
+		return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 #	except Exception, e:
 #s		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
@@ -269,7 +269,7 @@ def relacionsagital_consultar(request,codi,num):
 				form3 = ImagenForm_consultar(request.POST, request.FILES, instance=imagenes)
 
 				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/consultar/%s/%s/' %(codi,num))
-			return render(request, 'denticion/sagitales_consultar_form.html', {'form':form,'form2':form2,'form3':form3})
+			return render(request, 'denticion/sagitales_consultar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
