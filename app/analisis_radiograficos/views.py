@@ -169,7 +169,7 @@ def otrosAspectos_crear(request, codi, num):
         if ids:
             if request.method == 'POST':
                 form = aspectos_mandibulares2Form(request.POST, initial={'fichas': ids.id})
-                if form.is_valid():
+                idsf form.is_valid():
                     form.save()
 
                 return HttpResponseRedirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))

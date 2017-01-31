@@ -29,7 +29,7 @@ def moyerssup_view(request,codi,num):
 						print form
 						form.save()
 
-				return redirect('/')
+				return redirect('/diag_general/nuevo/%s/%s' % (codi, num))
 			else:
 				form1 = moyersSupForm(initial={'fichas':ids.id})
 				formset = moyerssupFormSet()

@@ -28,7 +28,7 @@ def cefalometrico_view(request,codi,num):
 						print form
 						form.save()
 
-				return redirect('/analisis_radiograficos/analisis_nance/nuevo/%s/%s' % (codi, num))
+				return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
 			else:
 				formset = cefalometricoFormSet()
 		return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset, 'codi':codi, 'num':num,'ids':ids.id,'max':max_num})
