@@ -38,7 +38,7 @@ def CodExpediente_crear(request):
 	else:
 			form = DatosGeneralesForm()
 
-			return render(request, 'informacion/form_inicio.html', {'form':form,'codi':codi,'num':num})
+			return render(request, 'informacion/form_inicio.html', {'form':form})
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
