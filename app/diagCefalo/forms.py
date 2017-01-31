@@ -32,10 +32,10 @@ class diagCefaloForm(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'patron_esqueletal':forms.TextInput(attrs={'class':'form-control'}),
-			'tipo_de_crecimiento':forms.TextInput(attrs={'class':'form-control'}),
-			'medidas_dentales':forms.TextInput(attrs={'class':'form-control'}),
-			'medidas_esteticas':forms.TextInput(attrs={'class':'form-control'}),
+			'patron_esqueletal':forms.Textarea(attrs={'class':'form-control'}),
+			'tipo_de_crecimiento':forms.Textarea(attrs={'class':'form-control'}),
+			'medidas_dentales':forms.Textarea(attrs={'class':'form-control'}),
+			'medidas_esteticas':forms.Textarea(attrs={'class':'form-control'}),
 		}
 
 
@@ -69,8 +69,8 @@ class diagCefaloForm_consultar(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'patron_esqueletal': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'tipo_de_crecimiento':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'medidas_dentales':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'medidas_esteticas':forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'patron_esqueletal': forms.Textarea(attrs={'class':'form-control','readonly':True}),
+			'tipo_de_crecimiento':forms.Textarea(attrs={'class':'form-control','readonly':True}),
+			'medidas_dentales':forms.Textarea(attrs={'class':'form-control','readonly':True}),
+			'medidas_esteticas':forms.Textarea(attrs={'class':'form-control','readonly':True}),
 		}

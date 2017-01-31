@@ -26,7 +26,7 @@ def AspectosArticulares_Crear(request,codi,num):
 				if form.is_valid():
 				 	form.save()
 
-				return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
 				
 			else:
 				

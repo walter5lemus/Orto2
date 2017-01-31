@@ -1,14 +1,17 @@
 {% extends 'base/base.html' %}
 
 {% block header %}
-<h3>Diagnostico Cefalometrico</h3>
+
 {% endblock %}
 
+{% block title %}
+Diagnostico Cefalometrico
+{% endblock %}
 
 {% block content %}
 <form method="post">
 	{% csrf_token %}
-
+<h3><center>Diagnostico Cefalometrico</center></h3>
 <div class="row">
 	<div class="col-md-7 col-md-offset-1">
 		<div class="form-group">
@@ -17,8 +20,24 @@
 	</div>
 	</div>
 
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
 
-	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<label for="{{form.patron_esqueletal.name}}">{{form.patron_esqueletal.label}}</label>
 			{{form.patron_esqueletal}}
@@ -26,7 +45,7 @@
 	</div>
 
 
-	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<label for="{{form.tipo_de_crecimiento.name}}">{{form.tipo_de_crecimiento.label}}</label>
 			{{form.tipo_de_crecimiento}}
@@ -34,7 +53,7 @@
 	</div>
 
     <br></br>
-	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<label for="{{form.medidas_dentales.name}}">{{form.medidas_dentales.label}}</label>
 			{{form.medidas_dentales}}
@@ -42,7 +61,7 @@
 	</div>
 
 
-	<div class="col-md-7 col-md-offset-1">
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<label for="{{form.medidas_esteticas.name}}">{{form.medidas_esteticas.label}}</label>
 			{{form.medidas_esteticas}}
@@ -51,13 +70,21 @@
 
 
 
-	<div class="col-md-8 col-md-offset-1">
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<button type="button" onclick=" location.href='/informacion/estado_general/editar2/{{codi}}/{{num}}'" class="btn btn-warning">Cancelar</button>
 			<button type="submit" class="btn btn-success">Siguiente</button>
 		</div>
 	</div>
+<script>
 
+	$('#{{form.fichas.auto_id}}').val({{fichas}});
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
 
 	</form>
 {% endblock %}

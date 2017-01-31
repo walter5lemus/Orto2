@@ -19,6 +19,9 @@ Estado general
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
+
+	<h2><center>Estado General</center></h2>
+
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			{{form.fichas}}

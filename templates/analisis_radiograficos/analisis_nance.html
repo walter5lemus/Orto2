@@ -25,20 +25,26 @@
     	    	width: 150px;
                 text-align: center;
     	    }
+            h4{
+                    color: red;
+            }
     	</style>
 
     	
     {% endblock %}
 
     {% block content %}
-    <div class="col-md-8 col-md-offset-2">
+
+<h2><center>Analisis de Nance</center></h2>
+
+<div class="col-md-12 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-6">
+            <div class="col-md-4">
             <label for="codigo">N° de Expediente </label>   
             <input id="codigo" class="form-control" type="text" disabled="True">
             <br>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
             <br>
@@ -47,6 +53,7 @@
         </div>
         <br>
     </div>
+    
 
     <div class="analisis_nance">
     		
@@ -69,9 +76,14 @@
                     {{form1.ed_mand}}
                 </div>
             </div>
+
             {{form1.total}}
                            {{form1.total2}}  
-              
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>Si el diente esta permanente, ingresar el dato en Valor x</h4>
+                </div>
+            </div>
     			<table id="1" cellpadding="0" cellspacing="5">
                     <thead>
                         <tr>

@@ -23,7 +23,7 @@ def asp_mandibular1_view(request,codi,num):
 				if form.is_valid():
 					form.save()
 
-				return HttpResponseRedirect('/denticion/mordidas/nuevo/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s/' %(codi,num))
 			else: 
 				form = aspMandibularForm(initial={'fichas':ids.id})
 				

@@ -9,6 +9,23 @@
 <form method="post">
 	{% csrf_token %}
 
+<div class="col-md-12 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-4">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-4">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+
 
 <div class="row">
 	<div class="col-md-6 col-md-offset-1">
@@ -224,7 +241,13 @@
 		</div>
 	</div>
 
+<script>
 
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
 
 	</form>
 {% endblock %}

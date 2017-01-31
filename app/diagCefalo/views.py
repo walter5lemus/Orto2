@@ -23,7 +23,7 @@ def diag_cefalo_view(request,codi,num):
 				if form.is_valid():
 					form.save()
 
-				return HttpResponseRedirect('/denticion/mordidas/nuevo/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/analisis_radiograficos/analisis_nance/nuevo/%s/%s/' %(codi,num))
 			else: 
 				form = diagCefaloForm(initial={'fichas':ids.id})
 				
