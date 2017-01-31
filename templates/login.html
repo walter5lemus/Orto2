@@ -37,71 +37,59 @@
 		  width: 9em;
 		  word-wrap: break-word;
 		} 
-		.contenedor{
-			border:2px solid #000;
-			border-radius:25px;
-			position: absolute;
-			top: 50%;
-			left:50%;
-			transform: translate(-50%,-50%);
-			
-		}
+
 	</style>
 
 <div>
 <form method="POST">
 	{% csrf_token %}
-
-	{% if form.non_field_errors %}
-    <ul class='form-errors'>
-        {% for error in form.non_field_errors %}
-            <li class="alert alert-danger">{{ error }}</li>
-        {% endfor %}
-    </ul>
-	{% endif %}
-
-	<div>
-		<div class="col-md-12">
-			<h1> <center> Facultad de Odontología </center></h1>
-			<h1> <center> Universidad de El Salvador   </center></h1>
-			<div class="col-md-8 col-md-offset-2">
-				<div class="form-group">
-						<h1></h1>
-				</div>
-			</div>
-
+	<div class="row">
+		{% if form.non_field_errors %}
+		<ul class='form-errors'>
+		    {% for error in form.non_field_errors %}
+		        <li class="alert alert-danger">{{ error }}</li>
+		    {% endfor %}
+		</ul>
+		<br><br>
+		{% endif %}
 	</div>
-	
+	<div class="row">
+		<div>
+			<div class="col-md-12">	
+				<h1> <center> Facultad de Odontología </center></h1>
+				<h1> <center> Universidad de El Salvador   </center></h1>
 
-	
-	<div>
-		<div class="contenedor">
-				<div class="col-md-8 col-md-offset-2">
-				<br><br>
-					<div class="form-group">
-							<label for="username">Nombre de Usuario</label>
-							<input class="form-control" type="text" name="username">
+			</div>
+		</div>
+		<br><br><br>
+		
+		
+			<div class="contenedor row">
+					<div class="col-md-4 col-md-offset-4">
+					<br><br>
+						<div class="form-group">
+								<label for="username">Nombre de Usuario</label>
+								<input class="form-control" type="text" name="username">
+						</div>
 					</div>
-				</div>
-				<div class="col-md-8 col-md-offset-2">
-					<div class="form-group">
-							
+
+					<div class="col-md-4 col-md-offset-4">
+						<div class="form-group">
+								<label for="username">Contraseña</label>
+								<input class="form-control" type="password" name="password">
+						</div>
+					<br><br>
+					</div>	
+
+					<div class="col-md-2 col-md-offset-5">
+						<div class="form-group">
+						
+								<input class="btn btn-primary btn-lg btn-block" type="submit" value="Ingresar">
+						
+						</div>
 					</div>
-				</div>
-				<div class="col-md-8 col-md-offset-2">
-					<div class="form-group">
-							
-					</div>
-				</div>
-				
-				<div class="col-md-8 col-md-offset-2">
-					<div class="form-group">
-							<label for="username">Contraseña</label>
-							<input class="form-control" type="password" name="password">
-					</div>
-				<br><br>
-				</div>	
-			</div>		
+				</div>		
+			</div>
 		</div>
 </form>
 </div>
