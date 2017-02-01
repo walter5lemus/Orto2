@@ -7,7 +7,7 @@ from app.informacion.models import fichas, datos_generales
 
 class diagnostico_general(models.Model):
 
-	cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
+	#cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
 
 	diagnostico_ortodontico_general = models.TextField()

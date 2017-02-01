@@ -57,6 +57,11 @@ INSERT INTO `tipo_perfil_competencialabial` (`id_competenciaLabial`, `tipo_compe
 ('2', 'Potencialmente Competente'),
 ('3', 'Incompetente');
 
+INSERT INTO `analisisdenticionmixta_pos` (`id`) VALUES
+(1),
+(2),
+(3),
+(4);
 
 --
 -- Indices de la tabla `informacion_catalogo_enfermedades`
@@ -81,6 +86,9 @@ ALTER TABLE `tipo_perfil_perfiltotal`
   
 ALTER TABLE `tipo_perfil_competencialabial`
   ADD PRIMARY KEY (`id_competenciaLabial`);
+  
+ALTER TABLE `analisisdenticionmixta_pos`
+  ADD PRIMARY KEY (`id`);
 
   
   

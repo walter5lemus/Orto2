@@ -6,7 +6,7 @@ from app.informacion.models import fichas, datos_generales
 
 class diagnostico_cefalometrico(models.Model):
 
-	cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
+	#cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
 
 	patron_esqueletal = models.TextField()
