@@ -76,43 +76,88 @@
 	</style>
 
 
-	<h1> <center> Bienvenido </center></h1>
-	<h2> <center>¿Que desea hacer hoy? </center></h2>
-	<div class="col-md-6 col-md-offset-5">
-		<div class="form-group"></div>
-	</div>
-	<div class="col-md-6 col-md-offset-5">
-		<div class="form-group"></div>
-	</div>
-	<div class="col-md-6 col-md-offset-5">
-		<div class="form-group"></div>
-	</div>
+	<style>
 
-	<div class="col-md-4 col-md-offset-4">
-		<div class="form-group">
-				<button type="button" onclick=" location.href='/informacion/inicio/nuevo/'" class="btn btn-primary btn-lg btn-block uno">Crear un nuevo expediente </button>
-		</div>
-	</div>
+    /* Transicion de imagenes */
+
+		#container {
+			margin: 0 auto;
+		}
 	
-	<div class="col-md-4 col-md-offset-4">
-		<div class="form-group">
-				<button type="button" onclick=" location.href='/informacion/inicio/consultar/'" class="btn btn-primary btn-lg btn-block dos">Consultar un expediente</button>
-		</div>
+		.ex2 img{
+			margin: 15px 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+			transition: all 0.5s ease;
+		}
+
+ 		.ex2 img:hover {
+			margin-top: -50px;
+		}
+
+
+
+	/* Transparencia de imagenes */
+
+		div.background {
+  			background: url(klematis.jpg) repeat;
+  			/*border: 2px solid black;*/
+		}
+
+		div.transbox {
+ 			/*margin: 30px;
+  			background-color: #ffffff;
+  			border: 1px solid black;*/
+  			opacity: 0.6;                     /*Nivel Tranparencia*/
+  			/*filter: alpha(opacity=60);*/    /* For IE8 and earlier */
+		}
+
+		div.transbox p {
+ 			margin: 5%;
+  			font-weight: bold;
+  			color: #000000;
+			}
+	</style>
+
+
+
+  
+
+<div style="position:relative">
+
+    <center> 
+    <img src="\media\imagenes\Menu\Bienvenidos.jpg" width="75%" height="70%">
+    </center>
+
+   <div style="position:absolute; top:280; left:630;">
+
+   	<div class="background">
+      <div class="transbox">
+
+         <div id="container">
+         <div class="ex2">
+
+    		<a href="/informacion/inicio/nuevo/"><img src="\media\imagenes\Menu\nuevo.png"></a></td>
+    		<a href="/informacion/inicio/consultar/"><img src="\media\imagenes\Menu\consulta.png"></a></td>
+    		<a href="/informacion/inicio/editar/"><img src="\media\imagenes\Menu\editar.png"></a></td>
+    		<a href="#"><img src="\media\imagenes\Menu\imagen.png"></a></td>
+    		<a href="#"><img src="\media\imagenes\Menu\citas.png"></a></td>
+
+         </div>
+	     </div>
+
+	  </div>
 	</div>
 
-	<div class="col-md-4 col-md-offset-4">
-		<div class="form-group">
-				<button type="button" onclick=" location.href='/informacion/inicio/editar/'" class="btn btn-primary btn-lg btn-block uno">Editar un expediente</button>
-		</div>
-	</div>
+   </div>
+</div>
 
-	<div class="col-md-4 col-md-offset-4">
-		<div class="form-group">
-				<button type="button" onclick=" location.href='/citas/nuevo'" class="btn btn-primary btn-lg btn-block dos">Control de Citas</button>
-		</div>
-	</div>
-	<div class="col-md-4 col-md-offset-4">
-		<div class="form-group">
-				<button type="button" onclick=" location.href='/reportes/nuevo/'" class="btn btn-primary btn-lg btn-block uno">Generar Reportes</button>
-		</div>
-	</div>
+
+
+	<blockquote class="blockquote-reverse">
+  	    <p>Universidad de El Salvador. Facultad de Odontología</p>
+  	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
+	</blockquote>
+
+

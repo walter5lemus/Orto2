@@ -133,7 +133,7 @@ def mordidas_view(request,codi,num):
 				if (form1.is_valid() and form2.is_valid() and formset.is_valid()):
 					form1.save()
 					form2.save()
-
+					
 					for form in formset:
 						print form
 						form.save()
