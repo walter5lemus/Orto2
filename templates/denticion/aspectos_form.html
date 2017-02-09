@@ -720,26 +720,35 @@
     </div>
 </div><!-- fin bootstrap -->
 
-    <br/>
-    <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+    
+
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+            <br><br>
+            
+        </div>
+    </div>
+
+
     </form>
 </div>
 
-<script type="text/javascript">
 
-    $('polygon').click(function (evt) {
-        var sector = $(evt.target); 
+        <!-- Barra de progreso -->
+        <br><br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 24%;"></div>
+        </div>
+        </div>
 
-        palabra = sector.parent().attr('id')
-        cuadrante = palabra[1] 
-        pieza = palabra[2]
 
-        b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
-        b1 = b - 1
-
-        $("#id_"+nombre+"-"+b1+"-cuadrante").val( cuadrante );
-        $("#id_"+nombre+"-"+b1+"-pieza").val( pieza );
-    });        
   
 </script>
 

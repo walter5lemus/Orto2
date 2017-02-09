@@ -6,8 +6,6 @@
 
 {% block header %}
 
-<h5>Este es el analisis cefalometro</h5>
-
 {% endblock %}
 
 {% block extrajs %}
@@ -149,7 +147,7 @@ $('#id_form-1-snb').change(function() {
 			</div>
 			<br>
 		</div>
-		<br>
+		<br><br><br><br>
 	</div>
 	{% csrf_token %}
 	{{ formset.management_form }}	 
@@ -182,11 +180,13 @@ $('#id_form-1-snb').change(function() {
 {{ formset.0.numero_de_examen }}
 {{ formset.1.numero_de_examen }}
 	
-
-		<table class='table-bordered'>
-			<caption>TABLA ACUMULADORA DE DATOS</caption>
+		
+		<table class='table table-bordered table-striped table-hover'>
+			<caption><center><h2>Tabla Acumuladora de Datos</h2></center></caption>
+			<br>
 			<tbody>
-				<tr>
+
+				<tr class="info">
 					<th colspan=2>Tipo</th>
 					<th>Medida</th>  
 					<th>Norma</th> 
@@ -201,8 +201,8 @@ $('#id_form-1-snb').change(function() {
 					<!-- 8 FILAS -->
 
 				<tr>
-					<th rowspan=15 class='rotar'>MEDIDAS ESQUELETALES</th>
-					<th rowspan=8>Patrón Esqueletal</th>
+					<th rowspan=15 class='rotar'><br><br><br><br><br>MEDIDAS ESQUELETALES</th>
+					<th rowspan=8><br><br><br>Patrón Esqueletal</th>
 					<td>SNA (Plano SN - Punto A)</td> 
 					<td>82° +/- 2°</td>
 					<td style="width: 105px">{{ formset.0.sna }}</td>
@@ -254,7 +254,7 @@ $('#id_form-1-snb').change(function() {
 					<!-- 7 FILAS -->
 
 				<tr>
-					<th rowspan=7>Tipo de Crecimiento</th>
+					<th rowspan=7><br><br><br>Tipo de Crecimiento</th>
 					<td>Plano Mandibular (Plano FH - Go a Me)</td> 
 					<td>26° +/- 4°</td>
 					<td style="width: 105px">{{ formset.0.plano_mandibular }}</td>
@@ -300,8 +300,8 @@ $('#id_form-1-snb').change(function() {
 					<!-- 4 FILAS -->	
 
 				<tr>
-					<th rowspan=6 class='rotar'>MEDIDAS DENTALES</th>	
-					<th rowspan=4>Inclinación</th>
+					<th rowspan=6 class='rotar'><br><br><br><br><br>MEDIDAS DENTALES</th>	
+					<th rowspan=4><br><br><br>Inclinación</th>
 					<td>IS - NA (Incisivo Superior - Plano NA)</td> 
 					<td>22° +/- -4°</td>
 					<td style="width: 105px">{{ formset.0.is_na }}</td>
@@ -329,7 +329,7 @@ $('#id_form-1-snb').change(function() {
 				<!-- 2 Filas -->
 
 				<tr>
-					<th rowspan=2> Movimiento en Cuerpo</th>
+					<th rowspan=2><br>Movimiento en Cuerpo</th>
 					<td>Protrusión de Incisivo Mx (Borde del Incisivo Mx - Plano A - Pog)</td> 
 					<td>3.55mm +/- 2mm</td>
 					<td style="width: 105px">{{ formset.0.protusion_de_incisivo_max }}</td>
@@ -354,17 +354,40 @@ $('#id_form-1-snb').change(function() {
 			</tbody>
 		</table>
 
-	<br><br>
-<center><button type="submit" class="btn btn-success">Siguiente</button></center>	<br><br>
+
+
+
+	 <br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+            <br><br>
+            
+        </div>
+    </div>
+
+
+
+     <!-- Barra de progreso -->
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 66%;"></div>
+        </div>
+        </div>
+
+
 
 <script>
 
-	
-
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
-
 		 
 </script>
+
 </form>
 {% endblock %}

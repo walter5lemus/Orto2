@@ -33,17 +33,29 @@
             </div>
         </div>
 
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form1.otros_hallazgos.name }}">{{ form1.otros_hallazgos.label }}</label>
-                {{ form1.otros_hallazgos }}
-            </div>
-        </div>
+
+
+   
+   <div class="col-md-8 col-md-offset-2">
+   <div class="form-group">
+    <br><br><br>
+    <table class="table table-striped table-hover ">
+     <thead>
+        <tr class="info">
+        <td>
+            <br><h4>Otros Hallazgos: Radiografía Panoramica</h4>
+            {{ form1.otros_hallazgos }}
+        </td>
+     </tbody>
+    </table>
+   </div>
+   </div>
+
 
 
         <div class="col-md-12">
             <div class="form-group">
-                <b>Estadios de Nolla</b><br><br>
+                <br><br><h4><b>Estadios de Nolla</b></h4><br>
                 <table border="1">
                     <tr>
                         <td align="center">
@@ -158,7 +170,7 @@
         <br><br>
         <div class="col-md-12">
             <div class="form-group">
-                <b>Estadios de Nolla</b><br><br>
+                <br><br><h4><b>Estadios de Nolla</b></h4><br><br>
                 <table border="1">
                     <tr>
                         <td align="center">
@@ -270,11 +282,34 @@
             </div>
         </div>
 
-        <div class="col-md-8 col-md-offset-1">
-            <div class="form-group">
-                <center><button type="submit" class="btn btn-success">Siguiente</button></center>
+
+
+
+    <br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
+            <br><br>
+            
         </div>
+    </div>
+
+
+
+     <!-- Barra de progreso -->
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 60%;"></div>
+        </div>
+        </div>
+
+
+
     </form>
 <script>
     $('#codigo').val("{{codi}}");

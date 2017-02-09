@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block header %}
-<h3>Aspectos Mandibulares</h3>
+<center><h1>Aspectos Mandibulares</h1></center>
 {% endblock %}
 
 
@@ -28,218 +28,288 @@
 
 
 <div class="row">
-	<div class="col-md-6 col-md-offset-1">
-	<h3>Rama Mandibular</h3>
-	    <h4>Anchura R - R'</h4>
+	<div class="col-md-3 col-md-offset-0">
 		<div class="form-group">
 			{{form.fichas}}
 		</div>
 	</div>
-	</div>
+</div>
+<br><br>
+
+<!-- Rama Mandibular -->
+<div class="col-md-10 col-md-offset-1">
+<div class="form-group">
+
+	<div class="panel panel-primary">
+  	  <div class="panel-heading">
+    	<h3 class="panel-title">Rama Mandibular</h3>
+      </div>
+
+  	  <div class="panel-body">
 
 
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_anch_izq_altura.name}}">{{form.rama_mand_anch_izq_altura.label}}</label>
-			{{form.rama_mand_anch_izq_altura}}
+  	  	<!-- Anchura R - R' -->
+
+        <br><h4><b>Anchura R - R'</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_izq_altura.name}}">{{form.rama_mand_anch_izq_altura.label}}</label>
+				{{form.rama_mand_anch_izq_altura}}
+			</div>	
 		</div>
-	</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_anch_izq_aspect_observ.name}}">{{form.rama_mand_anch_izq_aspect_observ.label}}</label>
-			{{form.rama_mand_anch_izq_aspect_observ}}
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.rama_mand_anch_simetrico.name}}">{{form.rama_mand_anch_simetrico.label}}</label>
+				{{form.rama_mand_anch_simetrico}}
+			</div>
 		</div>
-	</div>
 
 
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_anch_der_altura.name}}">{{form.rama_mand_anch_der_altura.label}}</label>
-			{{form.rama_mand_anch_der_altura}}
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_izq_aspect_observ.name}}">{{form.rama_mand_anch_izq_aspect_observ.label}}</label>
+				{{form.rama_mand_anch_izq_aspect_observ}}
+			</div>
 		</div>
-	</div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_anch_der_aspect_observ.name}}">{{form.rama_mand_anch_der_aspect_observ.label}}</label>
-			{{form.rama_mand_anch_der_aspect_observ}}
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_der_altura.name}}">{{form.rama_mand_anch_der_altura.label}}</label>
+				{{form.rama_mand_anch_der_altura}}
+			</div>
 		</div>
-	</div>
-
-
-	<div class="col-md-4 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_anch_simetrico.name}}">{{form.rama_mand_anch_simetrico.label}}</label>
-			{{form.rama_mand_anch_simetrico}}
+		<div class="col-md-1">
+			<br><h5>mm</h5>
 		</div>
-	</div>
 
 
-
-<br></br>
-<div class="row">
-	<div class="col-md-6 col-md-offset-1">
-	    <h4>Altura (Plano M - Redorde Albeolar)</h4>
-		<div class="form-group"></div>
-	</div>
-	</div>
-
-
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_altur_izq_altura.name}}">{{form.rama_mand_altur_izq_altura.label}}</label>
-			{{form.rama_mand_altur_izq_altura}}
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_der_aspect_observ.name}}">{{form.rama_mand_anch_der_aspect_observ.label}}</label>
+				{{form.rama_mand_anch_der_aspect_observ}}
+			</div>
+			<br><br>
 		</div>
-	</div>
 
+    
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_altur_izq_aspect_observ.name}}">{{form.rama_mand_altur_izq_aspect_observ.label}}</label>
-			{{form.rama_mand_altur_izq_aspect_observ}}
+         <!-- Altura (Plano M - Redorde Albeolar) -->
+    	
+        <h4><b>Altura (Plano M - Redorde Albeolar)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_izq_altura.name}}">{{form.rama_mand_altur_izq_altura.label}}</label>
+				{{form.rama_mand_altur_izq_altura}}
+			</div>	
 		</div>
-	</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
 
 
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_altur_der_altura.name}}">{{form.rama_mand_altur_der_altura.label}}</label>
-			{{form.rama_mand_altur_der_altura}}
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.rama_mand_altur_simetrico.name}}">{{form.rama_mand_altur_simetrico.label}}</label>
+				{{form.rama_mand_altur_simetrico}}
+			</div>
 		</div>
-	</div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_altur_der_aspect_observ.name}}">{{form.rama_mand_altur_der_aspect_observ.label}}</label>
-			{{form.rama_mand_altur_der_aspect_observ}}
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_izq_aspect_observ.name}}">{{form.rama_mand_altur_izq_aspect_observ.label}}</label>
+				{{form.rama_mand_altur_izq_aspect_observ}}
+			</div>
 		</div>
-	</div>
 
 
-	<div class="col-md-4 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.rama_mand_altur_simetrico.name}}">{{form.rama_mand_altur_simetrico.label}}</label>
-			{{form.rama_mand_altur_simetrico}}
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_der_altura.name}}">{{form.rama_mand_altur_der_altura.label}}</label>
+				{{form.rama_mand_altur_der_altura}}
+			</div>
 		</div>
-	</div>
-
-
-
-
-
-<br></br>
-<div class="row">
-	<div class="col-md-6 col-md-offset-1">
-	<br></br>
-	<h3>Cuerpo Mandibular</h3>
-	    <h4>Altura (Plano M - Tangente de plano T)</h4>
-		<div class="form-group"></div>
-	</div>
-	</div>
-
-
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_altur_izq_altura.name}}">{{form.cuerpo_mand_altur_izq_altura.label}}</label>
-			{{form.cuerpo_mand_altur_izq_altura}}
+		<div class="col-md-1">
+			<br><h5>mm</h5>
 		</div>
-	</div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_altur_izq_aspect_observ.name}}">{{form.cuerpo_mand_altur_izq_aspect_observ.label}}</label>
-			{{form.cuerpo_mand_altur_izq_aspect_observ}}
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_der_aspect_observ.name}}">{{form.rama_mand_altur_der_aspect_observ.label}}</label>
+				{{form.rama_mand_altur_der_aspect_observ}}
+			</div>
 		</div>
-	</div>
+
+	  </div>
+    </div>
+
+ <br>
+</div>
+</div>
 
 
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_altur_der_altura.name}}">{{form.cuerpo_mand_altur_der_altura.label}}</label>
-			{{form.cuerpo_mand_altur_der_altura}}
+
+
+
+<!-- Cuerpo Mandibular -->
+<div class="col-md-10 col-md-offset-1">
+<div class="form-group">
+
+	<div class="panel panel-primary">
+  	  <div class="panel-heading">
+    	<h3 class="panel-title">Cuerpo Mandibular</h3>
+      </div>
+
+  	  <div class="panel-body">
+
+
+  	  	<!-- Altura (Plano M - Tangente de plano T) -->
+
+        <br><h4><b>Altura (Plano M - Tangente de plano T)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_izq_altura.name}}">{{form.cuerpo_mand_altur_izq_altura.label}}</label>
+				{{form.cuerpo_mand_altur_izq_altura}}
+			</div>	
 		</div>
-	</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_altur_der_aspect_observ.name}}">{{form.cuerpo_mand_altur_der_aspect_observ.label}}</label>
-			{{form.cuerpo_mand_altur_der_aspect_observ}}
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_simetrico.name}}">{{form.cuerpo_mand_altur_simetrico.label}}</label>
+				{{form.cuerpo_mand_altur_simetrico}}
+			</div>
 		</div>
-	</div>
 
 
-	<div class="col-md-4 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_altur_simetrico.name}}">{{form.cuerpo_mand_altur_simetrico.label}}</label>
-			{{form.cuerpo_mand_altur_simetrico}}
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_izq_aspect_observ.name}}">{{form.cuerpo_mand_altur_izq_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_altur_izq_aspect_observ}}
+			</div>
 		</div>
-	</div>
 
 
-
-<br></br>
-<div class="row">
-	<div class="col-md-6 col-md-offset-1">
-	    <h4>Longitud (Go-Limite de sinfisis madibular)</h4>
-		<div class="form-group"></div>
-	</div>
-	</div>
-
-
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_long_izq_altura.name}}">{{form.cuerpo_mand_long_izq_altura.label}}</label>
-			{{form.cuerpo_mand_long_izq_altura}}
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_der_altura.name}}">{{form.cuerpo_mand_altur_der_altura.label}}</label>
+				{{form.cuerpo_mand_altur_der_altura}}
+			</div>
 		</div>
-	</div>
-
-
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_long_izq_aspect_observ.name}}">{{form.cuerpo_mand_long_izq_aspect_observ.label}}</label>
-			{{form.cuerpo_mand_long_izq_aspect_observ}}
+		<div class="col-md-1">
+			<br><h5>mm</h5>
 		</div>
-	</div>
 
 
-	<div class="col-md-3 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_long_der_altura.name}}">{{form.cuerpo_mand_long_der_altura.label}}</label>
-			{{form.cuerpo_mand_long_der_altura}}
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_der_aspect_observ.name}}">{{form.cuerpo_mand_altur_der_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_altur_der_aspect_observ}}
+			</div>
+			<br><br>
 		</div>
-	</div>
 
 
-	<div class="col-md-6 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_long_der_aspect_observ.name}}">{{form.cuerpo_mand_long_der_aspect_observ.label}}</label>
-			{{form.cuerpo_mand_long_der_aspect_observ}}
+
+
+		 <!-- Longitud (Go-Limite de sinfisis madibular) -->
+    	
+        <h4><b>Longitud (Go-Limite de sinfisis madibular)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_izq_altura.name}}">{{form.cuerpo_mand_long_izq_altura.label}}</label>
+				{{form.cuerpo_mand_long_izq_altura}}
+			</div>	
 		</div>
-	</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
 
 
-	<div class="col-md-4 col-md-offset-1">
-		<div class="form-group">
-			<label for="{{form.cuerpo_mand_long_simetrico.name}}">{{form.cuerpo_mand_long_simetrico.label}}</label>
-			{{form.cuerpo_mand_long_simetrico}}
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_simetrico.name}}">{{form.cuerpo_mand_long_simetrico.label}}</label>
+				{{form.cuerpo_mand_long_simetrico}}
+			</div>
 		</div>
-	</div>
+
+
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_izq_aspect_observ.name}}">{{form.cuerpo_mand_long_izq_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_long_izq_aspect_observ}}
+			</div>
+		</div>
+
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_der_altura.name}}">{{form.cuerpo_mand_long_der_altura.label}}</label>
+				{{form.cuerpo_mand_long_der_altura}}
+			</div>
+		</div>
+		<div class="col-md-1">
+			<br><h5>mm</h5>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_der_aspect_observ.name}}">{{form.cuerpo_mand_long_der_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_long_der_aspect_observ}}
+			</div>
+		</div>
+
+	  </div>
+    </div>
+</div>
+</div>
 
 
 
-
+<!-- 
 	<div class="col-md-8 col-md-offset-1">
 		<div class="form-group">
 			<button type="button" onclick=" location.href='/informacion/estado_general/editar2/{{codi}}/{{num}}'" class="btn btn-warning">Cancelar</button>
 			<button type="submit" class="btn btn-success">Siguiente</button>
 		</div>
 	</div>
+-->
+
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+
+			<br><br>
+			<div class="col-md-3 col-md-offset-4">
+			    <center><button type="submit" class="btn btn-success btn-block"> Siguiente </button></center>
+			</div>
+			<br><br>
+			
+		</div>
+	</div>
+
+
+	<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 48%;"></div>
+		</div>
+		</div>
+
+
+
 
 <script>
 

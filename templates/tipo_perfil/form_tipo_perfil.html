@@ -45,9 +45,18 @@
 		<br>
 	</div>
 <br><br><br><br>
+
+
+
 	<!-- TIPO DE PERFIL -->
 
-	<div class="row contenedor">
+	<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Facial</h4>
+      </div>
+    
+     <div class="panel-body">
+
 	<br><br>
 		<div class="col-md-3 col-md-offset-1">
 			<div class="form-group">
@@ -66,52 +75,65 @@
 				<label for="{{form.perfilTercio_inferior.name}}">{{form.perfilTercio_inferior.label}}</label>
 				{{form.perfilTercio_inferior}}
 			</div>
-			<br><br>
+			<br>
 		</div>
-	
 	</div>
-<br><br>
-	<div class="row contenedor">
+</div>
+
+
+    <div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Nariz</h4>
+      </div>
+    
+     <div class="panel-body">
+
+     	<br><br>
 		<div class="col-md-4 col-md-offset-1">
-		<br>
-		<h4>Nariz</h4>
 				<div class="form-group">
 					<label for="{{form.tipoNariz.name}}">{{form.tipoNariz.label}}</label>
 					{{form.tipoNariz}}
 			</div>
 		</div>
-		<div class="col-md-4 ">
-		<br><br><br>
+
+		<div class="col-md-4 col-md-offset-1">
 			<div class="form-group">
 				<label for="{{form.angulo_Naso_labial.name}}">{{form.angulo_Naso_labial.label}}</label>
 				{{form.angulo_Naso_labial}}
 			</div>
-			<br><br>
+			<br>
 		</div>
 	</div>
-<br><br>
+</div>
 	
 	<!-- TERCIOS -->
 	
 
-	<div class="row contenedor">
-		<br>
+	<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Tercios</h4>
+      </div>
+    
+     <div class="panel-body">
+
+	 <br><br>
 		<div class="col-md-3 col-md-offset-1">
-		<h4>Tercios</h4>
 			<div class="form-group">
 				<div class="col-md-9">
-					<label for="{{form.tercio_superior.name}}">{{form.tercio_superior.label}}</label>
-					{{form.tercio_superior}} 
+				<label for="{{form.tercio_superior.name}}">{{form.tercio_superior.label}}</label>
+				{{form.tercio_superior}} 
 				</div>
+
 				<div class="col-md-1 ">
 					<br>	<h4>mm</h4>
 				</div>
+
 			</div>
 		</div>
 
 		
 		<div class="col-md-3">
-		<br><br>
+		
 			<div class="form-group">
 				<div  class="col-md-9">
 					<label for="{{form.tercio_medio.name}}">{{form.tercio_medio.label}}</label>
@@ -125,101 +147,121 @@
 
 
 		<div class="col-md-3">
-		<br><br>
 			<div class="form-group">
 				<div  class="col-md-9">
 					<label for="{{form.tercio_inferior.name}}">{{form.tercio_inferior.label}}</label>
 					{{form.tercio_inferior}}
 				</div>
+
 				<div class="col-md-1 ">
 					<br>	<h4>mm</h4>
+			    <br><br>
 				</div>
-				<br><br><br><br>
 			</div>
-		<br><br>
 		</div>
-	</div>
 
-<br><br>
+	</div>
+</div>
+
 	<!-- Sonrisa -->
-	<div class="row contenedor">
+	<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Sonrisa</h4>
+      </div>
+    
+     <div class="panel-body">
+
+	<br>
 		<div class="col-md-4 col-md-offset-1">
-		<br><br>
+		<br>
 			<div class="form-group">
-				<h4>Sonrisa</h4>
 				<label for="{{form.tipoSonrisa.name}}">{{form.tipoSonrisa.label}}</label>
 				{{form.tipoSonrisa}}
 			</div>
 		</div>
 		<div class="col-md-4 col-md-offset-1">
-			<br><br><br><br>
+			<br>
 			<div class="form-group">
 				<label for="{{form.tamanoSonrisa.name}}">{{form.tamanoSonrisa.label}}</label>
 				{{form.tamanoSonrisa}}
 			</div>
-			<br><br>
-		</div>
-		
+			<br>
+		</div>		
 	</div>
-<br><br>
+</div>
+
 	<!-- Labios -->
-	<div class="row contenedor">
-	<br><br>
-		<div class="col-md-4 col-md-offset-1">
+	<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Labios</h4>
+      </div>
+    
+     <div class="panel-body">
+
+	    <br><br>
+		<div class="col-md-3 col-md-offset-1">
 			<div class="form-group">
-				<h4>Labios</h4>
 				<label for="{{form.grosorLabios.name}}">{{form.grosorLabios.label}}</label>
 				{{form.grosorLabios}}
 			</div>
 		</div>
 
-		<div class="col-md-4 col-md-offset-1">
-		<br><br>
+
+		<div class="col-md-2 col-md-offset-0">
 			<div class="form-group">
 				<label for="{{form.tamanoLabios.name}}">{{form.tamanoLabios.label}}</label>
 				{{form.tamanoLabios}}
 			</div>
-			<br><br>
 		</div>
-	</div>
-
-	<br><br>
 
 
-	<div class="row contenedor">
-		<div class="col-md-6 col-md-offset-3">
-		<br><br>
+		<div class="col-md-1 ">
+			  <br>
+			  <h4>mm</h4>
+		</div>
+
+
+ 		<div class="col-md-4 col-md-offset-0">
 			<div class="form-group">
-				<h4>Competencia labial</h4>
 				<label for="{{form.tipo_competenciaLabial.name}}">{{form.tipo_competenciaLabial.label}}</label>
 				{{form.tipo_competenciaLabial}}
 			</div>
-			<br><br>
 		</div>
+
 	</div>
-	
+</div>
+
+
+
 
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
+
 			<br><br>
-			<div class="col-md-3 col-md-offset-3">
-			<center><button type="submit" class="btn btn-danger"> Anterior </button></center>
+			<div class="col-md-3 col-md-offset-4">
+			    <center><button type="submit" class="btn btn-success btn-block"> Siguiente </button></center>
 			</div>
-			<div class="col-md-3 ">
-			<center><button type="submit" class="btn btn-success">Siguiente</button></center>
-			</div>
-			<br><br><br><br><br><br>
+			<br><br>
+			
 		</div>
 	</div>
 
-<script>
 
+<script>
 
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
 
-		 
 </script>
+
+		<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 18%;"></div>
+		</div>
+		</div>
+
 
 	</form>
 {% endblock %}

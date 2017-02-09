@@ -35,11 +35,11 @@ class diagGeneralForm(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'diagnostico_ortodontico_general':forms.TextInput(attrs={'class':'form-control'}),
-			'problemas':forms.TextInput(attrs={'class':'form-control'}),
-			'objetivos':forms.TextInput(attrs={'class':'form-control'}),
+			'diagnostico_ortodontico_general':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
+			'problemas':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
+			'objetivos':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
 			'tratamiento':forms.Select(attrs={'class':'form-control'}),
-			'descripcion_tratamiento':forms.TextInput(attrs={'class':'form-control'}),
+			'descripcion_tratamiento':forms.Textarea(attrs={'class':'form-control', 'rows':5}),
 		}
 
 
@@ -75,9 +75,9 @@ class diagGeneralForm_consultar(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'diagnostico_ortodontico_general':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'problemas':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'objetivos':forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'diagnostico_ortodontico_general':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
+			'problemas':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
+			'objetivos':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
 			'tratamiento':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
-			'descripcion_tratamiento':forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'descripcion_tratamiento':forms.Textarea(attrs={'class':'form-control', 'rows':5,'readonly':True}),
 		}

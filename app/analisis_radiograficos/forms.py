@@ -272,17 +272,17 @@ class aspectos_mandibulares2Form(forms.ModelForm):
 		widgets = {
 			'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
 			'aspectos_sinusales_simetrico': forms.RadioSelect,
-			'aspectos_sinusales_izq_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
-			'aspectos_sinusales_der_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
+			'aspectos_sinusales_izq_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+			'aspectos_sinusales_der_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 			'ord_ori_simetrico': forms.RadioSelect,
-			'ord_ori_izq_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
-			'ord_ori_der_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
+			'ord_ori_izq_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+			'ord_ori_der_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 			'fpgd_fpgi_simetrico': forms.RadioSelect,
-			'fpgd_fpgi_izq_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
-			'fpgd_fpgi_der_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
+			'fpgd_fpgi_izq_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+			'fpgd_fpgi_der_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 			'veloc_erup_simetrico': forms.RadioSelect,
-			'veloc_erup_izq_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
-			'veloc_erup_der_aspect_observ': forms.TextInput(attrs={'class': 'form-control', 'max_length': 20}),
+			'veloc_erup_izq_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+			'veloc_erup_der_aspect_observ': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
 			'diagnostico': forms.Textarea(attrs={'class': 'form-control', 'max_length': 500}),
 		}
 
@@ -328,25 +328,25 @@ class aspectos_mandibulares2Form_consultar(forms.ModelForm):
 		widgets = {
 			'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
 			'aspectos_sinusales_simetrico': forms.RadioSelect(attrs={'readonly': True, 'disabled': True}),
-			'aspectos_sinusales_izq_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
-			'aspectos_sinusales_der_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
+			'aspectos_sinusales_izq_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
+			'aspectos_sinusales_der_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
 			'ord_ori_simetrico': forms.RadioSelect(attrs={'readonly': True, 'disabled': True}),
-			'ord_ori_izq_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
-			'ord_ori_der_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
+			'ord_ori_izq_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
+			'ord_ori_der_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
 			'fpgd_fpgi_simetrico': forms.RadioSelect(attrs={'readonly': True, 'disabled': True}),
-			'fpgd_fpgi_izq_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
-			'fpgd_fpgi_der_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
+			'fpgd_fpgi_izq_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
+			'fpgd_fpgi_der_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
 			'veloc_erup_simetrico': forms.RadioSelect(attrs={'readonly': True, 'disabled': True}),
-			'veloc_erup_izq_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
-			'veloc_erup_der_aspect_observ': forms.TextInput(
-				attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
+			'veloc_erup_izq_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
+			'veloc_erup_der_aspect_observ': forms.Textarea(
+				attrs={'class': 'form-control', 'rows': 3, 'readonly': True, 'disabled': True}),
 			'diagnostico': forms.Textarea(attrs={'class': 'form-control', 'readonly': True, 'disabled': True}),
 		}
 
