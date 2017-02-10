@@ -7,6 +7,7 @@
 {% block extrajs %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
+    <script src="{% static 'js/jquery.js' %}""></script>
     <script type="text/javascript" src="{% static 'js/skinable_tabs.js' %}"></script>
     <script src="{% static 'js/mordidas.js' %}"></script>
     <script src="{% static 'js/jquery.formset.js' %}"></script>
@@ -35,16 +36,20 @@
 
         $(function(){
             nombre = 'perdidas';
+            color = 'yellow';
             $( "a" ).click(function() { 
                 if ( $( this ).hasClass( "tab-id-1-tab_header" ) ) {
                     nombre = 'perdidas'
+                    color = 'yellow'
                 } 
                 else{
                     if( $( this ).hasClass( "tab-id-2-tab_header" ) ){
                         nombre = 'anodoncias';
+                        color = 'red'
                     }
                     else{
                         nombre = 'mordidas';
+                        color = 'blue'
                     }
                 }
             });      
@@ -745,18 +750,44 @@
 
 <script type="text/javascript">
 
-    $('polygon').click(function (evt) {
+    $('g polygon').mouseover(function (evt) {
+        var sector = $(evt.target);
+        iden = sector.parent().attr('id')
+        $('g#'+ iden + ' polygon#T').attr('fill', color);
+        $('g#'+ iden + ' polygon#B').attr('fill', color);
+        $('g#'+ iden + ' polygon#R').attr('fill', color);
+        $('g#'+ iden + ' polygon#L').attr('fill', color);
+        $('g#'+ iden + ' polygon#C').attr('fill', color);
+    });
+        
+    $('g polygon').mouseout(function (evt) {
+        var sector = $(evt.target);
+        iden = sector.parent().attr('id')
+        $('g#'+ iden + ' polygon#T').attr('fill', 'white');
+        $('g#'+ iden + ' polygon#B').attr('fill', 'white');
+        $('g#'+ iden + ' polygon#R').attr('fill', 'white');
+        $('g#'+ iden + ' polygon#L').attr('fill', 'white');
+        $('g#'+ iden + ' polygon#C').attr('fill', 'white');
+    });
+
+    $('g polygon').click(function (evt) {
         var sector = $(evt.target); 
 
-        palabra = sector.parent().attr('id')
-        cuadrante = palabra[1] 
-        pieza = palabra[2]
+        iden = sector.parent().attr('id')
+        cuadrante = iden[1] 
+        pieza = iden[2]
 
         b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
         b1 = b - 1
 
         $("#id_"+nombre+"-"+b1+"-cuadrante").val( cuadrante );
         $("#id_"+nombre+"-"+b1+"-pieza").val( pieza );
+
+        $('g#'+ iden + ' polygon#T').attr('fill', color);
+        $('g#'+ iden + ' polygon#B').attr('fill', color);
+        $('g#'+ iden + ' polygon#R').attr('fill', color);
+        $('g#'+ iden + ' polygon#L').attr('fill', color);
+        $('g#'+ iden + 'polygon#C').attr('fill', color);
     });        
   
 </script>
