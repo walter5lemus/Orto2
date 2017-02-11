@@ -15,18 +15,11 @@ from app.informacion.models import *
 def citas_crear(request):
 	
 	user = request.user.id
-	if request.method == 'POST':
-		form2 = citasForm(request.POST,initial={})
-		form = citasGeneralesForm(request.POST,initial={})
-		if form.is_valid() and form2.is_valid():
-			form.save()
-			form2.save()
-		return HttpResponseRedirect('/')
-	else:
-
-		form2 = citasForm(initial={})
-		form = citasGeneralesForm(initial={'estudiante':request.user.username})
-	return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2})
+	form = citasGeneralesForm(initial={'estudiante':request.user.username})
+	form2 = citasForm(initial={})
+	form3 = citasGeneralesForm2()
+	form4 = citasForm2(initial={})
+	return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4})
 
 def citas_crear2(request):
 	
@@ -44,13 +37,31 @@ def citas_crear2(request):
 		form = citasGeneralesForm(initial={'estudiante':request.user.username})
 	return render(request, 'citas/citas_crear2.html', {'form':form,'form2':form2})
 
+def post1(request):
+	codigo = request.POST['codigo']
+	estudiante = request.POST['estudiante']
+	aparato = request.POST['aparato']
+	radio = request.POST['radio']
+	id_estudiante = Usuario.objects.get(username=estudiante)
 
+	print radio
+
+	if request.method == 'POST':
+		if radio == 'mx':
+			citas_general.objects.create(aparato=aparato,codigo_id=codigo,estudiante_id=id_estudiante.id,mx=1,md=0)
+		if radio == 'md':
+			citas_general.objects.create(aparato=aparato,codigo_id=codigo,estudiante_id=id_estudiante.id,mx=0,md=1)
+
+	return HttpResponse('<script>alert("cita creada con exito");</script>')
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
-		nombre = datos_generales.objects.filter(cod_expediente=cod)
-		citass = citas_general.objects.filter(codigo_id=cod)
+		if datos_generales.objects.filter(cod_expediente=cod).exists():
+			nombre = datos_generales.objects.filter(cod_expediente=cod)
+			citass = citas_general.objects.filter(codigo_id=cod)
+		else:
+			nombre="fallo"
 		
 		data = serializers.serialize('json', nombre, fields=('nombre_completo'))
 

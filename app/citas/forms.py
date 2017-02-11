@@ -100,7 +100,7 @@ class citasGeneralesForm(forms.ModelForm):
 		}
 		widgets = {
 		'codigo':forms.TextInput(attrs={'class':'form-control'}),
-		'aparato':forms.TextInput(attrs={'class':'form-control'}),
+		'aparato':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),
 		'estudiante':forms.TextInput(attrs={'class':'form-control'}),
@@ -128,7 +128,7 @@ class citasGeneralesForm2(forms.ModelForm):
 		}
 		widgets = {
 		'codigo':forms.HiddenInput(attrs={'class':'form-control'}),
-		'aparato':forms.Select(attrs={'class':'form-control'}),
+		'aparato':forms.Select(attrs={'class':'form-control','id':'id_aparato2'}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),
 		'estudiante':forms.HiddenInput(attrs={'class':'form-control'}),
