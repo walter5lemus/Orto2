@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from app.informacion.choices import *
 from django.contrib.auth.models import AbstractUser
-
-
+import datetime
+from django.utils import timezone
 # Create your models here.
 
 class Usuario(AbstractUser):
@@ -31,7 +31,7 @@ class datos_generales(models.Model):
     direccion = models.CharField(max_length=200)
     nombre_resp = models.CharField(max_length=100)
     motivo_consulta = models.CharField(max_length=500)
-    fechaRegistro = models.DateField() 
+    fechaRegistro = models.DateField(default=datetime.datetime.now()) 
     usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
     fecha_hora_creacion = models.DateTimeField()
 

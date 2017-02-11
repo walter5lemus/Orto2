@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class citas(models.Model):
-	codigo = models.ForeignKey(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
+	codigo = models.OneToOneField(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
 	num_cita = models.IntegerField()
 	fecha_cita = models.DateField() 
 	observaciones= models.CharField(max_length=250)
@@ -19,7 +19,7 @@ class citas(models.Model):
 		return unicode(self.codigo)
 
 class citas_general(models.Model):
-	codigo = models.ForeignKey(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
+	codigo = models.OneToOneField(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
 	aparato = models.IntegerField(choices=aparato_choices) 
 	mx = models.BooleanField()
 	md = models.BooleanField()

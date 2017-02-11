@@ -22,11 +22,14 @@ def CodExpediente_crear(request):
 	if request.method == 'POST':
 		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
+		#num = form.data['num']
+		print codi
 		if form.is_valid():
 		 	form.save()
- 			return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
-	 	else:
+ 		"""return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
+	 	*else:
 	 		try:
+	 	
 	 			existe = datos_generales.objects.get(cod_expediente = codi)
 		 		if existe:
 		 			return HttpResponseRedirect('/informacion/datos_generales/consultar2/%s/' %codi)
@@ -34,7 +37,7 @@ def CodExpediente_crear(request):
 		 			return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
 	 		except Exception, e:
 				return HttpResponseRedirect('/informacion/datos_generales/nuevo/%s/' %codi)
-
+"""
 	else:
 			form = DatosGeneralesForm()
 
@@ -44,6 +47,10 @@ class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
 		datosGenerales = datos_generales.objects.filter(cod_expediente=cod)
+		if codigo_expediente.objects.filter(codigo=cod).exists():{
+		}
+		else:
+			codigo_expediente.objects.create(codigo=cod)
 		data = serializers.serialize('json', datosGenerales, fields=('nombre_completo','fechaRegistro','fecha_hora_creacion'))
 		return HttpResponse(data, content_type='application/json')
 
@@ -106,16 +113,18 @@ def DatosGeneral_crear(request,codi):
 	user = request.user.id
 	num = 1
 	if datos_generales.objects.filter(cod_expediente=codi).exists():
-		return HttpResponseRedirect('/informacion/datos_generales/editar/%s/' %codi)
+		return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
 	
 	if request.method == 'POST':
 			form = DatosGeneralesForm(request.POST)
 			if form.is_valid():
+				
 			 	form.save()
 			return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num)) 
 	else:
 			form = DatosGeneralesForm(initial={'cod_expediente':codi,'usuario_creador':request.user.id})
-
+			
+				
 	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'codi':codi,'num':num})
 
 def DatosGenerales_consultar(request,codi):
@@ -148,7 +157,7 @@ def DatosGenerales_consultar2(request,codi):
 			form = DatosGeneralesForm_consultar(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
-			return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi)
+			return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/' %codi)
 		return render(request,'informacion/form_datosGenerales_existente.html',{'form':form,'codi':codi,'num':num})
 	return HttpResponse("No se encontro el Codigo de Expediente")
 	#except Exception, e:
