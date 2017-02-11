@@ -12,6 +12,48 @@
     <script src="{% static 'js/jquery.formset.js' %}"></script>
 
     <script type="text/javascript">
+
+        //Pintar perdidas prematuras.
+        $(function() {
+            n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
+
+            for (i = 0; i < n1; i++) {
+                c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
+                p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', 'yellow');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', 'yellow');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', 'yellow');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', 'yellow');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', 'yellow');
+            }  
+
+            n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
+
+            for (i = 0; i < n2; i++) {
+                c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
+                p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', 'red');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', 'red');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', 'red');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', 'red');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', 'red');
+            }  
+
+            n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
+
+            for (i = 0; i < n3; i++) {
+                c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
+                p = document.getElementById("id_mordidas-"+i+"-pieza").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', 'blue');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', 'blue');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', 'blue');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', 'blue');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', 'blue');
+            } 
+        });
+    </script>    
+
+    <script type="text/javascript">
         $('.tabs_holder').skinableTabs({
             effect: 'basic_display',
             skin: 'skin12',
