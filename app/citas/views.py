@@ -54,6 +54,32 @@ def post1(request):
 
 	return HttpResponse('<script>alert("cita creada con exito");</script>')
 
+
+def post2(request):
+	codigo = request.POST['codigo']
+	autorizacion = request.POST['autorizacion']
+	resultados = request.POST['resultados']
+	observaciones = request.POST['observaciones']
+	fecha1 = request.POST['fecha1']
+	fecha2 = request.POST['fecha2']
+
+	num_cita=0
+
+	try:
+		numerocitas =  len(citas.objects.filter(codigo_id=codigo))
+		num_cita=numerocitas +1
+	except Exception as e:
+		raise e
+
+	if autorizacion==1:
+		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=1,codigo_id=codigo)
+	else:
+		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=0,codigo_id=codigo)
+
+
+	return HttpResponse('<script>alert("cita creada con exito");</script>')
+
+
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
@@ -70,14 +96,9 @@ class BusquedaAjaxView(TemplateView):
 class BusquedaAjaxView2(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
-		#nombre = datos_generales.objects.filter(cod_expediente=cod)
 		citass = citas_general.objects.filter(codigo_id=cod)
-		#algo = citass[0]
-		#aparato2 = dict(aparato_choices).get(algo['aparato'])
-		data = serializers.serialize('json', citass, fields=('aparato'))
-		#data = json.dumps({
-        #'aparato': aparato2,
-    	#})
+		data = serializers.serialize('json', citass, fields=('aparato','md'))
+
 		return HttpResponse(data, content_type='application/json')
 
 

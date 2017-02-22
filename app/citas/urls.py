@@ -8,7 +8,7 @@ urlpatterns = [
 
 
  url(r'^post1/', login_required(post1), name= 'post1'),
- 
+ url(r'^post2/', login_required(post2), name= 'post2'),
 
  url(r'^cerrar/', login_required(citas_crear2), name= 'citasCrear2'),
  url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),

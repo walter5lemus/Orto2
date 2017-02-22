@@ -46,47 +46,61 @@
     padding: 20px;
 
 }
+.divOcultar{
+	display: none;
+}
+
+.divOcultar2{
+	display: none;
+}
+.divOcultar {
+  padding: 20px;
+  border-color: solid black;
+  border-style: ridge;
+}
+
+
+.divOcultar2{
+  padding: 20px;
+  border-color: solid black;
+  border-style: ridge;
+}
+
+
 </style>
+
+<script type="text/javascript">
+
+
+</script>
+
 {% endblock %}
 
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
 	</form>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-2">
+	<div class="row fuera">
+		<div class="col-md-4 col-md-offset-2">
 			<div class="form-group">
 					<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
 				{{form2.codigo}}		
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-2 ">
 				<br>
 				<button class="btn btn-primary" onclick="buscar()">Buscar</button>
 			</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+	<div class="row fuera" >
+		<div class="col-md-5 col-md-offset-1">
 			<div class="form-group">
 					<label for="cod_expediente">Nombre del Paciente</label>	
 				<input readonly type="text" class="form-control" id="id_nombre_estudiante">
-
 			</div>
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="form-group">
-					<label for="{{form.estudiante.name}}">{{form.estudiante.label}}</label>	
-				{{form.estudiante}}
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-3">
 			<div class="form-group">
 					<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
 				{{form.aparato}}
@@ -95,19 +109,28 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-2">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="form-group">
+				{{form.estudiante}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="form-group fuera">
+			<div class="col-md-2 col-md-offset-2">
+			<br>
 					<label for="{{form.mx.name}}">{{form.mx.label}}</label>	
 					{{form.mx}}
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-						<label for="{{form.md.name}}">{{form.md.label}}</label>	
-						{{form.md}}
-				</div>	
+			<div class="col-md-2">
+			<br>
+					<label for="{{form.md.name}}">{{form.md.label}}</label>	
+					{{form.md}}
 			</div>	
+				
 		</div>
-		<div class="col-md-4 col-md-offset-2">
+		<div class="col-md-2 col-md-offset-1">
 			<div class="form-group">
 				<button class="btn btn-primary" onclick="urlss()">Registrar Cita</button>
 			</div>	
@@ -138,11 +161,18 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="row">
+			<br>
+				<div class="col-md-6 col-md-offset-5">
+					<button class="btn btn-primary" onclick="post1()" id="boton1">Registrar</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1 divOcultar">	
+		<div class="col-md-10 col-md-offset-1 divOcultar2">	
 			<div class="form-group">
 				<div class="col-md-2 col-md-offset-2">
 						<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
@@ -165,24 +195,21 @@
 							<label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
 						{{form2.autorizacion}}
 				</div>
-				<div class="col-md-2">
-					<div class="form-group">
-							<label for="{{form2.num_cita.name}}">{{form2.num_cita.label}}</label>	
-						{{form2.num_cita}}
-					</div>
+				
+			</div>
+			<div class="row">
+
+				<div class="col-md-6 col-md-offset-5">
+				<br>
+					<button class="btn btn-primary" onclick="post2()" id="boton2">Registrar</button>
 				</div>
-				<div class="col-md-12">
-					<div class="col-md-4 col-md-offset-5">
-						<button class="btn btn-primary" onclick="post1()" id="boton1">POST1</button>
-						<button class="btn btn-primary" onclick="post2()" id="boton2">POST2</button>
-					</div>
-				</div>
+				
 			</div>
 			
 		</div>
 	</div>
 
-	<div class="table-responsive col-md-12">
+	<div class="table-responsive col-md-12 fuera">
 		<div id="conteiner">
 	
 		</div>
@@ -193,28 +220,101 @@
 
 <script>
 
+	var fechaCita="";
+
 	function post1(){
 		var codigo = $('#id_codigo').val();
 		var aparato = $("#id_aparato2 option:selected").val()
 		var radio = $('input:radio[name=radio]:checked').val();
 		var estudiante = $('#id_estudiante').val();
-		alert("Radio= "+radio+"/nAparato= "+aparato );
-		
+		var fecha1 = $("#id_fecha_cita").val();
+		var fecha2 = $("#id_proxima_cita").val();
+		var observaciones = $('#id_observaciones').val();
+		var resultados = $('#id_resultados').val();
+		var autorizacion =0;
 
 		$.ajax({
-			//var i=0;
+			
 			data : {'aparato':aparato,'radio':radio,'codigo':codigo,'estudiante':estudiante},
 			url : '/citas/post1/',
 			type : 'POST',
 			success: function(response){
 				alert("Ingreso con exito");
 				buscar();
+				$(".divOcultar").css("display", "none");
+				$(".divOcultar2").css("display", "block");
+				$("#boton2").css("display", "block");
 			}
 		});
 	}
 
+	$('.fuera').click(function() {
+		$(".divOcultar").css("display", "none");
+		$(".divOcultar2").css("display", "none");
+	});
+
+	function post2(){
+		var codigo = $('#id_codigo').val();
+		var fecha1 = $("#id_fecha_cita").val();
+		var fecha2 = $("#id_proxima_cita").val();
+		var observaciones = $('#id_observaciones').val();
+		var resultados = $('#id_resultados').val();
+		var autorizacion =0;
+		//var tutor = $('#input:checkbox[name=radio]:checked').val();
+		var estudiante = $('#id_estudiante').val();
+
+		datePickerfunction();
+		$("#id_autorizacion").click(function() {  
+	        if($("#id_autorizacion").is(':checked')) {  
+	            autorizacion=1;
+	        } else {  
+	            autorizacion=0; 
+	        }  
+	    });
+
+
+
+		if (codigo!='') {
+				if (fecha2!='') {
+					if (observaciones!='') {
+						if (resultados!='') {
+
+							$.ajax({
+								data : {'fecha1':fecha1,'fecha2':fecha2,'observaciones':observaciones,'resultados':resultados,'autorizacion':autorizacion,'codigo':codigo},
+								url : '/citas/post2/',
+								type : 'POST',
+								success: function(response){
+									alert("Ingreso con exito POST 2 ");
+									buscar();
+									limpiar2();
+									$(".divOcultar2").css("display", "none");
+								}
+							});
+
+						}else{
+							alert("LLene el campo Resultados Esperados");
+						}
+					}else{
+						alert("LLene el campo Observaciones");
+					}
+				}else{
+					alert("Seleccione una fecha en proxima cita");
+				}
+
+		}else{
+			alert("Digite el codigo del estudiante");
+		}
+
+
+		
+	}	
+
+	
+
 	function buscar(){
 		var codigo = $('#id_codigo').val();
+
+
 		$.ajax({
 			data : {'codigo':codigo},
 			url : '/citas/busqueda_ajax/',
@@ -233,8 +333,14 @@
 									type : 'get',
 									success: function(data){
 										for (var i = 0; i < data.length; i++) {
-											var apa = data[i].fields.aparato
+											var apa = data[i].fields.aparato;
+											var mdd = data[i].fields.md;
 											
+										if(mdd=="0"){
+											$("#id_mx").prop("checked", "checked");
+										}else{
+											$("#id_md").prop("checked", "checked");
+										}	
 										switch ((apa-1)) {
 										    case 0:
 										        day = "Ortodoncia Fija";
@@ -327,6 +433,7 @@
 						                    tr += '<tr>';
 						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td><td>'+data2[i].fields.autorizacion+'</td>';
 						                    tr += '</tr>';
+						                    fechaCita= data2[i].fields.proxima_cita;
 						                }
 						 
 						                tabla += tr;
@@ -338,12 +445,24 @@
 
 					}
 				}
+
 			},
 			error: function(data){
 				alert("No se encontraron datos con ese codigo de expediente");
+				$("#id_nombre_estudiante").val("");
+				$("#id_aparato").val("");
+				$(".divOcultar").css("display", "none");
+				$(".divOcultar2").css("display", "none");
+				$("#conteiner tr").remove();
 			},
 		});
 
+	    if(fechaCita==""){
+	    	$('#id_fecha_cita').attr('disabled', false);
+	    }else{
+	    	alert(fechaCita);
+	    	datePicker();
+	    }
 
 	}
 
@@ -351,16 +470,68 @@
 	function urlss(){
 
 		var codigo = $('#id_codigo').val();
-		if (codigo==''){
-			alert("Digite el codigo del Expediente");
+		var nombre = $('#id_nombre_estudiante').val();
+		if (nombre==''){
+			alert("Digite el codigo del Expediente y haz click en el boton buscar");
 		}
 		else{
-			window.open("/citas/registro_cita/"+codigo+"/","ventana1","width=700,height=700,scrollbars=NO") 	
-		}
-		
-		
+			if ($("#id_aparato").val()=="") {
+				$(".divOcultar").css("display", "block");
+				$(".divOcultar2").css("display", "none");
+				$("#boton1").css("display", "block");
+				$("#boton2").css("display", "none");
+			}else{
+				$(".divOcultar2").css("display", "block");
+				$("#boton1").css("display", "none");
+				}
+			}
+
+		if(fechaCita==""){
+	    	$('#id_fecha_cita').attr('disabled', false);
+	    }else{
+	    	$("#id_fecha_cita").val(fechaCita)
+	    	$('#id_fecha_cita').attr('disabled', true);
+	    }
 	}
-  
+
+	function limpiar2(){
+		//var codigo = $('#id_codigo').val();
+		var fecha1 = $("#id_fecha_cita").val("");
+		var fecha2 = $("#id_proxima_cita").val("");
+		var observaciones = $('#id_observaciones').val("");
+		var resultados = $('#id_resultados').val("");
+		$("#id_autorizacion").prop("checked", "");
+	
+	}
+
+	
+
+	function datePickerfunction(){
+		var fechaa1 = $("#id_fecha_cita").val();
+		var fechaa2 = $("#id_proxima_cita").val();
+		$(document).ready(function(){
+		    $("#id_fecha_cita").datepicker({
+		        dateFormat: 'yy-mm-dd',
+		        numberOfMonths: 2,
+		        onSelect: function(selected) {
+		          $("#id_proxima_cita").datepicker("option","minDate", selected)
+		        }
+		    });
+		    $("#id_proxima_cita").datepicker({ 
+		        minDate: 1,
+		        dateFormat: 'yy-mm-dd',
+		        maxDate:"+60D",
+		        numberOfMonths: 2,
+		        onSelect: function(selected) {
+		           $("#id_fecha_cita").datepicker("option","maxDate", selected)
+		       	 }
+		    	});  
+		});
+	}
+
+	$(function() {
+    	datePickerfunction();
+	})
 </script>
 
 

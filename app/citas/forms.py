@@ -32,9 +32,9 @@ class citasForm(forms.ModelForm):
 		widgets = {
 		'codigo':forms.TextInput(attrs={'class':'form-control'}),
 		'num_cita':forms.TextInput(attrs={'class':'form-control'}),
-		'fecha_cita':forms.DateInput(attrs={'class':'form-control fecha'}),
+		'fecha_cita':forms.DateInput(attrs={'class':'form-control','disabled':True}),
 		'observaciones':forms.Textarea(attrs={'class':'form-control'}),
-		'proxima_cita':forms.DateInput(attrs={'class':'form-control fecha'}),
+		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'resultados':forms.Textarea(attrs={'class':'form-control'}),
 		'autorizacion':forms.CheckboxInput(attrs={'class':''}),
 		'tutor':forms.TextInput(attrs={'class':'form-control'}),
@@ -70,9 +70,9 @@ class citasForm2(forms.ModelForm):
 		widgets = {
 		'codigo':forms.HiddenInput(attrs={'class':'form-control'}),
 		'num_cita':forms.HiddenInput(attrs={'class':'form-control'}),
-		'fecha_cita':forms.TextInput(attrs={'class':'form-control'}),
+		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'observaciones':forms.TextInput(attrs={'class':'form-control'}),
-		'proxima_cita':forms.TextInput(attrs={'class':'form-control'}),
+		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'resultados':forms.TextInput(attrs={'class':'form-control'}),
 		'autorizacion':forms.CheckboxInput(attrs={'class':''}),
 		'tutor':forms.TextInput(attrs={'class':'form-control'}),
@@ -103,7 +103,7 @@ class citasGeneralesForm(forms.ModelForm):
 		'aparato':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),
-		'estudiante':forms.TextInput(attrs={'class':'form-control'}),
+		'estudiante':forms.HiddenInput(attrs={'class':'form-control'}),
 
 		}
 
