@@ -32,7 +32,7 @@ class citasForm(forms.ModelForm):
 		widgets = {
 		'codigo':forms.TextInput(attrs={'class':'form-control'}),
 		'num_cita':forms.TextInput(attrs={'class':'form-control'}),
-		'fecha_cita':forms.DateInput(attrs={'class':'form-control','disabled':True}),
+		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'observaciones':forms.Textarea(attrs={'class':'form-control'}),
 		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'resultados':forms.Textarea(attrs={'class':'form-control'}),

@@ -44,8 +44,6 @@ def post1(request):
 	radio = request.POST['radio']
 	id_estudiante = Usuario.objects.get(username=estudiante)
 
-	print radio
-
 	if request.method == 'POST':
 		if radio == 'mx':
 			citas_general.objects.create(aparato=aparato,codigo_id=codigo,estudiante_id=id_estudiante.id,mx=1,md=0)
@@ -64,17 +62,13 @@ def post2(request):
 	fecha2 = request.POST['fecha2']
 
 	num_cita=0
-
 	try:
 		numerocitas =  len(citas.objects.filter(codigo_id=codigo))
 		num_cita=numerocitas +1
 	except Exception as e:
 		raise e
 
-	if autorizacion==1:
-		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=1,codigo_id=codigo)
-	else:
-		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=0,codigo_id=codigo)
+	citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=autorizacion,codigo_id=codigo)
 
 
 	return HttpResponse('<script>alert("cita creada con exito");</script>')
