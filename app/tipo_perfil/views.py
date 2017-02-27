@@ -56,15 +56,13 @@ def tipo_perfil_edit(request,codi,num):
 			form = Tipo_perfilForm(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
-			return redirect('/denticion/sagitales/editar/%s/%s' %(codi,num))
+			return redirect('/denticion/aspectos/editar/%s/%s' %(codi,num))
 		return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 
 	
-
-
 
 def tipo_perfil_consultar(request,codi,num):
 	str(codi)
@@ -76,14 +74,12 @@ def tipo_perfil_consultar(request,codi,num):
 				form = Tipo_perfilForm_consultar(instance=datos)
 			else: 
 				form = Tipo_perfilForm_consultar(request.POST, instance=datos)
-				
+				if form.is_valid():
+					form.save()
 				return HttpResponseRedirect('/denticion/aspectos/consultar/%s/%s/' %(codi,num))
-			return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi})
+			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
-
-
-
 
 

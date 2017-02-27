@@ -264,7 +264,8 @@ def EstadoGeneral_crear(request,codi,num):
 		form = EstadoGeneralForm(initial={'fichas':ids.id})
 		
 		return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
-		
+	
+
 def EstadoGeneral_consultar(request,codi,num):
 	str(codi)
 	try:
@@ -281,6 +282,8 @@ def EstadoGeneral_consultar(request,codi,num):
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+
+
 
 def EstadoGeneral_edit(request,codi,num):
 	str(codi)
@@ -299,6 +302,7 @@ def EstadoGeneral_edit(request,codi,num):
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+
 
 def EstadoGeneral_edit2(request,codi,num):
 	str(codi)

@@ -39,48 +39,49 @@ def moyerssup_view(request,codi,num):
 	
 
 def moyerssup_editar(request, codi, num):
-	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
-		moyerssupFormSet = modelformset_factory(moyers_superior_ancho, moyersSupAncForm, extra=0)
-			
-		if ids:
-			moysup = moyers_superior.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':				
-				form1 = moyersSupForm(instance=moysup)
-				formset = moyerssupFormSet(queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
-			else:
-				form1 = moyersSupForm(request.POST, instance=moysup)
-				formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
-				if form1.is_valid() and formset.is_valid():
-					form1.save()
-					formset.save()
-				
-				return redirect('/')			
-			return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id})	
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    str(codi)
+    try:
+        ids = fichas.objects.get(cod_expediente=codi, numero=num)
+        moyerssupFormSet = modelformset_factory(moyers_superior_ancho, moyersSupAncForm, extra=0)
+            
+        if ids:
+            moysup = moyers_superior.objects.get(fichas_id=ids.id)
+            if request.method == 'GET':             
+                form1 = moyersSupForm(instance=moysup)
+                formset = moyerssupFormSet(queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
+            else:
+                form1 = moyersSupForm(request.POST, instance=moysup)
+                formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
+                if form1.is_valid() and formset.is_valid():
+                    form1.save()
+                    formset.save()
+                
+                return redirect('/diag_general/edit/%s/%s' % (codi, num))           
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id})  
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    except Exception, e:
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 
 def moyerssup_consultar(request, codi, num):
-	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
-		moyerssupFormSet = modelformset_factory(moyers_superior_ancho, moyersSupAncForm_consultar, extra=0)
-		if ids:
-			moysup = moyers_superior.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form1 = moyersSupForm_consultar(instance=moysup)
-				formset = moyerssupFormSet(queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
-			else:
-				form1 = moyersSupForm(request.POST, instance=moysup)
-				formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
-					
-				return redirect('/')			
-			return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id})	
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    str(codi)
+    try:
+        ids = fichas.objects.get(cod_expediente=codi, numero=num)
+        moyerssupFormSet = modelformset_factory(moyers_superior_ancho, moyersSupAncForm_consultar, extra=0)
+        if ids:
+            moysup = moyers_superior.objects.get(fichas_id=ids.id)
+            if request.method == 'GET':
+                form1 = moyersSupForm_consultar(instance=moysup)
+                formset = moyerssupFormSet(queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
+            else:
+                form1 = moyersSupForm(request.POST, instance=moysup)
+                formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
+                    
+                return redirect('/diag_general/consultar/%s/%s' % (codi, num))          
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id})    
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    except Exception, e:
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+
 
 def moyersinf_view(request, codi, num):
     str(codi)

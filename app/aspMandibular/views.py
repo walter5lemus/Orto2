@@ -46,7 +46,7 @@ def asp_mandibular1_edit(request,codi,num):
 			form = aspMandibularForm(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
-			return redirect('/denticion/sagitales/editar/%s/%s' %(codi,num))
+			return redirect('/analisis_radiograficos/otrosAspectos/editar/%s/%s' %(codi,num))
 		return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
@@ -65,11 +65,12 @@ def asp_mandibular1_consultar(request,codi,num):
 				form = aspMandibularForm_consultar(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
-				return redirect('/denticion/sagitales/consultar/%s/%s' %(codi,num))
-			return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form})
+				return redirect('/analisis_radiograficos/otrosAspectos/consultar/%s/%s' %(codi,num))
+			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+
 
 
 	

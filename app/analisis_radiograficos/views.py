@@ -49,11 +49,12 @@ def AspectosArticulares_consultar(request,codi,num):
 			else: 
 				form = AspectosArticularesForm_consultar(request.POST, instance=estado)
 
-				return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/consultar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/asp_mandibular1/consultar/%s/%s/' %(codi,num))
 			return render(request,'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+
 
 def AspectosArticulares_edit(request,codi,num):
 	str(codi)
@@ -67,7 +68,7 @@ def AspectosArticulares_edit(request,codi,num):
 				form = AspectosArticularesForm(request.POST, instance=estado)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/editar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/asp_mandibular1/edit/%s/%s/' %(codi,num))
 			return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -153,12 +154,13 @@ def nance_editar(request, codi, num):
 			formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
 			formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
 
-			#return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num))		
-			return redirect('/')		
+			return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num))		
+			#return redirect('/')		
 		return render(request, 'analisis_radiograficos/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero})	
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 #	except Exception, e:
 #		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+
 
 # Otros Aspectos
 

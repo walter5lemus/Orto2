@@ -51,11 +51,12 @@ def cefalometrico_editar(request, codi, num):
 					
 					formset.save()
 				
-				return redirect('/analisis_radiograficos/analisis_nance/editar/%s/%s' % (codi, num))			
+				return redirect('/diag_cefalo/edit/%s/%s' % (codi, num))			
 			return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+
 
 def cefalometrico_consultar(request, codi, num):
 	str(codi)
@@ -70,9 +71,11 @@ def cefalometrico_consultar(request, codi, num):
 				if formset.is_valid():
 					formset.save()
 				
-				return redirect('/analisis_radiograficos/analisis_nance/consultar/%s/%s' % (codi, num))			
+				return redirect('/diag_cefalo/consultar/%s/%s' % (codi, num))			
 			return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})		
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 
+
+		

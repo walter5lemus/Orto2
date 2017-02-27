@@ -1,0 +1,131 @@
+{% extends 'base/base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block title %}
+Diagnostico Cefalometrico
+{% endblock %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+<h1><center>Diagnostico Cefalometrico</center></h1>
+<div class="row">
+	<div class="col-md-7 col-md-offset-1">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br><br><br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+
+
+
+
+
+<div class="col-md-10 col-md-offset-1">
+  <div class="form-group">
+
+ 	<div class="panel panel-primary">
+  	  <div class="panel-heading">
+   	 	<h3 class="panel-title"></h3>
+  	  </div>
+
+  	  <div class="panel-body">
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<br><br>
+				<label for="{{form.patron_esqueletal.name}}">{{form.patron_esqueletal.label}}</label>
+				{{form.patron_esqueletal}}
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<br><br>
+				<label for="{{form.tipo_de_crecimiento.name}}">{{form.tipo_de_crecimiento.label}}</label>
+				{{form.tipo_de_crecimiento}}
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<br><br>
+				<label for="{{form.medidas_dentales.name}}">{{form.medidas_dentales.label}}</label>
+			{{form.medidas_dentales}}
+			</div>
+		</div>
+
+
+		<div class="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<br><br>
+				<label for="{{form.medidas_esteticas.name}}">{{form.medidas_esteticas.label}}</label>
+				{{form.medidas_esteticas}}
+			</div>
+		</div>
+
+	 </div>
+	</div>
+
+  </div>
+ </div>	
+
+
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+
+			<br><br>
+			<div class="col-md-3 col-md-offset-4">
+			    <center><button type="submit" class="btn btn-success btn-block"> Siguiente </button></center>
+			</div>
+			<br><br>
+			
+		</div>
+	</div>
+
+
+	<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 72%;"></div>
+		</div>
+		</div>
+
+
+
+<script>
+
+	$('#{{form.fichas.auto_id}}').val({{fichas}});
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
+
+	</form>
+{% endblock %}

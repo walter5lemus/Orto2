@@ -10,24 +10,53 @@
 <form method="POST">
 	{% csrf_token %}
 </form>
-	<div class="col-md-8 col-md-offset-2">
+
+
+<div class="col-md-10 col-md-offset-1">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+
+  <div class="panel-body">
+    <br><br>
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group">
 			<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
 		{{form.codigo}}
 		<button class="btn btn-primary" onclick="buscar()">Buscar</button>
 		</div>
 	</div>
-	<div class="col-md-8 col-md-offset-2">
+
+	<div class="col-md-6 col-md-offset-3">
 		<div class="form-group" >
 			<label for="ficha">Ficha</label>	
 		<select name="select" id="select" class="form-control"></select>
 		</div>
 	</div>
+
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			<center>	<button type="submit" onclick="redireccionar()" class="btn btn-success">Consultar Expediente</button></center>
 		</div>
 	</div>
+
+  </div>
+</div>
+
+
+<div class="col-md-7 col-md-offset-7">
+<div class="alert alert-dismissible alert-warning">
+  <button class="close" type="button" data-dismiss="alert">&times;</button>
+  <h4>Indicacion!</h4>
+  <p>Para poder hacer la consulta de una ficha clinica de un expediente existente, <a class="alert-link" href="#">debes ingresar el codigo del expediente</a>, y luego seleccionar la ficha clinica a consultar.</p>
+</div>
+</div>
+
+
+</div>
+
+
 
 <script>
 

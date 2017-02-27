@@ -43,14 +43,16 @@
 
     {% block content %}
 
-    <div class="col-md-8 col-md-offset-2">
+    <h2><center>Analisis de Nance</center></h2>
+
+<div class="col-md-10 col-md-offset-3">
         <div class="form-group">
-            <div class="col-md-6">
+            <div class="col-md-4">
             <label for="codigo">N° de Expediente </label>   
             <input id="codigo" class="form-control" type="text" disabled="True">
             <br>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
             <br>
@@ -58,30 +60,58 @@
             <br>
         </div>
         <br>
-    </div>
-    <div class="analisis_nance">
-    		
-    		<div class="col-md-10 col-md-offset-0">
-       		<!-- <h5>Nance</h5> -->
+</div>
+    
+
+<div class="analisis_nance">
+            
+    <div class="col-md-10 col-md-offset-1">
+    <!-- <h5>Nance</h5> -->
 
             <form method="POST" action="">
-            	{% csrf_token %}
-    			 {{ formset.management_form }}		
-    			 {{form1.fichas}} 
-             <div class="col-md-8">
-                <div class="form-group">
+                {% csrf_token %}
+                 {{ formset.management_form }}      
+                 {{form1.fichas}} 
+
+
+    <br><br><br>
+    <div class="col-md-10 col-md-offset-1">
+                
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Espacio Disponible (Medida del Modelo: Alambre de Cobre)</h3>
+          </div>
+
+         <div class="panel-body">
+         <div class="form-group">
+            <div class="col-md-3 col-md-offset-1">
                 <label for="{{form1.ed_maxi.name}}">{{form1.ed_maxi.label}}</label> 
                     {{form1.ed_maxi}}
-                </div>
+            </div>  
+            <div class="col-md-1 ">
+                <br><br>    <h4>mm</h4>
             </div>
-             <div class="col-md-8">
-                <div class="form-group">
+
+
+            <div class="col-md-3 col-md-offset-1">
                 <label for="{{form1.ed_mand.name}}">{{form1.ed_mand.label}}</label> 
                     {{form1.ed_mand}}
-                </div>
             </div>
+            <div class="col-md-1 ">
+                <br><br>    <h4>mm</h4>
+            </div>
+
+         </div>
+         </div>
+        </div>
+        <br><br>
+    </div>
+
+
+    
+
             {{form1.total}}
-                           {{form1.total2}}  
+            {{form1.total2}}   
               
     			<table id="1" cellpadding="0" cellspacing="5">
                     <thead>
@@ -124,7 +154,8 @@
                     </tfoot>
     			</table>
                  
-               
+            
+            <br><br>     
             {{ formset2.management_form }}
             <table id="2" cellpadding="0" cellspacing="5">
                     <thead>
@@ -167,6 +198,9 @@
                     </tr>
                     </tfoot>
                 </table> 
+
+
+            <br>    
             <div class="col-md-6 col-md-offset-3">
                 <table id="3" cellpadding="0" cellspacing="3">
                     <thead>
@@ -191,9 +225,33 @@
                   
                 </table>  
             </div>
-            <div class="col-md-6 col-md-offset-3" >
-                <center><button type="submit" class="btn btn-success">Siguiente</button></center>
-                </div>
+
+
+
+    <br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-5">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+            <br><br>
+            
+        </div>
+    </div>
+    </div>
+
+     <!-- Barra de progreso -->
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 78%;"></div>
+        </div>
+        </div>
+            
+
+
             </form>
         </div>
     </div>      
