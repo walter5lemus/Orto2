@@ -20,16 +20,20 @@ Estado general
 <form method="POST">
 	{% csrf_token %}
 
+
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
 	<h1><center>Estado General</center></h1>
-
-
-
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			{{form.fichas}}
 		</div>
 	</div>	
-	</div>
+	
 
 
 	<div class="col-md-8 col-md-offset-2">
@@ -85,6 +89,10 @@ Estado general
 			{{form.detalle_medicamento}}
 		</div>
 	</div>
+
+
+</div>
+</div>
 		
 
 
