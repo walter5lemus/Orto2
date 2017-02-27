@@ -20,11 +20,11 @@
             for (i = 0; i < n1; i++) {
                 c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
                 p = document.getElementById("id_perdidas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', 'yellow');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', 'yellow');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', 'yellow');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', 'yellow');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', 'yellow');
+                $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
             }  
 
             n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
@@ -32,11 +32,11 @@
             for (i = 0; i < n2; i++) {
                 c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
                 p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', 'red');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', 'red');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', 'red');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', 'red');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', 'red');
+                $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
             }  
 
             n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
@@ -44,11 +44,11 @@
             for (i = 0; i < n3; i++) {
                 c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
                 p = document.getElementById("id_mordidas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', 'blue');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', 'blue');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', 'blue');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', 'blue');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', 'blue');
+                $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
             } 
         });
     </script>    
@@ -641,6 +641,17 @@
                     </g>
                 </svg>
             </div>                
+
+            <br/>
+            <table border = "2">
+                <tbody>
+                    <tr>
+                        <td bgcolor = "#f7ff70"><center><strong>Perdidas prematuras</strong></center></td>
+                        <td bgcolor = "#ff6666"><center><strong>Anodoncias</strong></center></td>
+                        <td bgcolor = "#666dff"><center><strong>Mordidas telescópica</strong></center></td>
+                    </tr>
+                </tbody>
+            </table>
 
         </center>           
         <br/><br/><br/>    

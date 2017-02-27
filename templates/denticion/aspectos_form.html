@@ -520,20 +520,23 @@
 
         $(function(){
             nombre = 'perdidas';
-            color = 'yellow';
+            color = '#f7ff70';
             $( "a" ).click(function() { 
                 if ( $( this ).hasClass( "tab-id-1-tab_header" ) ) {
                     nombre = 'perdidas'
-                    color = 'yellow'
+                    color = '#f7ff70'
+                    //amarillo
                 } 
                 else{
                     if( $( this ).hasClass( "tab-id-2-tab_header" ) ){
                         nombre = 'anodoncias';
-                        color = 'red'
+                        color = '#ff6666'
+                        //rojo
                     }
                     else{
                         nombre = 'mordidas';
-                        color = 'blue'
+                        color = '#666dff'
+                        //azul
                     }
                 }
             });      
@@ -1166,7 +1169,18 @@
                         </g>
                     </g>
                 </svg>
-            </div>                
+            </div>   
+                         
+            <br/>
+            <table border = "2">
+                <tbody>
+                    <tr>
+                        <td bgcolor = "#f7ff70"><center><strong>Perdidas prematuras</strong></center></td>
+                        <td bgcolor = "#ff6666"><center><strong>Anodoncias</strong></center></td>
+                        <td bgcolor = "#666dff"><center><strong>Mordidas telescópica</strong></center></td>
+                    </tr>
+                </tbody>
+            </table>
 
         </center>           
         <br/><br/><br/>    
