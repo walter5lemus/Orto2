@@ -4,8 +4,7 @@ from django.http import HttpResponseRedirect
 
 
 from app.tipo_perfil.forms import Tipo_perfilForm,Tipo_perfilForm_consultar 
-from app.tipo_perfil.models import TipoPerfil, FacialFrontal, PerfilTotal   
-from app.tipo_perfil.models import PTercioInferioir, Sonrisa, CompetenciaLabial
+from app.tipo_perfil.models import TipoPerfil
 from app.informacion.models import fichas
 
 # Create your views here.

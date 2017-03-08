@@ -8,9 +8,6 @@ urlpatterns = [
     url(r'^aspectos_articulares/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(AspectosArticulares_consultar),name='aspectos_articulares_consultar'),
 	url(r'^aspectos_articulares/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(AspectosArticulares_edit),name='aspectos_articulares_editar'),
 
-	url(r'^analisis_nance/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(nance_crear), name= 'analisis_nance_crear'),
-	url(r'^analisis_nance/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(nance_consultar), name= 'analisis_nance_consultar'),
-	url(r'^analisis_nance/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(nance_editar), name= 'analisis_nance_editar'),
 
 	#OTROOS ASPECTOS
 

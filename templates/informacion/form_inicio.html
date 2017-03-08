@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load staticfiles %}
 {% block title %}
 	Inicio
 {% endblock %}
@@ -54,70 +54,142 @@
 </form>
 	<div class="col-md-12">
 	<br><br>
-		<div class="form-group col-md-offset-4">
-			<div class="col-md-5">
-				<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>
-				{{form.cod_expediente}}
-			</div>	
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-1">
+				<label for="nombre_paciente">Nombre del Paciente</label>
+				<input type="text" class="form-control" id="id_nombre_paciente" name="nombre_paciente" list="id_listanombres">
+				<datalist id="id_listanombres">
+					
+				</datalist>
+			</div>
+			<div class="col-md-2 ">
+				<div class="form-group ocultar">
+					<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>
+					{{form.cod_expediente}}
+				</div>
+			</div> 
 			<div class="col-md-3 form-group ">
 			<br>
-			<button class="btn btn-success" style="margin-top: 5px;" onclick="buscar()">Buscar</button>
+			<!-- <button class="btn btn-success" style="margin-top: 5px;" onclick="buscar()">Buscar</button> -->
 			</div>
 		
 		</div>				
 
 	</div>
 	
-		<div class="row ocultar ">
-			<div class="col-md-6 col-md-offset-1">
-				<div class="form-group">
-				<br><br><br>
-					<label for="{{form.nombre_completo.name}}">{{form.nombre_completo.label}}</label>
-					{{form.nombre_completo}}
-				</div>
-			</div> 
-			<div class="col-md-2 ">
-				<div class="form-group">
-				<br><br><br>
-					<label for="fichas"> N° Fichas </label>
-					<select class="form-control" name="fichas" id="select_fichas"></select>
 
-				</div>
-			</div>
-			<div class="col-md-3 ">
-				<div class="form-group">
-				<br><br><br>
-					<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="row ocultar">
-			<div class="col-md-3 col-md-offset-1 ">
-				<div class="form-group">
-					<label for="{{form.fechaRegistro.name}}">{{form.fechaRegistro.label}}</label>	
-					<input class="form-control" id="id_fecha_registro" name="fecha_registro" type="text" required="" vk_14476="subscribed">	
-				</div>
-			</div>
-			<div class="col-md-3">
+	<div class="row ocultar">
+			<div class="col-md-3  col-md-offset-2">
 				<div class="form-group">
 					<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
 				{{form.fecha_hora_creacion}}	
 				</div>
 			</div>
-			<div class="col-md-5 ">
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="fichas"> N° de Ficha a Crear </label>
+					<!--<select class="form-control" name="fichas" id="select_fichas"></select> -->
+					 <input type="number" id="select_fichas" class="form-control">
+				</div>
+			</div>
+			<!-- <div class="col-md-2">
+				<div class="form-group">
+					<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
+				</div>
+			</div>  --> 
+			<div class="col-md- 2">
 				<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2()">Crear Nueva Ficha</button>
 			</div>
 		</div>
+		<div class="row" id="lista">
+		<ol>
+			
+		</ol>
 		</div>
-		<div class="row">
 
  
 
 
 <script>
+	$("input[name='nombre_paciente']").on('input', function(e){
+	//$('#select_fichas').find('option').remove().end().val('whatever');
+   var $input = $(this),
+       val = $input.val();
+       list = $input.attr('list'),
+       match = $('#'+list + ' option').filter(function() {
+           return ($(this).val() === val);
+       });
 
-var codigo = $('#id_cod_expediente').val();
+    if(match.length > 0) {
+        // value is in list
+    var nombre = $('#id_nombre_paciente').val();
+	//$('#select_fichas').find('option').remove().end().val('whatever');
+		
+		$.ajax({
+			data : {'nombre':nombre},
+			url : '/informacion/busqueda_ajax/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					$(".ocultar").css("display", "block");
+					$('#id_nombre_completo').val(data[i].fields.nombre_completo);
+					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
+					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
+					$('#id_cod_expediente').val(data[i].pk);
+				}
+				if(data==''){
+					
+					//	window.location="/informacion/datos_generales/nuevo/"+nombre;
+				}
+			},
+			
+		});
+
+		$.ajax({
+			data : {'nombre':nombre},
+			url : '/informacion/busqueda_ajax2/',
+			type : 'get',
+			success: function(data){
+				$("#select_fichas").val(1);
+				for (var i = 0; i < data.length; i++) {
+					//$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
+					$("#select_fichas").val(data.length+1);
+
+				}
+				if(data==''){
+					
+					//window.location="/informacion/datos_generales/nuevo/"+nombre;
+				}
+			},
+			
+		});
+    } else {
+        limpiar();
+
+    }
+});
+
+$('#id_nombre_paciente').keyup(function(e){
+ 	consulta = $("#id_nombre_paciente").val();
+ 	$('#id_listanombres').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'nombre': consulta},
+ 		url: '/informacion/busqueda/',
+ 		type: 'get',
+ 		success : function(data) {
+        	//console.log(data[0].nombre_completo);
+        	for (var i = 0; i < data.length; i++) {
+					$("#id_listanombres").append("<option value='" + data[i].nombre_completo + "'></option>");
+
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+});
+
+var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
     .remove()
@@ -126,24 +198,26 @@ var codigo = $('#id_cod_expediente').val();
 $("#id_nombre_completo").prop('readonly', true);
 $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
+$("#id_cod_expediente").prop('readonly', true);
+$("#select_fichas").prop('readonly', true);
 
 function redireccionar(){
-	var num= $( "#select_fichas" ).val();
+	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
-	window.location="/informacion/estado_general/consultar/"+codigo+"/"+num;
+	window.location="/informacion/motivo_consultas/consultar/"+codigo+"/"+num;
 }
 
 function redireccionar2(){
-	var id= $( "#select_fichas option:last" ).val();
-	var num=parseInt(id);
+	//var num= $( "#select_fichas" ).val();
+	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
-	window.location="/informacion/estado_general/nuevo/"+codigo+"/"+(num+1);
+	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
 }
 
 function buscar(){
 
 
-	var codigo = $('#id_cod_expediente').val();
+	var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
     .remove()
@@ -189,6 +263,20 @@ function buscar(){
 			
 		});
 }
+
+function limpiar(){
+	$(".ocultar").css("display", "none");
+	$('#id_nombre_completo').val("");
+	$('#id_fecha_registro').val("");
+	$('#id_fecha_hora_creacion').val("");
+	$('#id_cod_expediente').val("");
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever')
+}
+
 </script>
 
 
@@ -208,6 +296,9 @@ function buscar(){
 			<small>Indicaciones de <cite title="Source Title">Código de expediente</cite></small>
   		    <p>Ingresa un número de expediente, si este existe, creará una nueva ficha; Sino, creará un nuevo expediente con su primera ficha.</p>    
 		</blockquote>
+		</div>
+		<div class="col-md-3 col-md-offset-4">
+			<a href="/informacion/datos_generales/nuevo/"><img src="{% static 'images/icono_mas.png' %}" alt="Agregar un nuevo expediente" width="75" height="75"></a>
 		</div>
 
 

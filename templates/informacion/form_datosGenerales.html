@@ -69,7 +69,6 @@
 		<div class="form-group">
 			<label for="{{form.fecha_nac.name}}" >{{form.fecha_nac.label}}</label>
 			<div class='input-group date' class='form-control' >
-					
 				{{form.fecha_nac}}
             </div>	
 		</div>
@@ -88,8 +87,6 @@
 			{{form.edad_registro}}
 		</div>
 	</div>
-	</div>
-
 	<div>
 		<div class="col-md-4 col-md-offset-2">
 			<div class="form-group">
@@ -118,18 +115,7 @@
 			{{form.nombre_resp}}	
 		</div>
 	</div>
-		<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<label for="{{form.motivo_consulta.name}}">{{form.motivo_consulta.label}}</label>	
-			{{form.motivo_consulta}}	
-		</div>
-	</div>
-	<div class="col-md-10 col-md-offset-2">
-		<label for="{{form.fechaRegistro.name}}">{{form.fechaRegistro.label}}</label>	
-		<div class="form-group">
-			{{form.fechaRegistro}}	
-		</div>
-	</div>
+
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			
@@ -166,7 +152,23 @@
 
 
  <script>
- $("#id_cod_expediente").prop('readonly', true);
+ //$("#id_cod_expediente").prop('readonly', true);
+
+ 	$(function() {
+    	var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+		
+		    var today = new Date();
+		    var dayDiff = Math.ceil(today - f) / (1000 * 60 * 60 * 24 * 365);
+		    var age = parseInt(dayDiff);
+		    $('#{{form.edad.auto_id}}').val(age)
+		    $('#{{form.edad_registro.auto_id}}').val(age)
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	})
 
 	$('.fecha').change(function() {
 		

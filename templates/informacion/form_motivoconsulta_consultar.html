@@ -1,0 +1,137 @@
+{% extends 'base/base_consultar.html' %}
+
+{% block title %}
+Motivo Consulta
+{% endblock %}
+{% block header %}
+<style>
+</style>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+
+
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Motivo de Consulta</h3>
+  </div>
+  <div class="panel-body">
+
+	<h1><center>Motivo Consulta</center></h1>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>	
+	
+
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br><br><br>
+	</div>
+
+
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.motivo_consulta.name}}">{{form.motivo_consulta.label}}</label>	
+			{{form.motivo_consulta}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+		
+			<label for="{{form.fechaRegistro.name}}">{{form.fechaRegistro.label}}</label><br>
+			{{form.fechaRegistro}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
+			{{form.fecha_hora_creacion}}
+		</div>
+	</div>
+
+
+
+</div>
+</div>
+		
+
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<br>
+			<div class="col-md-3 col-md-offset-4">
+			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+			</div>
+		</div>
+		<br><br>
+	</div>
+
+
+		<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 12%;"></div>
+		</div>
+		</div>
+
+
+
+<script>
+
+	$('#{{form.fichas.auto_id}}').val({{fichas}});
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+
+ 	$(function() {
+    	//var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+		
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	})
+
+	$('.fecha').change(function() {
+		
+		//var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	    
+
+	});
+
+</script>
+
+
+</form>
+
+	
+{% endblock %}

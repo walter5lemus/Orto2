@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 from django import forms
-from app.tipo_perfil.models import TipoPerfil,PerfilTotal,FacialFrontal
-from app.tipo_perfil.models import Sonrisa,PTercioInferioir, CompetenciaLabial
+from app.tipo_perfil.models import TipoPerfil
 from app.informacion.models import fichas
 
 
@@ -10,10 +10,7 @@ class Tipo_perfilForm(forms.ModelForm):
 		model = TipoPerfil
 
 		fields = [
-			#'id_tipo_perfil',
-			#'cod_expediente',
 			'fichas',
-
 			'frontal_facial', 
 			'tipoPerfiltotal', 
 			'perfilTercio_inferior', 
@@ -31,8 +28,6 @@ class Tipo_perfilForm(forms.ModelForm):
 		]
 
 		labels = {
-			#'id_tipo_perfil': 'Codigo',
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
 			'frontal_facial': 'Facial Frontal',
@@ -54,8 +49,6 @@ class Tipo_perfilForm(forms.ModelForm):
 		}
 
 		widgets = {
-			#'id_tipo_perfil': forms.TextInput(attrs={'class':'form-control'}),
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
 			'frontal_facial': forms.Select(attrs={'class':'form-control'}),
@@ -64,14 +57,14 @@ class Tipo_perfilForm(forms.ModelForm):
 			'tipoSonrisa': forms.Select(attrs={'class':'form-control'}), 
 			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control'}),
 
-			'tipoNariz': forms.TextInput(attrs={'class':'form-control'}),
+			'tipoNariz': forms.Select(attrs={'class':'form-control'}),
 			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control'}),
 			'tercio_superior': forms.NumberInput(attrs={'class':'form-control'}),
 			'tercio_medio': forms.NumberInput(attrs={'class':'form-control'}),
 			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control'}),
 			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control'}),
-			'grosorLabios':forms.TextInput(attrs={'class':'form-control'}),
-			'tamanoLabios': forms.TextInput(attrs={'class':'form-control'}),
+			'grosorLabios':forms.Select(attrs={'class':'form-control'}),
+			'tamanoLabios': forms.Select(attrs={'class':'form-control'}),
 
 		}
 
@@ -84,8 +77,6 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 		model = TipoPerfil
 
 		fields = [
-			#'id_tipo_perfil',
-			#'cod_expediente',
 			'fichas',
 
 			'frontal_facial', 
@@ -105,8 +96,6 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 		]
 
 		labels = {
-			#'id_tipo_perfil': 'Codigo',
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
 			'frontal_facial': 'Facial Frontal',
@@ -128,8 +117,6 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 		}
 
 		widgets = {
-			#'id_tipo_perfil': forms.TextInput(attrs={'class':'form-control'}),
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
 			'frontal_facial': forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
@@ -138,14 +125,14 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 			'tipoSonrisa': forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}), 
 			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 
-			'tipoNariz': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'tipoNariz': forms.Select(attrs={'class':'form-control','readonly':True}),
 			'angulo_Naso_labial': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tercio_superior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tercio_medio': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tercio_inferior':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tamanoSonrisa':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'grosorLabios':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'tamanoLabios': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'grosorLabios':forms.Select(attrs={'class':'form-control','readonly':True}),
+			'tamanoLabios': forms.Select(attrs={'class':'form-control','readonly':True}),
 
 		}
 

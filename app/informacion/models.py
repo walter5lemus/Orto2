@@ -26,17 +26,17 @@ class datos_generales(models.Model):
     edad = models.IntegerField()
     edad_registro = models.IntegerField()
     fecha_nac = models.DateField()
-    telefono = models.CharField(max_length=8)
+    telefono = models.IntegerField(max_length=8)
     genero = models.IntegerField(choices=genero_choices, default=1)
     direccion = models.CharField(max_length=200)
     nombre_resp = models.CharField(max_length=100)
-    motivo_consulta = models.CharField(max_length=500)
-    fechaRegistro = models.DateField(default=datetime.datetime.now()) 
     usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
     fecha_hora_creacion = models.DateTimeField()
 
     def __unicode__(self):
         return '{}'.format(self.cod_expediente)
+
+
 
 class fichas(models.Model):
     cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
@@ -57,6 +57,14 @@ class catalogo_enfermedades(models.Model):
     def __unicode__(self):
         return  '{} {}'.format(self.id_enfermedad,self.nombre_enfermedad)
 
+class motivo_consulta(models.Model):
+    fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
+    motivo_consulta = models.CharField(max_length=500)
+    fechaRegistro = models.DateField(default=datetime.datetime.now()) 
+    fecha_hora_creacion = models.DateTimeField()
+
+    def __unicode__(self):
+        return '{}'.format(self.fichas)
 
 class estado_general(models.Model):
     fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)

@@ -10,14 +10,17 @@ urlpatterns = [
 	url(r'^inicio/consultar/$', login_required(CodExpediente_consular), name='cod_expediente_consultar'),
 	url(r'^inicio/editar/$', login_required(CodExpediente_editar), name='cod_expediente_editar'),
 
-	url(r'^datos_generales/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGeneral_crear), name='datos_generales_crear'),
+	url(r'^datos_generales/nuevo/$', login_required(DatosGeneral_crear), name='datos_generales_crear'),
 	url(r'^datos_generales/listar/', login_required(DatosGeneralesList.as_view()),name='datos_generales_listar'),
 	url(r'^datos_generales/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar),name='datos_generales_consultar'),
 	url(r'^datos_generales/consultar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar2),name='datos_generales_consultar2'),
 	url(r'^datos_generales/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_edit),name='datos_generales_editar'),
 
-	url(r'^fichas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(Fichas_crear), name='fichas_crear'),
-	url(r'^fichas/listar/', login_required(FichasList.as_view()),name='fichas_listar'),
+#	url(r'^fichas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(Fichas_crear), name='fichas_crear'),
+#	url(r'^fichas/listar/', login_required(FichasList.as_view()),name='fichas_listar'),
+
+	url(r'^motivo_consultas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(Motivo_Consulta_crear), name='motivo_consulta_crear'),
+	url(r'^motivo_consultas/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(Motivo_Consulta_consultar),name='motivo_consulta_consultar'),
 
 
 	url(r'^estado_general/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_crear), name='estado_general_crear'),
@@ -29,6 +32,8 @@ urlpatterns = [
 
 	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
 	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
+	url(r'^busqueda/$', login_required(busqueda), name='busquedaProyecto'), 
+
 
 
 ]

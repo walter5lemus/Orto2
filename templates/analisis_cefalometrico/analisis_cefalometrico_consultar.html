@@ -1,0 +1,393 @@
+{% extends 'base/base_consultar.html' %}
+
+{% block title %}
+	Analisis Cefalómetro
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block extrajs %}
+
+
+
+
+<script type="text/javascript">
+	$('#id_form-0-fichas').val({{ids}});
+	$('#id_form-1-fichas').val({{ids}});
+	$('#id_form-0-numero_de_examen').val(1);
+	$('#id_form-1-numero_de_examen').val(2);
+
+
+$('#id_form-0-sna').change(function() {
+        $('#id_form-0-anb').val($('#id_form-0-sna').val()-$('#id_form-0-snb').val());});
+$('#id_form-0-snb').change(function() {
+        $('#id_form-0-anb').val($('#id_form-0-sna').val()-$('#id_form-0-snb').val());});
+
+$('#id_form-1-sna').change(function() {
+        $('#id_form-1-anb').val($('#id_form-1-sna').val()-$('#id_form-1-snb').val());});
+$('#id_form-1-snb').change(function() {
+        $('#id_form-1-anb').val($('#id_form-1-sna').val()-$('#id_form-1-snb').val());});
+
+	
+</script>
+
+<script type="text/javascript">	
+    function showContent() {
+        e1 = document.getElementById("e2c1");
+        e2 = document.getElementById("e2c2");
+        e3 = document.getElementById("e2c3");
+        e4 = document.getElementById("e2c4");
+        e5 = document.getElementById("e2c5");
+        e6 = document.getElementById("e2c6");
+        e7 = document.getElementById("e2c7");
+        e8 = document.getElementById("e2c8");
+        e9 = document.getElementById("e2c9");
+        e10 = document.getElementById("e2c10");
+        e11 = document.getElementById("e2c11");
+        e12 = document.getElementById("e2c12");
+        e13 = document.getElementById("e2c13");
+        e14 = document.getElementById("e2c14");
+        e15 = document.getElementById("e2c15");
+        e15 = document.getElementById("e2c15");
+        e16 = document.getElementById("e2c16");
+        e17 = document.getElementById("e2c17");
+        e18 = document.getElementById("e2c18");
+        e19 = document.getElementById("e2c19");
+        e20 = document.getElementById("e2c20");
+        e21 = document.getElementById("e2c21");
+        e22 = document.getElementById("e2c22");
+        check = document.getElementById("check");
+
+        if (check.checked) {
+        	
+        	
+        	
+        	
+        	e1.style.display='block';
+            e2.style.display='block';
+            e3.style.display='block';
+            e4.style.display='block';
+            e5.style.display='block';
+            e6.style.display='block';
+            e7.style.display='block';
+            e8.style.display='block';
+            e9.style.display='block';
+            e10.style.display='block';
+            e11.style.display='block';
+            e12.style.display='block';
+            e12.style.display='block';
+            e13.style.display='block';
+            e14.style.display='block';
+            e15.style.display='block';
+            e16.style.display='block';
+            e17.style.display='block';
+            e18.style.display='block';
+            e19.style.display='block';
+            e20.style.display='block';
+            e21.style.display='block';
+            e22.style.display='block';
+        }
+        else {
+        	
+        	
+            e1.style.display='none';
+            e2.style.display='none';
+            e3.style.display='none';
+            e4.style.display='none';
+            e5.style.display='none';
+            e6.style.display='none';
+            e7.style.display='none';
+            e8.style.display='none';
+            e9.style.display='none';
+            e10.style.display='none';
+            e11.style.display='none';
+            e12.style.display='none';
+            e12.style.display='none';
+            e13.style.display='none';
+            e14.style.display='none';
+            e15.style.display='none';
+            e16.style.display='none';
+            e17.style.display='none';
+            e18.style.display='none';
+            e19.style.display='none';
+            e20.style.display='none';
+            e21.style.display='none';
+            e22.style.display='none';
+        }
+    }
+	</script>
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<!-- CSS -->
+
+<form method="post">
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br><br><br><br>
+	</div>
+	{% csrf_token %}
+	{{ formset.management_form }}	 
+
+	<style type="text/css">
+
+	table, th, td {
+   		border: 1px solid black;
+    	border-collapse: collapse;
+	}
+	th, td {
+    	padding: 4.9px;
+	}
+
+	th{
+		text-align: center;
+	}
+
+	td{
+		vertical-align: middle;
+	}
+
+	</style>
+		{% for form in formset %}
+ 			{{ form.id }}
+		{% endfor %}
+		
+{{ formset.0.fichas }}
+{{ formset.1.fichas }}
+{{ formset.0.numero_de_examen }}
+{{ formset.1.numero_de_examen }}
+	
+		
+		<table class='table table-bordered table-striped table-hover'>
+			<caption><center><h2>Tabla Acumuladora de Datos</h2></center></caption>
+			<br>
+			<tbody>
+
+				<tr class="info">
+					<th colspan=2>Tipo</th>
+					<th>Medida</th>  
+					<th>Norma</th> 
+					<th>1° Ex
+						
+					</th>
+					<th>2° Ex
+					<input type="checkbox" name="check" id="check" value="1" onchange="javascript:showContent()" />
+					</th>
+				</tr>
+
+					<!-- 8 FILAS -->
+
+				<tr>
+					<th rowspan=15 class='rotar'><br><br><br><br><br>MEDIDAS ESQUELETALES</th>
+					<th rowspan=8><br><br><br>Patrón Esqueletal</th>
+					<td>SNA (Plano SN - Punto A)</td> 
+					<td>82° +/- 2°</td>
+					<td style="width: 105px">{{ formset.0.sna }}</td>
+					<td id="e2c1" style="display: none; width: 105px">{{ formset.1.sna }}</td>
+				</tr>
+				<tr>
+					<td>SNB (Plano SN - Punto B)</td> 
+					<td>80° +/- 2°</td>
+					<td style="width: 105px">{{ formset.0.snb }}</td>
+					<td id="e2c2" style="display: none; width: 105px">{{ formset.1.snb }}</td>
+				</tr>
+				<tr>
+					<td>ANB (Diferencia SNA - SNB)</td> 
+					<td>2° +/- 2°</td>
+					<td style="width: 105px">{{ formset.0.anb }}</td>
+					<td id="e2c3" style="display: none; width: 105px">{{ formset.1.anb }}</td>
+				</tr>
+				<tr>
+					<td>Convexidad (N - Pog - Punto A)</td> 
+					<td>2 mm</td>
+					<td style="width: 105px">{{ formset.0.convexidad }}</td>
+					<td id="e2c4" style="display: none; width: 105px">{{ formset.1.convexidad}}</td>
+				</tr>
+				<tr>
+					<td>Wits (Punto A - Punto B perpendicular al plano oclusal)</td> 
+					<td>-1mm a 3mm</td>
+					<td style="width: 105px">{{ formset.0.wits }}</td>
+					<td id="e2c5" style="display: none; width: 105px">{{ formset.1.wits }}</td>
+				</tr>
+				<tr>
+					<td>Longitud del Cuerpo Mandibular (Xi - Plano A - Pog)</td> 
+					<td>65mm +/- 2.7mm</td>
+					<td style="width: 105px">{{ formset.0.long_cuerpo_mandibular }}</td>
+					<td id="e2c6" style="display: none; width: 105px">{{ formset.1.long_cuerpo_mandibular }}</td>
+				</tr>
+				<tr>
+					<td>Profundidad Maxiliar (Plano FH - Plano NA)</td> 
+					<td>90° +/- 3°</td>
+					<td style="width: 105px">{{ formset.0.profundidad_maxilar }}</td>
+					<td id="e2c7" style="display: none; width: 105px">{{ formset.1.profundidad_maxilar }}</td>
+				</tr>
+				<tr>
+					<td>Profundidad Facial (Plano FH - Na - Pog</td> 
+					<td>87° +/- 3° a los 9 años</td>
+					<td style="width: 105px">{{ formset.0.profundidad_facial }}</td>
+					<td id="e2c8" style="display: none; width: 105px">{{ formset.1.profundidad_facial }}</td>
+				</tr>
+
+					<!-- 7 FILAS -->
+
+				<tr>
+					<th rowspan=7><br><br><br>Tipo de Crecimiento</th>
+					<td>Plano Mandibular (Plano FH - Go a Me)</td> 
+					<td>26° +/- 4°</td>
+					<td style="width: 105px">{{ formset.0.plano_mandibular }}</td>
+					<td id="e2c9" style="display: none; width: 105px">{{ formset.1.plano_mandibular }}</td>
+				</tr>
+				<tr>					
+					<td>Eje Y-FH (Plano FH - S a Gn)</td> 
+					<td>66° - 53°</td>
+					<td style="width: 105px">{{ formset.0.eje_y_fh }}</td>
+					<td id="e2c10" style="display: none; width: 105px">{{ formset.1.eje_y_fh }}</td>
+				</tr>
+				<tr>					
+					<td>Cono Facial (Go-Me - Na - Pog)</td> 
+					<td>68° +/- 3.5°</td>
+					<td style="width: 105px">{{ formset.0.cono_facial }}</td>
+					<td id="e2c11" style="display: none; width: 105px">{{ formset.1.cono_facial }}</td>
+				</tr>
+				<tr>					
+					<td>Eje Facial (Pt - Gn - Ba - Na)</td> 
+					<td>90° +/- 3.5°</td>
+					<td style="width: 105px">{{ formset.0.eje_facial}}</td>
+					<td id="e2c12" style="display: none; width: 105px">{{ formset.1.eje_facial }}</td>
+				</tr>
+				<tr>					
+					<td>Ángulo Goniaco Superior (Ar - Go y Go - Na)</td> 
+					<td>52° - 55°</td>
+					<td style="width: 105px">{{ formset.0.angulo_goniaco_superior }}</td>
+					<td id="e2c13" style="display: none; width: 105px">{{ formset.1.angulo_goniaco_superior }}</td>
+				</tr>
+				<tr>					
+					<td>Ángulo Goniaco Inferior (Go - Na y Go - Me)</td> 
+					<td>75°</td>
+					<td style="width: 105px">{{ formset.0.angulo_goniaco_inferior }}</td>
+					<td id="e2c14" style="display: none; width: 105px">{{ formset.1.angulo_goniaco_inferior }}</td>
+				</tr>
+				<tr>					
+					<td>Ángulo Goniaco Total (Ar - Go y Go - Me)</td> 
+					<td>120° - 130°</td>
+					<td style="width: 105px">{{ formset.0.angulo_goniaco_total }}</td>
+					<td id="e2c15" style="display: none; width: 105px">{{ formset.1.angulo_goniaco_total }}</td>
+				</tr>
+
+					<!-- 4 FILAS -->	
+
+				<tr>
+					<th rowspan=6 class='rotar'><br><br><br><br><br>MEDIDAS DENTALES</th>	
+					<th rowspan=4><br><br><br>Inclinación</th>
+					<td>IS - NA (Incisivo Superior - Plano NA)</td> 
+					<td>22° +/- -4°</td>
+					<td style="width: 105px">{{ formset.0.is_na }}</td>
+					<td id="e2c16" style="display: none; width: 105px">{{ formset.1.is_na }}</td>
+				</tr>
+				<tr>
+					<td>IS - SN (Incisivo Superior - Plano SN)</td> 
+					<td>103° +/- 2°</td>
+					<td style="width: 105px">{{ formset.0.is_sn }}</td>
+					<td id="e2c17" style="display: none; width: 105px">{{ formset.1.is_sn }}</td>
+				</tr>
+				<tr>
+					<td>ISFH (Plano FH - Eje Longitudinal Incisivo Mx)</td> 
+					<td>110° +/- 5°</td>
+					<td style="width: 105px">{{ formset.0.isfh }}</td>
+					<td id="e2c18" style="display: none; width: 105px">{{ formset.1.isfh }}</td>
+				</tr>
+				<tr>
+					<td>IMPA (Plano Mandibular - Eje del Incisivo Mandibular)</td> 
+					<td>90° +/- 5°</td>
+					<td style="width: 105px">{{ formset.0.impa }}</td>
+					<td id="e2c19" style="display: none; width: 105px">{{ formset.1.impa }}</td>
+				</tr>
+
+				<!-- 2 Filas -->
+
+				<tr>
+					<th rowspan=2><br>Movimiento en Cuerpo</th>
+					<td>Protrusión de Incisivo Mx (Borde del Incisivo Mx - Plano A - Pog)</td> 
+					<td>3.55mm +/- 2mm</td>
+					<td style="width: 105px">{{ formset.0.protusion_de_incisivo_max }}</td>
+					<td id="e2c20" style="display: none; width: 105px">{{ formset.1.protusion_de_incisivo_max }}</td>
+				</tr>
+				<tr>
+					<td>Protusión de Incisivo Md (Borde del Incisivo Md - Plano A - Pog)</td> 
+					<td>1mm +/- 2mm</td>
+					<td style="width: 105px">{{ formset.0.protusion_de_incisivo_md }}</td>
+					<td id="e2c21" style="display: none; width: 105px">{{ formset.1.protusion_de_incisivo_md }}</td>
+				</tr>
+
+				<!-- 1 Fila-->
+
+				<tr>
+					<th colspan=2>MEDIDAS ESTÉTICAS</th>
+					<td>Protusión Labial (Punta Nariz - Pogonion Tejido Blando - Labio Inferior)</td> 
+					<td>-2mm +/- 2mm</td>
+					<td style="width: 105px">{{ formset.0.protusion_labial }}</td>
+					<td id="e2c22" style="display: none; width: 105px">{{ formset.1.protusion_labial }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+	 <br>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+            <br><br>
+            
+        </div>
+    </div>
+
+
+
+     <!-- Barra de progreso -->
+        <br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 66%;"></div>
+        </div>
+        </div>
+
+
+
+<script>
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+		 
+</script>
+
+</form>
+{% endblock %}

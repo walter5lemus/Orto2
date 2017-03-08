@@ -12,6 +12,96 @@ from django.forms import modelformset_factory
 
 codi="0000-00"
 
+################################################################################################################
+
+
+def nance_crear(request,codi,num):  
+    str(codi)
+    ids = fichas.objects.get(cod_expediente=codi, numero=num)
+
+
+    max_numero=10
+    nanceFormSet = formset_factory(nance_tabla, extra=max_numero, max_num=max_numero)
+    nanceFormSet2 = formset_factory(nance_tabla, extra=max_numero, max_num=max_numero)
+
+    if request.method == 'POST':
+
+        form1 = nance_generalForm(request.POST,initial={'fichas':ids.id})
+        formset = nanceFormSet(request.POST, request.FILES, prefix='1tablas')
+        formset2 = nanceFormSet2(request.POST, request.FILES, prefix='2tablas') 
+        if (form1.is_valid() and formset.is_valid() and formset2.is_valid() ):
+        #if (formset.is_valid() ):
+            form1.save()
+
+            for form in formset:
+                print form
+                form.save()
+
+            for form in formset2:
+                print form
+                form.save() 
+
+        return redirect('/analisis_denticion_mixta/moyersinferior/nuevo/%s/%s/' %(codi,num))
+    else:
+            form1 = nance_generalForm(initial={'fichas':ids.id})
+            formset = nanceFormSet(prefix='1tablas')
+            formset2 = nanceFormSet2(prefix='2tablas')
+    return render(request, 'analisis_radiograficos/analisis_nance.html', {'form1':form1, 'formset':formset, 'num':num,'formset2':formset2,'codi':codi,'ids':ids.id,'max':max_numero})       
+
+
+
+def nance_consultar(request, codi, num):
+    str(codi)
+    try:
+        ids = fichas.objects.get(cod_expediente=codi, numero=num)
+        nanceFormSet = modelformset_factory(nance_tablas, nance_tabla_consultar, extra=0)
+        nanceFormSet2 = modelformset_factory(nance_tablas, nance_tabla_consultar, extra=0)
+        max_numero=10
+        if ids:
+            nance_general1 = nance_general.objects.get(fichas_id=ids.id)
+            if request.method == 'GET':
+                form1 = nance_generalForm_Consultar(instance=nance_general1)
+                formset = nanceFormSet(queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
+                formset2 = nanceFormSet(queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=2),prefix='2tablas')
+            else:
+                form1 = nance_generalForm_Consultar(request.POST, instance=nance_general1)
+                formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
+                formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
+
+                return redirect('/analisis_denticion_mixta/moyersinferior/consultar/%s/%s/' %(codi,num))            
+            return render(request, 'analisis_radiograficos/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero})    
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    except Exception, e:
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+
+def nance_editar(request, codi, num):
+    str(codi)
+    try:
+        ids = fichas.objects.get(cod_expediente=codi, numero=num)
+        nanceFormSet = modelformset_factory(nance_tablas, nance_tabla, extra=0)
+        nanceFormSet2 = modelformset_factory(nance_tablas, nance_tabla, extra=0)
+        max_numero=10
+        if ids:
+            nance_general1 = nance_general.objects.get(fichas_id=ids.id)
+            if request.method == 'GET':
+                form1 = nance_generalForm(instance=nance_general1)
+                formset = nanceFormSet(queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
+                formset2 = nanceFormSet2(queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=2),prefix='2tablas')
+            else:
+                form1 = nance_generalForm(request.POST, instance=nance_general1)
+                formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
+                formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
+
+                return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num))
+                #return redirect('/')       
+            return render(request, 'analisis_radiograficos/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero})   
+        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+    except Exception, e:
+       return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+
+################################################################################################################
+
+
 def moyerssup_view(request,codi,num):
 	str(codi)
 	try:
