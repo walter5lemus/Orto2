@@ -47,7 +47,7 @@ def asp_mandibular1_edit(request,codi,num):
 			if form.is_valid():
 				form.save()
 			return redirect('/analisis_radiograficos/otrosAspectos/editar/%s/%s' %(codi,num))
-		return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form})
+		return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form,'codi':codi,'num':num})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
@@ -66,7 +66,7 @@ def asp_mandibular1_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return redirect('/analisis_radiograficos/otrosAspectos/consultar/%s/%s' %(codi,num))
-			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form})
+			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

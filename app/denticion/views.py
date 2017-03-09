@@ -192,7 +192,7 @@ def mordidas_consultar(request, codi, num):
 				formset = registro_mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id),)
 				
 				return redirect('/denticion/sagitales/consultar/%s/%s/'%(codi,num))			
-			return render(request, 'denticion/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,})	
+			return render(request, 'denticion/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
