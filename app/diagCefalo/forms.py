@@ -13,16 +13,19 @@ class diagCefaloForm(forms.ModelForm):
 			'fichas',
 
 			'patron_esqueletal', 
+			'otro_patron',
 			'tipo_de_crecimiento',
 			'medidas_dentales',
 			'medidas_esteticas',
+
 		]
 
 		labels = {
 			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
-			'patron_esqueletal': "Patron Esqueletal", 
+			'patron_esqueletal': "Patron Esqueletal",
+			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
 			'medidas_dentales': "Medidas Dentales",
 			'medidas_esteticas': "Medidas Esteticas",
@@ -32,9 +35,10 @@ class diagCefaloForm(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'patron_esqueletal':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
-			'tipo_de_crecimiento':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
-			'medidas_dentales':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
+			'patron_esqueletal': forms.Select(attrs={'class':'form-control'}),
+			'otro_patron':forms.TextInput(attrs={'class':'form-control'}),
+			'tipo_de_crecimiento':forms.Select(attrs={'class':'form-control'}),
+			'medidas_dentales':forms.Select(attrs={'class':'form-control'}),
 			'medidas_esteticas':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
 		}
 
@@ -50,6 +54,7 @@ class diagCefaloForm_consultar(forms.ModelForm):
 			'fichas',
 
 			'patron_esqueletal', 
+			'otro_patron',
 			'tipo_de_crecimiento',
 			'medidas_dentales',
 			'medidas_esteticas',
@@ -59,7 +64,8 @@ class diagCefaloForm_consultar(forms.ModelForm):
 			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
-			'patron_esqueletal': "Patron Esqueletal", 
+			'patron_esqueletal': "Patron Esqueletal",
+			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
 			'medidas_dentales': "Medidas Dentales",
 			'medidas_esteticas': "Medidas Esteticas",
@@ -69,8 +75,11 @@ class diagCefaloForm_consultar(forms.ModelForm):
 			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'patron_esqueletal': forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
-			'tipo_de_crecimiento':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
-			'medidas_dentales':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
+
+			'patron_esqueletal': forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
+			'otro_patron':forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'tipo_de_crecimiento':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
+			'medidas_dentales':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'medidas_esteticas':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
+
 		}
