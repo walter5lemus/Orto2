@@ -9,7 +9,7 @@ import os
 class examen(models.Model):
 
 	def __unicode__(self):
-		return '{}'.format(self.nombre_problemas)
+		return '{}'.format(self.id)
 
 
 class analisis_cefalometrico(models.Model):	

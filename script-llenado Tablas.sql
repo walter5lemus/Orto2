@@ -36,6 +36,8 @@ INSERT INTO `analisisdenticionmixta_pos` (`id`) VALUES
 (3),
 (4);
 
+INSERT INTO `analisis_cefalometrico_examen` (`id`) VALUES ('1'), ('2');
+
 --
 -- Indices de la tabla `informacion_catalogo_enfermedades`
 --
