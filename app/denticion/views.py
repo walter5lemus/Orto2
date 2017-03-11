@@ -17,8 +17,45 @@ def index(request):
 
 def denticion_view(request,codi,num):
 	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	#try:
+	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	max_num=5
+	print "entro"
+	if registro.objects.filter(fichas_id=ids.id).exists():
+		if denticion.objects.filter(fichas_id=ids.id).exists():
+
+			perdidaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
+			anodonciaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
+			mordidaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
+			if ids:
+				denticion1 = denticion.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
+					anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
+					mordida_formset = mordidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='3'), prefix='mordidas')
+					form1 = denticionForm(instance=denticion1)
+				else:
+					perdida_formset = perdidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='perdidas',)		
+					anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='anodoncias',)
+					mordida_formset = mordidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='mordidas',)
+					form1 = denticionForm(request.POST, instance=denticion1)
+					if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid()):
+						for form in perdida_formset:
+							print form
+							form.save()				
+
+						for form in anodoncia_formset:
+							print form
+							form.save()
+
+						for form in mordida_formset:
+							print form
+							form.save()	
+
+						form1.save()							
+					return redirect('/denticion/mordidas/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'denticion/aspectos_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+	else:
 		if ids:
 			max_num=5
 			perdidaFormSet = formset_factory(registroForm, extra=1, max_num=5)
@@ -50,8 +87,8 @@ def denticion_view(request,codi,num):
 				mordida_formset = mordidaFormSet(prefix='mordidas')
 				form1 = denticionForm(initial={'fichas':ids.id})
 		return render(request, 'denticion/aspectos_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, "num":num,'form1':form1, 'codi':codi, 'ids':ids.id, 'max':max_num,'num':num})
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
+	#except Exception, e:
+	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 
 def denticion_editar(request,codi,num):
 	str(codi)
@@ -121,10 +158,34 @@ def denticion_consultar(request,codi,num):
 		
 def mordidas_view(request,codi,num):
 	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	#try:
+	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	max_num=5
+	registro_mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, extra=1, max_num=5)
+	if linea_media_facial.objects.filter(fichas_id=ids.id).exists():
+		if sobremordidas.objects.filter(fichas_id=ids.id).exists():
+			if registro_mordidas.objects.filter(fichas_id=ids.id).exists():
+				lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
+				sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form1 = linea_media_facialForm(instance=lineamediafacial)
+					form2 = sobremordidasForm(instance=sobremordida)
+					formset = registro_mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id))
+				else:
+					form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
+					form2 = sobremordidasForm(request.POST, instance=sobremordida)
+					formset = registro_mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id),)
+					if form1.is_valid() and form2.is_valid() and formset.is_valid():
+						form1.save()
+						form2.save()
+							
+						for form in formset:
+							print form
+							form.save()
+					return redirect('/denticion/sagitales/nuevo/%s/%s/'%(codi,num))		
+				return render(request, 'denticion/denticion_edit_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})			
+	else:
 		if ids:
-			max_num=5
 			registro_mordidasFormSet = formset_factory(registro_mordidasForm, extra=1, max_num=5)
 			if request.method == 'POST':
 				form1 = linea_media_facialForm(request.POST,initial={'fichas':ids.id})
@@ -143,9 +204,10 @@ def mordidas_view(request,codi,num):
 				form1 = linea_media_facialForm(initial={'fichas':ids.id})
 				form2 = sobremordidasForm(initial={'fichas':ids.id})
 				formset = registro_mordidasFormSet()
+
 		return render(request, 'denticion/denticion_form.html', {'form1':form1, 'form2':form2, 'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
+	#except Exception, e:
+	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
 
 def mordidas_editar(request,codi,num):
 	str(codi)
@@ -201,21 +263,40 @@ def relacionsagital_crear(request,codi,num):
 	str(codi)
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
-		if ids:
-			if request.method == 'POST':
-				form = RelacionSagitalForm(request.POST,initial={'fichas':ids.id})
-				form2 = FuncionMandibularForm(request.POST,initial={'fichas':ids.id})
-				form3 = ImagenForm(request.POST, request.FILES,initial={'fichas':ids.id})
+		if relaciones_sagitales.objects.filter(fichas_id=ids.id).exists():
+			relacionsagital = relaciones_sagitales.objects.get(fichas_id=ids.id)
+			funcionmandibular = funcion_mandibular.objects.get(fichas_id=ids.id)
+			imagenes = imagenes_afmp.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = RelacionSagitalForm(instance=relacionsagital)
+				form2 = FuncionMandibularForm(instance=funcionmandibular)
+				form3 = ImagenForm(instance=imagenes)
+			else:
+				form = RelacionSagitalForm(request.POST, instance=relacionsagital)
+				form2 = FuncionMandibularForm(request.POST, instance=funcionmandibular)
+				form3 = ImagenForm(request.POST, request.FILES, instance=imagenes)
 				if form.is_valid() and form2.is_valid() and form3.is_valid():
 					form.save()
 					form2.save()
 					form3.save()
 				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
-			else:
-				form = RelacionSagitalForm(initial={'fichas':ids.id})
-				form2 = FuncionMandibularForm(initial={'fichas':ids.id})
-				form3 = ImagenForm(initial={'fichas':ids.id})
-		return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi})
+			return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
+		else:
+			if ids:
+				if request.method == 'POST':
+					form = RelacionSagitalForm(request.POST,initial={'fichas':ids.id})
+					form2 = FuncionMandibularForm(request.POST,initial={'fichas':ids.id})
+					form3 = ImagenForm(request.POST, request.FILES,initial={'fichas':ids.id})
+					if form.is_valid() and form2.is_valid() and form3.is_valid():
+						form.save()
+						form2.save()
+						form3.save()
+					return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
+				else:
+					form = RelacionSagitalForm(initial={'fichas':ids.id})
+					form2 = FuncionMandibularForm(initial={'fichas':ids.id})
+					form3 = ImagenForm(initial={'fichas':ids.id})
+			return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi})
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 

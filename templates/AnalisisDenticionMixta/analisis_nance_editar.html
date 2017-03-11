@@ -64,7 +64,9 @@
     
 
 <div class="analisis_nance">
-            
+
+
+
     <div class="col-md-10 col-md-offset-1">
     <!-- <h5>Nance</h5> -->
 
@@ -117,6 +119,7 @@
                     <thead>
                         <tr>
                         	<th scope="col"></th>
+                            <th scope="col">id</th>
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -128,7 +131,8 @@
                     <tbody>
                         {% for form in formset %}
     			                <tr>
-    			                	<td>{{ form.seleccion }}</td>
+    			                	<td>{{ form.id }}</td>
+                                    <td>{{ form.seleccion }}</td>
     			                    <td>{{ form.posicion }}</td>
     			                    <td>{{ form.mdm }}</td>
     			                    <td>{{ form.mprx }}</td>
@@ -160,7 +164,8 @@
             <table id="2" cellpadding="0" cellspacing="5">
                     <thead>
                         <tr>
-                            <th scope="col"></th>          
+                            <th scope="col"></th>
+                            <th scope="col">id</th>          
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -172,6 +177,7 @@
                     <tbody>
                         {% for form in formset2 %}
                                 <tr>
+                                    <td>{{ form.id }}</td>
                                     <td>{{ form.seleccion }}</td>
                                     <td>{{ form.posicion }}</td>
                                     <td>{{ form.mdm }}</td>

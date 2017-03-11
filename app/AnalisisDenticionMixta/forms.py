@@ -53,6 +53,7 @@ class nance_tabla(forms.ModelForm):
         model = nance_tablas
 
         fields = [
+            'id',
             'seleccion',
             'fichas',
             'tabla',
@@ -65,6 +66,7 @@ class nance_tabla(forms.ModelForm):
         ]
 
         labels={
+            'id': '' ,
             'seleccion': '' ,
             'fichas':'',
             'tabla':'',
@@ -77,6 +79,7 @@ class nance_tabla(forms.ModelForm):
         }
 
         widgets={
+            'id':forms.HiddenInput(attrs={'class':'checkbox','readonly':True}),
             'seleccion':forms.CheckboxInput(attrs={'class':'checkbox','readonly':True}),
             'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
             'tabla':forms.HiddenInput(attrs={'class':'form-control'}),

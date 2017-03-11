@@ -1,17 +1,10 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-Estado general
+Motivo Consulta
 {% endblock %}
 {% block header %}
 <style>
-	#id_cambio_salud {
-		column-count: 2;
-	}
-	#id_otras_enfermedades {
-		column-count: 2;
-	}
-
 </style>
 
 {% endblock %}
@@ -23,11 +16,11 @@ Estado general
 
  <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"></h3>
+    <h3 class="panel-title">Motivo de Consulta</h3>
   </div>
   <div class="panel-body">
 
-	<h1><center>Estado General</center></h1>
+	<h1><center>Motivo de Consulta</center></h1>
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			{{form.fichas}}
@@ -57,38 +50,24 @@ Estado general
 	
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<label for="{{form.cambio_salud.name}}">{{form.cambio_salud.label}}</label>	
-			{{form.cambio_salud}}
+			<label for="{{form.motivo_consulta.name}}">{{form.motivo_consulta.label}}</label>	
+			{{form.motivo_consulta}}
 		</div>
 	</div>
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 		
-			<label for="{{form.detalle_enf_operacion.name}}">{{form.detalle_enf_operacion.label}}</label>
-			{{form.detalle_enf_operacion}}
+			<label for="{{form.fechaRegistro.name}}">{{form.fechaRegistro.label}}</label><br>
+			{{form.fechaRegistro}}
 		</div>
 	</div>
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<label for="{{form.otras_enfermedades.name}}">{{form.otras_enfermedades.label}}</label>	
-			{{form.otras_enfermedades}}
+			<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
+			{{form.fecha_hora_creacion}}
 		</div>
 	</div>
 
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<label for="{{form.detalle_otra_enfermedad.name}}">{{form.detalle_otra_enfermedad.label}}</label>	
-			{{form.detalle_otra_enfermedad}}
-		</div>
-	</div>
-
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<label for="{{form.detalle_medicamento.name}}">
-			{{form.detalle_medicamento.label}}</label>	
-			{{form.detalle_medicamento}}
-		</div>
-	</div>
 
 
 </div>
@@ -98,10 +77,8 @@ Estado general
 
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<div class="col-md-3 col-md-offset-1">
-			  <a href="/informacion/motivo_consultas/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-			</div>
-			<div class="col-md-3 col-md-offset-2">
+			<br>
+			<div class="col-md-3 col-md-offset-4">
 			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
 			</div>
 		</div>
@@ -126,11 +103,31 @@ Estado general
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
 
-	function redireccionar(){
-		//var num = parseInt($("#select_fichas").val(), 10);
-		//var codigo = $('#id_cod_expediente').val();
-		window.location.href="/informacion/motivo_consultas/editar/"+{{codi}}+"/"+{{num}};
-	}
+
+ 	$(function() {
+    	//var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+		
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	})
+
+	$('.fecha').change(function() {
+		
+		//var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());
+
+		    var date = new Date();
+	        var month = date.getMonth()+ 1;
+	        var dateString =  date.getFullYear() + "-"+ month + "-" + date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	        console.log(dateString);
+	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
+	    
+
+	});
+
 </script>
 
 

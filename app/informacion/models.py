@@ -26,7 +26,7 @@ class datos_generales(models.Model):
     edad = models.IntegerField()
     edad_registro = models.IntegerField()
     fecha_nac = models.DateField()
-    telefono = models.IntegerField(max_length=8)
+    telefono = models.IntegerField()
     genero = models.IntegerField(choices=genero_choices, default=1)
     direccion = models.CharField(max_length=200)
     nombre_resp = models.CharField(max_length=100)

@@ -14,7 +14,7 @@
 {% block extrajs %}
 
 	<script type="text/javascript">
-		a0 = 0;
+	/* 	a0 = 0;
 		b0 = 0;
 		c0 = 0;
 		d0 = 0;
@@ -23,7 +23,7 @@
 		sum2 = 0;
 		divi = 0;
 		edi = 0;
-		edd = 0;
+		edd = 0; */
 		
 		   
 		$('#id_form-0-fichas').val({{ids}});
@@ -35,13 +35,13 @@
 		$('#id_form-2-posicion').val(3);
 		$('#id_form-3-posicion').val(4);
 
-		$('#id_form-0-ancho_mesiodistal').val(0);
+		/*$('#id_form-0-ancho_mesiodistal').val(0);
 		$('#id_form-1-ancho_mesiodistal').val(0);	
 		$('#id_form-2-ancho_mesiodistal').val(0);
 		$('#id_form-3-ancho_mesiodistal').val(0);
 
 		$('#id_ed_izquierdo').val(0);
-		$('#id_ed_derecho').val(0);
+		$('#id_ed_derecho').val(0);*/
 
 		$('#id_form-0-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -10098,16 +10098,15 @@
 
 
 
-    <div class="col-md-8 col-md-offset-2">
+	 <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+            <br><br>
+            
         </div>
-        <br><br>
     </div>
 
 

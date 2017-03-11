@@ -16,8 +16,20 @@ def tipo_perfil(request):
 
 def tipo_perfil_view(request,codi,num):
 	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	#try:
+	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+
+	if TipoPerfil.objects.filter(fichas_id=ids.id).exists():
+		datos = TipoPerfil.objects.get(fichas_id=ids.id)
+		if request.method == 'GET':
+			form = Tipo_perfilForm(instance=datos)
+		else: 
+			form = Tipo_perfilForm(request.POST, instance=datos)
+			if form.is_valid():
+				form.save()
+			return redirect('/denticion/aspectos/nuevo/%s/%s' %(codi,num))
+		return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi}) 
+	else:
 		if ids:	
 			if request.method == 'POST':
 				form = Tipo_perfilForm(request.POST,initial={'fichas':ids.id})
@@ -29,8 +41,8 @@ def tipo_perfil_view(request,codi,num):
 				form = Tipo_perfilForm(initial={'fichas':ids.id})
 				
 		return render(request,'tipo_perfil/form_tipo_perfil.html', {'form':form,'codi':codi,'num':num})
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+#	except Exception, e:
+#		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 
 
 

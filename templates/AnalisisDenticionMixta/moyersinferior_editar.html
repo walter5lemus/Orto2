@@ -4,7 +4,7 @@
 
 
 {% block title %}
-	Moyers Superior
+	Moyers Inferior
 {% endblock %}
 
 {% block header %}
@@ -14,7 +14,7 @@
 {% block extrajs %}
 
 	<script type="text/javascript">
-		a0 = 0;
+		/*a0 = 0;
 		b0 = 0;
 		c0 = 0;
 		d0 = 0;
@@ -23,7 +23,7 @@
 		sum2 = 0;
 		divi = 0;
 		edi = 0;
-		edd = 0;
+		edd = 0;*/
 		
 		   
 		$('#id_form-0-fichas').val({{ids}});
@@ -35,13 +35,13 @@
 		$('#id_form-2-posicion').val(3);
 		$('#id_form-3-posicion').val(4);
 
-		$('#id_form-0-ancho_mesiodistal').val(0);
+		/*$('#id_form-0-ancho_mesiodistal').val(0);
 		$('#id_form-1-ancho_mesiodistal').val(0);	
 		$('#id_form-2-ancho_mesiodistal').val(0);
 		$('#id_form-3-ancho_mesiodistal').val(0);
 
 		$('#id_ed_izquierdo').val(0);
-		$('#id_ed_derecho').val(0);
+		$('#id_ed_derecho').val(0);*/
 
 		$('#id_form-0-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -9764,19 +9764,6 @@
 	        }
         ;});
 
-
-
-
-        $('#id_form-0-ancho_mesiodistal').change(function() {
-        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());});
-        $('#id_form-1-ancho_mesiodistal').change(function() {
-        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());});
-        $('#id_form-2-ancho_mesiodistal').change(function() {
-        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());});
-        $('#id_form-3-ancho_mesiodistal').change(function() {
-        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());});
-
-
     $('#id_ed_izquierdo').change(function() {
 			edi = parseFloat($('#id_ed_izquierdo').val());				
         	$('#edi2').html(edi); 
@@ -9869,7 +9856,7 @@
 
 <div class="container">
     <div class="row">
-    <h2 align="center">ANALISI DE MOYERS SUPERIOR</h1><br><br>
+    <h2 align="center">ANALISIS DE MOYERS SUPERIOR</h1><br><br>
     <h5 align="center">ESPACIO DISPONIBLE ARCADA SUPERIOR</h5><br>    
 	<h5 align="center">ESPACIO DISPONIBLE ANTERIOR</h5>
 	<div class="col-sm-6" align="right" style="align-items: center">
@@ -9901,7 +9888,7 @@
 				</tr>
 				<tr>
 					<td>{{ formset.0.posicion }}3-1</td>
-					<td style="width: 105px"><div>{{ formset.0.ancho_mesiodistal }} mm</div></td>
+					<td style="width: 105px">{{ formset.0.ancho_mesiodistal }}</td>
 				</tr>
 				<tr>
 					<td>{{ formset.1.posicion }}3-2</td>
@@ -9968,7 +9955,8 @@
 
         	<table class='table-bordered'>
 				<h5 align="center">ESPACIO NECESARIO ARCADA SUPERIOR</h5>
-								
+
+				
 				<tbody>
 					<tr>
 						<th id="a1">Ancho MD</th>						
@@ -10098,16 +10086,15 @@
 
 
 
-    <div class="col-md-8 col-md-offset-2">
+	 <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+
+            <div class="col-md-3 col-md-offset-4">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+            <br><br>
+            
         </div>
-        <br><br>
     </div>
 
 

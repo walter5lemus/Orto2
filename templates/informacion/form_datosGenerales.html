@@ -170,6 +170,27 @@
 	        $('#{{form.fecha_hora_creacion.auto_id}}').val(dateString)
 	})
 
+	$('#id_cod_expediente').change(function() {
+	 	codigo = $("#id_cod_expediente").val();
+	 	
+	 	$.ajax({
+	 		data: {'codigo': codigo},
+	 		url: '/informacion/codigo/',
+	 		type: 'get',
+	 		success : function(data) {
+	        	//console.log(data[0].nombre_completo);
+	        	for (var i = 0; i < data.length; i++) {
+						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
+						$("#id_cod_expediente").focus();
+						codigo = $("#id_cod_expediente").val("");
+				}
+	 		},
+	 		error : function(message) {
+	        	console.log(message);
+	     	}
+	 	});
+	});
+
 	$('.fecha').change(function() {
 		
 		var f = new Date($('#id_fecha_nac_year').val(),$('#id_fecha_nac_month').val() - 1,$('#id_fecha_nac_day').val());

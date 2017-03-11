@@ -17,6 +17,18 @@ def diag_cefalo_view(request,codi,num):
 	str(codi)
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+
+		if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
+			datos = diagnostico_cefalometrico.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = diagCefaloForm(instance=datos)
+			else: 
+				form = diagCefaloForm(request.POST, instance=datos)
+				if form.is_valid():
+					form.save()
+				return redirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s' %(codi,num))
+			return render(request, 'diag_cefalo/form_diag_cefalo.html',{'form':form,'num':num,'codi':codi})
+
 		if ids:	
 			if request.method == 'POST':
 				form = diagCefaloForm(request.POST,initial={'fichas':ids.id})

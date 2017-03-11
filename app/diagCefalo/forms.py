@@ -76,7 +76,7 @@ class diagCefaloForm_consultar(forms.ModelForm):
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
 
-			'patron_esqueletal': forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
+			'patron_esqueletal': forms.Select(attrs={'class':'form-control','readonly':True}),
 			'otro_patron':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tipo_de_crecimiento':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'medidas_dentales':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
