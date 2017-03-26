@@ -42,7 +42,7 @@ def denticion_view(request,codi,num):
 					if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid()):
 						for form in perdida_formset:
 							print form
-							form.save()				
+							form.save()
 
 						for form in anodoncia_formset:
 							print form
@@ -50,7 +50,9 @@ def denticion_view(request,codi,num):
 
 						for form in mordida_formset:
 							print form
-							form.save()	
+							form.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 
 						form1.save()							
 					return redirect('/denticion/mordidas/nuevo/%s/%s/' %(codi,num))
@@ -78,7 +80,9 @@ def denticion_view(request,codi,num):
 
 					for form in mordida_formset:
 						print form
-						form.save()					
+						form.save()
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 
 				return redirect('/denticion/mordidas/nuevo/%s/%s/' %(codi,num))
 			else:
@@ -121,7 +125,9 @@ def denticion_editar(request,codi,num):
 
 				for form in mordida_formset:
 					print form
-					form.save()	
+					form.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 
 				form1.save()							
 			return redirect('/denticion/mordidas/editar/%s/%s/' %(codi,num))
@@ -178,7 +184,8 @@ def mordidas_view(request,codi,num):
 					if form1.is_valid() and form2.is_valid() and formset.is_valid():
 						form1.save()
 						form2.save()
-							
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						for form in formset:
 							print form
 							form.save()
@@ -198,7 +205,8 @@ def mordidas_view(request,codi,num):
 					for form in formset:
 						print form
 						form.save()
-
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/denticion/sagitales/nuevo/%s/%s/' %(codi,num))
 			else:
 				form1 = linea_media_facialForm(initial={'fichas':ids.id})
@@ -228,7 +236,8 @@ def mordidas_editar(request,codi,num):
 			if form1.is_valid() and form2.is_valid() and formset.is_valid():
 				form1.save()
 				form2.save()
-					
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				for form in formset:
 					print form
 					form.save()
@@ -279,6 +288,8 @@ def relacionsagital_crear(request,codi,num):
 					form.save()
 					form2.save()
 					form3.save()
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
 			return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 		else:
@@ -291,6 +302,8 @@ def relacionsagital_crear(request,codi,num):
 						form.save()
 						form2.save()
 						form3.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 					return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
 				else:
 					form = RelacionSagitalForm(initial={'fichas':ids.id})
@@ -325,6 +338,8 @@ def relacionsagital_edit(request,codi,num):
 				form.save()
 				form2.save()
 				form3.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 			return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/editar/%s/%s/' %(codi,num))
 		return render(request, 'denticion/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

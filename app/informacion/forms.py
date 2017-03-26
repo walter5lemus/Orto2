@@ -174,19 +174,16 @@ class MotivoConsultaForm(forms.ModelForm):
 			'fichas',
 			'motivo_consulta',
 			'fechaRegistro',
-			'fecha_hora_creacion',			
 		]
 		labels={
 			'fichas': 'Codigo Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
-			'fecha_hora_creacion':'Fecha y hora de ultima modificación',
 		}
 		widgets={
 			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 			'motivo_consulta':forms.Textarea(attrs={'class':'form-control'}),
 			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control','style': 'width: 32.5%; display: inline-block;'}),
-			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control','readonly':'true'}),
 		}
 		
 class MotivoConsultaForm_consultar(forms.ModelForm):
@@ -198,19 +195,16 @@ class MotivoConsultaForm_consultar(forms.ModelForm):
 			'fichas',
 			'motivo_consulta',
 			'fechaRegistro',
-			'fecha_hora_creacion',			
 		]
 		labels={
 			'fichas': 'Codigo Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
-			'fecha_hora_creacion':'Fecha y hora de creacion',
 		}
 		widgets={
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 			'motivo_consulta':forms.Textarea(attrs={'class':'form-control','readonly':True}),
 			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control','style': 'width: 32.5%; display: inline-block;','readonly':True}),
-			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control','readonly':'true','readonly':True}),
 		}
 		
 

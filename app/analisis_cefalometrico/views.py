@@ -20,30 +20,29 @@ def cefalometrico_view(request,codi,num):
 
 		if analisis_cefalometrico.objects.filter(fichas_id=ids.id).exists():
 			cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)
-				
 			if ids:
-				if request.method == 'GET':				
+				if request.method == 'GET':
 					formset = cefalometricoFormSet(queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
 				else:
 					formset = cefalometricoFormSet(request.POST, request.FILES, queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
 					if formset.is_valid():
-						
 						formset.save()
-					
-					return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))			
+						fecha =timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+					return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
 				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})
 		else:
 			if ids:
 				max_num=2
 				cefalometricoFormSet = formset_factory(analisis_cefalometricoForm, extra=2, max_num=2)
 				if request.method == 'POST':
-					formset = cefalometricoFormSet(request.POST)		
+					formset = cefalometricoFormSet(request.POST)
 					if formset.is_valid():
-					
 						for form in formset:
 							print form
 							form.save()
-
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 					return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
 				else:
 					formset = cefalometricoFormSet()
@@ -59,15 +58,15 @@ def cefalometrico_editar(request, codi, num):
 		cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)
 			
 		if ids:
-			if request.method == 'GET':				
+			if request.method == 'GET':
 				formset = cefalometricoFormSet(queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
 			else:
 				formset = cefalometricoFormSet(request.POST, request.FILES, queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
 				if formset.is_valid():
-					
 					formset.save()
-				
-				return redirect('/diag_cefalo/edit/%s/%s' % (codi, num))			
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+				return redirect('/diag_cefalo/edit/%s/%s' % (codi, num))
 			return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:

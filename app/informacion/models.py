@@ -41,6 +41,7 @@ class datos_generales(models.Model):
 class fichas(models.Model):
     cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
     numero = models.IntegerField()
+    usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
 
     class Meta:
         unique_together = [("cod_expediente", "numero")]
@@ -48,7 +49,16 @@ class fichas(models.Model):
 
 
     def __unicode__(self):
-        return  '{} {}'.format(self.cod_expediente,self.numero)
+        return  '{} {} '.format(self.cod_expediente,self.numero)
+
+class ultima_modificacion(models.Model):
+    fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
+    fecha = models.DateTimeField() 
+    
+
+    def __unicode__(self):
+        return '{}'.format(self.fichas)
+
 
 class catalogo_enfermedades(models.Model):
     id_enfermedad = models.IntegerField(primary_key=True)
@@ -60,8 +70,8 @@ class catalogo_enfermedades(models.Model):
 class motivo_consulta(models.Model):
     fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
     motivo_consulta = models.CharField(max_length=500)
-    fechaRegistro = models.DateField(default=datetime.datetime.now()) 
-    fecha_hora_creacion = models.DateTimeField()
+    fechaRegistro = models.DateField(default=timezone.now()) 
+    
 
     def __unicode__(self):
         return '{}'.format(self.fichas)

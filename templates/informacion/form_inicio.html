@@ -177,7 +177,6 @@ $('#id_nombre_paciente').keyup(function(e){
  		url: '/informacion/busqueda/',
  		type: 'get',
  		success : function(data) {
-        	//console.log(data[0].nombre_completo);
         	for (var i = 0; i < data.length; i++) {
 					$("#id_listanombres").append("<option value='" + data[i].nombre_completo + "'></option>");
 
@@ -208,7 +207,6 @@ function redireccionar(){
 }
 
 function redireccionar2(){
-	//var num= $( "#select_fichas" ).val();
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
@@ -237,7 +235,6 @@ function buscar(){
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
 				}
 				if(data==''){
-					
 					window.location="/informacion/datos_generales/nuevo/"+codigo;
 				}
 			},
@@ -256,7 +253,6 @@ function buscar(){
 					}));
 				}
 				if(data==''){
-					
 					window.location="/informacion/datos_generales/nuevo/"+codigo;
 				}
 			},

@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from app.diagCefalo.forms import *
 from app.diagCefalo.models import diagnostico_cefalometrico
-from app.informacion.models import fichas, datos_generales
+from app.informacion.models import *
 
 
 # Create your views here.
@@ -26,6 +26,8 @@ def diag_cefalo_view(request,codi,num):
 				form = diagCefaloForm(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s' %(codi,num))
 			return render(request, 'diag_cefalo/form_diag_cefalo.html',{'form':form,'num':num,'codi':codi})
 
@@ -34,7 +36,8 @@ def diag_cefalo_view(request,codi,num):
 				form = diagCefaloForm(request.POST,initial={'fichas':ids.id})
 				if form.is_valid():
 					form.save()
-
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return HttpResponseRedirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s/' %(codi,num))
 			else: 
 				form = diagCefaloForm(initial={'fichas':ids.id})
@@ -57,6 +60,8 @@ def diag_cefalo_edit(request,codi,num):
 			form = diagCefaloForm(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 			return redirect('/analisis_denticion_mixta/analisis_nance/editar/%s/%s' %(codi,num))
 		return render(request, 'diag_cefalo/form_diag_cefalo.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

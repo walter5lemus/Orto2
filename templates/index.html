@@ -1,5 +1,7 @@
 {% load staticfiles %}
 
+
+
 {% block navbar %}
 		<div class="bs-docs-section clearfix">
 		    <div class="row">
@@ -29,6 +31,7 @@
 		                  		
 
 		                </div>
+
 		            </nav>
 		        </div>
            	</div>
@@ -123,7 +126,7 @@
 
 
   
-
+<body>
 <div style="position:relative">
 
     <center> 
@@ -136,15 +139,15 @@
       <div class="transbox">
 
          <div id="container">
-         <div class="ex2">
+	         <div class="ex2">
 
-    		<a href="/informacion/inicio/nuevo/"><img src="\media\imagenes\Menu\nuevo.png"></a></td>
-    		<a href="/informacion/inicio/consultar/"><img src="\media\imagenes\Menu\consulta.png"></a></td>
-    		<a href="/informacion/inicio/editar/"><img src="\media\imagenes\Menu\editar.png"></a></td>
-    		<a href="#"><img src="\media\imagenes\Menu\imagen.png"></a></td>
-    		<a href="/citas/nuevo/"><img src="\media\imagenes\Menu\citas.png"></a></td>
+	    		<a href="/informacion/inicio/nuevo/"><img src="\media\imagenes\Menu\nuevo.png"></a></td>
+	    		<a href="/informacion/inicio/consultar/"><img src="\media\imagenes\Menu\consulta.png"></a></td>
+	    		<a href="/informacion/inicio/editar/"><img src="\media\imagenes\Menu\editar.png"></a></td>
+	    		<a href="#"><img src="\media\imagenes\Menu\imagen.png"></a></td>
+	    		<a href="/citas/nuevo/"><img src="\media\imagenes\Menu\citas.png"></a></td>
 
-         </div>
+	         </div>
 	     </div>
 
 	  </div>
@@ -152,6 +155,16 @@
 
    </div>
 </div>
+<script type="text/javascript">
+	var i=0;
+</script>
+<div id="listas">
+	
+	
+
+</div>
+
+
 
 
 
@@ -160,4 +173,90 @@
   	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
 	</blockquote>
 
+</body>
+<script type="text/javascript">
+	var codigo;
+	var textoCodigo,lista,co,numero;
+</script>
 
+	{% for elemento in lista %}
+			<script type="text/javascript">
+			
+			if ({{elemento}} > 0) {
+				numero = {{elemento}};
+			}
+			
+			if ($.isNumeric("{{elemento}}") == false) {
+				//crea una lista y le asigna el codigo y el numero de la ficha como id
+				
+				
+				lista = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				codigo = {{elemento}};
+				co = "{{elemento}}";
+				textoCodigo = {{elemento}};
+				if(codigo != {{elemento}}){
+					lista += '</ul>';
+					lista = '';
+					i++;
+					numero =1;
+				}
+				
+				$('#listas').append( lista );
+				lista = '';
+			}else{
+				//entra si es un numero
+
+				switch({{elemento}}){
+					case -1:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Motivo de Consulta</a></li>');
+						break;
+					case -2:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/estado_general/nuevo/'+co+'/'+numero+'/">Estado General</a></li>');
+						break;
+					case -3:
+						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/">Tipo de perfil</a></li>');
+						break;
+					case -4:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -5:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro Mordidas FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -6:
+						$('#'+co+'_'+numero).append('<li><a href="/denticion/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
+						break;
+					case -7:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/">Aspectos Articulares</a></li>');
+						break;
+					case -8:
+						$('#'+co+'_'+numero).append('<li><a href="/asp_mandibular1/nuevo/'+co+'/'+numero+'/">Aspectos Mandibulares</a></li>');
+						break;
+					case -9:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/'+co+'/'+numero+'/">Otros Aspectos</a></li>');
+						break;
+					case -10:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/'+co+'/'+numero+'/">Otros Hallazgos</a></li>');
+						break;
+					case -11:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_cefalometrico/cefalometrico/nuevo/'+co+'/'+numero+'/">Analisis Cefalometricos</a></li>');
+						break;
+					case -12:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_cefalo/nuevo/'+co+'/'+numero+'/">Diagnostico Cefalometrico</a></li>');
+						break;
+					case -13:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/'+co+'/'+numero+'/">Analisis de Nance</a></li>');
+						break;
+					case -14:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/'+co+'/'+numero+'/">Moyers inferior</a></li>');
+						break;
+					case -15:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/'+co+'/'+numero+'/">Moyers Superior</a></li>');
+						break;
+					case -16:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
+						break;
+				}
+				lista = '';
+			}
+			</script>
+	{% endfor %}

@@ -4,12 +4,12 @@ from django.views.generic import CreateView,UpdateView
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.views.generic.base import RedirectView
-from django.http import HttpResponseRedirect	
+from django.http import HttpResponseRedirect
 from collections import OrderedDict
 from django.views.generic import TemplateView
 from app.informacion.models import *
 from app.informacion.forms import *
-from django.core import serializers	
+from django.core import serializers
 from django.http import HttpResponse
 import json
 import time
@@ -26,13 +26,11 @@ def CodExpediente_crear(request):
 		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
 		#num = form.data['num']
-		print codi
 		if form.is_valid():
 		 	form.save()
 	else:
-			form = DatosGeneralesForm()
-
-			return render(request, 'informacion/form_inicio.html', {'form':form})
+		form = DatosGeneralesForm()
+		return render(request, 'informacion/form_inicio.html', {'form':form})
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -56,7 +54,7 @@ class BusquedaAjaxView2(TemplateView):
 
 			if estado_general.objects.filter(fichas_id=ids.id).exists():{}
 			else:
-				fichas.objects.get(id=ids.id).delete();
+				fichas.objects.get(id=ids.id).delete()
 		fi=list(fichas.objects.filter(cod_expediente=cod))
 		data = serializers.serialize('json', fi, fields=('numero'))
 		return HttpResponse(data, content_type='application/json')
@@ -70,7 +68,10 @@ class busquedaCodigo(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
 		cod = datos_generales.objects.filter(cod_expediente=codigo)
-
+		if fichas.objects.filter(cod_expediente=codigo).exists():{}
+		else:
+			datos_generales.objects.filter(cod_expediente=codigo).delete()
+			codigo_expediente.objects.filter(codigo=codigo_expediente).delete()
 		data = serializers.serialize('json', cod, fields=('cod_expediente'))
 		return HttpResponse(data, content_type='application/json')
 
@@ -114,9 +115,7 @@ class DatosGeneralesList(ListView):
 def DatosGeneral_crear(request):
 	user = request.user.id
 	num = 1
-	#if datos_generales.objects.filter(cod_expediente=codi).exists():
-	#	return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
-	
+
 	if request.method == 'POST':
 			form = DatosGeneralesForm(request.POST)
 			codi = request.POST.get('cod_expediente')
@@ -188,67 +187,16 @@ def DatosGenerales_edit(request,codi):
 
 ################################################################################################
 
-
-class FichasList(ListView):
-	model = fichas
-	template_name = 'informacion/list_fichas.html'
-
-
-num=1
-def Fichas_crear(request,codi):
-	str(codi)
-	ids = datos_generales.objects.get(cod_expediente=codi)
-
-
-	d=OrderedDict()
- 	fi=list(fichas.objects.filter(cod_expediente=codi))
- 	if fi:
-	 	ultimo = fi[-1]
-	 	numer=ultimo.numero+1
-	else:
-	 	numer=1
-
-	if fichas.objects.filter(cod_expediente_id=codi, numero=numer-1).exists():
-		try:
-			d = fichas.objects.get(cod_expediente_id=codi, numero=numer-1)
-			if estado_general.objects.filter(fichas_id=d.id).exists():{}
-			else:
-				fichas.objects.get(cod_expediente_id=codi, numero=numer-1).delete();
-				numer-1;
-				return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi)
-		except Exception as e:
-			raise e
-		 
-
-
-	if ids:
-		if request.method == 'POST':
-				form = FichasForm(request.POST)
-				if form.is_valid():
-					global num
-					num = request.POST.get('numero')
-				
-				return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
-		else:
-
-			form = FichasForm(initial={'cod_expediente':codi,'numero':numer})
-
-	return render(request, 'informacion/form_fichas.html', {'form':form, 'numer':numer})
-
-
-
-
-
-##################################################################################################
 def Motivo_Consulta_crear(request,codi,num):
-	fecha =  time.strftime("%Y-%m-%d %H:%M:%S")
-
+	
 	if fichas.objects.filter(cod_expediente_id=codi, numero=num).exists():{}
-	else:{
-		fichas.objects.create(cod_expediente_id=codi, numero=num)
-	}
+	else:
+		fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id)
+		if not codigo_expediente.objects.filter(codigo=codi).exists():
+			codigo_expediente.objects.create(codigo=codi)
 
 	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	
 	if motivo_consulta.objects.filter(fichas_id=ids.id).exists():
 		if ids:
 			estado = motivo_consulta.objects.get(fichas_id=ids.id)
@@ -258,10 +206,21 @@ def Motivo_Consulta_crear(request,codi,num):
 				form = MotivoConsultaForm(request.POST, instance=estado)
 				if form.is_valid():
 					form.save()
+				fecha =  timezone.now()
+				print "fecha 2"
+				print fecha
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
 			return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	else:
+		fecha =  timezone.now()
+		print fecha
+
+		if ultima_modificacion.objects.filter(fichas_id=ids.id).exists():{}
+		else:
+			ultima_modificacion.objects.create(fichas_id=ids.id,fecha=fecha)
+
 		if request.method == 'POST':
 			
 			form = MotivoConsultaForm(request.POST)
@@ -348,6 +307,8 @@ def EstadoGeneral_crear(request,codi,num):
 			form = EstadoGeneralForm(request.POST, instance=estado)
 			if form.is_valid():
 				form.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 			return redirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))
 		return render(request,'informacion/form_estadoGeneral.html',{'form':form,'num':num,'codi':codi})
 
@@ -357,12 +318,10 @@ def EstadoGeneral_crear(request,codi,num):
 		 	form.save()
 		return HttpResponseRedirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))		
 	else:		
-		if fichas.objects.filter(cod_expediente_id=codi, numero=num).exists():{}
-		else:{
-			
-			fichas.objects.create(cod_expediente_id=codi, numero=num)
-
-		}
+		#if fichas.objects.filter(cod_expediente_id=codi, numero=num).exists():{}
+		#else:{
+			#fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id)
+		#}
 		form = EstadoGeneralForm(initial={'fichas':ids.id})
 		
 		return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})	

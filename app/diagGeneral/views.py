@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from app.diagGeneral.forms import *
 from app.diagGeneral.models import diagnostico_general
-from app.informacion.models import fichas, datos_generales
+from app.informacion.models import *
 
 
 # Create your views here.
@@ -26,6 +26,8 @@ def diag_general_view(request,codi,num):
 			form = diagGeneralForm(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 			return redirect('/')
 		return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
 
@@ -35,7 +37,8 @@ def diag_general_view(request,codi,num):
 				form = diagGeneralForm(request.POST,initial={'fichas':ids.id})
 				if form.is_valid():
 					form.save()
-
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return HttpResponseRedirect('/')
 			else: 
 				form = diagGeneralForm(initial={'fichas':ids.id})
@@ -58,6 +61,8 @@ def diag_general_edit(request,codi,num):
 			form = diagGeneralForm(request.POST, instance=datos)
 			if form.is_valid():
 				form.save()
+				fecha =  timezone.now()
+				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 			return redirect('/')
 		return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

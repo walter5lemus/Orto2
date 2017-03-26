@@ -16,8 +16,6 @@ urlpatterns = [
 	url(r'^datos_generales/consultar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar2),name='datos_generales_consultar2'),
 	url(r'^datos_generales/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_edit),name='datos_generales_editar'),
 
-	url(r'^fichas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(Fichas_crear), name='fichas_crear'),
-	url(r'^fichas/listar/', login_required(FichasList.as_view()),name='fichas_listar'),
 
 	url(r'^motivo_consultas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(Motivo_Consulta_crear), name='motivo_consulta_crear'),
 	url(r'^motivo_consultas/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(Motivo_Consulta_consultar),name='motivo_consulta_consultar'),
