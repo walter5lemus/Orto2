@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Molar derecha</td>
+			<td>Molar izquierda</td>
+			<td>Canina derecha</td>
+			<td>Canina izquierda</td>
+			<td>Plano terminal recto</td>
+			<td>Escalon mesial</td>
+			<td>Escalon distal</td>
+			<td>Observaciones</td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if relaciones %}
+		{% for relaciones_sagitales in relaciones %}
+		<tr>
+			<td>{{relaciones_sagitales.molar_derecha}}</td>
+			<td>{{relaciones_sagitales.molar_izquierda}}</td>
+			<td>{{relaciones_sagitales.canina_derecha}}</td>
+			<td>{{relaciones_sagitales.canina_izquierda}}</td>
+			<td>{{relaciones_sagitales.plano_termina_recto}}</td>
+			<td>{{relaciones_sagitales.escalon_mesial}}</td>
+			<td>{{relaciones_sagitales.escalon_distal}}</td>
+			<td>{{relaciones_sagitales.observaciones}}</td>
+		</tr>
+		{% endfor %}
+
+		{% else %}
+
+		<h1>No hay registros de mascotas</h1> 
+
+		{% endif %}
+	</tbody>
+</table>
+
+{% endblock%}

@@ -8,14 +8,12 @@ from app.analisis_cefalometrico.models import *
 from app.analisis_radiograficos.models import *
 from app.AnalisisDenticionMixta.models import *
 from app.aspMandibular.models import *
-from app.denticion.models import *
+from app.aspectos.models import *
 from app.diagCefalo.models import *
 from app.diagGeneral.models import *
 from app.informacion.models import *
 from app.tipo_perfil.models import *
 
-
- 
 def index(request):
 	user = request.user.id
 	#print user

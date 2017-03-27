@@ -18,13 +18,13 @@ INSERT INTO `informacion_catalogo_enfermedades` (`id_enfermedad`, `nombre_enferm
 -- Índices para tablas volcadas
 --
 
-INSERT INTO `denticion_tipo` (`id`, `nombre`) VALUES
+INSERT INTO `aspectos_tipo` (`id`, `nombre`) VALUES
 (1, 'Temporario'),
 (2, 'Mixto'),
 (3, 'Permanente');
 
 
-INSERT INTO `denticion_problema` (`id`, `nombre_problemas`) VALUES
+INSERT INTO `aspectos_problema` (`id`, `nombre_problemas`) VALUES
 (1, 'Pérdidas prematuras'),
 (2, 'Anodoncias'),
 (3, 'Mordida telescópica');

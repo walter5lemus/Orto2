@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^informacion/', include ('app.informacion.urls',namespace="informacion")),
     url(r'^tipo_perfil/', include ('app.tipo_perfil.urls',namespace="tipo_perfil")),
-    url(r'^denticion/', include ('app.denticion.urls', namespace="denticion")),
+    url(r'^aspectos/', include ('app.aspectos.urls', namespace="aspectos")),
     url(r'^analisis_radiograficos/', include ('app.analisis_radiograficos.urls', namespace="analisis_radiograficos")),
     url(r'^accounts/login/',login,{'template_name':'login.html'},name='login'),
     url(r'^logout/',logout_then_login,name='logout'),

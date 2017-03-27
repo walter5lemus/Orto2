@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.informacion',
-    'app.denticion',
+    'app.aspectos',
     'app.home',
     'app.tipo_perfil',
     'app.analisis_radiograficos',

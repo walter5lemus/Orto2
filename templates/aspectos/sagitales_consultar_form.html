@@ -1,0 +1,55 @@
+{% extends 'base/base_consultar.html' %}
+
+{% block title %}
+	Funciones Sagitales
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype='multipart/form-data'>
+	{% csrf_token %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" align="center"><table>
+        <tr><br><br><br><h4>Relaciones sagitales</h5><br></tr>
+        <tr>{{ form.as_table }}</tr>
+        </table></div>
+        <div class="col-sm-6" align="center"><table>
+        <tr><br><br><br><h4>Función mandibular</h5><br></tr>
+        <tr>{{ form2.as_table }}</tr>
+        <table>
+        <tr><br><h4>AFMP</h5><br></tr>
+        <tr>{{ form3.as_table }}</tr>
+        </table></div>
+    </div>
+ </div>
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-4">
+               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+            <br><br>
+            
+        </div>
+    </div>
+
+
+
+<!-- Barra de progreso -->
+        <br><br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 36%;"></div>
+        </div>
+        </div>
+	
+
+</form>
+{% endblock %}
