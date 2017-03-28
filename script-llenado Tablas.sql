@@ -38,21 +38,6 @@ INSERT INTO `analisisdenticionmixta_pos` (`id`) VALUES
 
 INSERT INTO `analisis_cefalometrico_examen` (`id`) VALUES ('1'), ('2');
 
---
--- Indices de la tabla `informacion_catalogo_enfermedades`
---
-ALTER TABLE `informacion_catalogo_enfermedades`
-  ADD PRIMARY KEY (`id_enfermedad`);
-
-ALTER TABLE `denticion_tipo`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `denticion_problema`
-  ADD PRIMARY KEY (`id`);
-
-
-ALTER TABLE `analisisdenticionmixta_pos`
-  ADD PRIMARY KEY (`id`);
 
   
   

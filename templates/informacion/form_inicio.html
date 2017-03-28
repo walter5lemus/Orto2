@@ -57,7 +57,7 @@
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-1">
 				<label for="nombre_paciente">Nombre del Paciente</label>
-				<input type="text" class="form-control" id="id_nombre_paciente" name="nombre_paciente" list="id_listanombres">
+				<input type="text" class="form-control" id="id_nombre_paciente" name="nombre_paciente" list="id_listanombres" pattern="a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]{2,100}">
 				<datalist id="id_listanombres">
 					
 				</datalist>
@@ -171,6 +171,7 @@
 
 $('#id_nombre_paciente').keyup(function(e){
  	consulta = $("#id_nombre_paciente").val();
+ 		
  	$('#id_listanombres').empty().append('whatever');
  	$.ajax({
  		data: {'nombre': consulta},

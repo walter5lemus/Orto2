@@ -124,6 +124,7 @@ def denticion2_view(request,codi,num):
 	str(codi)
 	#try:
 	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+
 	if ids:
 		max_num=5
 		diastemaFormSet = formset_factory(diastemasForm, min_num=1, max_num=5, extra=0)
@@ -234,20 +235,39 @@ def relacionsagital_crear(request,codi,num):
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
-			if request.method == 'POST':
-				form = RelacionSagitalForm(request.POST,initial={'fichas':ids.id})
-				form2 = FuncionMandibularForm(request.POST,initial={'fichas':ids.id})
-				form3 = ImagenForm(request.POST, request.FILES,initial={'fichas':ids.id})
-				if form.is_valid() and form2.is_valid() and form3.is_valid():
-					form.save()
-					form2.save()
-					form3.save()
-				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/'%(codi,num))
+			if relaciones_sagitales.objects.filter(fichas_id=ids.id).exists():
+				relacionsagital = relaciones_sagitales.objects.get(fichas_id=ids.id)
+				funcionmandibular = funcion_mandibular.objects.get(fichas_id=ids.id)
+				imagenes = imagenes_afmp.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = RelacionSagitalForm(instance=relacionsagital)
+					form2 = FuncionMandibularForm(instance=funcionmandibular)
+					form3 = ImagenForm(instance=imagenes)
+				else:
+					form = RelacionSagitalForm(request.POST, instance=relacionsagital)
+					form2 = FuncionMandibularForm(request.POST, instance=funcionmandibular)
+					form3 = ImagenForm(request.POST, request.FILES, instance=imagenes)
+					if form.is_valid() and form2.is_valid() and form3.is_valid():
+						form.save()
+						form2.save()
+						form3.save()
+					return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'aspectos/sagitales_editar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})	
 			else:
-				form = RelacionSagitalForm(initial={'fichas':ids.id})
-				form2 = FuncionMandibularForm(initial={'fichas':ids.id})
-				form3 = ImagenForm(initial={'fichas':ids.id})
-		return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi})
+				if request.method == 'POST':
+					form = RelacionSagitalForm(request.POST,initial={'fichas':ids.id})
+					form2 = FuncionMandibularForm(request.POST,initial={'fichas':ids.id})
+					form3 = ImagenForm(request.POST, request.FILES,initial={'fichas':ids.id})
+					if form.is_valid() and form2.is_valid() and form3.is_valid():
+						form.save()
+						form2.save()
+						form3.save()
+					return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/'%(codi,num))
+				else:
+					form = RelacionSagitalForm(initial={'fichas':ids.id})
+					form2 = FuncionMandibularForm(initial={'fichas':ids.id})
+					form3 = ImagenForm(initial={'fichas':ids.id})
+			return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi})
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 

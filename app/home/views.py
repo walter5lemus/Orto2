@@ -57,9 +57,6 @@ def index(request):
 			lista.append(-15)
 		if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 			lista.append(-16)
-		
-	for elemento in lista:
-		print elemento
 
 	return render(request,'index.html',{'lista':lista,'ficha':ficha,'numeros':numeros})
 

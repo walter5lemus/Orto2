@@ -8,9 +8,9 @@ from django.utils import timezone
 # Create your models here.
 
 class Usuario(AbstractUser):
-    dui = models.CharField(max_length=10)
-    carnet = models.CharField(max_length=7)
-    
+    dui = models.CharField(max_length=10,null=True, blank=True)
+    carnet = models.CharField(max_length=7,null=True, blank=True)
+
 
 
 ###################################################################################
