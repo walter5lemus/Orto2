@@ -555,21 +555,21 @@
         });     
 
         adding = function(){
-            var list = document.getElementsByClassName("delete-row-numerarios");
+            var list = document.getElementsByClassName("delete-row-"+nombre);
             for (var i = 0; i < list.length; i++) {
-                list[i].setAttribute("id", "numerarios-" + i);
+                list[i].setAttribute("id", nombre + "-" + i);
             }
 
-            numero = document.getElementById("id_numerarios-TOTAL_FORMS").value;
+            numero = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             numero = numero - 2;
-            if(document.getElementById("id_numerarios-"+numero+"-cuadrante").value)
+            if(document.getElementById("id_"+nombre+"-"+numero+"-cuadrante").value)
             {
                 
             }
             else
             {   
                 alert("La fila actual esta vacía debe llenarse para ingresar una nueva.")
-                document.getElementById("numerarios-"+numero).click();
+                document.getElementById(nombre+"-"+numero).click();
             }              
         }
 

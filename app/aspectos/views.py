@@ -62,19 +62,15 @@ def denticion1_editar(request,codi,num):
 			perdidaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
 			anodonciaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
 			mordidaFormSet = modelformset_factory(registro, registroForm, extra=1, max_num=5)
-		
-			denticion1 = denticion.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
 				anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
 				mordida_formset = mordidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='3'), prefix='mordidas')
-				form1 = denticionForm(instance=denticion1)
 			else:
 				perdida_formset = perdidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='perdidas',)		
 				anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='anodoncias',)
 				mordida_formset = mordidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='mordidas',)
-				form1 = denticionForm(request.POST, instance=denticion1)
-				if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid()):
+				if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid()):
 					for form in perdida_formset:
 						print form
 						form.save()				
@@ -86,10 +82,9 @@ def denticion1_editar(request,codi,num):
 					for form in mordida_formset:
 						print form
 						form.save()	
-
-					form1.save()							
+							
 				return redirect('/denticion2/mordidas/editar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+			return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
