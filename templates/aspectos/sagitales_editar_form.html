@@ -13,6 +13,39 @@
 <script type="text/javascript">
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");  
+
+
+    $('#id_molar_derecha, #id_molar_izquierda').change(function() {
+        if(document.getElementById("id_molar_derecha").value || document.getElementById("id_molar_izquierda").value)
+            {
+                document.getElementById("id_plano_termina_recto").disabled=true;
+                document.getElementById("id_escalon_mesial").disabled=true;
+                document.getElementById("id_escalon_distal").disabled=true;
+                {{form.molar_derecha.text_help}}
+
+            }
+            else
+            {   
+                document.getElementById("id_plano_termina_recto").disabled=false; 
+                document.getElementById("id_escalon_mesial").disabled=false;  
+                document.getElementById("id_escalon_distal").disabled=false;      
+            }
+    });
+
+    $('#id_plano_termina_recto, #id_escalon_mesial, #id_escalon_distal').change(function() {
+        if(document.getElementById("id_plano_termina_recto").value || document.getElementById("id_escalon_mesial").value || document.getElementById("id_escalon_distal").value)
+            {
+                document.getElementById("id_molar_derecha").disabled=true;
+                document.getElementById("id_molar_izquierda").disabled=true;
+            }
+            else
+            {   
+                document.getElementById("id_molar_derecha").disabled=false; 
+                document.getElementById("id_molar_izquierda").disabled=false;       
+            }
+    });
+
+
 </script>
 
 {% endblock %}
@@ -149,7 +182,7 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/aspectos/mordidas/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
@@ -165,10 +198,5 @@
             <div class="progress-bar" style="width: 36%;"></div>
         </div>
         </div>
-
-    
-
-
-
 </form>
 {% endblock %}

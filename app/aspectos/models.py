@@ -93,31 +93,31 @@ class registro_mordidas(models.Model):
 
 class relaciones_sagitales(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	molar_derecha = models.IntegerField(choices=molar_canina_choices, default=1)
-	molar_izquierda = models.IntegerField(choices=molar_canina_choices, default=1)
-	canina_derecha = models.IntegerField(choices=molar_canina_choices, default=1)
-	canina_izquierda = models.IntegerField(choices=molar_canina_choices, default=1)
-	plano_termina_recto = models.IntegerField(choices=plano_escalon_choices, default=1)
-	escalon_mesial = models.IntegerField(choices=plano_escalon_choices, default=1)
-	escalon_distal = models.IntegerField(choices=plano_escalon_choices, default=1)
-	observaciones = models.TextField()
+	molar_derecha = models.IntegerField(choices=molar_canina_choices, null=True, blank=True)
+	molar_izquierda = models.IntegerField(choices=molar_canina_choices, null=True, blank=True)
+	canina_derecha = models.IntegerField(choices=molar_canina_choices, null=True, blank=True)
+	canina_izquierda = models.IntegerField(choices=molar_canina_choices, null=True, blank=True)
+	plano_termina_recto = models.IntegerField(choices=plano_escalon_choices, null=True, blank=True)
+	escalon_mesial = models.IntegerField(choices=plano_escalon_choices, null=True, blank=True)
+	escalon_distal = models.IntegerField(choices=plano_escalon_choices, null=True, blank=True)
+	observaciones = models.TextField(null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class funcion_mandibular(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	apertura = models.IntegerField()
-	desv_afmp_derecho = models.IntegerField()
-	desv_afmp_izquierdo = models.IntegerField()
-	signos_sintomas_atm = models.TextField()
+	apertura = models.IntegerField(null=True, blank=True)
+	desv_afmp_derecho = models.IntegerField(null=True, blank=True)
+	desv_afmp_izquierdo = models.IntegerField(null=True, blank=True)
+	signos_sintomas_atm = models.TextField(null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class imagenes_afmp(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	nombreimagen = models.CharField(max_length=50, default='Sin nombre')
+	nombreimagen = models.CharField(max_length=50, default='Sin nombre', null=True, blank=True)
 	imagen = models.ImageField(upload_to='afmp',blank=True,null=True)
 
 	def __str__(self):

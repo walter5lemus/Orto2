@@ -425,7 +425,7 @@ class RelacionSagitalForm(forms.ModelForm):
 			'plano_termina_recto': forms.Select(attrs={'class':'form-control'}),
 			'escalon_mesial': forms.Select(attrs={'class':'form-control'}),
 			'escalon_distal': forms.Select(attrs={'class':'form-control'}),
-			'observaciones': forms.TextInput(attrs={'class':'form-control'}),
+			'observaciones': forms.Textarea(attrs={'class':'form-control','rows':8, 'cols':3}),
 		}
 
 
@@ -466,7 +466,7 @@ class RelacionSagitalForm_consultar(forms.ModelForm):
 			'plano_termina_recto': forms.Select(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'escalon_mesial': forms.Select(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'escalon_distal': forms.Select(attrs={'class':'form-control','disabled':True,'readonly':True}),
-			'observaciones': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'observaciones': forms.Textarea(attrs={'class':'form-control','rows':8, 'cols':3,'readonly':True}),
 		}	
 
 class FuncionMandibularForm(forms.ModelForm):
@@ -494,7 +494,7 @@ class FuncionMandibularForm(forms.ModelForm):
 			'apertura': forms.NumberInput(attrs={'class':'form-control'}),
 			'desv_afmp_derecho': forms.NumberInput(attrs={'class':'form-control'}),
 			'desv_afmp_izquierdo': forms.NumberInput(attrs={'class':'form-control'}),
-			'signos_sintomas_atm': forms.TextInput(attrs={'class':'form-control'}),
+			'signos_sintomas_atm': forms.Textarea(attrs={'class':'form-control'}),
 		}
 
 class FuncionMandibularForm_consultar(forms.ModelForm):
@@ -522,5 +522,5 @@ class FuncionMandibularForm_consultar(forms.ModelForm):
 			'apertura': forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'desv_afmp_derecho': forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'desv_afmp_izquierdo': forms.NumberInput(attrs={'class':'form-control','readonly':True}),
-			'signos_sintomas_atm': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'signos_sintomas_atm': forms.Textarea(attrs={'class':'form-control','readonly':True}),
 		}

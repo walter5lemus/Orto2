@@ -1,39 +1,188 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-	Funciones Sagitales
+    Funciones Sagitales
 {% endblock %}
 
 {% block header %}
 
 {% endblock %}
 
+{% block extrajs %}
+
+<script type="text/javascript">
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+
+
+    $('#id_molar_derecha, #id_molar_izquierda').change(function() {
+        if(document.getElementById("id_molar_derecha").value || document.getElementById("id_molar_izquierda").value)
+            {
+                document.getElementById("id_plano_termina_recto").disabled=true;
+                document.getElementById("id_escalon_mesial").disabled=true;
+                document.getElementById("id_escalon_distal").disabled=true;
+                {{form.molar_derecha.text_help}}
+
+            }
+            else
+            {   
+                document.getElementById("id_plano_termina_recto").disabled=false; 
+                document.getElementById("id_escalon_mesial").disabled=false;  
+                document.getElementById("id_escalon_distal").disabled=false;      
+            }
+    });
+
+    $('#id_plano_termina_recto, #id_escalon_mesial, #id_escalon_distal').change(function() {
+        if(document.getElementById("id_plano_termina_recto").value || document.getElementById("id_escalon_mesial").value || document.getElementById("id_escalon_distal").value)
+            {
+                document.getElementById("id_molar_derecha").disabled=true;
+                document.getElementById("id_molar_izquierda").disabled=true;
+            }
+            else
+            {   
+                document.getElementById("id_molar_derecha").disabled=false; 
+                document.getElementById("id_molar_izquierda").disabled=false;       
+            }
+    });
+
+
+</script>
+
+{% endblock %}
+
 {% block content %}
 <form method="post" enctype='multipart/form-data'>
-	{% csrf_token %}
+    {% csrf_token %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6" align="center"><table>
-        <tr><br><br><br><h4>Relaciones sagitales</h5><br></tr>
-        <tr>{{ form.as_table }}</tr>
-        </table></div>
-        <div class="col-sm-6" align="center"><table>
-        <tr><br><br><br><h4>Función mandibular</h5><br></tr>
-        <tr>{{ form2.as_table }}</tr>
-        <table>
-        <tr><br><h4>AFMP</h5><br></tr>
-        <tr>{{ form3.as_table }}</tr>
-        </table></div>
+    {{form.fichas}}
+    {{form2.fichas}}
+    {{form3.fichas}}
+
+    <h1> <center> Relaciones Sagitales </center></h1>
+        <div class="col-md-12 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-4">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-4">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
     </div>
- </div>
-	
 
-<br><br>
+<br><br><br><br><br>
+
+<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Relaciones Sagitales</h4>
+      </div>
+    
+     <div class="panel-body">
+    <br><br>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="form-group">
+                <label for="{{form.molar_derecha.name}}">{{form.molar_derecha.label}}</label>   
+                {{form.molar_derecha}}
+                <br>
+                <label for="{{form.molar_izquierda.name}}">{{form.molar_izquierda.label}}</label>   
+                {{form.molar_izquierda}}
+                <br>
+                <label for="{{form.canina_derecha.name}}">{{form.canina_derecha.label}}</label>   
+                {{form.canina_derecha}}
+                <br>
+                <label for="{{form.canina_izquierda.name}}">{{form.canina_izquierda.label}}</label>   
+                {{form.canina_izquierda}}
+            </div>
+        </div>
+        <div class="col-md-3 ">
+            <div class="form-group">
+                <label for="{{form.plano_termina_recto.name}}">{{form.plano_termina_recto.label}}</label> 
+                {{form.plano_termina_recto}}
+                <br>
+                <label for="{{form.escalon_mesial.name}}">{{form.escalon_mesial.label}}</label> 
+                {{form.escalon_mesial}}
+                <br>
+                <label for="{{form.escalon_distal.name}}">{{form.escalon_distal.label}}</label> 
+                {{form.escalon_distal}}
+                <br>
+            </div>
+        </div>
+        <div class="col-md-5 ">
+            <div class="form-group">
+                <label for="{{form.observaciones.name}}">{{form.observaciones.label}}</label>
+                {{form.observaciones}}
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Función mandibular</h4>
+      </div>
+    
+     <div class="panel-body">
+
+    <br><br>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="form-group">
+                <label for="{{form2.apertura.name}}">{{form2.apertura.label}}</label>   
+                {{form2.apertura}}
+                <br>
+                <label for="{{form2.desv_afmp_derecho.name}}">{{form2.desv_afmp_derecho.label}}</label>   
+                {{form2.desv_afmp_derecho}}
+                <br>
+                <label for="{{form2.desv_afmp_izquierdo.name}}">{{form2.desv_afmp_izquierdo.label}}</label>   
+                {{form2.desv_afmp_izquierdo}}
+                <br>
+            </div>
+        </div>
+        <div class="col-md-8 ">
+            <div class="form-group">
+                <label for="{{form2.signos_sintomas_atm.name}}">{{form2.signos_sintomas_atm.label}}</label> 
+                {{form2.signos_sintomas_atm}}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">AFMP</h4>
+      </div>
+    
+     <div class="panel-body">
+
+    <br><br>
+        <div class="col-md-6 col-md-offset-1">
+            <div class="form-group">
+                <label for="{{form3.nombreimagen.name}}">{{form3.nombreimagen.label}}</label>   
+                {{form3.nombreimagen}}
+                <br>
+                <label for="{{form3.imagen.name}}">{{form3.imagen.label}}</label>   
+                {{form3.imagen}}
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-3 col-md-offset-1">
-              <a href="/denticion/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
@@ -41,8 +190,6 @@
         </div>
         <br><br>
     </div>
-
-
 
 <!-- Barra de progreso -->
         <br><br>
@@ -52,7 +199,10 @@
         </div>
         </div>
 
-	
+    
+
+
 
 </form>
 {% endblock %}
+

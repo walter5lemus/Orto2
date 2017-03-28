@@ -242,7 +242,7 @@ def relacionsagital_crear(request,codi,num):
 					form.save()
 					form2.save()
 					form3.save()
-				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/'%(codi,num))
 			else:
 				form = RelacionSagitalForm(initial={'fichas':ids.id})
 				form2 = FuncionMandibularForm(initial={'fichas':ids.id})
@@ -277,7 +277,7 @@ def relacionsagital_edit(request,codi,num):
 					form2.save()
 					form3.save()
 				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/editar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
+			return render(request, 'aspectos/sagitales_editar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
