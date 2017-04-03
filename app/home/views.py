@@ -12,7 +12,7 @@ from app.informacion.forms import *
 from django.core import serializers
 from django.http import HttpResponse
 import json
-import time
+import time	
 
 from app.analisis_cefalometrico.models import *
 from app.analisis_radiograficos.models import *
@@ -46,48 +46,53 @@ def index(request):
 													if moyers_superior.objects.filter(fichas_id=fi.id).exists():
 														if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 															fichas.objects.filter(id=fi.id).update(completada=1)
-	lista =list()
-	numeros = list()
+	completos = list()
+	expedientes = fichas.objects.filter(usuario_creador=user,completada=1)
+	for exp in expedientes:
+		completos.append(exp.numero)
+		completos.append(exp.cod_expediente)
+
+	incompletos =list()
+	
 	ficha = fichas.objects.filter(usuario_creador=user, completada=0)
 	for fi in ficha:
-		lista.append(fi.numero)
-		lista.append(fi.cod_expediente)
+		incompletos.append(fi.numero)
+		incompletos.append(fi.cod_expediente)
 		
-		numeros.append([fi.cod_expediente,fi.numero])
 		if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-1)
+			incompletos.append(-1)
 		if not estado_general.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-2)
+			incompletos.append(-2)
 		if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-3)
+			incompletos.append(-3)
 		if not registro.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-4)
+			incompletos.append(-4)
 		if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-5)
+			incompletos.append(-5)
 		if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-6)
+			incompletos.append(-6)
 		if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-7)
+			incompletos.append(-7)
 		if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-8)
+			incompletos.append(-8)
 		if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-9)
+			incompletos.append(-9)
 		if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-10)
+			incompletos.append(-10)
 		if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-11)
+			incompletos.append(-11)
 		if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-12)
+			incompletos.append(-12)
 		if not nance_general.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-13)
+			incompletos.append(-13)
 		if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-14)
+			incompletos.append(-14)
 		if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-15)
+			incompletos.append(-15)
 		if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-			lista.append(-16)
+			incompletos.append(-16)
 
-	return render(request,'index.html',{'lista':lista,'ficha':ficha,'numeros':numeros})
+	return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
 
 	#return render(request,'index.html')
 

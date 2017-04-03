@@ -51,7 +51,11 @@
 	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 
-	<style type="text/css"> 
+	<style type="text/css">
+		.hidden{
+			display: none;
+		}
+
 		.dropdown-toggle{
 		 display:block;
 		  width: 9em;
@@ -158,8 +162,15 @@
 <script type="text/javascript">
 	var i=0;
 </script>
-<div id="listas">
-	
+<button id="btn_completos" > Completas</button>
+<div id="completas" class="hidden">
+	<h3>Lista de Expedientes Llenos</h3>
+</div>
+
+<button id="btn_incompletos"> Incompletos</button>
+
+<div id="incompletas" class="hidden">
+	<h3>Lista de Expedientes Incompletos</h3>
 	
 
 </div>
@@ -203,10 +214,39 @@
 </script>
 <script type="text/javascript">
 	var codigo;
-	var textoCodigo,lista,co,numero;
+	var textoCodigo,completas,co,numero;
 </script>
+	
+	{% for elemento in completos %}
+		<script type="text/javascript">
+			if ({{elemento}} > 0) {
+				numero = {{elemento}};
+			}
+			
+			if ($.isNumeric("{{elemento}}") == false) {
+				//crea una lista y le asigna el codigo y el numero de la ficha como id
+				
+				
+				completas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				codigo = {{elemento}};
+				co = "{{elemento}}";
+				textoCodigo = {{elemento}};
+				if(codigo != {{elemento}}){
+					completas += '</ul>';
+					completas = '';
+					i++;
+					numero =1;
+				}
+				
+				$('#completas').append( completas );
+				completas = '';
+			}
+			</script>
+	{% endfor %}
+	
 
-	{% for elemento in lista %}
+
+	{% for elemento in incompletos %}
 			<script type="text/javascript">
 			
 			if ({{elemento}} > 0) {
@@ -217,19 +257,19 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				lista = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
 				if(codigo != {{elemento}}){
-					lista += '</ul>';
-					lista = '';
+					incompletas += '</ul>';
+					incompletas = '';
 					i++;
 					numero =1;
 				}
 				
-				$('#listas').append( lista );
-				lista = '';
+				$('#incompletas').append( incompletas );
+				incompletas = '';
 			}else{
 				//entra si es un numero
 
@@ -283,7 +323,21 @@
 						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
 						break;
 				}
-				lista = '';
+				incompletas = '';
 			}
 			</script>
 	{% endfor %}
+
+<script>
+	$('#btn_completos').on('click', function(e){
+	    $('#completas').toggleClass('hidden');
+	})
+
+	$('#btn_incompletos').on('click', function(e){
+	    $('#incompletas').toggleClass('hidden');
+	})
+
+
+
+	
+</script>
