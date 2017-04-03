@@ -52,7 +52,7 @@ def nance_crear(request,codi,num):
                     else:
                         
                         return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
-                return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
+                return render(request, 'AnalisisDenticionMixta/analisis_nance2.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     else:
         nanceFormSet = formset_factory(nance_tabla, extra=max_numero, max_num=max_numero)
@@ -171,7 +171,7 @@ def moyerssup_view(request,codi,num):
                     fecha =  timezone.now()
                     ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                 return redirect('/diag_general/nuevo/%s/%s' % (codi, num))
-            return render(request, 'AnalisisDenticionMixta/moyerssuperior_editar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior2.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})
         else:
             if ids:
                 max_num=4
@@ -182,7 +182,6 @@ def moyerssup_view(request,codi,num):
                     if (form1.is_valid() and formset.is_valid()):
                         form1.save()
                         for form in formset:
-                            print form
                             form.save()
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
@@ -265,7 +264,7 @@ def moyersinf_view(request, codi, num):
                 fecha =  timezone.now()
                 ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
             return redirect('/analisis_denticion_mixta/moyerssuperior/nuevo/%s/%s/' %(codi,num))
-        return render(request, 'AnalisisDenticionMixta/moyersinferior_editar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
+        return render(request, 'AnalisisDenticionMixta/moyersinferior2.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
     else:
         if ids:
             max_num = 4

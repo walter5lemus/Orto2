@@ -4,7 +4,7 @@
 
 
 {% block title %}
-	Moyers Inferior
+	Moyers Superior
 {% endblock %}
 
 {% block header %}
@@ -9745,6 +9745,19 @@
 	        }
         ;}).change();
 
+
+
+
+        $('#id_form-0-ancho_mesiodistal').change(function() {
+        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());}).change();
+        $('#id_form-1-ancho_mesiodistal').change(function() {
+        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());}).change();
+        $('#id_form-2-ancho_mesiodistal').change(function() {
+        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());}).change();
+        $('#id_form-3-ancho_mesiodistal').change(function() {
+        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());}).change();
+
+
     $('#id_ed_izquierdo').change(function() {
 			edi = parseFloat($('#id_ed_izquierdo').val());				
         	$('#edi2').html(edi); 
@@ -9851,10 +9864,10 @@
 					<th><div id="d4-2" align="center" style="height:20px"></div></th>   
 				</tr>
 				<tr>
-					<td><img src=" {% static 'images/denticionMixta/3-2.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/3-1.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/4-1.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/4-2.png' %}"></td>
+					<td><img src=" {% static 'images/3-2.png' %}"></td>
+					<td><img src=" {% static 'images/3-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-2.png' %}"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -9869,7 +9882,7 @@
 				</tr>
 				<tr>
 					<td>{{ formset.0.posicion }}3-1</td>
-					<td style="width: 105px">{{ formset.0.ancho_mesiodistal }}</td>
+					<td style="width: 105px"><div>{{ formset.0.ancho_mesiodistal }} mm</div></td>
 				</tr>
 				<tr>
 					<td>{{ formset.1.posicion }}3-2</td>
@@ -9915,7 +9928,7 @@
 	<div class="row">
         <div class="col-sm-12" align="center">
         	<h5 align="center">ESPACIO DISPONIBLE POSTERIOR</h5>
-        	<img src=" {% static 'images/denticionMixta/m1.png' %}">
+        	<img src=" {% static 'images/moysup2.jpg' %}">
         	<br><br>
         	<table>
 			<tbody>
@@ -10069,7 +10082,7 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_denticion_mixta/analisis_nance/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>

@@ -25,7 +25,6 @@ def CodExpediente_crear(request):
 	if request.method == 'POST':
 		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
-		#num = form.data['num']
 		if form.is_valid():
 		 	form.save()
 	else:
@@ -68,10 +67,7 @@ class busquedaCodigo(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
 		cod = datos_generales.objects.filter(cod_expediente=codigo)
-		if fichas.objects.filter(cod_expediente=codigo).exists():{}
-		else:
-			datos_generales.objects.filter(cod_expediente=codigo).delete()
-			codigo_expediente.objects.filter(codigo=codigo_expediente).delete()
+		
 		data = serializers.serialize('json', cod, fields=('cod_expediente'))
 		return HttpResponse(data, content_type='application/json')
 
@@ -115,18 +111,14 @@ class DatosGeneralesList(ListView):
 def DatosGeneral_crear(request):
 	user = request.user.id
 	num = 1
-
 	if request.method == 'POST':
 			form = DatosGeneralesForm(request.POST)
 			codi = request.POST.get('cod_expediente')
-			if form.is_valid():
-				
+			if form.is_valid():	
 			 	form.save()
 			return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s' %(codi,num)) 
 	else:
 			form = DatosGeneralesForm(initial={'usuario_creador':request.user.id})
-			
-				
 	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num})
 
 def DatosGenerales_consultar(request,codi):
@@ -191,7 +183,7 @@ def Motivo_Consulta_crear(request,codi,num):
 	
 	if fichas.objects.filter(cod_expediente_id=codi, numero=num).exists():{}
 	else:
-		fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id)
+		fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id,completada=0)
 		if not codigo_expediente.objects.filter(codigo=codi).exists():
 			codigo_expediente.objects.create(codigo=codi)
 

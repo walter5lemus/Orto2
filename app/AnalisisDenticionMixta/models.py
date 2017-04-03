@@ -46,7 +46,7 @@ class pos(models.Model):
 class moyers_superior_ancho(models.Model):	
 
 	fichas = models.ForeignKey(fichas,null=True, blank=True, on_delete=models.CASCADE)
-	posicion = models.OneToOneField(pos,null=True, blank=True, unique=True)
+	posicion = models.ForeignKey(pos,null=True, blank=True)
 	ancho_mesiodistal = models.FloatField(null=True, blank=True)
 	
 	def __str__(self):
@@ -62,7 +62,7 @@ class moyers_inferior(models.Model):
 
 class moyers_inferior_ancho(models.Model):
     fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
-    posicion = models.OneToOneField(pos, null=True, blank=True, unique=True)
+    posicion = models.ForeignKey(pos, null=True, blank=True)
     ancho_mesiodistal = models.FloatField(null=True, blank=True)
 
     def __str__(self):

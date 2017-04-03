@@ -14,7 +14,7 @@ class examen(models.Model):
 
 class analisis_cefalometrico(models.Model):	
 	fichas = models.ForeignKey(fichas,null=True, blank=True, on_delete=models.CASCADE)
-	numero_de_examen = models.OneToOneField(examen,null=True, blank=True, unique=True)
+	numero_de_examen = models.ForeignKey(examen,null=True, blank=True) 
 	sna = models.FloatField(null=True, blank=True)
 	snb = models.FloatField(null=True, blank=True)
 	anb = models.FloatField(null=True, blank=True)

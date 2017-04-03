@@ -82,10 +82,8 @@ class DatosGeneralesForm(forms.ModelForm):
 			'nombre_completo':forms.TextInput(attrs={'class':'form-control','title':'El nombre no puede incluir numeros o caracteres especiales','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,100}'}),
 			'edad':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'edad_registro':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
-
 			'fecha_nac':forms.SelectDateWidget(years=range(1950,this_year,1),attrs={'class':'form-control fecha','style': 'width: 243px; display: inline-block;'}),
-
-			'telefono':forms.NumberInput(attrs={'class':'form-control', 'pattern':'[0-9]{8}','title':'Ejemplo: 77777777'}),
+			'telefono':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{8}','title':'Ejemplo: 77777777'}),
 			'genero':forms.Select(attrs={'class':'form-control'}),
 			'direccion':forms.TextInput(attrs={'class':'form-control'}),
 			'nombre_resp':forms.TextInput(attrs={'class':'form-control','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]{2,100}'}),
@@ -136,7 +134,7 @@ class DatosGeneralesForm_consultar(forms.ModelForm):
 
 			'fecha_nac':forms.DateInput(attrs={'class':'form-control fecha','readonly':True}),
 
-			'telefono':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
+			'telefono':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'genero':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'direccion':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'nombre_resp':forms.TextInput(attrs={'class':'form-control','readonly':True}),

@@ -173,7 +173,34 @@
   	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
 	</blockquote>
 
+
+
 </body>
+
+<script type="text/javascript">
+	$('#id_cod_expediente').click(function() {
+	 	//codigo = $("#id_cod_expediente").val();
+	 	
+	 	$.ajax({
+	 		//data: {'codigo': codigo},
+	 		url: '/home/incompletos/',
+	 		type: 'get',
+	 		success : function(data) {
+	        	//console.log(data[0].nombre_completo);
+	        	for (var i = 0; i < data.length; i++) {
+						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
+						$("#id_cod_expediente").focus();
+						codigo = $("#id_cod_expediente").val("");
+				}
+				
+	 		},
+	 		error : function(message) {
+	        	console.log(message);
+	     	}
+	 	});
+	});
+
+</script>
 <script type="text/javascript">
 	var codigo;
 	var textoCodigo,lista,co,numero;
@@ -223,7 +250,7 @@
 						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro Mordidas FALTA ESTE ARREGLAR</a></li>');
 						break;
 					case -6:
-						$('#'+co+'_'+numero).append('<li><a href="/denticion/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
 						break;
 					case -7:
 						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/">Aspectos Articulares</a></li>');

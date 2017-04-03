@@ -13,18 +13,7 @@
 
 {% block extrajs %}
 
-	<script type="text/javascript">
-	/* 	a0 = 0;
-		b0 = 0;
-		c0 = 0;
-		d0 = 0;
-		t0 = 0;
-		sum1 = 0;
-		sum2 = 0;
-		divi = 0;
-		edi = 0;
-		edd = 0; */
-		
+	<script type="text/javascript">		
 		   
 		$('#id_form-0-fichas').val({{ids}});
 		$('#id_form-1-fichas').val({{ids}});
@@ -34,14 +23,6 @@
 		$('#id_form-1-posicion').val(2);
 		$('#id_form-2-posicion').val(3);
 		$('#id_form-3-posicion').val(4);
-
-		/*$('#id_form-0-ancho_mesiodistal').val(0);
-		$('#id_form-1-ancho_mesiodistal').val(0);	
-		$('#id_form-2-ancho_mesiodistal').val(0);
-		$('#id_form-3-ancho_mesiodistal').val(0);
-
-		$('#id_ed_izquierdo').val(0);
-		$('#id_ed_derecho').val(0);*/
 
 		$('#id_form-0-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -2472,7 +2453,7 @@
 	        		h20.style.backgroundColor='#FFFFFF';
 	        	}
 	        }
-        ;});
+        ;}).change();
 
         $('#id_form-1-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -4902,7 +4883,7 @@
 	        		h20.style.backgroundColor='#FFFFFF';
 	        	}
 	        }
-        ;});
+        ;}).change();
 
         $('#id_form-2-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -7332,7 +7313,7 @@
 	        		h20.style.backgroundColor='#FFFFFF';
 	        	}
 	        }	
-        ;});
+        ;}).change();
 
         $('#id_form-3-ancho_mesiodistal').change(function() {
 			a0 = parseFloat($('#id_form-0-ancho_mesiodistal').val());
@@ -9762,19 +9743,19 @@
 	        		h20.style.backgroundColor='#FFFFFF';
 	        	}
 	        }
-        ;});
+        ;}).change();
 
 
 
 
         $('#id_form-0-ancho_mesiodistal').change(function() {
-        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());});
+        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());}).change();
         $('#id_form-1-ancho_mesiodistal').change(function() {
-        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());});
+        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());}).change();
         $('#id_form-2-ancho_mesiodistal').change(function() {
-        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());});
+        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());}).change();
         $('#id_form-3-ancho_mesiodistal').change(function() {
-        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());});
+        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());}).change();
 
 
     $('#id_ed_izquierdo').change(function() {
@@ -9788,7 +9769,7 @@
 				$('#ri').html(resi);
         	
         	        	
-    ;});
+    ;}).change();
 
     $('#id_ed_derecho').change(function() {
 			edd = parseFloat($('#id_ed_derecho').val());
@@ -9800,7 +9781,7 @@
 				resd = edd - z;
 				$('#rd').html(resd);
         	        	
-        ;});
+        ;}).change();
 
 	</script>
 
@@ -10098,7 +10079,7 @@
 
 
 
-	 <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
               <a href="/analisis_denticion_mixta/moyersinferior/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>

@@ -42,6 +42,7 @@ class fichas(models.Model):
     cod_expediente = models.ForeignKey(datos_generales, null=False, blank=False, on_delete=models.CASCADE)
     numero = models.IntegerField()
     usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
+    completada = models.IntegerField()
 
     class Meta:
         unique_together = [("cod_expediente", "numero")]

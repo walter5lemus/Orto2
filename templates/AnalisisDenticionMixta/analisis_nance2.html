@@ -9,7 +9,7 @@
     {% block extrajs %}
     	
     	<script src="{% static 'js/jquery.formset.js' %}"></script>	
-        <script src="{% static 'js/analisis_nance.js' %}"></script>
+        <script src="{% static 'js/analisis_nance_editar.js' %}"></script>
 
     	<style type="text/css">
     	    
@@ -25,17 +25,25 @@
     	    	width: 150px;
                 text-align: center;
     	    }
-            h4{
-                    color: red;
-            }
     	</style>
+	
+	<script>
+		$('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())+parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())+parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())+parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));
+         $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())+parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())+parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())+parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()));
+         $('#maxilareden').val($('#id_ed_maxi').val()+"-"+$('#total1').val());
+         $('#maxilartotal').val($('#id_ed_maxi').val()-$('#total1').val());
 
+          $('#mandibulareden').val($('#id_ed_mand').val()+"-"+$('#total2').val());
+         $('#mandibulartotal').val($('#id_ed_mand').val()-$('#total2').val());
+
+
+	</script>
     	
     {% endblock %}
 
     {% block content %}
 
-<h2><center>Analisis de Nance</center></h2>
+    <h2><center>Analisis de Nance</center></h2>
 
 <div class="col-md-10 col-md-offset-3">
         <div class="form-group">
@@ -56,14 +64,16 @@
     
 
 <div class="analisis_nance">
-    		
+
+
+
     <div class="col-md-10 col-md-offset-1">
     <!-- <h5>Nance</h5> -->
 
             <form method="POST" action="">
-            	{% csrf_token %}
-    			 {{ formset.management_form }}		
-    			 {{form1.fichas}} 
+                {% csrf_token %}
+                 {{ formset.management_form }}      
+                 {{form1.fichas}} 
 
 
     <br><br><br>
@@ -103,16 +113,13 @@
     
 
             {{form1.total}}
-            {{form1.total2}}  
-            <div class="row">
-                <div class="col-md-8 col-md-offset-0">
-                    <h4>Si el diente esta permanente, ingresar el dato en Valor x</h4>
-                </div>
-            </div>
+            {{form1.total2}}   
+              
     			<table id="1" cellpadding="0" cellspacing="5">
                     <thead>
                         <tr>
                         	<th scope="col"></th>
+                            <th scope="col">id</th>
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -124,8 +131,8 @@
                     <tbody>
                         {% for form in formset %}
     			                <tr>
-    			                	<td>{{ form.seleccion }}</td>
-                                    <td>{{ form.id }}</td>
+    			                	<td>{{ form.id }}</td>
+                                    <td>{{ form.seleccion }}</td>
     			                    <td>{{ form.posicion }}</td>
     			                    <td>{{ form.mdm }}</td>
     			                    <td>{{ form.mprx }}</td>
@@ -134,7 +141,6 @@
     			                    <td>{{ form.valor_x }}</td>
                                     <td>{{ form.fichas }}</td> 
                                     <td>{{ form.tabla }}</td> 
-
     			                </tr>
                         {% endfor %}
                     </tbody>
@@ -154,12 +160,13 @@
     			</table>
                  
             
-            <br><br>   
+            <br><br>     
             {{ formset2.management_form }}
             <table id="2" cellpadding="0" cellspacing="5">
                     <thead>
                         <tr>
-                            <th scope="col"></th>          
+                            <th scope="col"></th>
+                            <th scope="col">id</th>          
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -171,7 +178,7 @@
                     <tbody>
                         {% for form in formset2 %}
                                 <tr>
-                                   <td>{{ form.id }}</td> 
+                                    <td>{{ form.id }}</td>
                                     <td>{{ form.seleccion }}</td>
                                     <td>{{ form.posicion }}</td>
                                     <td>{{ form.mdm }}</td>
@@ -201,7 +208,7 @@
                 </table> 
 
 
-            <br>   
+            <br>    
             <div class="col-md-6 col-md-offset-3">
                 <table id="3" cellpadding="0" cellspacing="3">
                     <thead>
@@ -229,18 +236,18 @@
 
 
 
-    <br><br><br>
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-        <br><br>
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/diag_cefalo/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+
+            <br><br>
+            <div class="col-md-3 col-md-offset-5">
+                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+            <br><br>
+            
         </div>
-        <br><br>
+    </div>
     </div>
 
      <!-- Barra de progreso -->
@@ -250,13 +257,12 @@
             <div class="progress-bar" style="width: 78%;"></div>
         </div>
         </div>
-
+            
 
 
             </form>
-        
-    </div>  
-
+        </div>
+    </div>      
     <script>
 //alert({{max}});
     for (var i = 0; i < {{max}}; i++) {
@@ -282,9 +288,10 @@
     $('#maxilar').val("Maxilar");
     $('#mandibular').val("Mandibular");
 
-    
+
     $('#codigo').val("{{codi}}");
-    $('#ficha').val("{{num}}");
+    $('#ficha').val("{{num}}");  
+
     
     </script>
     {% endblock %}
