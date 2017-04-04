@@ -9764,6 +9764,16 @@
 	        }
         ;});
 
+
+        $('#id_form-0-ancho_mesiodistal').change(function() {
+        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());});
+        $('#id_form-1-ancho_mesiodistal').change(function() {
+        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());});
+        $('#id_form-2-ancho_mesiodistal').change(function() {
+        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());});
+        $('#id_form-3-ancho_mesiodistal').change(function() {
+        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());});
+
     $('#id_ed_izquierdo').change(function() {
 			edi = parseFloat($('#id_ed_izquierdo').val());				
         	$('#edi2').html(edi); 
@@ -9870,10 +9880,10 @@
 					<th><div id="d4-2" align="center" style="height:20px"></div></th>   
 				</tr>
 				<tr>
-					<td><img src=" {% static 'images/3-2.png' %}"></td>
-					<td><img src=" {% static 'images/3-1.png' %}"></td>
-					<td><img src=" {% static 'images/4-1.png' %}"></td>
-					<td><img src=" {% static 'images/4-2.png' %}"></td>
+					<td><img src=" {% static 'images/denticionMixta/3-2.png' %}"></td>
+					<td><img src=" {% static 'images/denticionMixta/3-1.png' %}"></td>
+					<td><img src=" {% static 'images/denticionMixta/4-1.png' %}"></td>
+					<td><img src=" {% static 'images/denticionMixta/4-2.png' %}"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -9934,7 +9944,7 @@
 	<div class="row">
         <div class="col-sm-12" align="center">
         	<h5 align="center">ESPACIO DISPONIBLE POSTERIOR</h5>
-        	<img src=" {% static 'images/moysup2.jpg' %}">
+        	<img src=" {% static 'images/denticionMixta/m1.png' %}">
         	<br><br>
         	<table>
 			<tbody>
@@ -10061,7 +10071,7 @@
 				<tr>
 					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
 					<td id = "edi2"></td>
-					<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/moysup3.jpg' %}">&nbsp;&nbsp;&nbsp;</td>
+					<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/denticionMixta/m2.png' %}">&nbsp;&nbsp;&nbsp;</td>
 					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
 					<td id = "edd2"></td>
 				</tr>

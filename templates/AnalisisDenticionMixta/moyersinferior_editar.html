@@ -9745,6 +9745,15 @@
 	        }
         ;}).change();
 
+        $('#id_form-0-ancho_mesiodistal').change(function() {
+        $('#d3-1').html($('#id_form-0-ancho_mesiodistal').val());}).change();
+        $('#id_form-1-ancho_mesiodistal').change(function() {
+        $('#d3-2').html($('#id_form-1-ancho_mesiodistal').val());}).change();
+        $('#id_form-2-ancho_mesiodistal').change(function() {
+        $('#d4-1').html($('#id_form-2-ancho_mesiodistal').val());}).change();
+        $('#id_form-3-ancho_mesiodistal').change(function() {
+        $('#d4-2').html($('#id_form-3-ancho_mesiodistal').val());}).change();
+
     $('#id_ed_izquierdo').change(function() {
 			edi = parseFloat($('#id_ed_izquierdo').val());				
         	$('#edi2').html(edi); 
