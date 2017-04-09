@@ -34,27 +34,26 @@ def CodExpediente_crear(request):
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		nombre = request.GET['nombre']
-		cod = datos_generales.objects.get(nombre_completo=nombre)
-		datosGenerales = datos_generales.objects.filter(cod_expediente=cod)
-		if codigo_expediente.objects.filter(codigo=cod).exists():{
-		}
-		else:
-			codigo_expediente.objects.create(codigo=cod)
-		data = serializers.serialize('json', datosGenerales, fields=('nombre_completo','fechaRegistro','fecha_hora_creacion','cod_expediente'))
+		cod = list(datos_generales.objects.filter(nombre_completo=nombre))
+
+		for codigo in cod:
+			print codigo.nombre_completo
+		
+		data = serializers.serialize('json', cod)
+		
 		return HttpResponse(data, content_type='application/json')
 
 class BusquedaAjaxView2(TemplateView):
 	def get(self,request,*args,**kwargs):
-		nombre = request.GET['nombre']
-		cod = datos_generales.objects.get(nombre_completo=nombre)
-		fi=list(fichas.objects.filter(cod_expediente=cod.cod_expediente))
+		codigo = request.GET['codigo']
+		
+		fi=fichas.objects.filter(cod_expediente=codigo)
 		for ficha in fi:
 			ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero)
-
-			if estado_general.objects.filter(fichas_id=ids.id).exists():{}
+			if motivo_consulta.objects.filter(fichas_id=ids.id).exists():{}
 			else:
 				fichas.objects.get(id=ids.id).delete()
-		fi=list(fichas.objects.filter(cod_expediente=cod))
+		fi=list(fichas.objects.filter(cod_expediente=codigo))
 		data = serializers.serialize('json', fi, fields=('numero'))
 		return HttpResponse(data, content_type='application/json')
 

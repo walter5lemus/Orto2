@@ -57,7 +57,7 @@
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-1">
 				<label for="nombre_paciente">Nombre del Paciente</label>
-				<input type="text" class="form-control" id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" pattern="a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]{2,100}">
+				<input type="text" class="form-control" id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
 				<datalist id="id_listanombres">
 					
 				</datalist>
@@ -111,6 +111,8 @@
 
 
 <script>
+
+
 	$("input[name='nombre_paciente']").on('input', function(e){
 	//$('#select_fichas').find('option').remove().end().val('whatever');
    var $input = $(this),
@@ -119,7 +121,10 @@
        match = $('#'+list + ' option').filter(function() {
            return ($(this).val() === val);
        });
-
+    
+	var nombre = $('#id_nombre_paciente').val();
+	var codigo = $('#id_listanombres option[value="' + nombre +'"]').attr('id');
+	
     if(match.length > 0) {
         // value is in list
     var nombre = $('#id_nombre_paciente').val();
@@ -144,9 +149,8 @@
 			},
 			
 		});
-
 		$.ajax({
-			data : {'nombre':nombre},
+			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax2/',
 			type : 'get',
 			success: function(data){
@@ -154,7 +158,6 @@
 				for (var i = 0; i < data.length; i++) {
 					//$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
 					$("#select_fichas").val(data.length+1);
-
 				}
 				if(data==''){
 					
@@ -165,10 +168,8 @@
 		});
     } else {
         limpiar();
-
     }
 });
-
 $('#id_nombre_paciente').keyup(function(e){
  	consulta = $("#id_nombre_paciente").val();
  		
@@ -179,8 +180,7 @@ $('#id_nombre_paciente').keyup(function(e){
  		type: 'get',
  		success : function(data) {
         	for (var i = 0; i < data.length; i++) {
-					$("#id_listanombres").append("<option value='" + data[i].nombre_completo + "'></option>");
-
+					$("#id_listanombres").append("<option value='" + data[i].nombre_completo + "' id='"+data[i].cod_expediente+"'>"+data[i].cod_expediente+"</option>");
 			}
  		},
  		error : function(message) {
@@ -188,7 +188,6 @@ $('#id_nombre_paciente').keyup(function(e){
      	}
  	});
 });
-
 var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
@@ -200,22 +199,17 @@ $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
 $("#id_cod_expediente").prop('readonly', true);
 $("#select_fichas").prop('readonly', true);
-
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/consultar/"+codigo+"/"+num;
 }
-
 function redireccionar2(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
 }
-
 function buscar(){
-
-
 	var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
@@ -241,7 +235,6 @@ function buscar(){
 			},
 			
 		});
-
 		$.ajax({
 			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax2/',
@@ -260,7 +253,6 @@ function buscar(){
 			
 		});
 }
-
 function limpiar(){
 	$(".ocultar").css("display", "none");
 	$('#id_nombre_completo').val("");
@@ -273,7 +265,6 @@ function limpiar(){
     .end()
     .val('whatever')
 }
-
 </script>
 
 

@@ -27,6 +27,7 @@ from app.tipo_perfil.models import *
 def index(request):
 	user = request.user.id
 	
+
 	codigos = fichas.objects.filter(usuario_creador=user)
 	for fi in codigos:
 		if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
@@ -53,7 +54,6 @@ def index(request):
 		completos.append(exp.cod_expediente)
 
 	incompletos =list()
-	
 	ficha = fichas.objects.filter(usuario_creador=user, completada=0)
 	for fi in ficha:
 		incompletos.append(fi.numero)
