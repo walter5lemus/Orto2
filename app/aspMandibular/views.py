@@ -89,7 +89,7 @@ def asp_mandibular1_consultar(request,codi,num):
 			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request, 'base/error_no_encontrado.html')
 
 
 

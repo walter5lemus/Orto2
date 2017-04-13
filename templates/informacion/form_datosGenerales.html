@@ -47,6 +47,17 @@
 <form method="POST">
 	{% csrf_token %}
 
+	<div class="row">
+		{% if form.errors %}
+			<ul class='form-errors'>
+			    {% for error in form.errors %}
+			    <li class="alert alert-danger">{{ form.errors }}</li>
+			    {% endfor %}
+			</ul>
+			<br><br>
+		{% endif %}
+	</div>
+
 	<h2><center>Datos Generales</center></h2>
 
 	<div class="col-md-8 col-md-offset-2">
@@ -182,7 +193,7 @@
 	        	for (var i = 0; i < data.length; i++) {
 						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
 						$("#id_cod_expediente").focus();
-						codigo = $("#id_cod_expediente").val("");
+						$("#id_cod_expediente").val("");
 				}
 				
 	 		},

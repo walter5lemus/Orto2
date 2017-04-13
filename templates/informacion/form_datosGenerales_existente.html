@@ -13,6 +13,33 @@
 	{% csrf_token %}
 
 	<div class="row">
+		{% if messages %}
+		    {% for message in messages %}
+		      <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+		    {% endfor %}
+		  {% endif %}
+
+		  {% if form.errors %}
+		  <script type="text/javascript">alert("LEL");</script>
+		    <div class="alert alert-error">
+		      <h4>Please fix the following errors</h4>
+		      <ul>
+		        {% for field in form.errors %}
+		          {% if field.errors %}
+		            {% for error in field.errors %}
+		              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
+		            {% endfor %}
+		          {% endif %}
+		        {% endfor %}
+		      </ul>
+		      {% if form.non_field_errors %}
+		        {{ form.non_field_errors }}
+		      {% endif %}
+		    </div>
+		{% endif %}
+    </div>
+
+	<div class="row">
 		<div class="col-md-4 col-md-offset-1" >
 			<div class="form-group">
 					<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>	

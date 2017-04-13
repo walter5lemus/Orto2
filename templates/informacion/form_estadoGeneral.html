@@ -19,7 +19,22 @@ Estado general
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
-
+	<div class="row">
+		{% if form.errors %}
+		    {% for field in form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-danger">
+		                <strong>{{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in form.non_field_errors %}
+		        <div class="alert alert-danger">
+		            <strong>{{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		</div>
 
  <div class="panel panel-primary">
   <div class="panel-heading">
@@ -126,11 +141,37 @@ Estado general
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
 
+	$('#id_cambio_salud_1').click(function() {
+   		if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+	});
+
+	$('#id_cambio_salud_0').click(function() {
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			var texto =  $("#id_detalle_enf_operacion").text();
+   			$("#id_detalle_enf_operacion").val(texto);
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	});
+
+	$(function() {
+    	if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	})
+
+
 	function redireccionar(){
-		//var num = parseInt($("#select_fichas").val(), 10);
-		//var codigo = $('#id_cod_expediente').val();
 		window.location.href="/informacion/motivo_consultas/editar/"+{{codi}}+"/"+{{num}};
 	}
+
+	
 </script>
 
 

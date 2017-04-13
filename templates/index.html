@@ -164,60 +164,8 @@
 </script>
 <button id="btn_completos" > Completas</button>
 <div id="completas" class="hidden">
-	<h3>Lista de Expedientes Llenos</h3>
-</div>
-
-<button id="btn_incompletos"> Incompletos</button>
-
-<div id="incompletas" class="hidden">
-	<h3>Lista de Expedientes Incompletos</h3>
 	
-
-</div>
-
-
-
-
-
-	<blockquote class="blockquote-reverse">
-  	    <p>Universidad de El Salvador. Facultad de Odontología</p>
-  	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
-	</blockquote>
-
-
-
-</body>
-
-<script type="text/javascript">
-	$('#id_cod_expediente').click(function() {
-	 	//codigo = $("#id_cod_expediente").val();
-	 	
-	 	$.ajax({
-	 		//data: {'codigo': codigo},
-	 		url: '/home/incompletos/',
-	 		type: 'get',
-	 		success : function(data) {
-	        	//console.log(data[0].nombre_completo);
-	        	for (var i = 0; i < data.length; i++) {
-						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
-						$("#id_cod_expediente").focus();
-						codigo = $("#id_cod_expediente").val("");
-				}
-				
-	 		},
-	 		error : function(message) {
-	        	console.log(message);
-	     	}
-	 	});
-	});
-
-</script>
-<script type="text/javascript">
-	var codigo;
-	var textoCodigo,completas,co,numero;
-</script>
-	
-	{% for elemento in completos %}
+		{% for elemento in completos %}
 		<script type="text/javascript">
 			if ({{elemento}} > 0) {
 				numero = {{elemento}};
@@ -242,8 +190,15 @@
 				completas = '';
 			}
 			</script>
+	{% empty %}
+		<h3>No existen expedientes llenos</h3>
 	{% endfor %}
-	
+</div>
+
+<button id="btn_incompletos"> Incompletos</button>
+
+<div id="incompletas" class="hidden">
+
 
 
 	{% for elemento in incompletos %}
@@ -326,7 +281,58 @@
 				incompletas = '';
 			}
 			</script>
+	{% empty %}
+		<h3>Lista de Expedientes Incompletos</h3>
 	{% endfor %}
+
+</div>
+
+
+
+
+
+	<blockquote class="blockquote-reverse">
+  	    <p>Universidad de El Salvador. Facultad de Odontología</p>
+  	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
+	</blockquote>
+
+
+
+</body>
+
+<script type="text/javascript">
+	$('#id_cod_expediente').click(function() {
+	 	//codigo = $("#id_cod_expediente").val();
+	 	
+	 	$.ajax({
+	 		//data: {'codigo': codigo},
+	 		url: '/home/incompletos/',
+	 		type: 'get',
+	 		success : function(data) {
+	        	//console.log(data[0].nombre_completo);
+	        	for (var i = 0; i < data.length; i++) {
+						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
+						$("#id_cod_expediente").focus();
+						codigo = $("#id_cod_expediente").val("");
+				}
+				
+	 		},
+	 		error : function(message) {
+	        	console.log(message);
+	     	}
+	 	});
+	});
+
+</script>
+<script type="text/javascript">
+	var codigo;
+	var textoCodigo,completas,co,numero;
+</script>
+	
+	
+
+
+	
 
 <script>
 	$('#btn_completos').on('click', function(e){

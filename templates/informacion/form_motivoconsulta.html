@@ -10,10 +10,20 @@ Motivo Consulta
 {% endblock %}
 
 {% block content %}
+
+	<div class="row">
+	{% if form.errors %}
+		<ul class='form-errors'>
+		    {% for error in form.errors %}
+		    <li class="alert alert-danger">{{ form.errors }}</li>
+		    {% endfor %}
+		</ul>
+		<br><br>
+		{% endif %}
+	</div>
+
 <form method="POST">
 	{% csrf_token %}
-
-
  <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">Motivo de Consulta</h3>
@@ -129,6 +139,8 @@ Motivo Consulta
 	    
 
 	});
+
+
 
 </script>
 

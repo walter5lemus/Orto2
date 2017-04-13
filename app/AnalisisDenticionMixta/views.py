@@ -109,7 +109,7 @@ def nance_consultar(request, codi, num):
             return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+        return render(request, 'base/error_no_encontrado.html')
 
 def nance_editar(request, codi, num):
     str(codi)
@@ -239,7 +239,7 @@ def moyerssup_consultar(request, codi, num):
             return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+        return render(request, 'base/error_no_encontrado.html')
 
 
 def moyersinf_view(request, codi, num):
@@ -341,4 +341,4 @@ def moyersinf_consultar(request, codi, num):
                           {'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+        return render(request, 'base/error_no_encontrado.html')

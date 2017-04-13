@@ -113,7 +113,7 @@ def denticion1_consultar(request,codi,num):
 			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")			
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+		return render(request, 'base/error_no_encontrado.html')
 		
 def denticion2_view(request,codi,num):
 	str(codi)
@@ -223,7 +223,7 @@ def mordidas_consultar(request, codi, num):
 			return render(request, 'aspectos/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+		return render(request, 'base/error_no_encontrado.html')
 
 def relacionsagital_crear(request,codi,num):
 	str(codi)
@@ -319,5 +319,5 @@ def relacionsagital_consultar(request,codi,num):
 			return render(request, 'aspectos/sagitales_consultar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request, 'base/error_no_encontrado.html')
 

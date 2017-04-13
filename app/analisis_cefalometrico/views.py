@@ -90,7 +90,6 @@ def cefalometrico_consultar(request, codi, num):
 			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})		
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
-
+		return render(request, 'base/error_no_encontrado.html')
 
 		

@@ -103,9 +103,8 @@ class BusquedaAjaxView(TemplateView):
 		codigos = fichas.objects.filter(usuario_creador=user, completada=0)
 		listaCod = list()
 
-		for cod in codigos:
-			print cod
-			#listaCod.append(cod)
+		
+		#listaCod.append(cod)
 		data = serializers.serialize('json', datosGenerales, fields=('nombre_completo','fechaRegistro','fecha_hora_creacion','cod_expediente'))
 		return HttpResponse(data, content_type='application/json')
 

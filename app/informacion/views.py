@@ -33,12 +33,9 @@ def CodExpediente_crear(request):
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
-		nombre = request.GET['nombre']
-		cod = list(datos_generales.objects.filter(nombre_completo=nombre))
+		codigo = request.GET['codigo']
+		cod = list(datos_generales.objects.filter(cod_expediente=codigo))
 
-		for codigo in cod:
-			print codigo.nombre_completo
-		
 		data = serializers.serialize('json', cod)
 		
 		return HttpResponse(data, content_type='application/json')
@@ -65,10 +62,12 @@ def busqueda(request):
 class busquedaCodigo(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
-		cod = datos_generales.objects.filter(cod_expediente=codigo)
-		
-		data = serializers.serialize('json', cod, fields=('cod_expediente'))
-		return HttpResponse(data, content_type='application/json')
+		if fichas.objects.filter(cod_expediente=codigo).exists():
+			cod = datos_generales.objects.filter(cod_expediente=codigo)
+			data = serializers.serialize('json', cod, fields=('cod_expediente'))
+			return HttpResponse(data, content_type='application/json')
+
+		return HttpResponse("")	
 
 def CodExpediente_consular(request):
 
@@ -77,9 +76,9 @@ def CodExpediente_consular(request):
 		codi = form.data['codigo']
 		if form.is_valid():
 		 	form.save()
- 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-	 	else:
- 			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
+			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
+		else:
+			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
 
 	else:
 			form = CodigoExpedienteForm()
@@ -96,7 +95,6 @@ def CodExpediente_editar(request):
  			return HttpResponseRedirect('/informacion/estado_general/editar/%s/' %codi)
 	 	else:
  			return HttpResponseRedirect('/informacion/estado_general/editar/%s/' %codi)
-
 	else:
 			form = CodigoExpedienteForm()
 
@@ -115,7 +113,12 @@ def DatosGeneral_crear(request):
 			codi = request.POST.get('cod_expediente')
 			if form.is_valid():	
 			 	form.save()
-			return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s' %(codi,num)) 
+				return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s' %(codi,num))
+			else:
+				print form.errors
+				return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num})
+
+
 	else:
 			form = DatosGeneralesForm(initial={'usuario_creador':request.user.id})
 	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num})
@@ -140,21 +143,21 @@ def DatosGenerales_consultar(request,codi):
 
 def DatosGenerales_consultar2(request,codi):
 	#str(codi)
-	#try:
-	ids = datos_generales.objects.get(cod_expediente=codi)
-	if ids:
-		datos = datos_generales.objects.get(cod_expediente=codi)
-		if request.method == 'GET':
-			form = DatosGeneralesForm_consultar(instance=datos)
-		else: 
-			form = DatosGeneralesForm_consultar(request.POST, instance=datos)
-			if form.is_valid():
-				form.save()
-			return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/' %codi)
-		return render(request,'informacion/form_datosGenerales_existente.html',{'form':form,'codi':codi,'num':num})
-	return HttpResponse("No se encontro el Codigo de Expediente")
-	#except Exception, e:
-	#	return HttpResponse("No se encontro el Codigo de Expediente")
+	try:
+		ids = datos_generales.objects.get(cod_expediente=codi)
+		if ids:
+			datos = datos_generales.objects.get(cod_expediente=codi)
+			if request.method == 'GET':
+				form = DatosGeneralesForm_consultar(instance=datos)
+			else: 
+				form = DatosGeneralesForm_consultar(request.POST, instance=datos)
+				if form.is_valid():
+					form.save()
+				return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/' %codi)
+			return render(request,'informacion/form_datosGenerales_existente.html',{'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente")
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')
 
 def DatosGenerales_edit(request,codi):
 	str(codi)
@@ -182,49 +185,63 @@ def Motivo_Consulta_crear(request,codi,num):
 	
 	if fichas.objects.filter(cod_expediente_id=codi, numero=num).exists():{}
 	else:
-		fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id,completada=0)
 		if not codigo_expediente.objects.filter(codigo=codi).exists():
 			codigo_expediente.objects.create(codigo=codi)
 
-	ids = fichas.objects.get(cod_expediente=codi, numero=num)
-	
-	if motivo_consulta.objects.filter(fichas_id=ids.id).exists():
-		if ids:
-			estado = motivo_consulta.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = MotivoConsultaForm(instance=estado)
-			else: 
-				form = MotivoConsultaForm(request.POST, instance=estado)
-				if form.is_valid():
-					form.save()
-				fecha =  timezone.now()
-				print "fecha 2"
-				print fecha
-				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	if int(num)==1:
+		if not fichas.objects.filter(cod_expediente_id=codi,numero=1).exists():
+			fichas.objects.create(cod_expediente_id=codi, numero=1, usuario_creador_id=request.user.id,completada=0)
 	else:
+		try:
+			ficha = fichas.objects.get(cod_expediente_id=codi,numero=int(num)-1)
+			if ficha.completada==1:
+				if not fichas.objects.filter(cod_expediente_id=codi,numero=num).exists():
+					fichas.objects.create(cod_expediente_id=codi, numero=num, usuario_creador_id=request.user.id,completada=0)
+		except Exception as e:
+			raise e
+			
+	try:
 		fecha =  timezone.now()
-		print fecha
-
-		if ultima_modificacion.objects.filter(fichas_id=ids.id).exists():{}
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		if motivo_consulta.objects.filter(fichas_id=ids.id).exists():
+			if ids:
+				estado = motivo_consulta.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = MotivoConsultaForm(instance=estado)
+				else: 
+					form = MotivoConsultaForm(request.POST, instance=estado)
+					if form.is_valid():
+						form.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+						return redirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
+					else:
+						print form.errors
+						return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
+				return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		else:
-			ultima_modificacion.objects.create(fichas_id=ids.id,fecha=fecha)
-
-		if request.method == 'POST':
+			fecha =  timezone.now()
 			
-			form = MotivoConsultaForm(request.POST)
-			if form.is_valid():
-			 	form.save()
+			if ultima_modificacion.objects.filter(fichas_id=ids.id).exists():{}
+			else:
+				ultima_modificacion.objects.create(fichas_id=ids.id,fecha=fecha)
 
-			return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
-		else:
-			
-			form = MotivoConsultaForm(initial={'fichas':ids.id,'fecha_hora_creacion':fecha})
-			
-			return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
-
+			if request.method == 'POST':
+				
+				form = MotivoConsultaForm(request.POST)
+				if form.is_valid():
+				 	form.save()
+					return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
+				else:
+					print form.errors
+					return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
+			else:			
+				form = MotivoConsultaForm(initial={'fichas':ids.id,'fecha_hora_creacion':fecha})
+				return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
+	except Exception as e:
+		return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+	
 	
 def Motivo_Consulta_editar2(request,codi,num):
 	str(codi)
@@ -259,7 +276,7 @@ def Motivo_Consulta_consultar(request,codi,num):
 			return render(request,'informacion/form_motivoconsulta_consultar.html',{'form':form,'num':num,'codi':codi})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request, 'base/error_no_encontrado.html')
 
 def Motivo_Consulta_editar(request,codi,num):
 	str(codi)
@@ -330,9 +347,9 @@ def EstadoGeneral_consultar(request,codi,num):
 
 				return redirect('/tipo_perfil/consultar/%s/%s/' %(codi,num))
 			return render(request,'informacion/form_estadoGeneral_consultar.html',{'form':form,'num':num,'codi':codi})
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request, 'base/error_no_encontrado.html')	
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request, 'base/error_no_encontrado.html')	
 
 
 

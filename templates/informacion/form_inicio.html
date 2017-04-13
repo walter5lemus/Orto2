@@ -55,19 +55,28 @@
 	<div class="col-md-12">
 	<br><br>
 		<div class="form-group">
-			<div class="col-md-6 col-md-offset-1">
-				<label for="nombre_paciente">Nombre del Paciente</label>
-				<input type="text" class="form-control" id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
-				<datalist id="id_listanombres">
+			<div class="col-md-6">
+				<label for="nombre_paciente">Nombre del paciente</label>
+				<div class="form-group has-success has-feedback"" role="form">
+					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
+					<span class="glyphicon glyphicon-search form-control-feedback"></span>
+					<datalist id="id_listanombres">
 					
-				</datalist>
+					</datalist>
+				</div>
 			</div>
 			<div class="col-md-2 ">
 				<div class="form-group ocultar">
 					<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>
 					{{form.cod_expediente}}
 				</div>
-			</div> 
+			</div>
+			<div class="col-md-3">
+				<div class="form-group ocultar">
+					<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
+				{{form.fecha_hora_creacion}}	
+				</div>
+			</div>
 			<div class="col-md-3 form-group ">
 			<br>
 			<!-- <button class="btn btn-success" style="margin-top: 5px;" onclick="buscar()">Buscar</button> -->
@@ -77,44 +86,40 @@
 
 	</div>
 	
-
 	<div class="row ocultar">
-			<div class="col-md-3  col-md-offset-2">
+			<div class="col-md-4 col-md-offset-1">
 				<div class="form-group">
-					<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
-				{{form.fecha_hora_creacion}}	
+					<h3><center>Crear una Nueva Ficha</center></h3>
+					<div class="col-md-6">
+						<label for="fichas"> N° de Ficha a Crear </label>
+						 <input type="number" id="input_fichas" class="form-control">
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2()">Crear Nueva Ficha</button>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-4 col-md-offset-1">
 				<div class="form-group">
-					<label for="fichas"> N° de Ficha a Crear </label>
-					<!--<select class="form-control" name="fichas" id="select_fichas"></select> -->
-					 <input type="number" id="select_fichas" class="form-control">
+					<h3 id="h3_consulta" ><center>Consultar una Ficha</center></h3>
+					<div class="col-md-6 col-md-offset-1">
+						<label id="label_consulta" for="fichas"> N° de Ficha a Consultar </label>
+						<select class="form-control" name="fichas" id="select_fichas"></select>
+					</div>
+					<div class="col-md-5">
+						<button id="boton_consulta" class="btn btn-primary" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
+					</div>
 				</div>
 			</div>
-			<!-- <div class="col-md-2">
-				<div class="form-group">
-					<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
-				</div>
-			</div>  --> 
-			<div class="col-md- 2">
-				<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2()">Crear Nueva Ficha</button>
-			</div>
-		</div>
-		<div class="row" id="lista">
-		<ol>
 			
-		</ol>
-		</div>
-
- 
+	</div>
 
 
 <script>
 
 
 	$("input[name='nombre_paciente']").on('input', function(e){
-	//$('#select_fichas').find('option').remove().end().val('whatever');
+	$('#select_fichas').find('option').remove().end().val('whatever');
    var $input = $(this),
        val = $input.val();
        list = $input.attr('list'),
@@ -122,8 +127,8 @@
            return ($(this).val() === val);
        });
     
-	var nombre = $('#id_nombre_paciente').val();
-	var codigo = $('#id_listanombres option[value="' + nombre +'"]').attr('id');
+	var codigo = $('#id_nombre_paciente').val();
+	var nombre = $('#id_listanombres option[value="' + codigo +'"]').attr('id');
 	
     if(match.length > 0) {
         // value is in list
@@ -131,13 +136,14 @@
 	//$('#select_fichas').find('option').remove().end().val('whatever');
 		
 		$.ajax({
-			data : {'nombre':nombre},
+			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax/',
 			type : 'get',
 			success: function(data){
 				for (var i = 0; i < data.length; i++) {
 					$(".ocultar").css("display", "block");
 					$('#id_nombre_completo').val(data[i].fields.nombre_completo);
+					$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
 					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
 					$('#id_cod_expediente').val(data[i].pk);
@@ -156,12 +162,21 @@
 			success: function(data){
 				$("#select_fichas").val(1);
 				for (var i = 0; i < data.length; i++) {
-					//$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
-					$("#select_fichas").val(data.length+1);
+					$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
+					$("#input_fichas").val(data.length+1);
+
+					$('#select_fichas').css('display','block');
+					$('#boton_consulta').css('display','block');
+					$('#label_consulta').css('display','block');
+					$('#h3_consulta').css('display','block');
 				}
 				if(data==''){
-					
-					//window.location="/informacion/datos_generales/nuevo/"+nombre;
+					$("#input_fichas").val(1);					
+
+					$('#select_fichas').css('display','none');
+					$('#boton_consulta').css('display','none');
+					$('#label_consulta').css('display','none');
+					$('#h3_consulta').css('display','none');
 				}
 			},
 			
@@ -179,8 +194,9 @@ $('#id_nombre_paciente').keyup(function(e){
  		url: '/informacion/busqueda/',
  		type: 'get',
  		success : function(data) {
+ 			$('#id_listanombres').empty().append('whatever');
         	for (var i = 0; i < data.length; i++) {
-					$("#id_listanombres").append("<option value='" + data[i].nombre_completo + "' id='"+data[i].cod_expediente+"'>"+data[i].cod_expediente+"</option>");
+					$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
 			}
  		},
  		error : function(message) {
@@ -188,24 +204,27 @@ $('#id_nombre_paciente').keyup(function(e){
      	}
  	});
 });
+
 var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
     .remove()
     .end()
-    .val('whatever')
+    .val('whatever');
+
 $("#id_nombre_completo").prop('readonly', true);
 $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
 $("#id_cod_expediente").prop('readonly', true);
-$("#select_fichas").prop('readonly', true);
+$("#input_fichas").prop('readonly', true);
+
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/consultar/"+codigo+"/"+num;
 }
 function redireccionar2(){
-	var num = parseInt($("#select_fichas").val(), 10);
+	var num = parseInt($("#input_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
 }
@@ -215,8 +234,7 @@ function buscar(){
     .find('option')
     .remove()
     .end()
-    .val('whatever')
-;
+    .val('whatever');
 		
 		$.ajax({
 			data : {'codigo':codigo},
