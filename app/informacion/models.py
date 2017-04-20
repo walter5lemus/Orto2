@@ -72,10 +72,15 @@ class motivo_consulta(models.Model):
     fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
     motivo_consulta = models.CharField(max_length=500)
     fechaRegistro = models.DateField(default=timezone.now()) 
-    
+    curso = models.IntegerField(choices=curso_choices,default=1)
+    rotacion = models.IntegerField(choices=rotacion_choices,default=1)
+    turno = models.IntegerField(choices=turnos_choices,default=1)
 
     def __unicode__(self):
         return '{}'.format(self.fichas)
+
+
+
 
 class estado_general(models.Model):
     fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)

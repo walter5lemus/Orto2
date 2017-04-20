@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from app.aspMandibular.choices import *
 from app.diagGeneral.models import diagnostico_general

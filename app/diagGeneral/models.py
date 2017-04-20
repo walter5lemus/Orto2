@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from app.aspMandibular.choices import *
+from app.diagGeneral.choices import *
 from app.informacion.models import fichas, datos_generales
 
 # Create your models here.
@@ -13,7 +14,7 @@ class diagnostico_general(models.Model):
 	diagnostico_ortodontico_general = models.TextField()
 	problemas = models.TextField()
 	objetivos = models.TextField()
-	tratamiento = models.IntegerField(choices=Tratamiento)
+	tratamiento = models.IntegerField(choices=Tratamiento_choices,default=1)
 	descripcion_tratamiento = models.TextField()
 	
 def __unicode__(self):

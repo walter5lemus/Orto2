@@ -1,11 +1,13 @@
-# -*- coding: utf-8 -*-
+	# -*- coding: utf-8 -*-
 from django import forms
 from app.informacion.models import *
 from django.contrib.admin import widgets
 from app.informacion.choices import *
 from datetime import datetime
+from datetime import date
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError 
 
 class UserForm(UserCreationForm):
 	class Meta:
@@ -167,22 +169,43 @@ class MotivoConsultaForm(forms.ModelForm):
 	class Meta:
 		model = motivo_consulta
 		this_year = datetime.now().year+1
-
+		this_month = datetime.now().month
+		this_day = datetime.now().day
 		fields = [
 			'fichas',
 			'motivo_consulta',
 			'fechaRegistro',
+			'curso',
+			'rotacion',
+			'turno',
 		]
 		labels={
 			'fichas': 'Codigo Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
+			'curso':'Curso',
+			'rotacion':'Rotacion',
+			'turno':'Turno',
 		}
 		widgets={
 			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 			'motivo_consulta':forms.Textarea(attrs={'class':'form-control'}),
 			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control','style': 'width: 32.5%; display: inline-block;'}),
+			'curso':forms.Select(attrs={'class':'form-control'}),
+			'rotacion':forms.Select(attrs={'class':'form-control'}),
+			'turno':forms.Select(attrs={'class':'form-control'}),
 		}
+
+	def clean(self):
+
+		# Sobrecargar clean devuelve un diccionario con los campos
+		cleaned_data = super(MotivoConsultaForm, self).clean()
+		valor_propiedad = cleaned_data.get("fechaRegistro")
+     
+		if valor_propiedad > date.today():
+			raise forms.ValidationError({'fechaRegistro': ["La fecha que seleccionó es mayor al dia de ahora",]})
+        # Siempre hay que devolver el diccionario
+		return cleaned_data
 		
 class MotivoConsultaForm_consultar(forms.ModelForm):
 	class Meta:
@@ -193,16 +216,25 @@ class MotivoConsultaForm_consultar(forms.ModelForm):
 			'fichas',
 			'motivo_consulta',
 			'fechaRegistro',
+			'curso',
+			'rotacion',
+			'turno',
 		]
 		labels={
 			'fichas': 'Codigo Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
+			'curso':'Curso',
+			'rotacion':'Rotacion',
+			'turno':'Turno',
 		}
 		widgets={
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 			'motivo_consulta':forms.Textarea(attrs={'class':'form-control','readonly':True}),
 			'fechaRegistro':forms.SelectDateWidget(years=range(this_year-1,this_year-3,-1),attrs={'class':'form-control','style': 'width: 32.5%; display: inline-block;','readonly':True}),
+			'curso':forms.Select(attrs={'class':'form-control','readonly':True}),
+			'rotacion':forms.Select(attrs={'class':'form-control','readonly':True}),
+			'turno':forms.Select(attrs={'class':'form-control','readonly':True}),
 		}
 		
 

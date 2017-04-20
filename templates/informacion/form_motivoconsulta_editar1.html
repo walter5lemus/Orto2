@@ -4,8 +4,6 @@
 Motivo Consulta
 {% endblock %}
 {% block header %}
-<style>
-</style>
 
 {% endblock %}
 
@@ -14,30 +12,23 @@ Motivo Consulta
 	{% csrf_token %}
 
 <div class="row">
-{% if messages %}
-    {% for message in messages %}
-      <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
-    {% endfor %}
-  {% endif %}
-
-  {% if form.errors %}
-  <script type="text/javascript">alert("LEL");</script>
-    <div class="alert alert-error">
-      <h4>Please fix the following errors</h4>
-      <ul>
-        {% for field in form.errors %}
-          {% if field.errors %}
-            {% for error in field.errors %}
-              <li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      </ul>
-      {% if form.non_field_errors %}
-        {{ form.non_field_errors }}
-      {% endif %}
-    </div>
-  {% endif %}
+	<ul>
+	  {% if form.non_field_errors %}
+	    <li>{{ form.non_field_errors }}</li>
+	  {% endif %}
+	  {% for field in form %}
+	    {% if field.errors %}
+	      <li class="alert alert-danger">
+	        <strong>{{ field.label }}</strong>
+	        <ul>
+	          {% for error in field.errors %}
+	            <li class="alert alert-danger"><strong>{{ error }}</li></strong>
+	          {% endfor %}
+	        </ul>
+	      </li>
+	    {% endif %}
+	  {% endfor %}
+	</ul>
 
 	</div>
 
@@ -89,6 +80,24 @@ Motivo Consulta
 			{{form.fechaRegistro}}
 		</div>
 	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group"><br>
+			<div class="col-md-4">
+				<label for="{{form.curso.name}}">{{form.curso.label}}</label><br>
+				{{form.curso}}
+			</div>
+			<div class="col-md-4">
+				<label for="{{form.rotacion.name}}">{{form.rotacion.label}}</label><br>
+				{{form.rotacion}}
+			</div>
+			<div class="col-md-4">
+				<label for="{{form.turno.name}}">{{form.turno.label}}</label><br>
+				{{form.turno}}
+			</div>
+		</div>
+	</div>
+	
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
 			<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
