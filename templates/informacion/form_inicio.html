@@ -247,9 +247,6 @@ function buscar(){
 					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
 				}
-				if(data==''){
-					window.location="/informacion/datos_generales/nuevo/"+codigo;
-				}
 			},
 			
 		});

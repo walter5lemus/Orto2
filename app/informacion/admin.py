@@ -9,7 +9,6 @@ from app.informacion.models import *
 admin.site.register(fichas)
 admin.site.register(estado_general)
 admin.site.register(catalogo_enfermedades)
-admin.site.register(codigo_expediente)
 admin.site.register(Usuario)
 admin.site.register(motivo_consulta)
 admin.site.register(datos_generales)

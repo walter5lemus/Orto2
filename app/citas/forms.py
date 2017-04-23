@@ -8,7 +8,7 @@ class citasForm(forms.ModelForm):
 		model = citas
 
 		fields = [
-		'codigo',
+		'fichas',
 		'num_cita',
 		'fecha_cita',
 		'observaciones',
@@ -19,7 +19,7 @@ class citasForm(forms.ModelForm):
 		]
 
 		labels={
-		'codigo': 'Codigo Expediente',
+		'fichas': 'Codigo Expediente',
 		'num_cita':'N° de Cita',
 		'fecha_cita':'Fecha de Cita',
 		'observaciones':'Observaciones',
@@ -30,7 +30,7 @@ class citasForm(forms.ModelForm):
 		}
 
 		widgets = {
-		'codigo':forms.TextInput(attrs={'class':'form-control'}),
+		'fichas':forms.TextInput(attrs={'class':'form-control'}),
 		'num_cita':forms.TextInput(attrs={'class':'form-control'}),
 		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'observaciones':forms.Textarea(attrs={'class':'form-control'}),
@@ -46,7 +46,7 @@ class citasForm2(forms.ModelForm):
 		model = citas
 
 		fields = [
-		'codigo',
+		'fichas',
 		'num_cita',
 		'fecha_cita',
 		'observaciones',
@@ -57,7 +57,7 @@ class citasForm2(forms.ModelForm):
 		]
 
 		labels={
-		'codigo': 'Codigo Expediente',
+		'fichas': 'Codigo Expediente',
 		'num_cita':'N° de Cita',
 		'fecha_cita':'Fecha de Cita',
 		'observaciones':'Observaciones',
@@ -68,7 +68,7 @@ class citasForm2(forms.ModelForm):
 		}
 
 		widgets = {
-		'codigo':forms.HiddenInput(attrs={'class':'form-control'}),
+		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 		'num_cita':forms.HiddenInput(attrs={'class':'form-control'}),
 		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'observaciones':forms.TextInput(attrs={'class':'form-control'}),
@@ -84,7 +84,7 @@ class citasGeneralesForm(forms.ModelForm):
 		model = citas_general
 
 		fields = [
-		'codigo',
+		'fichas',
 		'aparato',
 		'mx',
 		'md',
@@ -92,14 +92,14 @@ class citasGeneralesForm(forms.ModelForm):
 		]
 
 		labels={
-		'codigo': 'Codigo Expediente',
+		'fichas': 'Codigo Expediente',
 		'aparato':'Aparato',
 		'mx':'Maxilar (Mx)',
 		'md':'Mandibular (Md)',
 		'estudiante':'Estudiante',
 		}
 		widgets = {
-		'codigo':forms.TextInput(attrs={'class':'form-control'}),
+		'fichas':forms.TextInput(attrs={'class':'form-control'}),
 		'aparato':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),
@@ -112,7 +112,7 @@ class citasGeneralesForm2(forms.ModelForm):
 		model = citas_general
 
 		fields = [
-		'codigo',
+		'fichas',
 		'aparato',
 		'mx',
 		'md',
@@ -120,14 +120,14 @@ class citasGeneralesForm2(forms.ModelForm):
 		]
 
 		labels={
-		'codigo': 'Codigo Expediente',
+		'fichas': 'Codigo Expediente',
 		'aparato':'Aparato',
 		'mx':'Maxilar (Mx)',
 		'md':'Mandibular (Md)',
 		'estudiante':'Estudiante',
 		}
 		widgets = {
-		'codigo':forms.HiddenInput(attrs={'class':'form-control'}),
+		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 		'aparato':forms.Select(attrs={'class':'form-control','id':'id_aparato2'}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),

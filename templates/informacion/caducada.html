@@ -1,0 +1,299 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block title %}
+	Caducar
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
+		                  		</div>
+		                  		
+		                  		<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="{%url 'logout' %}" role="button" aria-expanded="false">Cerrar Sesión<span></span></a>
+		                        		
+		                      		</li>
+		                    	</ul>
+		                    	<div>	
+		                    	<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="#" class="navbar-brand" role="button" aria-expanded="false">{{user}}<span></span></a>
+		                      		</li>
+		                    	</ul>
+		                    	</div>
+		                  		<h1 style="color:white "> <center> </center></h1> 
+		                  		<h2 style="color:white "> <center>  </center></h2> 
+		                  		
+
+		                </div>
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>   
+    {% endblock %} 
+{% block content %}
+
+<style>
+	.ocultar{
+		display: block;
+	}
+</style>
+
+
+<h2><center>Caducar Fichas concluido el ciclo</center></h2>
+	
+	<div class="row ocultar" >
+	<div class="col-md-6 col-md-offset-4" >
+		<br>
+
+		<div class="col-md-3" >
+				<div class="form-group">
+						<button class="btn btn-danger" style="margin-top: 25px;" id="id_caducar_todo" ">Caducar todos los expedientes INCOMPLETOS</button>
+					<br><br></div>
+				</div>
+			</div>
+	</div>
+
+
+
+<script>
+
+//Ajax para completar el datalist del imput nombre
+
+$("input[name='nombre_paciente']").on('input', function(e){
+$('#select_fichas').find('option').remove().end().val('whatever');
+var $input = $(this),
+   val = $input.val();
+   list = $input.attr('list'),
+   match = $('#'+list + ' option').filter(function() {
+       return ($(this).val() === val);
+   });
+
+var codigo = $('#id_nombre_paciente').val();
+var nombre = $('#id_listanombres option[value="' + codigo +'"]').attr('id');
+
+if(match.length > 0) {
+    // value is in list
+var nombre = $('#id_nombre_paciente').val();
+//$('#select_fichas').find('option').remove().end().val('whatever');
+	
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$(".ocultar").css("display", "block");
+				$('#input_codigo').val(data[i].pk);
+				$('#id_codigo_expediente').val(data[i].pk);
+				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+
+			}
+		},
+		
+	});
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax2/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$("#input_fichas").val(data.length);
+				$("#input_codigo").val(codigo);
+			}
+			if(data.length==0){
+				$("#input_fichas").val("No se encontraron fichas");
+			}
+
+		},
+		
+	});
+    } else {
+        limpiar();
+    }
+});
+$('#id_nombre_paciente').keyup(function(e){
+ 	consulta = $("#id_nombre_paciente").val();
+ 		
+ 	$('#id_listanombres').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'nombre': consulta},
+ 		url: '/informacion/busqueda/',
+ 		type: 'get',
+ 		success : function(data) {
+ 			$('#id_listanombres').empty().append('whatever');
+        	for (var i = 0; i < data.length; i++) {
+					$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+});
+
+
+
+$("input[name='codigo_paciente']").on('input', function(e){
+var $input = $(this),
+   val = $input.val();
+   list = $input.attr('list'),
+   match = $('#'+list + ' option').filter(function() {
+       return ($(this).val() === val);
+   });
+
+var codigo = $('#id_codigo_expediente').val();
+
+if(match.length > 0) {	
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$(".ocultar").css("display", "block");
+				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+				$('#input_codigo').val(data[i].pk);
+				$('#id_cod_expediente').val(data[i].pk);
+			}
+		},
+		
+	});
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax2/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$("#input_fichas").val(data.length);
+				$("#input_codigo").val(codigo);
+			}
+			if(data.length==0){
+				$("#input_fichas").val("No se encontraron fichas");
+			}
+
+		},
+		
+	});
+    } else {
+        limpiar();
+    }
+});
+
+//Ajax para completar el datalist del imput codigo
+$('#id_codigo_expediente').keyup(function(e){
+ 	consulta = $("#id_codigo_expediente").val();
+ 		
+ 	$('#id_listacodigo').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'codigo': consulta},
+ 		url: '/informacion/busqueda2/',
+ 		type: 'get',
+ 		success : function(data) {
+ 			$('#id_listacodigo').empty().append('whatever');
+        	for (var i = 0; i < data.length; i++) {
+					$("#id_listacodigo").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].cod_expediente+"'></option>");
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+});
+
+var codigo = $('#id_nombre_paciente').val();
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever');
+
+$("#id_nombre_completo").prop('readonly', true);
+$("#id_cod_expediente").prop('readonly', true);
+$("#input_fichas").prop('readonly', true);
+$("#input_codigo").prop('readonly', true);
+
+
+function limpiar(){
+	$(".ocultar").css("display", "none");
+	$('#cod_expediente').val("");
+	$('#id_fecha_hora_creacion').val("");
+	$('#id_cod_expediente').val("");
+	$('#input_codigo').val("");
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever')
+
+}
+
+$( "#id_caducar_todo" ).click(function() {
+	
+	var codigo = $("#id_codigo_expediente").val();
+	var ficha = $("#input_fichas").val();
+
+	swal({
+	  title: "¡Advertencia!",
+	  text: "¿Desea RETIRAR VOLUNTARIAMENTE la FICHA "+ficha+" del EXPEDIENTE "+codigo+"?",
+	  type: "warning",
+	  showCancelButton: true,
+	  closeOnConfirm: false,
+	  showLoaderOnConfirm: true,
+	},
+	function(){
+	  setTimeout(function(){
+	    $.ajax({
+			data : {'codigo':codigo,'numero':ficha},
+			url : '/informacion/caduca/',
+			type : 'get',
+			success: function(data){
+				swal("La ficha se retiro satisfactoriamente!", "You clicked the button!", "success")
+				swal({
+				  title: "¡Excelente!",
+				  text: "¡La ficha se retiro satisfactoriamente!",
+				  type: "success",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Ok",
+				  showCancelButton: false,
+				  closeOnConfirm: false
+				},
+				function(){
+				  location.reload();
+				});
+			},
+			error: function(data){
+				swal({
+				  title: "ERROR!",
+				  text: "¡No hay fichas INCOMPLETAS!",
+				  type: "error",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Ok",
+				  showCancelButton: false,
+				  closeOnConfirm: false
+				},
+				); // <- this should run if user is not activated
+			}
+		});
+	  }, 2000);
+	});
+});
+
+</script>
+
+
+
+
+	
+{% endblock %}

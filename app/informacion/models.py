@@ -14,11 +14,6 @@ class Usuario(AbstractUser):
 
 
 ###################################################################################
-class codigo_expediente(models.Model):
-    codigo = models.CharField(max_length=10, primary_key=True)
-
-    def __unicode__(self):
-        return '{}'.format(self.codigo)
 
 class datos_generales(models.Model):
     cod_expediente = models.CharField(max_length=10, primary_key=True)

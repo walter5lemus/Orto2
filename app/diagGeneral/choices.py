@@ -6,6 +6,5 @@ Tratamiento_choices = (
     (4, ("Planos Inclinados")),
     (5, ("Pistas Indirectas Planas Simples")),
     (6, ("Rompehábitos")),
-    (7, ("Reganadores de Espacio")),
-    (8, ("Extracciones Seriadas"))
+    (7, ("Reganadores de Espacio"))
 )

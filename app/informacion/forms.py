@@ -30,22 +30,6 @@ class UserForm(UserCreationForm):
 			'carnet':'Carnet',
 		}
 
-class CodigoExpedienteForm(forms.ModelForm):
-	class Meta:
-		model = codigo_expediente
-
-		fields = [
-			'codigo',
-		]
-
-		labels={
-			'codigo':'Codigo Expediente',
-		}
-
-		widgets={
-			'codigo':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{4}[-]{1}[0-9]{2}','title':'Ejemplo: 0001-16'}),
-		}
-
 class DatosGeneralesForm(forms.ModelForm):
 	class Meta:
 		model = datos_generales

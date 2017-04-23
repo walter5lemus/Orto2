@@ -7,7 +7,7 @@ from django.template.defaultfilters import date
 # Create your models here.
 
 class citas(models.Model):
-	codigo = models.ForeignKey(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
+	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
 	num_cita = models.IntegerField()
 	fecha_cita = models.DateField() 
 	observaciones= models.CharField(max_length=250)
@@ -20,7 +20,7 @@ class citas(models.Model):
 		return '{} {}'.format(self.codigo,self.num_cita)
 
 class citas_general(models.Model):
-	codigo = models.ForeignKey(codigo_expediente, null=False, blank=False, on_delete=models.CASCADE)
+	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
 	aparato = models.IntegerField(choices=aparato_choices) 
 	mx = models.BooleanField()
 	md = models.BooleanField()
