@@ -242,52 +242,65 @@ $( "#id_caducar_todo" ).click(function() {
 	var codigo = $("#id_codigo_expediente").val();
 	var ficha = $("#input_fichas").val();
 
+
 	swal({
-	  title: "¡Advertencia!",
-	  text: "¿Desea RETIRAR VOLUNTARIAMENTE la FICHA "+ficha+" del EXPEDIENTE "+codigo+"?",
-	  type: "warning",
-	  showCancelButton: true,
-	  closeOnConfirm: false,
-	  showLoaderOnConfirm: true,
-	},
-	function(){
-	  setTimeout(function(){
-	    $.ajax({
-			data : {'codigo':codigo,'numero':ficha},
-			url : '/informacion/caduca/',
-			type : 'get',
-			success: function(data){
-				swal("La ficha se retiro satisfactoriamente!", "You clicked the button!", "success")
-				swal({
-				  title: "¡Excelente!",
-				  text: "¡La ficha se retiro satisfactoriamente!",
-				  type: "success",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
-				},
-				function(){
-				  location.reload();
-				});
+		  title: "¡ADVERTENCIA!",
+		  text: "¡Estas fichas YA NO SE PODRAN MODIFICAR en el futuro!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Ok",
+		  showCancelButton: true,
+		  closeOnConfirm: false
+		},
+		function(){
+			swal({
+			  title: "¡¿ESTA SEGURO?!",
+			  text: "Todas las fichas que estan INCOMPLETAS se volveran Caducadas?",
+			  type: "warning",
+			  showCancelButton: true,
+			  closeOnConfirm: false,
+			  showLoaderOnConfirm: true,
 			},
-			error: function(data){
-				swal({
-				  title: "ERROR!",
-				  text: "¡No hay fichas INCOMPLETAS!",
-				  type: "error",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
-				},
-				); // <- this should run if user is not activated
-			}
+			function(){
+			  setTimeout(function(){
+			    $.ajax({
+					data : {'codigo':codigo,'numero':ficha},
+					url : '/informacion/caduca/',
+					type : 'get',
+					success: function(data){
+						swal("Las fichas se transfirieron a CADUCADAS satisfactoriamente!", "You clicked the button!", "success")
+						swal({
+						  title: "¡Excelente!",
+						  text: "¡La ficha se retiro satisfactoriamente!",
+						  type: "success",
+						  showCancelButton: true,
+						  confirmButtonColor: "#DD6B55",
+						  confirmButtonText: "Ok",
+						  showCancelButton: false,
+						  closeOnConfirm: false
+						},
+						function(){
+						  location.reload();
+						});
+					},
+					error: function(data){
+						swal({
+						  title: "ERROR!",
+						  text: "¡No hay fichas INCOMPLETAS!",
+						  type: "error",
+						  showCancelButton: true,
+						  confirmButtonColor: "#DD6B55",
+						  confirmButtonText: "Ok",
+						  showCancelButton: false,
+						  closeOnConfirm: false
+						},
+						); // <- this should run if user is not activated
+					}
+				});
+			  }, 2000);
+			});
 		});
-	  }, 2000);
-	});
 });
 
 </script>

@@ -1,0 +1,349 @@
+{% load staticfiles %}
+
+
+
+{% block navbar %}
+		<div class="bs-docs-section clearfix">
+		    <div class="row">
+		        <div class="col-lg-12">
+		            <div class="bs-component">
+		            	<nav class="navbar navbar-default">
+		                	<div class="container-fluid">
+		                  		<div class="navbar-header">
+		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
+		                  		</div>
+		                  		
+		                  		<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="{%url 'logout' %}" role="button" aria-expanded="false">Cerrar Sesión<span></span></a>
+		                        		
+		                      		</li>
+		                    	</ul>
+		                    	<div>	
+		                    	<ul class="nav navbar-nav navbar-right">
+		                        	<li class="">
+		                        		<a href="#" class="navbar-brand" role="button" aria-expanded="false">{{user}}<span></span></a>
+		                      		</li>
+		                    	</ul>
+		                    	</div>
+		                  		<h1 style="color:white "> <center> Universidad de El Salvador</center></h1> 
+		                  		<h2 style="color:white "> <center> Facultad de Odontología</center></h2> 
+		                  		
+
+		                </div>
+
+		            </nav>
+		        </div>
+           	</div>
+        </div>
+    </div>   
+    {% endblock %} 
+
+
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+
+	<style type="text/css">
+		.hidden{
+			display: none;
+		}
+
+		.dropdown-toggle{
+		 display:block;
+		  width: 9em;
+		  word-wrap: break-word;
+		} 
+		.contenedor{
+			border:2px solid #000;
+			border-radius:25px;
+			position: absolute;
+			top: 50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			
+		}
+
+		.uno{
+			background-color: #004D40;
+		}
+		.dos{
+			background-color: #009688;
+		}
+		.tercero{
+			background-color: #004D40;
+		}
+	</style>
+
+
+	<style>
+
+    /* Transicion de imagenes */
+
+		#container {
+			margin: 0 auto;
+		}
+	
+		.ex2 img{
+			margin: 15px 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+			transition: all 0.5s ease;
+		}
+
+ 		.ex2 img:hover {
+			margin-top: -50px;
+		}
+
+
+
+	/* Transparencia de imagenes */
+
+		div.background {
+  			background: url(klematis.jpg) repeat;
+  			/*border: 2px solid black;*/
+		}
+
+		div.transbox {
+ 			/*margin: 30px;
+  			background-color: #ffffff;
+  			border: 1px solid black;*/
+  			opacity: 0.6;                     /*Nivel Tranparencia*/
+  			/*filter: alpha(opacity=60);*/    /* For IE8 and earlier */
+		}
+
+		div.transbox p {
+ 			margin: 5%;
+  			font-weight: bold;
+  			color: #000000;
+			}
+	</style>
+
+
+
+  
+<body>
+<div style="position:relative">
+
+    <center> 
+    <img src="\media\imagenes\Menu\Bienvenidos.jpg" width="75%" height="70%">
+    </center>
+
+   <div style="position:absolute; top:280; left:630;">
+
+   	<div class="background">
+      <div class="transbox">
+
+         <div id="container">
+	         <div class="ex2">
+
+	    		<a href="/informacion/inicio/nuevo/"><img src="\media\imagenes\Menu\nuevo.png"></a></td>
+	    		<a href="/informacion/inicio/consultar/"><img src="\media\imagenes\Menu\consulta.png"></a></td>
+	    		<a href="#"><img src="\media\imagenes\Menu\imagen.png"></a></td>
+	    		<a href="/citas/nuevo/"><img src="\media\imagenes\Menu\citas.png"></a></td>
+
+
+	         </div>
+	     </div>
+
+	  </div>
+	</div>
+
+   </div>
+</div>
+<script type="text/javascript">
+	var i=0;
+</script>
+<button id="btn_completos" > Completas</button>
+<div id="completas" class="hidden">
+	
+		{% for elemento in completos %}
+		<script type="text/javascript">
+			if ({{elemento}} > 0) {
+				numero = {{elemento}};
+			}
+			
+			if ($.isNumeric("{{elemento}}") == false) {
+				//crea una lista y le asigna el codigo y el numero de la ficha como id
+				
+				
+				completas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				codigo = {{elemento}};
+				co = "{{elemento}}";
+				textoCodigo = {{elemento}};
+				if(codigo != {{elemento}}){
+					completas += '</ul>';
+					completas = '';
+					i++;
+					numero =1;
+				}
+				
+				$('#completas').append( completas );
+				completas = '';
+			}
+			</script>
+	{% empty %}
+		<h3>No existen expedientes llenos</h3>
+	{% endfor %}
+</div>
+
+<button id="btn_incompletos"> Incompletos</button>
+
+<div id="incompletas" class="hidden">
+
+
+
+	{% for elemento in incompletos %}
+			<script type="text/javascript">
+			
+			if ({{elemento}} > 0) {
+				numero = {{elemento}};
+			}
+			
+			if ($.isNumeric("{{elemento}}") == false) {
+				//crea una lista y le asigna el codigo y el numero de la ficha como id
+				
+				
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				codigo = {{elemento}};
+				co = "{{elemento}}";
+				textoCodigo = {{elemento}};
+				if(codigo != {{elemento}}){
+					incompletas += '</ul>';
+					incompletas = '';
+					i++;
+					numero =1;
+				}
+				
+				$('#incompletas').append( incompletas );
+				incompletas = '';
+			}else{
+				//entra si es un numero
+
+				switch({{elemento}}){
+					case -1:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Motivo de Consulta</a></li>');
+						break;
+					case -2:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/estado_general/nuevo/'+co+'/'+numero+'/">Estado General</a></li>');
+						break;
+					case -3:
+						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/">Tipo de perfil</a></li>');
+						break;
+					case -4:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -5:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro Mordidas FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -6:
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
+						break;
+					case -7:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/">Aspectos Articulares</a></li>');
+						break;
+					case -8:
+						$('#'+co+'_'+numero).append('<li><a href="/asp_mandibular1/nuevo/'+co+'/'+numero+'/">Aspectos Mandibulares</a></li>');
+						break;
+					case -9:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/'+co+'/'+numero+'/">Otros Aspectos</a></li>');
+						break;
+					case -10:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/'+co+'/'+numero+'/">Otros Hallazgos</a></li>');
+						break;
+					case -11:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_cefalometrico/cefalometrico/nuevo/'+co+'/'+numero+'/">Analisis Cefalometricos</a></li>');
+						break;
+					case -12:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_cefalo/nuevo/'+co+'/'+numero+'/">Diagnostico Cefalometrico</a></li>');
+						break;
+					case -13:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/'+co+'/'+numero+'/">Analisis de Nance</a></li>');
+						break;
+					case -14:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/'+co+'/'+numero+'/">Moyers inferior</a></li>');
+						break;
+					case -15:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/'+co+'/'+numero+'/">Moyers Superior</a></li>');
+						break;
+					case -16:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
+						break;
+				}
+				incompletas = '';
+			}
+			</script>
+	{% empty %}
+		<h3>Lista de Expedientes Incompletos</h3>
+	{% endfor %}
+
+</div>
+
+
+
+
+
+	<blockquote class="blockquote-reverse">
+  	    <p>Universidad de El Salvador. Facultad de Odontología</p>
+  	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
+	</blockquote>
+
+
+
+</body>
+
+<script type="text/javascript">
+	$('#id_cod_expediente').click(function() {
+	 	//codigo = $("#id_cod_expediente").val();
+	 	
+	 	$.ajax({
+	 		//data: {'codigo': codigo},
+	 		url: '/home/incompletos/',
+	 		type: 'get',
+	 		success : function(data) {
+	        	//console.log(data[0].nombre_completo);
+	        	for (var i = 0; i < data.length; i++) {
+						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
+						$("#id_cod_expediente").focus();
+						codigo = $("#id_cod_expediente").val("");
+				}
+				
+	 		},
+	 		error : function(message) {
+	        	console.log(message);
+	     	}
+	 	});
+	});
+
+</script>
+<script type="text/javascript">
+	var codigo;
+	var textoCodigo,completas,co,numero;
+</script>
+	
+	
+
+
+	
+
+<script>
+	$('#btn_completos').on('click', function(e){
+	    $('#completas').toggleClass('hidden');
+	})
+
+	$('#btn_incompletos').on('click', function(e){
+	    $('#incompletas').toggleClass('hidden');
+	})
+
+
+
+	
+</script>

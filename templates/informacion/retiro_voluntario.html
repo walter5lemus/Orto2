@@ -275,50 +275,62 @@ $( "#id_retiro_voluntario" ).click(function() {
 	var ficha = $("#input_fichas").val();
 
 	swal({
-	  title: "¡Advertencia!",
-	  text: "¿Desea RETIRAR VOLUNTARIAMENTE la FICHA "+ficha+" del EXPEDIENTE "+codigo+"?",
-	  type: "warning",
-	  showCancelButton: true,
-	  closeOnConfirm: false,
-	  showLoaderOnConfirm: true,
-	},
-	function(){
-	  setTimeout(function(){
-	    $.ajax({
-			data : {'codigo':codigo,'numero':ficha},
-			url : '/informacion/retiro_voluntario/',
-			type : 'get',
-			success: function(data){
-				swal("La ficha se retiro satisfactoriamente!", "You clicked the button!", "success")
-				swal({
-				  title: "¡Excelente!",
-				  text: "¡La ficha se retiro satisfactoriamente!",
-				  type: "success",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
+		  title: "¡ADVERTENCIA!",
+		  text: "¡Esta ficha ya no se podra MODIFICAR en el futuro!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Ok",
+		  showCancelButton: true,
+		  closeOnConfirm: false
+		},
+		function(){
+		swal({
+		  title: "¡¿Desea convertir esta ficha a RETIRO VOLUNTARIO?!",
+		  text: "¿Desea transferir la FICHA "+ficha+" del EXPEDIENTE "+codigo+" a RETIRO VOLUNTARIO?",
+		  type: "warning",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  showLoaderOnConfirm: true,
+		},
+		function(){
+		  setTimeout(function(){
+		    $.ajax({
+				data : {'codigo':codigo,'numero':ficha},
+				url : '/informacion/retiro_voluntario/',
+				type : 'get',
+				success: function(data){
+					swal("La ficha se retiro satisfactoriamente!", "You clicked the button!", "success")
+					swal({
+					  title: "¡Excelente!",
+					  text: "¡La ficha se retiro satisfactoriamente!",
+					  type: "success",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					function(){
+					  location.reload();
+					});
 				},
-				function(){
-				  location.reload();
-				});
-			},
-			error: function(data){
-				swal({
-				  title: "ERROR!",
-				  text: "¡La ficha ya se encuentra en estado Retirada!",
-				  type: "error",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
-				},
-				); // <- this should run if user is not activated
-			}
+				error: function(data){
+					swal({
+					  title: "ERROR!",
+					  text: "¡La ficha ya se encuentra en estado Retirada!",
+					  type: "error",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					); // <- this should run if user is not activated
+				}
+			});
+		  }, 2000);
 		});
-	  }, 2000);
 	});
 });
 

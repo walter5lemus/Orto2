@@ -12,7 +12,6 @@ class Usuario(AbstractUser):
     carnet = models.CharField(max_length=7,null=True, blank=True)
 
 
-
 ###################################################################################
 
 class datos_generales(models.Model):

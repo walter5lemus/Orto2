@@ -288,41 +288,50 @@ $( "#eliminar_expediente" ).click(function() {
 	
 	var codigo = $("#input_codigo").val();
 	swal({
-	  title: "¡Advertencia!",
-	  text: "¿Desea eliminar el Expediente "+codigo+"?",
-	  type: "warning",
-	  showCancelButton: true,
-	  closeOnConfirm: false,
-	  showLoaderOnConfirm: true,
-	},
-	function(){
-	  setTimeout(function(){
-	    $.ajax({
-			data : {'codigo':codigo},
-			url : '/informacion/eliminar_expediente/',
-			type : 'get',
-			success: function(data){
-				swal("Se elimino correctamente!", "You clicked the button!", "success")
-				swal({
-				  title: "¡Excelente!",
-				  text: "¡Se elimino correctamente!",
-				  type: "success",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
+		  title: "¿Desea Eliminar el Expediente "+codigo+"?",
+		  text: "¡Al eliminar este expediente se borraron todo lo que este relacionado con el!",
+		  type: "error",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Ok",
+		  showCancelButton: true,
+		  closeOnConfirm: false
+		},
+		function(){
+		swal({
+		  title: "¡AVISO!",
+		  text: "¡El expediente "+codigo+" que esta apunto de eliminar no se podrá recuperar!",
+		  type: "error",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  showLoaderOnConfirm: true,
+		},
+		function(){
+		  setTimeout(function(){
+		    $.ajax({
+				data : {'codigo':codigo},
+				url : '/informacion/eliminar_expediente/',
+				type : 'get',
+				success: function(data){
+					swal("Se elimino correctamente!", "You clicked the button!", "success")
+					swal({
+					  title: "FINALIZADO!",
+					  text: "¡Se elimino correctamente!",
+					  type: "success",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					function(){
+					  location.reload();
+					});
 				},
-				function(){
-				  location.reload();
-				});
-
-				
-
-			},
+			});
+		  }, 2000);
 		});
-	  }, 2000);
-	});
+});
 });
 
 $( "#eliminar_ficha" ).click(function() {
@@ -331,37 +340,49 @@ $( "#eliminar_ficha" ).click(function() {
 	var ficha = $("#input_fichas").val();
 
 	swal({
-	  title: "¡Advertencia!",
-	  text: "¿Desea eliminar la FICHA "+ficha+" del Expediente "+codigo+"?",
-	  type: "warning",
-	  showCancelButton: true,
-	  closeOnConfirm: false,
-	  showLoaderOnConfirm: true,
-	},
-	function(){
-	  setTimeout(function(){
-	    $.ajax({
-			data : {'codigo':codigo,'numero':ficha},
-			url : '/informacion/eliminar_ficha/',
-			type : 'get',
-			success: function(data){
-				swal("Se elimino correctamente!", "You clicked the button!", "success")
-				swal({
-				  title: "¡Excelente!",
-				  text: "¡Se elimino correctamente!",
-				  type: "success",
-				  showCancelButton: true,
-				  confirmButtonColor: "#DD6B55",
-				  confirmButtonText: "Ok",
-				  showCancelButton: false,
-				  closeOnConfirm: false
+		  title: "¿Desea Eliminar la Ficha "+ficha+" del Expediente "+codigo+"?",
+		  text: "¡Se eliminaran los datos que esten relacionados con ella!",
+		  type: "error",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Ok",
+		  showCancelButton: true,
+		  closeOnConfirm: false
+		},
+		function(){
+		swal({
+		  title: "AVISO!",
+		  text: "¿Esta acción no se podra deshacer?",
+		  type: "warning",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  showLoaderOnConfirm: true,
+		},
+		function(){
+		  setTimeout(function(){
+		    $.ajax({
+				data : {'codigo':codigo,'numero':ficha},
+				url : '/informacion/eliminar_ficha/',
+				type : 'get',
+				success: function(data){
+					swal("Se elimino correctamente!", "You clicked the button!", "success")
+					swal({
+					  title: "Ok!",
+					  text: "¡Se elimino correctamente!",
+					  type: "success",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					function(){
+					  location.reload();
+					});
 				},
-				function(){
-				  location.reload();
-				});
-			},
+			});
+		  }, 2000);
 		});
-	  }, 2000);
 	});
 });
 
