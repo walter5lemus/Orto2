@@ -8,6 +8,7 @@ class registroForm(forms.ModelForm):
 		model = registro
 
 		fields = [
+			'id',
 			'fichas',
 			'problema',
 			'cuadrante',
@@ -15,6 +16,7 @@ class registroForm(forms.ModelForm):
 			'detalle',
 		]
 		labels = {
+			'id': 'Id',
 			'fichas': 'Ficha',
 			'problema': 'Problema',
 			'cuadrante': 'Cuadrante',
@@ -22,6 +24,7 @@ class registroForm(forms.ModelForm):
 			'detalle': 'Detalle',
 		}
 		widgets = {
+			'id': forms.HiddenInput(attrs={'class':'form-control id'}),
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
 			'problema': forms.HiddenInput(attrs={'class':'form-control'}),
 			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
@@ -35,6 +38,7 @@ class registroForm_consultar(forms.ModelForm):
 		model = registro
 
 		fields = [
+			'id',
 			'fichas',
 			'problema',
 			'cuadrante',
@@ -42,6 +46,7 @@ class registroForm_consultar(forms.ModelForm):
 			'detalle',
 		]
 		labels = {
+			'id': 'Id',
 			'fichas': 'Ficha',
 			'problema': 'Problema',
 			'cuadrante': 'Cuadrante',
@@ -49,11 +54,12 @@ class registroForm_consultar(forms.ModelForm):
 			'detalle': 'Detalle',
 		}
 		widgets = {
-			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
+			'id': forms.HiddenInput(attrs={'class':'form-control id','readonly':True}),
+			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha','readonly':True}),
 			'problema': forms.HiddenInput(attrs={'class':'form-controls','readonly':True}),
 			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'detalle': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'detalle': forms.TextInput(attrs={'class':'form-control'}),
 		}
 
 class tipo_denticionForm(forms.ModelForm):
@@ -114,12 +120,12 @@ class diastemasForm(forms.ModelForm):
 			'pieza_dos': 'Pieza 2',
 		}
 		widgets = {
-			'id' : forms.HiddenInput(attrs={'class':'form-control id'}),
-			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
-			'cuad_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'pieza_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'cuad_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'pieza_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'id' : forms.TextInput(attrs={'class':'form-control id'}),
+			'fichas': forms.TextInput(attrs={'class':'form-control ficha'}),
+			'cuad_uno': forms.TextInput(attrs={'class':'form-control'}),
+			'pieza_uno': forms.TextInput(attrs={'class':'form-control'}),
+			'cuad_dos': forms.TextInput(attrs={'class':'form-control'}),
+			'pieza_dos': forms.TextInput(attrs={'class':'form-control'}),
 		}
 
 
@@ -341,7 +347,6 @@ class registro_mordidasForm_consultar(forms.ModelForm):
 			'cuad_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
-
 
 class ImagenForm(forms.ModelForm):
 	class Meta:

@@ -2,73 +2,417 @@
 
 {% load staticfiles %}
 
-{% block title %}Aspectos de dentición{% endblock %}
+{% block title %}Aspectos de dentición - Parte 1{% endblock %}
 
 {% block extrajs %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}""></script>
     <script type="text/javascript" src="{% static 'js/skinable_tabs.js' %}"></script>
-    <script src="{% static 'js/mordidas.js' %}"></script>
-    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
 
-        //Pintar perdidas prematuras.
-        $(function() {
-            n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
+    del = 1;
+        //Ocultar parte odontograma
+        $(".tipo").change(function() {
+            del = 0;
+            vacio = 1;
+            
+            maximo = document.getElementById("id_perdidas-TOTAL_FORMS").value;
+        
+            for (var i = 0; i < maximo; i++) {
+                if (document.getElementById("id_perdidas-"+ i +"-id").value) {
+                    ides = document.getElementById("id_perdidas-"+ i +"-id").value;
+                    //Borrando tupla bd
 
-            for (i = 0; i < n1; i++) {
-                c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
-                p = document.getElementById("id_perdidas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
-            }  
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
+            }
 
-            n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
+            for(var i = 1; i < maximo; i++){
+                document.getElementById("perdidas-"+i).click();
+            }
 
-            for (i = 0; i < n2; i++) {
-                c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
-                p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
-            }  
+            $('#id_perdidas-0-cuadrante').val('');
+            $('#id_perdidas-0-pieza').val('');
+            $('#id_perdidas-0-detalle').val('');
 
-            n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
+            maximo = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
+        
+            for (var i = 0; i < maximo; i++) {
+                if (document.getElementById("id_anodoncias-"+ i +"-id").value) {
+                    ides = document.getElementById("id_anodoncias-"+ i +"-id").value;
+                    //Borrando tupla bd
 
-            for (i = 0; i < n3; i++) {
-                c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
-                p = document.getElementById("id_mordidas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
-            } 
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
+            }
+
+            for(var i = 1; i < maximo; i++){
+                document.getElementById("anodoncias-"+i).click();
+            }
+
+            $('#id_anodoncias-0-cuadrante').val('');
+            $('#id_anodoncias-0-pieza').val('');
+            $('#id_anodoncias-0-detalle').val('');
+
+            maximo = document.getElementById("id_mordidas-TOTAL_FORMS").value;
+        
+            for (var i = 0; i < maximo; i++) {
+                if (document.getElementById("id_mordidas-"+ i +"-id").value) {
+                    ides = document.getElementById("id_mordidas-"+ i +"-id").value;
+                    //Borrando tupla bd
+
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
+            }
+
+            for(var i = 1; i < maximo; i++){
+                document.getElementById("mordidas-"+i).click();
+            }
+
+            $('#id_mordidas-0-cuadrante').val('');
+            $('#id_mordidas-0-pieza').val('');
+            $('#id_mordidas-0-detalle').val('');
+
+            switch ($(this).val()) {
+                case "1":
+
+                    $('polygon#T').attr('fill', "white");
+                    $('polygon#B').attr('fill', "white");
+                    $('polygon#R').attr('fill', "white");
+                    $('polygon#L').attr('fill', "white");
+                    $('polygon#C').attr('fill', "white");
+
+                    e11.style.display='none'; 
+                    e12.style.display='none';
+                    e13.style.display='none';
+                    e14.style.display='none';
+                    e15.style.display='none';
+                    e16.style.display='none';
+                    e17.style.display='none';
+                    e18.style.display='none';
+
+                    e21.style.display='none'; 
+                    e22.style.display='none';
+                    e23.style.display='none';
+                    e24.style.display='none';
+                    e25.style.display='none';
+                    e26.style.display='none';
+                    e27.style.display='none';
+                    e28.style.display='none';
+
+                    e31.style.display='none'; 
+                    e32.style.display='none';
+                    e33.style.display='none';
+                    e34.style.display='none';
+                    e35.style.display='none';
+                    e36.style.display='none';
+                    e37.style.display='none';
+                    e38.style.display='none';
+
+                    e41.style.display='none'; 
+                    e42.style.display='none';
+                    e43.style.display='none';
+                    e44.style.display='none';
+                    e45.style.display='none';
+                    e46.style.display='none';
+                    e47.style.display='none';
+                    e48.style.display='none';
+
+                    e51.style.display='block'; 
+                    e52.style.display='block'; 
+                    e53.style.display='block';
+                    e54.style.display='block'; 
+                    e55.style.display='block';
+
+                    e61.style.display='block';
+                    e62.style.display='block';
+                    e63.style.display='block';
+                    e64.style.display='block';
+                    e65.style.display='block';
+
+                    e71.style.display='block';
+                    e72.style.display='block';
+                    e73.style.display='block';
+                    e74.style.display='block';
+                    e75.style.display='block';
+
+                    e81.style.display='block';
+                    e82.style.display='block';
+                    e83.style.display='block';
+                    e84.style.display='block';
+                    e85.style.display='block';
+                break;
+                case "2":
+
+                    $('polygon#T').attr('fill', "white");
+                    $('polygon#B').attr('fill', "white");
+                    $('polygon#R').attr('fill', "white");
+                    $('polygon#L').attr('fill', "white");
+                    $('polygon#C').attr('fill', "white");
+
+                    e11.style.display='block';
+                    e12.style.display='block';
+                    e13.style.display='block';
+                    e14.style.display='block';
+                    e15.style.display='block';
+                    e16.style.display='block';
+                    e17.style.display='block';
+                    e18.style.display='block';
+
+                    e21.style.display='block';
+                    e22.style.display='block';
+                    e23.style.display='block';
+                    e24.style.display='block';
+                    e25.style.display='block';
+                    e26.style.display='block';
+                    e27.style.display='block';
+                    e28.style.display='block';
+
+                    e31.style.display='block';
+                    e32.style.display='block';
+                    e33.style.display='block';
+                    e34.style.display='block';
+                    e35.style.display='block';
+                    e36.style.display='block';
+                    e37.style.display='block';
+                    e38.style.display='block';
+
+                    e41.style.display='block';
+                    e42.style.display='block';
+                    e43.style.display='block';
+                    e44.style.display='block';
+                    e45.style.display='block';
+                    e46.style.display='block';
+                    e47.style.display='block';
+                    e48.style.display='block';  
+
+                    e51.style.display='block'; 
+                    e52.style.display='block'; 
+                    e53.style.display='block';
+                    e54.style.display='block'; 
+                    e55.style.display='block';
+
+                    e61.style.display='block';
+                    e62.style.display='block';
+                    e63.style.display='block';
+                    e64.style.display='block';
+                    e65.style.display='block';
+
+                    e71.style.display='block';
+                    e72.style.display='block';
+                    e73.style.display='block';
+                    e74.style.display='block';
+                    e75.style.display='block';
+
+                    e81.style.display='block';
+                    e82.style.display='block';
+                    e83.style.display='block';
+                    e84.style.display='block';
+                    e85.style.display='block';                  
+                break;
+                case "3":
+
+                    $('polygon#T').attr('fill', "white");
+                    $('polygon#B').attr('fill', "white");
+                    $('polygon#R').attr('fill', "white");
+                    $('polygon#L').attr('fill', "white");
+                    $('polygon#C').attr('fill', "white");
+                    
+                    e11.style.display='block';
+                    e12.style.display='block';
+                    e13.style.display='block';
+                    e14.style.display='block';
+                    e15.style.display='block';
+                    e16.style.display='block';
+                    e17.style.display='block';
+                    e18.style.display='block';
+
+                    e21.style.display='block';
+                    e22.style.display='block';
+                    e23.style.display='block';
+                    e24.style.display='block';
+                    e25.style.display='block';
+                    e26.style.display='block';
+                    e27.style.display='block';
+                    e28.style.display='block';
+
+                    e31.style.display='block';
+                    e32.style.display='block';
+                    e33.style.display='block';
+                    e34.style.display='block';
+                    e35.style.display='block';
+                    e36.style.display='block';
+                    e37.style.display='block';
+                    e38.style.display='block';
+
+                    e41.style.display='block';
+                    e42.style.display='block';
+                    e43.style.display='block';
+                    e44.style.display='block';
+                    e45.style.display='block';
+                    e46.style.display='block';
+                    e47.style.display='block';
+                    e48.style.display='block';      
+
+                    e51.style.display='none'; 
+                    e52.style.display='none'; 
+                    e53.style.display='none';
+                    e54.style.display='none'; 
+                    e55.style.display='none';
+
+                    e61.style.display='none';
+                    e62.style.display='none';
+                    e63.style.display='none';
+                    e64.style.display='none';
+                    e65.style.display='none';
+
+                    e71.style.display='none';
+                    e72.style.display='none';
+                    e73.style.display='none';
+                    e74.style.display='none';
+                    e75.style.display='none';
+
+                    e81.style.display='none';
+                    e82.style.display='none';
+                    e83.style.display='none';
+                    e84.style.display='none';
+                    e85.style.display='none';               
+                break;
+            }
+            del = 1;
         });
-    </script>    
 
-    <script type="text/javascript">
+    //Pintar odontograma
+    $(function() {
+        n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-perdidas");
+        for (i = 0; i < n1; i++) {
+            list[i].setAttribute("id", "perdidas-" + i);
+            c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
+            p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
+        }  
+
+        n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-anodoncias");
+        for (i = 0; i < n2; i++) {
+            list[i].setAttribute("id", "anodoncias-" + i);            
+            c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
+            p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
+        }  
+
+        n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-mordidas");
+        for (i = 0; i < n3; i++) {
+            list[i].setAttribute("id", "mordidas-" + i);
+            c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
+            p = document.getElementById("id_mordidas-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
+        } 
+    });
+
+        //Tipo problema y color por pestaña
+        nombre = 'perdidas';
+        color = '#f7ff70';
+        $( "a" ).click(function() { 
+            if ( $( this ).hasClass( "tab-id-1-tab_header" ) ) {
+                nombre = 'perdidas'
+                color = '#f7ff70'
+                //amarillo
+            } 
+            else{
+                if( $( this ).hasClass( "tab-id-2-tab_header" ) ){
+                    nombre = 'anodoncias';
+                    color = '#ff6666'
+                    //rojo
+                }
+                else{
+                    nombre = 'mordidas';
+                    color = '#666dff'
+                    //azul
+                }
+            }  
+        });  
+
+        //Declarando formsets
+        $('#perdidas_prematuras tbody tr').formset({
+            prefix: "{{ perdida_formset.prefix }}",
+            addCssClass: 'add-row-perdidas',
+            deleteCssClass: 'delete-row-perdidas',
+            formCssClass: 'dynamic-perdida-form',
+        });  
+
+        $('#anodoncia tbody tr').formset({
+            prefix: "{{ anodoncia_formset.prefix }}",
+            addCssClass: 'add-row-anodoncias',
+            deleteCssClass: 'delete-row-anodoncias',
+            formCssClass: 'dynamic-anodoncia-form',
+        });
+
+        $('#mordida_telescopica tbody tr').formset({
+            prefix: "{{ mordida_formset.prefix }}",
+            addCssClass: 'add-row-mordidas',
+            deleteCssClass: 'delete-row-mordidas',
+            formCssClass: 'dynamic-mordida-form',       
+        });     
+
         $('.tabs_holder').skinableTabs({
             effect: 'basic_display',
             skin: 'skin12',
             position: 'top',
             persist_tab: 0,
             skin_path: '{% static '' %}'
-        });
+        });  
+        
     </script>
 
     <style type="text/css">
-        .add-row {
+        .add-row-perdidas, .add-row-anodoncias, .add-row-mordidas {
             padding-left:18px;
             background:url({% static 'images/add.png' %}) no-repeat left center;
         }
-        .delete-row {
+        .delete-row-perdidas, .delete-row-anodoncias, .delete-row-mordidas {
             float:left;
             display:block;
             margin:5px 0 0 5px;
@@ -91,11 +435,13 @@
 
 <div class="row">
     <form method="POST" action="">
+    <center><h3>Examen de Dentición - Parte 1</h3></center>
     {% csrf_token %} 
 
     <div class="col-md-5">
         <center>
         <div class="form-group" style="width:200px">
+            {{form1.fichas}}
             <label for="{{form1.tipo.name}}">{{form1.tipo.label}}</label>  
             {{form1.tipo}}
         </div>
@@ -112,6 +458,7 @@
                     
                     <table id="perdidas_prematuras" cellpadding="0" cellspacing="5">
                     <thead>
+                        <center><h4>Pérdidas Prematuras</h4></center>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Cuadrante</th>
@@ -120,10 +467,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in perdida_formset.forms %}
-                        {{ form.id }}                        
+                        {% for form in perdida_formset.forms %}                                               
                         <tr>
-                            <td>{{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -139,6 +485,7 @@
 
                     <table id="anodoncia" cellpadding="0" cellspacing="5">
                     <thead>
+                        <center><h4>Anodoncia</h4></center>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Cuadrante</th>
@@ -147,10 +494,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in anodoncia_formset %}
-                        {{ form.id }}                                            
+                        {% for form in anodoncia_formset %}                                          
                         <tr>
-                            <td>{{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -166,6 +512,7 @@
 
                     <table id="mordida_telescopica" cellpadding="0" cellspacing="5">
                     <thead>
+                        <center><h4>Mordida Telescópica</h4></center>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Cuadrante</th>
@@ -174,10 +521,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in mordida_formset %}
-                        {{ form.id }}                        
+                        {% for form in mordida_formset %}                  
                         <tr>
-                            <td>{{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -201,7 +547,7 @@
             <div id="svgselect" style="width: 610px; height: 230px;"> <!-- background-color:red -->
                 <svg version="1.1" height="100%" width="100%">
                     <g transform="scale(1.5)" id="gmain">
-                        <g id="P18" style="display: none">
+                        <g id="P18">
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
                             <polygon points="15,5   20,0    20,20   15,15" fill="white" stroke="navy" stroke-width="0.5" id="R" opacity="1"></polygon>
@@ -209,7 +555,7 @@
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">18</text>
                         </g>
-                        <g id="P17" transform="translate(25,0)" style="display: none">
+                        <g id="P17" transform="translate(25,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -217,7 +563,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">17</text>
                         </g>
-                        <g id="P16" transform="translate(50,0)" style="display: none">
+                        <g id="P16" transform="translate(50,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -225,7 +571,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">16</text>
                         </g>
-                        <g id="P15" transform="translate(75,0)" style="display: none">
+                        <g id="P15" transform="translate(75,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -233,7 +579,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">15</text>
                         </g>
-                        <g id="P14" transform="translate(100,0)" style="display: none">
+                        <g id="P14" transform="translate(100,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -241,7 +587,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">14</text>
                         </g>
-                        <g id="P13" transform="translate(125,0)" style="display: none">
+                        <g id="P13" transform="translate(125,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -249,7 +595,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">13</text>
                         </g>
-                        <g id="P12" transform="translate(150,0)" style="display: none">
+                        <g id="P12" transform="translate(150,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -257,7 +603,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">12</text>
                         </g>
-                        <g id="P11" transform="translate(175,0)" style="display: none">
+                        <g id="P11" transform="translate(175,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -268,7 +614,7 @@
                         
                         <!-- Izquierda segunda fila -->
                 
-                        <g id="P55" transform="translate(75,40)" style="display: none">
+                        <g id="P55" transform="translate(75,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -276,7 +622,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">55</text>
                         </g>
-                        <g id="P54" transform="translate(100,40)" style="display: none">
+                        <g id="P54" transform="translate(100,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -284,7 +630,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">54</text>
                         </g>
-                        <g id="P53" transform="translate(125,40)" style="display: none">
+                        <g id="P53" transform="translate(125,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -292,7 +638,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">53</text>
                         </g>
-                        <g id="P52" transform="translate(150,40)" style="display: none">
+                        <g id="P52" transform="translate(150,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -300,7 +646,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">52</text>
                         </g>
-                        <g id="P51" transform="translate(175,40)" style="display: none">
+                        <g id="P51" transform="translate(175,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -311,7 +657,7 @@
                 
                         <!-- Izquierda tercer fila -->
                 
-                        <g id="P85" transform="translate(75,80)" style="display: none">
+                        <g id="P85" transform="translate(75,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -319,7 +665,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">85</text>
                         </g>
-                        <g id="P84" transform="translate(100,80)" style="display: none">
+                        <g id="P84" transform="translate(100,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -327,7 +673,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">84</text>
                         </g>
-                        <g id="P83" transform="translate(125,80)" style="display: none">
+                        <g id="P83" transform="translate(125,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -335,7 +681,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">83</text>
                         </g>
-                        <g id="P82" transform="translate(150,80)" style="display: none">
+                        <g id="P82" transform="translate(150,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -343,7 +689,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">82</text>
                         </g>
-                        <g id="P81" transform="translate(175,80)" style="display: none">
+                        <g id="P81" transform="translate(175,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -354,7 +700,7 @@
                 
                         <!-- Izquierda cuarta fila -->
                 
-                        <g id="P48" transform="translate(0,120)" style="display: none">
+                        <g id="P48" transform="translate(0,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -362,7 +708,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">48</text>
                         </g>
-                        <g id="P47" transform="translate(25,120)" style="display: none">
+                        <g id="P47" transform="translate(25,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -370,7 +716,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">47</text>
                         </g>
-                        <g id="P46" transform="translate(50,120)" style="display: none">
+                        <g id="P46" transform="translate(50,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -378,7 +724,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">46</text>
                         </g>
-                        <g id="P45" transform="translate(75,120)" style="display: none">
+                        <g id="P45" transform="translate(75,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -386,7 +732,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">45</text>
                         </g>
-                        <g id="P44" transform="translate(100,120)" style="display: none">
+                        <g id="P44" transform="translate(100,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -394,7 +740,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">44</text>
                         </g>
-                        <g id="P43" transform="translate(125,120)" style="display: none">
+                        <g id="P43" transform="translate(125,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -402,7 +748,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">43</text>
                         </g>
-                        <g id="P42" transform="translate(150,120)" style="display: none">
+                        <g id="P42" transform="translate(150,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -410,7 +756,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">42</text>
                         </g>
-                        <g id="P41" transform="translate(175,120)" style="display: none">
+                        <g id="P41" transform="translate(175,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -421,7 +767,7 @@
                         
                         <!-- Derecha primer fila -->
                         
-                        <g id="P21" transform="translate(210,0)" style="display: none">
+                        <g id="P21" transform="translate(210,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -429,7 +775,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">21</text>
                         </g>
-                        <g id="P22" transform="translate(235,0)" style="display: none">
+                        <g id="P22" transform="translate(235,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -437,7 +783,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">22</text>
                         </g>
-                        <g id="P23" transform="translate(260,0)" style="display: none">
+                        <g id="P23" transform="translate(260,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -445,7 +791,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">23</text>
                         </g>
-                        <g id="P24" transform="translate(285,0)" style="display: none">
+                        <g id="P24" transform="translate(285,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -453,7 +799,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">24</text>
                         </g>
-                        <g id="P25" transform="translate(310,0)" style="display: none">
+                        <g id="P25" transform="translate(310,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -461,7 +807,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">25</text>
                         </g>
-                        <g id="P26" transform="translate(335,0)" style="display: none">
+                        <g id="P26" transform="translate(335,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -469,7 +815,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">26</text>
                         </g>
-                        <g id="P27" transform="translate(360,0)" style="display: none">
+                        <g id="P27" transform="translate(360,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -477,7 +823,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">27</text>
                         </g>
-                        <g id="P28" transform="translate(385,0)" style="display: none">
+                        <g id="P28" transform="translate(385,0)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -488,7 +834,7 @@
                         
                         <!-- Derecha segunda fila -->
                         
-                        <g id="P61" transform="translate(210,40)" style="display: none">
+                        <g id="P61" transform="translate(210,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -496,7 +842,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">61</text>
                         </g>
-                        <g id="P62" transform="translate(235,40)" style="display: none">
+                        <g id="P62" transform="translate(235,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -504,7 +850,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">62</text>
                         </g>
-                        <g id="P63" transform="translate(260,40)" style="display: none">
+                        <g id="P63" transform="translate(260,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -512,7 +858,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">63</text>
                         </g>
-                        <g id="P64" transform="translate(285,40)" style="display: none">
+                        <g id="P64" transform="translate(285,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -520,7 +866,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">64</text>
                         </g>
-                        <g id="P65" transform="translate(310,40)" style="display: none">
+                        <g id="P65" transform="translate(310,40)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -531,7 +877,7 @@
                         
                         <!-- Derecha tercer fila -->
                         
-                        <g id="P71" transform="translate(210,80)" style="display: none">
+                        <g id="P71" transform="translate(210,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -539,7 +885,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">71</text>
                         </g>
-                        <g id="P72" transform="translate(235,80)" style="display: none">
+                        <g id="P72" transform="translate(235,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -547,7 +893,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">72</text>
                         </g>
-                        <g id="P73" transform="translate(260,80)" style="display: none">
+                        <g id="P73" transform="translate(260,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -555,7 +901,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">73</text>
                         </g>
-                        <g id="P74" transform="translate(285,80)" style="display: none">
+                        <g id="P74" transform="translate(285,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -563,7 +909,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">74</text>
                         </g>
-                        <g id="P75" transform="translate(310,80)" style="display: none">
+                        <g id="P75" transform="translate(310,80)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -574,7 +920,7 @@
                         
                         <!-- Derecha cuarta fila -->
                         
-                        <g id="P31" transform="translate(210,120)" style="display: none">
+                        <g id="P31" transform="translate(210,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -582,7 +928,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">31</text>
                         </g>
-                        <g id="P32" transform="translate(235,120)" style="display: none">
+                        <g id="P32" transform="translate(235,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -590,7 +936,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">32</text>
                         </g>
-                        <g id="P33" transform="translate(260,120)" style="display: none">
+                        <g id="P33" transform="translate(260,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -598,7 +944,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">33</text>
                         </g>
-                        <g id="P34" transform="translate(285,120)" style="display: none">
+                        <g id="P34" transform="translate(285,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -606,7 +952,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">34</text>
                         </g>
-                        <g id="P35" transform="translate(310,120)" style="display: none">
+                        <g id="P35" transform="translate(310,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -614,7 +960,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">35</text>
                         </g>
-                        <g id="P36" transform="translate(335,120)" style="display: none">
+                        <g id="P36" transform="translate(335,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -622,7 +968,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">36</text>
                         </g>
-                        <g id="P37" transform="translate(360,120)" style="display: none">
+                        <g id="P37" transform="translate(360,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -630,7 +976,7 @@
                             <polygon points="0,0    5,5     5,15    0,20" fill="white" stroke="navy" stroke-width="0.5" id="L" opacity="1"></polygon>
                             <text x="6" y="30" stroke="navy" fill="navy" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">37</text>
                         </g>
-                        <g id="P38" transform="translate(385,120)" style="display: none">
+                        <g id="P38" transform="translate(385,120)">
                             <polygon points="5,5    15,5    15,15   5,15" fill="white" stroke="navy" stroke-width="0.5" id="C" opacity="1"></polygon>
                             <polygon points="0,0    20,0    15,5    5,5" fill="white" stroke="navy" stroke-width="0.5" id="T" opacity="1"></polygon>
                             <polygon points="5,15   15,15   20,20   0,20" fill="white" stroke="navy" stroke-width="0.5" id="B" opacity="1"></polygon>
@@ -640,8 +986,8 @@
                         </g>
                     </g>
                 </svg>
-            </div>                
-
+            </div>   
+                         
             <br/>
             <table border = "2">
                 <tbody>
@@ -652,50 +998,7 @@
                     </tr>
                 </tbody>
             </table>
-
-        </center>           
-        <br/><br/><br/>    
-    </div>
-    <div class="col-md-6">
-        {{form1.fichas}}
-        <center> 
-
-        <div class="form-group" style="width:400px">
-            <label for="{{form1.observaciones_generales.name}}">{{form1.observaciones_generales.label}}</label>  
-            {{form1.observaciones_generales}}
-        </div>
-
-        <div class="form-group" style="width:250px">
-            <label for="{{form1.diastemas.name}}">{{form1.diastemas.label}}</label>  
-            {{form1.diastemas}}
-            <br/>
-            <label for="{{form1.mal_posiciones.name}}">{{form1.mal_posiciones.label}}</label>  
-            {{form1.mal_posiciones}}
-            <br/>
-            <label for="{{form1.supernumerarios.name}}">{{form1.supernumerarios.label}}</label>  
-            {{form1.supernumerarios}}
-            <br/>
-            <label for="{{form1.tejido_intraorales.name}}">{{form1.tejido_intraorales.label}}</label>  
-            {{form1.tejido_intraorales}}
-        </div> 
-        </center>          
-
-    </div>
-    <div class="col-md-6">          
-
-    <center>
-    <div class="form-group" style="width:250px">
-        <label for="{{form1.encias.name}}">{{form1.encias.label}}</label>  
-        {{form1.encias}}
-        <br/>
-        <label for="{{form1.frenillos.name}}">{{form1.frenillos.label}}</label>  
-        {{form1.frenillos}}
-        <br/>
-        <label for="{{form1.lengua.name}}">{{form1.lengua.label}}</label>  
-        {{form1.lengua}}
-    </div> 
-    </center>   
-
+        </center>             
     </div>
 </div><!-- fin bootstrap -->
 
