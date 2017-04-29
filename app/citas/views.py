@@ -10,16 +10,60 @@ from django.core import serializers
 from app.citas.forms import *
 from app.citas.models import *
 from app.informacion.models import *
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import CreateView,UpdateView
+from django.http import HttpResponse
+from django.views.generic import ListView
+from django.views.generic.base import RedirectView
+from django.http import HttpResponseRedirect
+from collections import OrderedDict
+from django.views.generic import TemplateView
+from app.informacion.models import *
+from app.informacion.forms import *
+from django.core import serializers
+from django.http import HttpResponse
+import json
+import time	
+
+from app.analisis_cefalometrico.models import *
+from app.analisis_radiograficos.models import *
+from app.AnalisisDenticionMixta.models import *
+from app.aspMandibular.models import *
+from app.aspectos.models import *
+from app.diagCefalo.models import *
+from app.diagGeneral.models import *
+from app.informacion.models import *
+from app.tipo_perfil.models import *
 
 # Create your views here.
-def citas_crear(request):
+def citas_crear(request,codi,num):
 	
 	user = request.user.id
-	form = citasGeneralesForm(initial={'estudiante':request.user.username})
-	form2 = citasForm(initial={})
-	form3 = citasGeneralesForm2()
-	form4 = citasForm2(initial={})
-	return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4})
+
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num,completada=0)
+		if ids:
+			form = citasGeneralesForm(initial={'estudiante':request.user.username})
+			form2 = citasForm(initial={})
+			form3 = citasGeneralesForm2()
+			form4 = citasForm2(initial={})
+			return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num})
+	except Exception as e:
+			return render(request, 'base/error_no_hay_acceso.html')
+
+def citas_consultar(request,codi,num):
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			form = citasGeneralesForm(initial={'estudiante':request.user.username})
+			form2 = citasForm(initial={})
+			form3 = citasGeneralesForm2()
+			form4 = citasForm2(initial={})
+			return render(request, 'citas/citas_consultar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num})
+	except Exception as e:
+			return render(request, 'base/error_no_existe.html')
+		
 
 def citas_crear2(request):
 	
@@ -38,70 +82,178 @@ def citas_crear2(request):
 	return render(request, 'citas/citas_crear2.html', {'form':form,'form2':form2})
 
 def post1(request):
-	codigo = request.POST['codigo']
+	cod = request.POST['codigo']
+	num = request.POST['numero']
 	estudiante = request.POST['estudiante']
 	aparato = request.POST['aparato']
-	radio = request.POST['radio']
+	radioMx = request.POST['radio1']
+	radioMd = request.POST['radio2']
 	id_estudiante = Usuario.objects.get(username=estudiante)
 
 	if request.method == 'POST':
-		if radio == 'mx':
-			citas_general.objects.create(aparato=aparato,codigo_id=codigo,estudiante_id=id_estudiante.id,mx=1,md=0)
-		if radio == 'md':
-			citas_general.objects.create(aparato=aparato,codigo_id=codigo,estudiante_id=id_estudiante.id,mx=0,md=1)
-
-	return HttpResponse('<script>alert("cita creada con exito");</script>')
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+			ids= fichas.objects.get(cod_expediente=cod,numero=num)
+			citas_general.objects.create(aparato=aparato,fichas_id=ids.id,estudiante_id=id_estudiante.id,mx=radioMx,md=radioMd)
+			return HttpResponse('<script>alert("cita creada con exito");</script>')
+		else:
+			return HttpResponse('No se encuentran fichas incompletas', status=401)
 
 
 def post2(request):
-	codigo = request.POST['codigo']
-	autorizacion = request.POST['autorizacion']
+	cod = request.POST['codigo']
+	num = request.POST['numero']
 	resultados = request.POST['resultados']
 	observaciones = request.POST['observaciones']
 	fecha1 = request.POST['fecha1']
 	fecha2 = request.POST['fecha2']
 
 	num_cita=0
-	try:
-		numerocitas =  len(citas.objects.filter(codigo_id=codigo))
-		num_cita=numerocitas +1
-	except Exception as e:
-		raise e
+	if fichas.objects.filter(cod_expediente_id=cod,numero=num).exists():
+		ids = fichas.objects.get(cod_expediente_id=cod,numero=num)
+		try:
+			numerocitas =  len(citas.objects.filter(fichas_id=ids.id))
+			num_cita=numerocitas +1
+		except Exception as e:
+			raise e
 
-	citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=autorizacion,codigo_id=codigo)
+		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=0,fichas_id=ids.id)
 
 
-	return HttpResponse('<script>alert("cita creada con exito");</script>')
+		return HttpResponse('<script>alert("cita creada con exito");</script>')
+	else:
+		return HttpResponse('No se encuentran fichas incompletas', status=401)
+
+
+def autorizacion(request):
+	cod = request.POST['codigo']
+	num = request.POST['numero']
+
+	print "entra"
+
+	if request.method == 'POST':
+		num_cita=1
+		if fichas.objects.filter(cod_expediente_id=cod,numero=num).exists():
+			ids = fichas.objects.get(cod_expediente_id=cod,numero=num)
+			try:
+				numerocitas =  len(citas.objects.filter(fichas_id=ids.id))
+				num_cita=numerocitas
+			except Exception as e:
+				raise e
+			citas.objects.filter(num_cita=numerocitas,fichas_id=ids.id).update(autorizacion=1,tutor=request.user.username)
+			return HttpResponse('<script>alert("Se autorizo");</script>')
+		else:
+			return HttpResponse('Error', status=401)
+
+
+class finalizar(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if request.method == 'GET':
+				codigos = fichas.objects.filter(cod_expediente=cod,numero=num)
+				for fi in codigos:
+					if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+						if estado_general.objects.filter(fichas_id=fi.id).exists():
+							if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+								if registro.objects.filter(fichas_id=fi.id).exists():
+									#if registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+										#if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+									if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+										if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+											if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+												if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+													if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+														if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+															if nance_general.objects.filter(fichas_id=fi.id).exists():
+																if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+																	if moyers_superior.objects.filter(fichas_id=fi.id).exists():
+																		if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+																			fichas.objects.filter(id=fi.id).update(completada=1)
+																			return HttpResponse('<script>alert("Se autorizo");</script>')
+																		else:
+																			return HttpResponse('16', status=401)
+																	else:
+																		return HttpResponse('15', status=401)
+																else:
+																	return HttpResponse('14', status=401)
+															else:
+																return HttpResponse('13', status=401)
+														else:
+															return HttpResponse('12', status=401)
+													else:
+														return HttpResponse('11', status=401)
+												else:
+													return HttpResponse('10', status=401)
+											else:
+												return HttpResponse('9', status=401)
+										else:
+											return HttpResponse('8', status=401)
+									else:
+										return HttpResponse('7', status=401)	
+								else:
+									return HttpResponse('4', status=401)
+							else:
+								return HttpResponse('3', status=401)
+						else:
+							return HttpResponse('2', status=401)
+					else:
+						return HttpResponse('1', status=401)
 
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if request.method == 'POST':
+			num_cita=0
+			if fichas.objects.filter(cod_expediente_id=cod,numero=num).exists():
+				ids = fichas.objects.get(cod_expediente_id=cod,numero=num)
+				try:
+					numerocitas =  len(citas.objects.filter(fichas_id=ids.id))
+					num_cita=numerocitas
+				except Exception as e:
+					raise e
+				citas.objects.filter(numero=numerocitas,fichas_id=ids.id).update(autorizacion=1)
+				return HttpResponse('<script>alert("Se autorizo");</script>')
+			else:
+				return HttpResponse('No se encuentran fichas incompletas', status=401)
+
+
+
+class BusquedaAjaxView(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
 		if datos_generales.objects.filter(cod_expediente=cod).exists():
 			nombre = datos_generales.objects.filter(cod_expediente=cod)
-			citass = citas_general.objects.filter(codigo_id=cod)
+			if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				if citas_general.objects.filter(fichas_id=ids.id).exists():
+					citass = citas_general.objects.get(fichas_id=ids.id)
 		else:
 			nombre="fallo"
-		
 		data = serializers.serialize('json', nombre, fields=('nombre_completo'))
-
 		return HttpResponse(data, content_type='application/json')
 
 class BusquedaAjaxView2(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
-		citass = citas_general.objects.filter(codigo_id=cod)
-		data = serializers.serialize('json', citass, fields=('aparato','md'))
-
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				citass = citas_general.objects.filter(fichas_id=ids.id)
+				data = serializers.serialize('json', citass, fields=('aparato','md','mx'))
 		return HttpResponse(data, content_type='application/json')
 
 
 class BusquedaCitasListar(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
-		citas2 = citas.objects.filter(codigo_id=cod)
-
-		data2 = serializers.serialize('json', citas2,fields=('codigo','num_cita','fecha_cita','observaciones','proxima_cita','resultados','autorizacion','tutor'))
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+			ids= fichas.objects.get(cod_expediente=cod,numero=num)
+			citas2 = citas.objects.filter(fichas_id=ids.id)
+			data2 = serializers.serialize('json', citas2,fields=('codigo','num_cita','fecha_cita','observaciones','proxima_cita','resultados','autorizacion','tutor'))
 		return HttpResponse(data2, content_type='application/json')
 
 

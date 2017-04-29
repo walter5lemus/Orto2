@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base2.html' %}
 {% load staticfiles %}
 {% block title %}
 	Control de Citas
@@ -93,12 +93,12 @@
 		<div class="form-group">
 			<div class="col-md-6">
 				<label for="codigo">N° de Expediente </label>	
-				<input id="codigo" class="form-control" type="text" disabled="True">
+				<input id="codigo" class="form-control" type="text" readonly>
 				<br>
 			</div>
 			<div class="col-md-6">
 				<label for="ficha">N° de Ficha</label>	
-				<input id="ficha" class="form-control" type="text" disabled="True">
+				<input id="ficha" class="form-control" type="text" readonly>
 				<br>
 			</div>
 			<br>
@@ -149,7 +149,7 @@
 					<label for="{{form.mx.name}}">{{form.mx.label}}</label>	
 					{{form.mx}}
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-3">
 					<label for="{{form.md.name}}">{{form.md.label}}</label>	
 					{{form.md}}
 			</div>	
@@ -157,107 +157,12 @@
 		</div>
 
 		<br><br>
-		<div class="col-md-4 col-md-offset-4">
-			<div class="form-group">
-				<button class="btn btn-primary btn-block" id="aparato1" onclick="urlss()">Registrar Cita</button>
-				<button class="btn btn-primary btn-block" id="aparato2" onclick="urlss()">Añadir Aparato</button>
-			</div>
-		</div>	
+
 	</div>
 
 		</div>
 	</div>
 </div>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2 divOcultar">	
-			{% csrf_token %}
-			<div class="row">
-				<div class="form-group">
-					<div class="col-md-4 col-md-offset-2">
-						<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
-						{{form3.aparato}}
-					</div>
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<br>
-							<label for="mx">Maxilar (Mx)</label>
-							<input type="checkbox" name="radio" id="mx" value="mx">
-						</div>
-						<div class="col-md-6 ">
-							<br>
-							<label for="md">Mandibular (Md)</label>
-							<input type="checkbox" name="radio2" id="md" value="md">
-						</div>
-						
-					</div>
-				</div>
-			</div>
-			<div class="row">
-			<br>
-				<div class="col-md-4 col-md-offset-4">
-					<button class="btn btn-primary btn-block" onclick="post1()" id="boton1">Registrar</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="row">
-	<br><br>
-		<div class="col-md-10 col-md-offset-1 divOcultar2">	
-			<div class="col-md-5">
-				<div class="form-group">
-					<div class="row">
-						<div class="col-md-12">
-								<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
-									{{form2.fecha_cita}}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-						<br>
-									<label for="{{form4.observaciones.name}}">{{form4.observaciones.label}}</label>	
-								{{form4.observaciones}}
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-5 col-md-offset-1">
-				<div class="col-md-12">
-							<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
-						{{form2.proxima_cita}}
-				</div>
-
-				<div class="col-md-12">
-							<br>
-							<label for="{{form4.resultados.name}}">{{form4.resultados.label}}</label>	
-						{{form4.resultados}}
-				</div>
-
-				<!--  <div class="col-md-1">
-				<div class="well well-sm">
-							<FONT SIZE=5 COLOR=FF8000>
-							  <label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
-							</FONT>
-						{{form2.autorizacion}}
-				</div>
-				</div> -->
-
-			</div>
-			
-			
-			<div class="row">
-
-				<div class="col-md-3 col-md-offset-4">
-				<br>
-					<button class="btn btn-primary btn-block" onclick="post2()" id="boton2">Registrar</button>
-				<br>
-				</div>
-				
-			</div>
-			</div>
-		</div>
 
 	<br><br>
 	<div class="table-responsive col-md-12 fuera">
@@ -265,15 +170,6 @@
 	
 		</div>
 	</div>
-
-	<div class="row">
-	<div class="col-md-3 col-md-offset-9">
-		<br>
-			<button class="btn btn-danger btn-block" id="finalizar_control">Finalizar Control</button>
-		<br>
-		</div>
-	</div>
-
 
 
 

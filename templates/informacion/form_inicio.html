@@ -196,7 +196,7 @@ $('#id_nombre_paciente').keyup(function(e){
  		success : function(data) {
  			$('#id_listanombres').empty().append('whatever');
         	for (var i = 0; i < data.length; i++) {
-					$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
+				$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
 			}
  		},
  		error : function(message) {

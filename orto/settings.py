@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'orto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'orto22',
+        'NAME': 'orto2',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

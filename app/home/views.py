@@ -27,26 +27,6 @@ from app.tipo_perfil.models import *
 def index(request):
 	user = request.user.id
 	
-
-	codigos = fichas.objects.filter(usuario_creador=user)
-	for fi in codigos:
-		if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-			if estado_general.objects.filter(fichas_id=fi.id).exists():
-				if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-					#if registro.objects.filter(fichas_id=fi.id).exists():
-						#if registro_mordidas.objects.filter(fichas_id=fi.id).exists():
-							#if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-						if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-							if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-								if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-									if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-										if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-											if nance_general.objects.filter(fichas_id=fi.id).exists():
-												if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-													if moyers_superior.objects.filter(fichas_id=fi.id).exists():
-														if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-															fichas.objects.filter(id=fi.id).update(completada=1)
 	completos = list()
 	expedientes = fichas.objects.filter(usuario_creador=user,completada=1)
 	for exp in expedientes:

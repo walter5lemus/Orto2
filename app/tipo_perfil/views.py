@@ -25,7 +25,7 @@ def tipo_perfil_view(request,codi,num):
 				form.save()
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-			return redirect('/aspectos/denticion1/nuevo/%s/%s' %(codi,num))
+				return redirect('/aspectos/denticion1/nuevo/%s/%s' %(codi,num))
 		return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi,'fecha':ultima}) 
 	else:
 		if ids:	
@@ -35,7 +35,7 @@ def tipo_perfil_view(request,codi,num):
 					form.save()
 					fecha =  timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return HttpResponseRedirect('/aspectos/denticion1/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/aspectos/denticion1/nuevo/%s/%s/' %(codi,num))
 			else: 
 				form = Tipo_perfilForm(initial={'fichas':ids.id})
 				
@@ -68,7 +68,7 @@ def tipo_perfil_edit(request,codi,num):
 				form.save()
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-			return redirect('/aspectos/denticion1/editar/%s/%s' %(codi,num))
+				return redirect('/aspectos/denticion1/editar/%s/%s' %(codi,num))
 		return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:

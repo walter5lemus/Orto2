@@ -29,7 +29,7 @@ def diag_general_view(request,codi,num):
 				form.save()
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-			return redirect('/')
+				return redirect('/')
 		return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
 
 	else:
@@ -40,7 +40,7 @@ def diag_general_view(request,codi,num):
 					form.save()
 					fecha =  timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return HttpResponseRedirect('/')
+					return HttpResponseRedirect('/')
 			else: 
 				form = diagGeneralForm(initial={'fichas':ids.id})
 		
@@ -64,7 +64,7 @@ def diag_general_edit(request,codi,num):
 				form.save()
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-			return redirect('/')
+				return redirect('/')
 		return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
@@ -83,7 +83,7 @@ def diag_general_consultar(request,codi,num):
 				form = diagGeneralForm_consultar(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
-				return redirect('/')
+					return redirect('/')
 			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:

@@ -20,7 +20,23 @@ Estado general
 <form method="POST">
 	{% csrf_token %}
 
-
+	<div class="row">
+		{% if form.errors %}
+		    {% for field in form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-danger">
+		                <strong>{{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in form.non_field_errors %}
+		        <div class="alert alert-danger">
+		            <strong>{{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		</div>
+		
  <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title"></h3>

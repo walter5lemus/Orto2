@@ -1,4 +1,4 @@
-	# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django import forms
 from app.citas.models import *
 from app.informacion.models import *
@@ -30,7 +30,7 @@ class citasForm(forms.ModelForm):
 		}
 
 		widgets = {
-		'fichas':forms.TextInput(attrs={'class':'form-control'}),
+		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 		'num_cita':forms.TextInput(attrs={'class':'form-control'}),
 		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'observaciones':forms.Textarea(attrs={'class':'form-control'}),
@@ -71,9 +71,9 @@ class citasForm2(forms.ModelForm):
 		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 		'num_cita':forms.HiddenInput(attrs={'class':'form-control'}),
 		'fecha_cita':forms.DateInput(attrs={'class':'form-control'}),
-		'observaciones':forms.TextInput(attrs={'class':'form-control'}),
+		'observaciones':forms.Textarea(attrs={'class':'form-control'}),
 		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
-		'resultados':forms.TextInput(attrs={'class':'form-control'}),
+		'resultados':forms.Textarea(attrs={'class':'form-control'}),
 		'autorizacion':forms.CheckboxInput(attrs={'class':''}),
 		'tutor':forms.TextInput(attrs={'class':'form-control'}),
 
@@ -99,7 +99,7 @@ class citasGeneralesForm(forms.ModelForm):
 		'estudiante':'Estudiante',
 		}
 		widgets = {
-		'fichas':forms.TextInput(attrs={'class':'form-control'}),
+		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 		'aparato':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		'mx':forms.CheckboxInput(attrs={'class':''}),
 		'md':forms.CheckboxInput(attrs={'class':''}),

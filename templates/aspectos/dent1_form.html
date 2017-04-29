@@ -584,7 +584,22 @@
 {% endblock %}
 
 {% block content %}
-
+    <div class="row">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
 <div class="row">
     <form method="POST" action="">
     <center><h3>Examen de Dentición - Parte 1</h3></center>
@@ -1154,18 +1169,18 @@
     </div>
 </div><!-- fin bootstrap -->
 
-<div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-
-            <br><br>
-            <div class="col-md-3 col-md-offset-4">
-                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+        <br><br>
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
-            <br><br>
-            
+            <div class="col-md-3 col-md-offset-2">
+              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
         </div>
-    </div>
-
+        <br><br>
+    </div>  
     </form>
 </div>
 

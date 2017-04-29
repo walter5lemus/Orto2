@@ -66,7 +66,8 @@ def cefalometrico_editar(request, codi, num):
 					formset.save()
 					fecha =  timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/diag_cefalo/edit/%s/%s' % (codi, num))
+					return redirect('/diag_cefalo/edit/%s/%s' % (codi, num))
+				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})
 			return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})	
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:

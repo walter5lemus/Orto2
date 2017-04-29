@@ -31,7 +31,7 @@ def AspectosArticulares_Crear(request,codi,num):
 				form.save()
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-			return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
 		return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
 	else:
 		if ids:
@@ -41,7 +41,8 @@ def AspectosArticulares_Crear(request,codi,num):
 					form.save()
 					fecha =  timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num})
 			else:
 				ids = fichas.objects.get(cod_expediente=codi, numero=num)
 				form = AspectosArticularesForm(initial={'fichas':ids.id})
@@ -82,7 +83,8 @@ def AspectosArticulares_edit(request,codi,num):
 					form.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return HttpResponseRedirect('/asp_mandibular1/edit/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/asp_mandibular1/edit/%s/%s/' %(codi,num))
+				return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
 			return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -105,7 +107,7 @@ def otrosAspectos_crear(request, codi, num):
 					form.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
+					return redirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
 			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num})
 
 		else:
@@ -116,7 +118,8 @@ def otrosAspectos_crear(request, codi, num):
 						form.save()
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return HttpResponseRedirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
+						return HttpResponseRedirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
+					return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num})
 				else:
 					form = aspectos_mandibulares2Form(initial={'fichas': ids.id})
 			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num})
@@ -157,7 +160,8 @@ def otrosAspectos_editar(request, codi, num):
 					form.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/analisis_radiograficos/otrosHallazgos/editar/%s/%s/' % (codi, num))
+					return redirect('/analisis_radiograficos/otrosHallazgos/editar/%s/%s/' % (codi, num))
+				return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num})
 			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -186,7 +190,7 @@ def otrosHallazgos_crear(request, codi, num):
 					form2.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
+					return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
 			return render(request, 'analisis_radiograficos/otrosHallazgosForm.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num})            
 
 	else:
@@ -200,7 +204,8 @@ def otrosHallazgos_crear(request, codi, num):
 					form2.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
+					return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
+				return render(request, 'analisis_radiograficos/otrosHallazgosForm.html',{'form1': form1,'form2': form2, 'codi': codi, 'num': num})
 			else:
 				form1 = estadios_de_nollaForm(initial={'fichas': ids.id})
 				form2 = secuencia_y_cronologiaForm(initial={'fichas': ids.id})
@@ -251,7 +256,8 @@ def otrosHallazgos_editar(request, codi, num):
 					form2.save()
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/analisis_cefalometrico/cefalometrico/editar/%s/%s' % (codi, num))
+					return redirect('/analisis_cefalometrico/cefalometrico/editar/%s/%s' % (codi, num))
+				return render(request, 'analisis_radiograficos/otrosHallazgosForm.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num})
 			return render(request, 'analisis_radiograficos/otrosHallazgosForm.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
