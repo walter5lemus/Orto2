@@ -556,7 +556,10 @@
             {
                 alert("Esta pieza ya fue seleccionada.")
             }
-        });   
+        });
+
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");
     </script>
 
     <style type="text/css">
@@ -602,7 +605,25 @@
         </div>
 <div class="row">
     <form method="POST" action="">
-    <center><h3>Examen de Dentición - Parte 1</h3></center>
+    <center><h1>Examen de Dentición - Parte 1</h1></center>
+
+        <div class="col-md-12 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-4">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-4">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <br>
+        </div>
+        <br>
+    </div>
+
     {% csrf_token %} 
 
     <div class="col-md-5">

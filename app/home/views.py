@@ -72,10 +72,13 @@ def index(request):
 		if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-16)
 
-	
-	return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
-
-	#return render(request,'index.html')
+	if request.user.is_superuser == 1:
+		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+	if request.user.is_superuser == 2:
+		return render(request,'index_docentes.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+	if request.user.is_superuser== 3:
+			return render(request,'index_estudiantes.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+			
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):

@@ -44,7 +44,10 @@ def diag_cefalo_view(request,codi,num):
 				
 		return render(request,'diag_cefalo/form_diag_cefalo.html', {'form':form,'codi':codi,'num':num})
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 
 

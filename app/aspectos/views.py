@@ -86,7 +86,10 @@ def denticion1_view(request,codi,num):
 						form1 = tipo_denticionForm(initial={'fichas':ids.id})
 						return render(request, 'aspectos/dent1_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 	except Exception, e:
-		return render(request, 'base/error_no_existe.html', {'num':int(num)-1})		
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 def denticion1_editar(request,codi,num):
 	str(codi)
