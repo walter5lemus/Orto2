@@ -27,18 +27,22 @@ def denticion1_view(request,codi,num):
 					anodonciaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
 					mordidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
 					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+					denticion = denticion.objects.get(fichas_id=ids.id)
 					if request.method == 'GET':
 						perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
 						anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
 						mordida_formset = mordidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='3'), prefix='mordidas')
 						form1 = tipo_denticionForm(instance=tipodenticion)
+						form2 = denticionForm(instance=denticion)
 					else:
 						perdida_formset = perdidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='perdidas',)		
 						anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='anodoncias',)
 						mordida_formset = mordidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='mordidas',)
 						form1 = tipo_denticionForm(request.POST, instance=tipodenticion)
-						if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid()):
+						form2 = denticionForm(request.POST, instance=denticion)
+						if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid() and form2.is_valid()):
 							form1.save()
+							form2.save()
 
 							for form in perdida_formset:
 								print form
@@ -53,7 +57,7 @@ def denticion1_view(request,codi,num):
 								form.save()
 
 							return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/dent1_form2.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+					return render(request, 'aspectos/dent1_form2.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 				else:
 					max_num=5
 					perdidaFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
@@ -64,8 +68,10 @@ def denticion1_view(request,codi,num):
 						anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, prefix='anodoncias')
 						mordida_formset = mordidaFormSet(request.POST, request.FILES, prefix='mordidas')
 						form1 = tipo_denticionForm(request.POST,initial={'fichas':ids.id})
-						if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid()):
+						form2 = denticionForm(request.POST, initial={'fichas':ids.id})
+						if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid() and form2.is_valid()):
 							form1.save()
+							form2.save()
 							for form in perdida_formset:
 								print form
 								form.save()
@@ -84,7 +90,8 @@ def denticion1_view(request,codi,num):
 						anodoncia_formset = anodonciaFormSet(prefix='anodoncias')
 						mordida_formset = mordidaFormSet(prefix='mordidas')
 						form1 = tipo_denticionForm(initial={'fichas':ids.id})
-						return render(request, 'aspectos/dent1_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
+						form2 = denticionForm(initial={'fichas':ids.id})
+						return render(request, 'aspectos/dent1_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 	except Exception, e:
 		return render(request, 'base/error_no_existe.html', {'num':int(num)-1})		
 
