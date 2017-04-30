@@ -105,6 +105,7 @@ def denticion1_editar(request,codi,num):
 			anodonciaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
 			mordidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
 			tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+			denticion = denticion.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
 				anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
