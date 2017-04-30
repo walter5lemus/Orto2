@@ -16,7 +16,7 @@ def asp_mandibular1(request):
 def asp_mandibular1_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 		if aspectos_mandibulares1.objects.filter(fichas_id=ids.id).exists():
 			datos = aspectos_mandibulares1.objects.get(fichas_id=ids.id)

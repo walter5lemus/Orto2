@@ -13,7 +13,7 @@ def tipo_perfil(request):
 def tipo_perfil_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		ultima = ultima_modificacion.objects.get(fichas_id=ids.id)
 		if TipoPerfil.objects.filter(fichas_id=ids.id).exists():
 			datos = TipoPerfil.objects.get(fichas_id=ids.id)

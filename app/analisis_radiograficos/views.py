@@ -20,7 +20,7 @@ codi=""
 def AspectosArticulares_Crear(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		if aspectos_articulares.objects.filter(fichas_id=ids.id).exists():
 			estado = aspectos_articulares.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':

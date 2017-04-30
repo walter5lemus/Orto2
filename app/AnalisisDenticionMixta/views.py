@@ -18,7 +18,7 @@ codi="0000-00"
 def nance_crear(request,codi,num):  
     str(codi)
     try:
-        ids = fichas.objects.get(cod_expediente=codi, numero=num)
+        ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
         max_numero=10
         if nance_tablas.objects.filter(fichas_id=ids.id).exists():
             if nance_tablas.objects.filter(fichas_id=ids.id).exists():

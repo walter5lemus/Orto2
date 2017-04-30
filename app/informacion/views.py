@@ -14,18 +14,68 @@ from django.http import HttpResponse
 import json
 import time
 
+
+
+from app.analisis_cefalometrico.models import *
+from app.analisis_radiograficos.models import *
+from app.AnalisisDenticionMixta.models import *
+from app.aspMandibular.models import *
+from app.aspectos.models import *
+from app.diagCefalo.models import *
+from app.diagGeneral.models import *
+from app.informacion.models import *
+from app.tipo_perfil.models import *
 codi=""
 
 def CodExpediente_crear(request):
-
+	user = request.user.id
 	if request.method == 'POST':
 		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
 		if form.is_valid():
 		 	form.save()
 	else:
+		incompletos =list()
+		ficha = fichas.objects.filter(usuario_creador=user, completada=0)
+		for fi in ficha:
+			incompletos.append(fi.numero)
+			incompletos.append(fi.cod_expediente)
+			
+			if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-1)
+			if not estado_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-2)
+			if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-3)
+			if not registro.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-4)
+			if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-5)
+			if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-6)
+			if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-7)
+			if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-8)
+			if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-9)
+			if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-10)
+			if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-11)
+			if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-12)
+			if not nance_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-13)
+			if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-14)
+			if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-15)
+			if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-16)
+
 		form = DatosGeneralesForm()
-		return render(request, 'informacion/form_inicio.html', {'form':form})
+		return render(request, 'informacion/form_inicio.html', {'form':form,'incompletos':incompletos})
 
 class BusquedaAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -40,12 +90,10 @@ class BusquedaAjaxView2(TemplateView):
 		fi=fichas.objects.filter(cod_expediente=codigo)
 		for ficha in fi:
 			ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero)
-			if motivo_consulta.objects.filter(fichas_id=ids.id).exists():{}
-			else:
-				fichas.objects.get(id=ids.id).delete()
 		fi=list(fichas.objects.filter(cod_expediente=codigo))
 		data = serializers.serialize('json', fi, fields=('numero'))
 		return HttpResponse(data, content_type='application/json')
+
 
 def busqueda(request):
 	if request.is_ajax():
@@ -53,13 +101,13 @@ def busqueda(request):
 		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda_admin(request):
-	if request.user.id==1:
+	if request.user.is_superuser==1:
 		if request.is_ajax():
 			resultado = datos_generales.objects.filter(nombre_completo__istartswith= request.GET['nombre'] ).values('nombre_completo', 'cod_expediente')
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda2_admin(request):
-	if request.user.id==1:
+	if request.user.is_superuser==1:
 		if request.is_ajax():
 			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')

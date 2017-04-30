@@ -17,7 +17,7 @@ def diag_general(request):
 def diag_general_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 		if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
 			datos = diagnostico_general.objects.get(fichas_id=ids.id)

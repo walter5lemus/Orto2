@@ -16,7 +16,7 @@ def diag_cefalo(request):
 def diag_cefalo_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 		if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
 			datos = diagnostico_cefalometrico.objects.get(fichas_id=ids.id)

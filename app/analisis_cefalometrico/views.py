@@ -16,7 +16,7 @@ codi="0000-00"
 def cefalometrico_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 		if analisis_cefalometrico.objects.filter(fichas_id=ids.id).exists():
 			cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)

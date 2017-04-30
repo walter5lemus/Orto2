@@ -54,37 +54,36 @@
 </form>
 	<div class="col-md-12">
 	<br><br>
+		<div class="col-md-12">
+	<br><br>
 		<div class="form-group">
-			<div class="col-md-6">
+			<div class="col-md-6 col-md-offset-1">
 				<label for="nombre_paciente">Nombre del paciente</label>
 				<div class="form-group has-success has-feedback"" role="form">
-					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
+					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" autofocus >
 					<span class="glyphicon glyphicon-search form-control-feedback"></span>
 					<datalist id="id_listanombres">
 					
 					</datalist>
 				</div>
 			</div>
-			<div class="col-md-2 ">
-				<div class="form-group ocultar">
-					<label for="{{form.cod_expediente.name}}">{{form.cod_expediente.label}}</label>
-					{{form.cod_expediente}}
+			<div class="col-md-5">
+				<div class="col-md-6 col-md-offset-1">
+					<div class="form-group">
+						<label for="nombre_paciente">Codigo del Expediente</label>
+						<div class="form-group has-success has-feedback"" role="form">
+							<input type="search" class="form-control " id="id_codigo_expediente" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo" autofocus >
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							<datalist id="id_listacodigo">
+							
+							</datalist>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group ocultar">
-					<label for="{{form.fecha_hora_creacion.name}}">{{form.fecha_hora_creacion.label}}</label>	
-				{{form.fecha_hora_creacion}}	
-				</div>
-			</div>
-			<div class="col-md-3 form-group ">
-			<br>
-			<!-- <button class="btn btn-success" style="margin-top: 5px;" onclick="buscar()">Buscar</button> -->
-			</div>
-		
-		</div>				
-
+		</div>
 	</div>
+
 	
 	<div class="row ocultar">
 			<div class="col-md-4 col-md-offset-1">
@@ -110,10 +109,107 @@
 						<button id="boton_consulta" class="btn btn-primary" style="margin-top: 25px;" onclick="redireccionar()">Consultar</button>
 					</div>
 				</div>
-			</div>
-			
+			</div>	
 	</div>
 
+		<div class="row ocultar">
+			<div class="col-md-4 col-md-offset-1" id="imcompletas">
+				<div class="form-group">
+					
+<button id="btn_incompletos"> Incompletos</button>
+
+<div id="incompletas" class="hidden">
+
+
+
+	{% for elemento in incompletos %}
+			<script type="text/javascript">
+			
+			if ({{elemento}} > 0) {
+				numero = {{elemento}};
+			}
+			
+			if ($.isNumeric("{{elemento}}") == false) {
+				//crea una lista y le asigna el codigo y el numero de la ficha como id
+				
+				
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				codigo = {{elemento}};
+				co = "{{elemento}}";
+				textoCodigo = {{elemento}};
+				if(codigo != {{elemento}}){
+					incompletas += '</ul>';
+					incompletas = '';
+					i++;
+					numero =1;
+				}
+				
+				$('#incompletas').append( incompletas );
+				incompletas = '';
+			}else{
+				//entra si es un numero
+
+				switch({{elemento}}){
+					case -1:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Motivo de Consulta</a></li>');
+						break;
+					case -2:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/estado_general/nuevo/'+co+'/'+numero+'/">Estado General</a></li>');
+						break;
+					case -3:
+						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/">Tipo de perfil</a></li>');
+						break;
+					case -4:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -5:
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro Mordidas FALTA ESTE ARREGLAR</a></li>');
+						break;
+					case -6:
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
+						break;
+					case -7:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/">Aspectos Articulares</a></li>');
+						break;
+					case -8:
+						$('#'+co+'_'+numero).append('<li><a href="/asp_mandibular1/nuevo/'+co+'/'+numero+'/">Aspectos Mandibulares</a></li>');
+						break;
+					case -9:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/'+co+'/'+numero+'/">Otros Aspectos</a></li>');
+						break;
+					case -10:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/'+co+'/'+numero+'/">Otros Hallazgos</a></li>');
+						break;
+					case -11:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_cefalometrico/cefalometrico/nuevo/'+co+'/'+numero+'/">Analisis Cefalometricos</a></li>');
+						break;
+					case -12:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_cefalo/nuevo/'+co+'/'+numero+'/">Diagnostico Cefalometrico</a></li>');
+						break;
+					case -13:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/'+co+'/'+numero+'/">Analisis de Nance</a></li>');
+						break;
+					case -14:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/'+co+'/'+numero+'/">Moyers inferior</a></li>');
+						break;
+					case -15:
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/'+co+'/'+numero+'/">Moyers Superior</a></li>');
+						break;
+					case -16:
+						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
+						break;
+				}
+				incompletas = '';
+			}
+			</script>
+	{% empty %}
+		<h3>Lista de Expedientes Incompletos</h3>
+	{% endfor %}
+
+</div>
+				</div>
+			</div>
+		</div>
 
 <script>
 
@@ -146,16 +242,14 @@
 					$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
 					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
-					$('#id_cod_expediente').val(data[i].pk);
+					$('#id_codigo_expediente').val(data[i].pk);
 				}
 				if(data==''){
-					
-					//	window.location="/informacion/datos_generales/nuevo/"+nombre;
-				}
+						}
 			},
 			
 		});
-		$.ajax({
+			$.ajax({
 			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax2/',
 			type : 'get',
@@ -215,17 +309,16 @@ var codigo = $('#id_nombre_paciente').val();
 $("#id_nombre_completo").prop('readonly', true);
 $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
-$("#id_cod_expediente").prop('readonly', true);
 $("#input_fichas").prop('readonly', true);
 
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
-	var codigo = $('#id_cod_expediente').val();
+	var codigo = $('#id_codigo_expediente').val();
 	window.location="/informacion/motivo_consultas/consultar/"+codigo+"/"+num;
 }
 function redireccionar2(){
 	var num = parseInt($("#input_fichas").val(), 10);
-	var codigo = $('#id_cod_expediente').val();
+	var codigo = $('#id_codigo_expediente').val();
 	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
 }
 function buscar(){
@@ -273,13 +366,21 @@ function limpiar(){
 	$('#id_nombre_completo').val("");
 	$('#id_fecha_registro').val("");
 	$('#id_fecha_hora_creacion').val("");
-	$('#id_cod_expediente').val("");
+	$('#id_codigo_expediente').val("");
 	$('#select_fichas')
     .find('option')
     .remove()
     .end()
     .val('whatever')
 }
+
+	$('#btn_completos').on('click', function(e){
+	    $('#completas').toggleClass('hidden');
+	})
+
+	$('#btn_incompletos').on('click', function(e){
+	    $('#incompletas').toggleClass('hidden');
+	})
 </script>
 
 
