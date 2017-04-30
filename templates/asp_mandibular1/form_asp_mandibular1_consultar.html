@@ -28,13 +28,16 @@
 
 
 <div class="row">
+<div class="row">
+        <div class="mensaje" id="mensaje"></div>
+</div>
 	<div class="col-md-3 col-md-offset-0">
 		<div class="form-group">
 			{{form.fichas}}
 		</div>
 	</div>
 </div>
-<br><br>
+<br>
 
 <!-- Rama Mandibular -->
 <div class="col-md-10 col-md-offset-1">
@@ -46,7 +49,6 @@
       </div>
 
   	  <div class="panel-body">
-
 
   	  	<!-- Anchura R - R' -->
 
@@ -279,18 +281,17 @@
 
 
 
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-
-			<br><br>
-			<div class="col-md-3 col-md-offset-4">
-			    <center><button type="submit" class="btn btn-success btn-block"> Siguiente </button></center>
-			</div>
-			<br><br>
-			
-		</div>
-	</div>
-
+    <div class="col-md-8 col-md-offset-3">
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-1">
+              <a href="/analisis_radiograficos/aspectos_articulares/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+        </div>
+        <br><br>
+    </div>
 
 	<!-- Barra de progreso -->
 		<br><br>
@@ -308,7 +309,23 @@
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
 
-		 
+	if ({{completada}}==0){
+	$("#mensaje").append('<div class="col-md-3 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+	}else{
+		if ({{completada}}==1){
+			$("#mensaje").append('<div class="col-md-3 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
+		}else{
+			if ({{completada}}==2){
+				$("#mensaje").append('<div class="col-md-3 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
+			}else{
+				if ({{completada}}==3){
+					$("#mensaje").append('<div class="col-md-3 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
+				}
+				
+			}
+		}
+	}
+
 </script>
 
 	</form>

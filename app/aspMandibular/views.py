@@ -85,8 +85,8 @@ def asp_mandibular1_consultar(request,codi,num):
 					form.save()
 					fecha =  timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/analisis_radiograficos/otrosAspectos/consultar/%s/%s' %(codi,num))
-			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form,'codi':codi,'num':num})
+				return redirect('/analisis_radiograficos/otrosAspectos/consultar/%s/%s' %(codi,num))
+			return render(request, 'asp_mandibular1/form_asp_mandibular1_consultar.html',{'form':form,'codi':codi,'num':num,'completada':ids.completada})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')

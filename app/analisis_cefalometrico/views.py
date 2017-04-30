@@ -88,7 +88,7 @@ def cefalometrico_consultar(request, codi, num):
 					formset.save()
 				
 				return redirect('/diag_cefalo/consultar/%s/%s' % (codi, num))			
-			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})		
+			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'completada':ids.completada})		
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')

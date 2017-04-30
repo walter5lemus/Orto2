@@ -12,7 +12,7 @@ urlpatterns = [
 	url(r'^datos_generales/nuevo/$', login_required(DatosGeneral_crear), name='datos_generales_crear'),
 	url(r'^datos_generales/nuevo2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(DatosGeneral_crear2), name='datos_generales_crear2'),
 	url(r'^datos_generales/listar/', login_required(DatosGeneralesList.as_view()),name='datos_generales_listar'),
-	url(r'^datos_generales/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar),name='datos_generales_consultar'),
+	url(r'^datos_generales/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(DatosGenerales_consultar),name='datos_generales_consultar'),
 	url(r'^datos_generales/consultar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar2),name='datos_generales_consultar2'),
 	url(r'^datos_generales/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_edit),name='datos_generales_editar'),
 

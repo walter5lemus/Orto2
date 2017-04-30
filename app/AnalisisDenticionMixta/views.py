@@ -106,7 +106,7 @@ def nance_consultar(request, codi, num):
                 formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
 
                 return redirect('/analisis_denticion_mixta/moyersinferior/consultar/%s/%s/' %(codi,num))            
-            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero})    
+            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')
@@ -234,7 +234,7 @@ def moyerssup_consultar(request, codi, num):
                 formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
                     
                 return redirect('/diag_general/consultar/%s/%s' % (codi, num))
-            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})    
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'completada':ids.completada})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')
@@ -334,7 +334,7 @@ def moyersinf_consultar(request, codi, num):
                     form1.save()
                     formset.save()
                     return redirect('/analisis_denticion_mixta/moyerssuperior/consultar/%s/%s/' %(codi,num))
-            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
+            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'completada':ids.completada})
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')

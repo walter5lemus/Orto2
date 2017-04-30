@@ -46,7 +46,7 @@
 		                      		<li class="dropdown">
 		                        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informacion General<span class="caret"></span></a>
 				                        <ul class="dropdown-menu" role="menu">
-				                        	<!-- <li><a href="/informacion/datos_generales/consultar/{{codi}}/">Datos Generales</a></li> -->
+				                        	<li><a href="/informacion/datos_generales/consultar/{{codi}}/{{num}}/">Datos Generales</a></li>
 				                        	<li><a href="/informacion/motivo_consultas/consultar/{{codi}}/{{num}}/">Motivo de Consulta</a></li>
 				                        	<li><a href="/informacion/estado_general/consultar/{{codi}}/{{num}}/">Estado General</a></li>
 				                        </ul>
@@ -116,11 +116,9 @@
     {% endblock %} 
 
 	{% block header %}
-	<h4>Este es el bloque del header base </h4>
 	{% endblock %}
 
 	{% block content %}
-	<h5>Este es el contenido del archivo base</h5>
 	{% endblock %}
 
 	{% block tabla %}

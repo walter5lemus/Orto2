@@ -83,8 +83,8 @@ def diag_general_consultar(request,codi,num):
 				form = diagGeneralForm_consultar(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
-					return redirect('/')
-			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi})
+				return redirect('/')
+			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')

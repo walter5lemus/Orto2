@@ -9,9 +9,7 @@ class diagCefaloForm(forms.ModelForm):
 		model = diagnostico_cefalometrico
 
 		fields = [
-			#'cod_expediente',
 			'fichas',
-
 			'patron_esqueletal', 
 			'otro_patron',
 			'tipo_de_crecimiento',
@@ -21,9 +19,7 @@ class diagCefaloForm(forms.ModelForm):
 		]
 
 		labels = {
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
-
 			'patron_esqueletal': "Patron Esqueletal",
 			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
@@ -32,9 +28,7 @@ class diagCefaloForm(forms.ModelForm):
 		}
 
 		widgets = {
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
-
 			'patron_esqueletal': forms.Select(attrs={'class':'form-control'}),
 			'otro_patron':forms.TextInput(attrs={'class':'form-control'}),
 			'tipo_de_crecimiento':forms.Select(attrs={'class':'form-control'}),
@@ -50,9 +44,7 @@ class diagCefaloForm_consultar(forms.ModelForm):
 		model = diagnostico_cefalometrico
 
 		fields = [
-			#'cod_expediente',
 			'fichas',
-
 			'patron_esqueletal', 
 			'otro_patron',
 			'tipo_de_crecimiento',
@@ -61,9 +53,7 @@ class diagCefaloForm_consultar(forms.ModelForm):
 		]
 
 		labels = {
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
-
 			'patron_esqueletal': "Patron Esqueletal",
 			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
@@ -72,14 +62,10 @@ class diagCefaloForm_consultar(forms.ModelForm):
 		}
 
 		widgets = {
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
-
-
 			'patron_esqueletal': forms.Select(attrs={'class':'form-control','readonly':True}),
 			'otro_patron':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'tipo_de_crecimiento':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'medidas_dentales':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'medidas_esteticas':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),
-
 		}

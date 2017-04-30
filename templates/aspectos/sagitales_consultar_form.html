@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_consultar.html' %}
 
 {% block title %}
     Funciones Sagitales
@@ -24,7 +24,7 @@
     {{form.fichas}}
     {{form2.fichas}}
     {{form3.fichas}}
-
+    <div class="row">
     <h1> <center> Relaciones Sagitales </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
@@ -42,8 +42,11 @@
         </div>
         <br>
     </div>
-
-<br><br><br><br><br>
+</div>
+<div class="row">
+        <div class="mensaje" id="mensaje"></div>
+</div>
+<br>
 
 <div class="panel panel-primary">
       <div class="panel-heading"> 
@@ -146,12 +149,12 @@
     </div>
 </div>
 
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-3">
         <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
+            <div class="col-md-3 col-md-offset-1">
               <a href="/aspectos/mordidas/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
-            <div class="col-md-3 col-md-offset-2">
+            <div class="col-md-3 col-md-offset-1">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
         </div>
@@ -166,9 +169,25 @@
         </div>
         </div>
 
-    
-
-
-
 </form>
+
+    <script type="text/javascript">
+        if ({{completada}}==0){
+        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+        }else{
+            if ({{completada}}==1){
+                $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
+            }else{
+                if ({{completada}}==2){
+                    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
+                }else{
+                    if ({{completada}}==3){
+                        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
+                    }
+                    
+                }
+            }
+        }
+
+    </script>
 {% endblock %}

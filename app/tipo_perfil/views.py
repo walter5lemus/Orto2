@@ -89,7 +89,7 @@ def tipo_perfil_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return HttpResponseRedirect('/aspectos/denticion1/consultar/%s/%s/' %(codi,num))
-			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi})
+			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')

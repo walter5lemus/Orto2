@@ -84,7 +84,7 @@ class busqueda_codigo(TemplateView):
 
 def CodExpediente_consular(request):
 	if request.method == 'POST':
-		form = CodigoExpedienteForm(request.POST)
+		form = (request.POST)
 		codi = form.data['codigo']
 		if form.is_valid():
 		 	form.save()
@@ -98,7 +98,7 @@ def CodExpediente_consular(request):
 def CodExpediente_editar(request):
 
 	if request.method == 'POST':
-		form = CodigoExpedienteForm(request.POST)
+		form = DatosGeneralesForm(request.POST)
 		codi = form.data['codigo'] 
 		if form.is_valid():
 		 	form.save()
@@ -106,7 +106,7 @@ def CodExpediente_editar(request):
 	 	else:
  			return HttpResponseRedirect('/informacion/estado_general/editar/%s/' %codi)
 	else:
-			form = CodigoExpedienteForm()
+			form = DatosGeneralesForm()
 
 			return render(request, 'informacion/form_inicio_editar.html', {'form':form})
 
@@ -151,7 +151,7 @@ def DatosGeneral_crear2(request,codi,num):
 		return HttpResponse("No se encontro el Codigo de Expediente")
 
 
-def DatosGenerales_consultar(request,codi):
+def DatosGenerales_consultar(request,codi,num):
 	str(codi)
 	try:
 		ids = datos_generales.objects.get(cod_expediente=codi)
@@ -163,11 +163,12 @@ def DatosGenerales_consultar(request,codi):
 				form = DatosGeneralesForm_consultar(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/informacion/fichas/nuevo/%s/' %codi)
-			return render(request,'informacion/form_datosGenerales.html',{'form':form})
+				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
 		return HttpResponse("No se encontro el Codigo de Expediente")
+
 
 def DatosGenerales_consultar2(request,codi):
 	try:
@@ -180,7 +181,7 @@ def DatosGenerales_consultar2(request,codi):
 				form = DatosGeneralesForm_consultar(request.POST, instance=datos)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/' %codi)
+				return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/' %codi)
 			return render(request,'informacion/form_datosGenerales_existente.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
@@ -362,7 +363,7 @@ def EstadoGeneral_consultar(request,codi,num):
 			else: 
 				form = EstadoGeneralForm_consultar(request.POST, instance=estado)
 				return redirect('/tipo_perfil/consultar/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_estadoGeneral_consultar.html',{'form':form,'num':num,'codi':codi})
+			return render(request,'informacion/form_estadoGeneral_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
 		return render(request, 'base/error_no_encontrado.html')	
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')	
