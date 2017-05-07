@@ -2,572 +2,63 @@
 
 {% load staticfiles %}
 
-{% block title %}Aspectos de dentición - Parte 2{% endblock %}
+{% block title %}Aspectos de dentición - Parte 1{% endblock %}
 
 {% block extrajs %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
     <script type="text/javascript" src="{% static 'js/jquery.js' %}""></script>
     <script type="text/javascript" src="{% static 'js/skinable_tabs.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>  
+    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
+    document.getElementById("id_tipo").disabled=true; 
+    del = 1;
+    t = 0;  
 
-   //cuadrante1
-    e11 = document.getElementById("P11");
-    e12 = document.getElementById("P12");
-    e13 = document.getElementById("P13");
-    e14 = document.getElementById("P14");
-    e15 = document.getElementById("P15");
-    e16 = document.getElementById("P16");
-    e17 = document.getElementById("P17");
-    e18 = document.getElementById("P18");
-    //cuadrante2
-    e21 = document.getElementById("P21");
-    e22 = document.getElementById("P22");
-    e23 = document.getElementById("P23");
-    e24 = document.getElementById("P24");
-    e25 = document.getElementById("P25");
-    e26 = document.getElementById("P26");
-    e27 = document.getElementById("P27");
-    e28 = document.getElementById("P28");
-    //cuadrante3
-    e31 = document.getElementById("P31");
-    e32 = document.getElementById("P32");
-    e33 = document.getElementById("P33");
-    e34 = document.getElementById("P34");
-    e35 = document.getElementById("P35");
-    e36 = document.getElementById("P36");
-    e37 = document.getElementById("P37");
-    e38 = document.getElementById("P38");
-    //cuadrante4
-    e41 = document.getElementById("P41");
-    e42 = document.getElementById("P42");
-    e43 = document.getElementById("P43");
-    e44 = document.getElementById("P44");
-    e45 = document.getElementById("P45");
-    e46 = document.getElementById("P46");
-    e47 = document.getElementById("P47");
-    e48 = document.getElementById("P48");
-    //cuadrante5
-    e51 = document.getElementById("P51");
-    e52 = document.getElementById("P52");
-    e53 = document.getElementById("P53");
-    e54 = document.getElementById("P54");
-    e55 = document.getElementById("P55");
-    //cuadrante6
-    e61 = document.getElementById("P61");
-    e62 = document.getElementById("P62");
-    e63 = document.getElementById("P63");
-    e64 = document.getElementById("P64");
-    e65 = document.getElementById("P65");
-    //cuadrante7
-    e71 = document.getElementById("P71");
-    e72 = document.getElementById("P72");
-    e73 = document.getElementById("P73");
-    e74 = document.getElementById("P74");
-    e75 = document.getElementById("P75");            
-    //cuadrante8
-    e81 = document.getElementById("P81");
-    e82 = document.getElementById("P82");
-    e83 = document.getElementById("P83");
-    e84 = document.getElementById("P84");
-    e85 = document.getElementById("P85");
-
-    valor = $('.tipo').val()
-
-    $(function() {
-        switch (valor) {
-        case "1":
-            e11.style.display='none'; 
-            e12.style.display='none';
-            e13.style.display='none';
-            e14.style.display='none';
-            e15.style.display='none';
-            e16.style.display='none';
-            e17.style.display='none';
-            e18.style.display='none';
-
-            e21.style.display='none'; 
-            e22.style.display='none';
-            e23.style.display='none';
-            e24.style.display='none';
-            e25.style.display='none';
-            e26.style.display='none';
-            e27.style.display='none';
-            e28.style.display='none';
-
-            e31.style.display='none'; 
-            e32.style.display='none';
-            e33.style.display='none';
-            e34.style.display='none';
-            e35.style.display='none';
-            e36.style.display='none';
-            e37.style.display='none';
-            e38.style.display='none';
-
-            e41.style.display='none'; 
-            e42.style.display='none';
-            e43.style.display='none';
-            e44.style.display='none';
-            e45.style.display='none';
-            e46.style.display='none';
-            e47.style.display='none';
-            e48.style.display='none';
-
-            e51.style.display='block'; 
-            e52.style.display='block'; 
-            e53.style.display='block';
-            e54.style.display='block'; 
-            e55.style.display='block';
-
-            e61.style.display='block';
-            e62.style.display='block';
-            e63.style.display='block';
-            e64.style.display='block';
-            e65.style.display='block';
-
-            e71.style.display='block';
-            e72.style.display='block';
-            e73.style.display='block';
-            e74.style.display='block';
-            e75.style.display='block';
-
-            e81.style.display='block';
-            e82.style.display='block';
-            e83.style.display='block';
-            e84.style.display='block';
-            e85.style.display='block';        
-        break;
-        case "2":
-            e11.style.display='block';
-            e12.style.display='block';
-            e13.style.display='block';
-            e14.style.display='block';
-            e15.style.display='block';
-            e16.style.display='block';
-            e17.style.display='block';
-            e18.style.display='block';
-
-            e21.style.display='block';
-            e22.style.display='block';
-            e23.style.display='block';
-            e24.style.display='block';
-            e25.style.display='block';
-            e26.style.display='block';
-            e27.style.display='block';
-            e28.style.display='block';
-
-            e31.style.display='block';
-            e32.style.display='block';
-            e33.style.display='block';
-            e34.style.display='block';
-            e35.style.display='block';
-            e36.style.display='block';
-            e37.style.display='block';
-            e38.style.display='block';
-
-            e41.style.display='block';
-            e42.style.display='block';
-            e43.style.display='block';
-            e44.style.display='block';
-            e45.style.display='block';
-            e46.style.display='block';
-            e47.style.display='block';
-            e48.style.display='block';  
-
-            e51.style.display='block'; 
-            e52.style.display='block'; 
-            e53.style.display='block';
-            e54.style.display='block'; 
-            e55.style.display='block';
-
-            e61.style.display='block';
-            e62.style.display='block';
-            e63.style.display='block';
-            e64.style.display='block';
-            e65.style.display='block';
-
-            e71.style.display='block';
-            e72.style.display='block';
-            e73.style.display='block';
-            e74.style.display='block';
-            e75.style.display='block';
-
-            e81.style.display='block';
-            e82.style.display='block';
-            e83.style.display='block';
-            e84.style.display='block';
-            e85.style.display='block';   
-        break;
-        case "3":
-            e11.style.display='block';
-            e12.style.display='block';
-            e13.style.display='block';
-            e14.style.display='block';
-            e15.style.display='block';
-            e16.style.display='block';
-            e17.style.display='block';
-            e18.style.display='block';
-
-            e21.style.display='block';
-            e22.style.display='block';
-            e23.style.display='block';
-            e24.style.display='block';
-            e25.style.display='block';
-            e26.style.display='block';
-            e27.style.display='block';
-            e28.style.display='block';
-
-            e31.style.display='block';
-            e32.style.display='block';
-            e33.style.display='block';
-            e34.style.display='block';
-            e35.style.display='block';
-            e36.style.display='block';
-            e37.style.display='block';
-            e38.style.display='block';
-
-            e41.style.display='block';
-            e42.style.display='block';
-            e43.style.display='block';
-            e44.style.display='block';
-            e45.style.display='block';
-            e46.style.display='block';
-            e47.style.display='block';
-            e48.style.display='block';      
-
-            e51.style.display='none'; 
-            e52.style.display='none'; 
-            e53.style.display='none';
-            e54.style.display='none'; 
-            e55.style.display='none';
-
-            e61.style.display='none';
-            e62.style.display='none';
-            e63.style.display='none';
-            e64.style.display='none';
-            e65.style.display='none';
-
-            e71.style.display='none';
-            e72.style.display='none';
-            e73.style.display='none';
-            e74.style.display='none';
-            e75.style.display='none';
-
-            e81.style.display='none';
-            e82.style.display='none';
-            e83.style.display='none';
-            e84.style.display='none';
-            e85.style.display='none'; 
-        break;
-        }
-    });
-
-    $(".tipo").change(function() {
-
-        maximo = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-
-        for (var i = 0; i < maximo; i++) {
-            $('#id_diastemas-'+i+'-cuad_uno').val('');
-            $('#id_diastemas-'+i+'-pieza_uno').val('');
-            $('#id_diastemas-'+i+'-cuad_dos').val('');
-            $('#id_diastemas-'+i+'-pieza_dos').val('');
-        }
-
-        for (var i = 1; i < maximo; i++) {
-            document.getElementById("diastemas-"+i).click();
-        }
-
-        maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-
-        for (var i = 0; i < maximo; i++) {
-            $('#id_numerarios-'+i+'-cuadrante').val('');
-            $('#id_numerarios-'+i+'-pieza').val('');
-            $('#id_numerarios-'+i+'-detalle').val('');
-        }
-
-        for (var i = 1; i < maximo; i++) {
-            document.getElementById("numerarios-"+i).click();
-        }        
-
-        switch ($(this).val()) {
-            case "1":
-
-                $('polygon#T').attr('fill', "white");
-                $('polygon#B').attr('fill', "white");
-                $('polygon#R').attr('fill', "white");
-                $('polygon#L').attr('fill', "white");
-                $('polygon#C').attr('fill', "white");
-
-                e11.style.display='none'; 
-                e12.style.display='none';
-                e13.style.display='none';
-                e14.style.display='none';
-                e15.style.display='none';
-                e16.style.display='none';
-                e17.style.display='none';
-                e18.style.display='none';
-
-                e21.style.display='none'; 
-                e22.style.display='none';
-                e23.style.display='none';
-                e24.style.display='none';
-                e25.style.display='none';
-                e26.style.display='none';
-                e27.style.display='none';
-                e28.style.display='none';
-
-                e31.style.display='none'; 
-                e32.style.display='none';
-                e33.style.display='none';
-                e34.style.display='none';
-                e35.style.display='none';
-                e36.style.display='none';
-                e37.style.display='none';
-                e38.style.display='none';
-
-                e41.style.display='none'; 
-                e42.style.display='none';
-                e43.style.display='none';
-                e44.style.display='none';
-                e45.style.display='none';
-                e46.style.display='none';
-                e47.style.display='none';
-                e48.style.display='none';
-
-                e51.style.display='block'; 
-                e52.style.display='block'; 
-                e53.style.display='block';
-                e54.style.display='block'; 
-                e55.style.display='block';
-
-                e61.style.display='block';
-                e62.style.display='block';
-                e63.style.display='block';
-                e64.style.display='block';
-                e65.style.display='block';
-
-                e71.style.display='block';
-                e72.style.display='block';
-                e73.style.display='block';
-                e74.style.display='block';
-                e75.style.display='block';
-
-                e81.style.display='block';
-                e82.style.display='block';
-                e83.style.display='block';
-                e84.style.display='block';
-                e85.style.display='block';
-            break;
-            case "2":
-
-                $('polygon#T').attr('fill', "white");
-                $('polygon#B').attr('fill', "white");
-                $('polygon#R').attr('fill', "white");
-                $('polygon#L').attr('fill', "white");
-                $('polygon#C').attr('fill', "white");
-
-                e11.style.display='block';
-                e12.style.display='block';
-                e13.style.display='block';
-                e14.style.display='block';
-                e15.style.display='block';
-                e16.style.display='block';
-                e17.style.display='block';
-                e18.style.display='block';
-
-                e21.style.display='block';
-                e22.style.display='block';
-                e23.style.display='block';
-                e24.style.display='block';
-                e25.style.display='block';
-                e26.style.display='block';
-                e27.style.display='block';
-                e28.style.display='block';
-
-                e31.style.display='block';
-                e32.style.display='block';
-                e33.style.display='block';
-                e34.style.display='block';
-                e35.style.display='block';
-                e36.style.display='block';
-                e37.style.display='block';
-                e38.style.display='block';
-
-                e41.style.display='block';
-                e42.style.display='block';
-                e43.style.display='block';
-                e44.style.display='block';
-                e45.style.display='block';
-                e46.style.display='block';
-                e47.style.display='block';
-                e48.style.display='block';  
-
-                e51.style.display='block'; 
-                e52.style.display='block'; 
-                e53.style.display='block';
-                e54.style.display='block'; 
-                e55.style.display='block';
-
-                e61.style.display='block';
-                e62.style.display='block';
-                e63.style.display='block';
-                e64.style.display='block';
-                e65.style.display='block';
-
-                e71.style.display='block';
-                e72.style.display='block';
-                e73.style.display='block';
-                e74.style.display='block';
-                e75.style.display='block';
-
-                e81.style.display='block';
-                e82.style.display='block';
-                e83.style.display='block';
-                e84.style.display='block';
-                e85.style.display='block';                  
-            break;
-            case "3":
-
-                $('polygon#T').attr('fill', "white");
-                $('polygon#B').attr('fill', "white");
-                $('polygon#R').attr('fill', "white");
-                $('polygon#L').attr('fill', "white");
-                $('polygon#C').attr('fill', "white");
-                
-                e11.style.display='block';
-                e12.style.display='block';
-                e13.style.display='block';
-                e14.style.display='block';
-                e15.style.display='block';
-                e16.style.display='block';
-                e17.style.display='block';
-                e18.style.display='block';
-
-                e21.style.display='block';
-                e22.style.display='block';
-                e23.style.display='block';
-                e24.style.display='block';
-                e25.style.display='block';
-                e26.style.display='block';
-                e27.style.display='block';
-                e28.style.display='block';
-
-                e31.style.display='block';
-                e32.style.display='block';
-                e33.style.display='block';
-                e34.style.display='block';
-                e35.style.display='block';
-                e36.style.display='block';
-                e37.style.display='block';
-                e38.style.display='block';
-
-                e41.style.display='block';
-                e42.style.display='block';
-                e43.style.display='block';
-                e44.style.display='block';
-                e45.style.display='block';
-                e46.style.display='block';
-                e47.style.display='block';
-                e48.style.display='block';      
-
-                e51.style.display='none'; 
-                e52.style.display='none'; 
-                e53.style.display='none';
-                e54.style.display='none'; 
-                e55.style.display='none';
-
-                e61.style.display='none';
-                e62.style.display='none';
-                e63.style.display='none';
-                e64.style.display='none';
-                e65.style.display='none';
-
-                e71.style.display='none';
-                e72.style.display='none';
-                e73.style.display='none';
-                e74.style.display='none';
-                e75.style.display='none';
-
-                e81.style.display='none';
-                e82.style.display='none';
-                e83.style.display='none';
-                e84.style.display='none';
-                e85.style.display='none';               
-            break;
-        }
-    });
-
-    $(function() {
-        a = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-        a1 = a - 1  
-        $('#id_diastemas-'+a1+'-fichas').val({{ids}});                   
-    }); 
-
-    $(function() {
-        a = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-        a1 = a - 1  
-        $('#id_numerarios-'+a1+'-fichas').val({{ids}});
-        $('#id_numerarios-'+a1+'-problema').val(4);                      
-    });        
-
-    $(function(){
+        //Tipo problema y color por pestaña
         nombre = 'diastemas';
         color = '#f7ff70';
-        $( "a" ).click(function() { 
-            if ( $( this ).hasClass( "tab-id-1-tab_header" ) ) {
-                nombre = 'diastemas'
-                color = '#f7ff70'
-                //amarillo
-            } 
-            else{
-                nombre = 'numerarios';
-                color = '#ff6666'
-                //rojo
-            }
-        });     
 
+        //Agrega código expediente y tipo problema a formset
+        a = document.getElementById("id_diastemas-TOTAL_FORMS").value;
+        a1 = a - 1  
+        $('#id_diastemas-'+a1+'-fichas').val({{ids}});      
+
+        //Función añadir plugin formset
         adding = function(){
-            t = 0;
-            var list = document.getElementsByClassName("delete-row-diastemas");
+            var list = document.getElementsByClassName("delete-row-"+nombre);
             for (var i = 0; i < list.length; i++) {
-                list[i].setAttribute("id", "diastemas-" + i);
+                list[i].setAttribute("id", nombre + "-" + i);
             }
 
-            numero = document.getElementById("id_diastemas-TOTAL_FORMS").value;
+            numero = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             numero = numero - 2;
-            if(document.getElementById("id_diastemas-"+numero+"-cuad_dos").value)
+            if(document.getElementById("id_"+nombre+"-"+numero+"-cuad_uno").value && document.getElementById("id_"+nombre+"-"+numero+"-cuad_dos").value)
             {
                 
             }
             else
             {   
+                numero = numero + 1;
                 alert("La fila actual esta vacía debe llenarse para ingresar una nueva.")
-                document.getElementById("diastemas-"+numero).click();
+                document.getElementById(nombre+"-"+numero).click();
             }              
         }
 
-        adding2 = function(){
-            var list = document.getElementsByClassName("delete-row-numerarios");
-            for (var i = 0; i < list.length; i++) {
-                list[i].setAttribute("id", "numerarios-" + i);
-            }
-
-            numero = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-            numero = numero - 2;
-            if(document.getElementById("id_numerarios-"+numero+"-cuadrante").value)
-            {
-                
-            }
-            else
-            {   
-                alert("La fila actual esta vacía debe llenarse para ingresar una nueva.")
-                document.getElementById("numerarios-"+numero).click();
-            }              
-        }        
-
+        //Función eliminar plugin formset
         eliminar = function(){
+
+            //Borrado manual?
+            if(del == 1)
+            {
+                var list = document.getElementsByClassName("delete-row-"+nombre);
+                for (var i = 0; i < list.length; i++) {
+                    list[i].setAttribute("id", nombre + "-" + i);
+                }                 
+            }
+                   
             $('polygon#T').attr('fill', "white");
             $('polygon#B').attr('fill', "white");
             $('polygon#R').attr('fill', "white");
@@ -577,66 +68,39 @@
             n1 = document.getElementById("id_diastemas-TOTAL_FORMS").value;        
 
             for (i = 0; i < n1; i++) {
-                c1 = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
-                p1 = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
-                c2 = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
-                p2 = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
-                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', '#f7ff70');
-                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', '#f7ff70');
-                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', '#f7ff70');
-                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', '#f7ff70');
-                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', '#f7ff70');
+                c = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
+                p = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
 
-                $('g#P'+ c2 + p2 + ' polygon#T').attr('fill', '#f7ff70');
-                $('g#P'+ c2 + p2 + ' polygon#B').attr('fill', '#f7ff70');
-                $('g#P'+ c2 + p2 + ' polygon#R').attr('fill', '#f7ff70');
-                $('g#P'+ c2 + p2 + ' polygon#L').attr('fill', '#f7ff70');
-                $('g#P'+ c2 + p2 + ' polygon#C').attr('fill', '#f7ff70');
+                c = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
+                p = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
             }  
+        } 
 
-            n2 = document.getElementById("id_numerarios-TOTAL_FORMS").value;        
-
-            for (i = 0; i < n2; i++) {
-                c = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
-                p = document.getElementById("id_numerarios-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
-            }  
-        }
-
+        //Declarando formsets
         $('#diastemas tbody tr').formset({
             prefix: "{{ diastema_formset.prefix }}",
             addCssClass: 'add-row-diastemas',
-            deleteCssClass: 'delete-row-diastemas', 
+            deleteCssClass: 'delete-row-diastemas',
             formCssClass: 'dynamic-diastema-form',
             added: adding,
-            removed: eliminar,     
-        });
+            removed: eliminar,           
+        });  
 
         $('.add-row-diastemas').click(function(){
             for (i = 0; i < {{max}}; i++) {
                 $('#id_diastemas-'+i+'-fichas').val({{ids}});
             }         
-        });                
-
-        $('#supernumerarios tbody tr').formset({
-            prefix: "{{ numerario_formset.prefix }}",
-            addCssClass: 'add-row-numerarios',
-            deleteCssClass: 'delete-row-numerarios', 
-            formCssClass: 'dynamic-numerario-form',
-            added: adding2,
-            removed: eliminar,        
-        });
-
-        $('.add-row-numerarios').click(function(){
-            for (i = 0; i < {{max}}; i++) { 
-                $('#id_numerarios-'+i+'-fichas').val({{ids}});
-                $('#id_numerarios-'+i+'-problema').val(4);
-            }
-        });
+        });  
 
         $('.tabs_holder').skinableTabs({
             effect: 'basic_display',
@@ -645,15 +109,86 @@
             persist_tab: 0,
             skin_path: '{% static '' %}'
         });
-    });
+  
+        //Seleccion de pieza odontograma
+        $('g polygon').click(function (evt) {
+            var sector = $(evt.target); 
+
+            iden = sector.parent().attr('id')
+            cuadrante = iden[1] 
+            pieza = iden[2]
+
+            b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
+            b1 = b - 1       
+
+            if(t == 0)
+            {
+                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;        
+                diente = c + p                
+
+                if(diente!='')   
+                {
+                    c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                    p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
+                } 
+
+                $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
+                $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );                
+                t = 1;
+
+                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
+            }
+            else
+            {
+                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;        
+                diente = c + p      
+
+                if(diente!='')   
+                {
+                    c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                    p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
+                } 
+
+                $("#id_"+nombre+"-"+b1+"-cuad_dos").val( cuadrante );
+                $("#id_"+nombre+"-"+b1+"-pieza_dos").val( pieza ); 
+                t = 0;
+
+                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
+                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
+            }
+        });  
+
     </script>
 
     <style type="text/css">
-        .add-row-diastemas, .add-row-numerarios {
+        .add-row-diastemas {
             padding-left:18px;
             background:url({% static 'images/add.png' %}) no-repeat left center;
         }
-        .delete-row-diastemas, .delete-row-numerarios {
+        .delete-row-diastemas {
             float:left;
             display:block;
             margin:5px 0 0 5px;
@@ -673,7 +208,22 @@
 {% endblock %}
 
 {% block content %}
-
+    <div class="row">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
 <div class="row">
     <form method="POST" action="">
     <center><h3>Examen de Dentición - Parte 2</h3></center>
@@ -682,14 +232,14 @@
     <div class="col-md-5">
         <center>
         <div class="form-group" style="width:200px">
-            {{form1.fichas}}
+            <label for="{{form1.tipo.name}}">{{form1.tipo.label}}</label>  
+            {{form1.tipo}}
         </div>
         </center>       
 
         <div class="tabs_holder">
             <ul>
                 <li><a href="#tab-id-1">Diastemas</a></li>
-                <li><a href="#tab-id-2">Supernumerarios</a></li>
             </ul>
             <div class="content_holder">
                 <div id="tab-id-1">
@@ -707,49 +257,20 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in diastema_formset.forms %}
-                        {{ form.id }}                        
+                        {% for form in diastema_formset.forms %}                                              
                         <tr>
-                            <td>{{ form.fichas }}</td>
+                            <td>{{ form.id }} {{ form.fichas }}</td>
                             <td>{{ form.cuad_uno }}</td>
                             <td>{{ form.pieza_uno }}</td>
                             <td></td>
                             <td>{{ form.cuad_dos }}</td>
-                            <td>{{ form.pieza_dos }}</td>
+                            <td>{{ form.pieza_dos }}</td>                            
                             <td></td>
                         </tr>
                         {% endfor %}
                         {{ diastema_formset.management_form }}
                         </tbody>
                     </table>      
-
-                </div>
-                <div id="tab-id-2">
-
-                    <table id="supernumerarios" cellpadding="0" cellspacing="5">
-                    <thead>
-                        <center><h4>Supernumerarios</h4></center>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cuadrante</th>
-                            <th scope="col">Pieza</th>
-                            <th scope="col">Detalle</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        {% for form in numerario_formset %}
-                        {{ form.id }}                                            
-                        <tr>
-                            <td>{{ form.fichas }} {{ form.problema }}</td>
-                            <td>{{ form.cuadrante }}</td>
-                            <td>{{ form.pieza }}</td>
-                            <td style="width:300px">{{ form.detalle }}</td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                        {{ numerario_formset.management_form }}
-                        </tbody>
-                    </table>                
 
                 </div>
 
@@ -1211,19 +732,18 @@
                 <tbody>
                     <tr>
                         <td bgcolor = "#f7ff70"><center><strong>Diastemas</strong></center></td>
-                        <td bgcolor = "#ff6666"><center><strong>Supernumerarios</strong></center></td>
-                        <td bgcolor = "#ffd15e"><center><strong>Diastemas y Supernumerarios</strong></center></td>
                     </tr>
                 </tbody>
             </table>
-        </center>             
+        </center>         
     </div>
 </div><!-- fin bootstrap -->
 
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+        <br><br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/denticion1/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
@@ -1231,7 +751,6 @@
         </div>
         <br><br>
     </div>  
-
     </form>
 </div>
 
@@ -1242,204 +761,5 @@
         <div class="progress-bar" style="width: 24%;"></div>
     </div>
     </div>
-
-<script type="text/javascript">
-    t = 0;
-    $('g polygon').click(function (evt) {
-        var sector = $(evt.target); 
-
-        iden = sector.parent().attr('id')
-        cuadrante = iden[1] 
-        pieza = iden[2]
-
-        b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
-        b1 = b - 1
-
-        c = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-        d = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-        e = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-
-        for (i = 0; i < c; i++) {
-            cmp = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
-            cmp1 = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
-
-            comparar = cuadrante + pieza
-            comparar1 = cmp + cmp1
-
-            if(comparar == comparar1)
-            {
-                i = c + 1
-                mostrarc=0
-            }
-            else
-            {   
-                i++
-                if (i==c) {
-                    mostrarc=1                  
-                }
-                else{
-                    i--
-                }
-            }
-        }
-
-        for (i = 0; i < d; i++) {
-            cmp = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
-            cmp1 = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
-
-            comparar = cuadrante + pieza
-            comparar1 = cmp + cmp1
-
-            if(comparar == comparar1)
-            {
-                i = d + 1
-                mostrard=0
-            }
-            else
-            {   
-                i++
-                if (i==d) {
-                    mostrard=1                  
-                }
-                else{
-                    i--
-                }
-            }
-        }
-
-        for (i = 0; i < e; i++) {
-            cmp = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
-            cmp1 = document.getElementById("id_numerarios-"+i+"-pieza").value;
-
-            comparar = cuadrante + pieza
-            comparar1 = cmp + cmp1
-
-            if(comparar == comparar1)
-            {
-                i = e + 1
-                mostrare=0
-            }
-            else
-            {   
-                i++
-                if (i==e) {
-                    mostrare=1                  
-                }
-                else{
-                    i--
-                }
-            }
-        }
-
-        if (mostrarc==1 && mostrard==1 || mostrare==1) {
-            if(nombre == "diastemas")
-            {
-                if(t == 0)
-                {
-                    t = 1;                    
-                    c = document.getElementById("id_diastemas-"+b1+"-cuad_uno").value;
-                    p = document.getElementById("id_diastemas-"+b1+"-pieza_uno").value;        
-                    diente = c + p
-
-                    if(diente!='')   
-                    {
-                        c = document.getElementById("id_diastemas-"+b1+"-cuad_uno").value;
-                        p = document.getElementById("id_diastemas-"+b1+"-pieza_uno").value;
-                        $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                    } 
-
-                    $("#id_diastemas-"+b1+"-cuad_uno").val( cuadrante );
-                    $("#id_diastemas-"+b1+"-pieza_uno").val( pieza ); 
-                    
-                    mostrarc=0  
-                    mostrard=0
-                    mostrare=0
-
-                    c = document.getElementById("id_diastemas-"+b1+"-cuad_uno").value;
-                    p = document.getElementById("id_diastemas-"+b1+"-pieza_uno").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', color);
-                }
-                else
-                {
-                    t=0;
-                    c = document.getElementById("id_diastemas-"+b1+"-cuad_dos").value;
-                    p = document.getElementById("id_diastemas-"+b1+"-pieza_dos").value;        
-                    diente = c + p
-
-                    if(diente!='')   
-                    {
-                        c = document.getElementById("id_diastemas-"+b1+"-cuad_dos").value;
-                        p = document.getElementById("id_diastemas-"+b1+"-pieza_dos").value;
-                        $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                        $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                    } 
-
-                    $("#id_diastemas-"+b1+"-cuad_dos").val( cuadrante );
-                    $("#id_diastemas-"+b1+"-pieza_dos").val( pieza ); 
-                    
-                    mostrarc=0  
-                    mostrard=0
-                    mostrare=0
-
-                    c = document.getElementById("id_diastemas-"+b1+"-cuad_dos").value;
-                    p = document.getElementById("id_diastemas-"+b1+"-pieza_dos").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', color);
-                }
-            }
-            else
-            {               
-                c = document.getElementById("id_numerarios-"+b1+"-cuadrante").value;
-                p = document.getElementById("id_numerarios-"+b1+"-pieza").value;        
-                diente = c + p
-
-                if(diente!='')   
-                {
-                    c = document.getElementById("id_numerarios-"+b1+"-cuadrante").value;
-                    p = document.getElementById("id_numerarios-"+b1+"-pieza").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                } 
-
-                $("#id_numerarios-"+b1+"-cuadrante").val( cuadrante );
-                $("#id_numerarios-"+b1+"-pieza").val( pieza ); 
-                
-                mostrarc=0  
-                mostrard=0
-                mostrare=0
-
-                c = document.getElementById("id_numerarios-"+b1+"-cuadrante").value;
-                p = document.getElementById("id_numerarios-"+b1+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
-            }
-        }
-        else
-        {
-            alert("Esta pieza ya fue seleccionada.")
-        }
-    });   
-
-</script>
 
 {% endblock %}
