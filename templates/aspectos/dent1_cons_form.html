@@ -13,8 +13,7 @@
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
-        $('#codigo').val("{{codi}}");
-        $('#ficha').val("{{num}}");
+
     del = 1;
         //Ocultar parte odontograma
         $(".tipo").change(function() {
@@ -316,7 +315,6 @@
         n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
         var list = document.getElementsByClassName("delete-row-perdidas");
         for (i = 0; i < n1; i++) {
-            list[i].setAttribute("id", "perdidas-" + i);
             c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
             p = document.getElementById("id_perdidas-"+i+"-pieza").value;
             $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
@@ -329,7 +327,6 @@
         n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
         var list = document.getElementsByClassName("delete-row-anodoncias");
         for (i = 0; i < n2; i++) {
-            list[i].setAttribute("id", "anodoncias-" + i);            
             c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
             p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
             $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
@@ -342,7 +339,6 @@
         n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
         var list = document.getElementsByClassName("delete-row-mordidas");
         for (i = 0; i < n3; i++) {
-            list[i].setAttribute("id", "mordidas-" + i);
             c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
             p = document.getElementById("id_mordidas-"+i+"-pieza").value;
             $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
@@ -374,29 +370,7 @@
                     //azul
                 }
             }  
-        });  
-
-        //Declarando formsets
-        $('#perdidas_prematuras tbody tr').formset({
-            prefix: "{{ perdida_formset.prefix }}",
-            addCssClass: 'add-row-perdidas',
-            deleteCssClass: 'delete-row-perdidas',
-            formCssClass: 'dynamic-perdida-form',
-        });  
-
-        $('#anodoncia tbody tr').formset({
-            prefix: "{{ anodoncia_formset.prefix }}",
-            addCssClass: 'add-row-anodoncias',
-            deleteCssClass: 'delete-row-anodoncias',
-            formCssClass: 'dynamic-anodoncia-form',
-        });
-
-        $('#mordida_telescopica tbody tr').formset({
-            prefix: "{{ mordida_formset.prefix }}",
-            addCssClass: 'add-row-mordidas',
-            deleteCssClass: 'delete-row-mordidas',
-            formCssClass: 'dynamic-mordida-form',       
-        });     
+        });   
 
         $('.tabs_holder').skinableTabs({
             effect: 'basic_display',
@@ -409,19 +383,6 @@
     </script>
 
     <style type="text/css">
-        .add-row-perdidas, .add-row-anodoncias, .add-row-mordidas {
-            padding-left:18px;
-            background:url({% static 'images/add.png' %}) no-repeat left center;
-        }
-        .delete-row-perdidas, .delete-row-anodoncias, .delete-row-mordidas {
-            float:left;
-            display:block;
-            margin:5px 0 0 5px;
-            text-indent:-6000px;
-            background:url({% static 'images/delete.png' %}) no-repeat left center;
-            width:16px;
-            height:16px;
-        }
         th {
             text-align: center;
         }
@@ -453,26 +414,7 @@
 
 <div class="row">
     <form method="POST" action="">
-
-            <center><h1>Examen de Dentición - Parte 1</h1></center>
-
-        <div class="col-md-12 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-4">
-            <label for="codigo">N° de Expediente </label>   
-            <input id="codigo" class="form-control" type="text" disabled="True">
-            <br>
-            </div>
-            <div class="col-md-4">
-            <label for="ficha">N° de Ficha</label>  
-            <input id="ficha" class="form-control" type="text" disabled="True">
-            <br>
-            </div>
-            <br>
-        </div>
-        <br>
-    </div>
-
+    <center><h3>Examen de Dentición - Parte 1</h3></center>
     {% csrf_token %} 
 <div class="mensaje" id="mensaje"></div>
     <div class="col-md-5">
@@ -1035,8 +977,43 @@
                     </tr>
                 </tbody>
             </table>
-        </center>             
+        </center>    
+        <br/><br/><br/>         
     </div>
+
+    <div class="col-md-6">
+        {{form2.fichas}}
+        <center> 
+        <div class="form-group" style="width:400px">
+            <label for="{{form2.observaciones_generales.name}}">{{form2.observaciones_generales.label}}</label>  
+            {{form2.observaciones_generales}}
+        </div>
+
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.mal_posiciones.name}}">{{form2.mal_posiciones.label}}</label>  
+            {{form2.mal_posiciones}}
+            <br/>
+            <label for="{{form2.tejido_intraorales.name}}">{{form2.tejido_intraorales.label}}</label>
+            {{form2.tejido_intraorales}}
+        </div> 
+        </center>         
+    </div>
+
+    <div class="col-md-6">         
+    <center>
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.encias.name}}">{{form2.encias.label}}</label>  
+            {{form2.encias}}
+            <br/>
+            <label for="{{form2.frenillos.name}}">{{form2.frenillos.label}}</label>  
+            {{form2.frenillos}}
+            <br/>
+            <label for="{{form2.lengua.name}}">{{form2.lengua.label}}</label>  
+            {{form2.lengua}}
+        </div> 
+    </center>   
+    </div>
+
 </div><!-- fin bootstrap -->
 
     <div class="col-md-8 col-md-offset-3">

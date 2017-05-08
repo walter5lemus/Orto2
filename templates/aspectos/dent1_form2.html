@@ -729,10 +729,7 @@
             {
                 alert("Esta pieza ya fue seleccionada.")
             }
-        });
-        $('#codigo').val("{{codi}}");
-    $('#ficha').val("{{num}}");
-    
+        });   
     </script>
 
     <style type="text/css">
@@ -763,24 +760,7 @@
 
 <div class="row">
     <form method="POST" action="">
-    <center><h1>Examen de Dentición - Parte 1</h1></center>
-
-        <div class="col-md-12 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-4">
-            <label for="codigo">N° de Expediente </label>   
-            <input id="codigo" class="form-control" type="text" disabled="True">
-            <br>
-            </div>
-            <div class="col-md-4">
-            <label for="ficha">N° de Ficha</label>  
-            <input id="ficha" class="form-control" type="text" disabled="True">
-            <br>
-            </div>
-            <br>
-        </div>
-        <br>
-    </div>
+    <center><h3>Examen de Dentición - Parte 1</h3></center>
     {% csrf_token %} 
 
     <div class="col-md-5">
@@ -1343,8 +1323,43 @@
                     </tr>
                 </tbody>
             </table>
-        </center>             
+        </center>  
+        <br/><br/><br/>            
     </div>
+
+    <div class="col-md-6">
+        {{form2.fichas}}
+        <center> 
+        <div class="form-group" style="width:400px">
+            <label for="{{form2.observaciones_generales.name}}">{{form2.observaciones_generales.label}}</label>  
+            {{form2.observaciones_generales}}
+        </div>
+
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.mal_posiciones.name}}">{{form2.mal_posiciones.label}}</label>  
+            {{form2.mal_posiciones}}
+            <br/>
+            <label for="{{form2.tejido_intraorales.name}}">{{form2.tejido_intraorales.label}}</label>
+            {{form2.tejido_intraorales}}
+        </div> 
+        </center>         
+    </div>
+
+    <div class="col-md-6">         
+    <center>
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.encias.name}}">{{form2.encias.label}}</label>  
+            {{form2.encias}}
+            <br/>
+            <label for="{{form2.frenillos.name}}">{{form2.frenillos.label}}</label>  
+            {{form2.frenillos}}
+            <br/>
+            <label for="{{form2.lengua.name}}">{{form2.lengua.label}}</label>  
+            {{form2.lengua}}
+        </div> 
+    </center>   
+    </div>
+    
 </div><!-- fin bootstrap -->
 
     <div class="col-md-8 col-md-offset-2">

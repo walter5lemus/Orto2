@@ -1,45 +1,47 @@
 {% extends 'base/base.html' %}
+
 {% load staticfiles %}
+
 {% block title %}
 	Retiro Voluntario
 {% endblock %}
+
 {% block header %}
 {% endblock %}
-{% block navbar %}
-		<div class="bs-docs-section clearfix">
-		    <div class="row">
-		        <div class="col-lg-12">
-		            <div class="bs-component">
-		            	<nav class="navbar navbar-default">
-		                	<div class="container-fluid">
-		                  		<div class="navbar-header">
-		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
-		                  		</div>
-		                  		
-		                  		<ul class="nav navbar-nav navbar-right">
-		                        	<li class="">
-		                        		<a href="{%url 'logout' %}" role="button" aria-expanded="false">Cerrar Sesión<span></span></a>
-		                        		
-		                      		</li>
-		                    	</ul>
-		                    	<div>	
-		                    	<ul class="nav navbar-nav navbar-right">
-		                        	<li class="">
-		                        		<a href="#" class="navbar-brand" role="button" aria-expanded="false">{{user}}<span></span></a>
-		                      		</li>
-		                    	</ul>
-		                    	</div>
-		                  		<h1 style="color:white "> <center> </center></h1> 
-		                  		<h2 style="color:white "> <center>  </center></h2> 
-		                  		
 
-		                </div>
-		            </nav>
-		        </div>
-           	</div>
-        </div>
-    </div>   
-    {% endblock %} 
+{% block navbar %}
+	<nav class="navbar navbar-inverse">
+  		<div class="container-fluid">
+
+    		<div class="navbar-header">
+     			 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
+        			<span class="sr-only">Toggle navigation</span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+      			</button>
+      			<a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span> Home</a>
+    		</div>
+
+    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+      			<ul class="nav navbar-nav navbar-right">
+       				<li class="active">
+           				<a href="{%url 'logout' %}">Cerrar Sesión</a>
+       				</li> 
+      			</ul>
+
+      			<ul class="nav navbar-nav navbar-right">
+        			<div class="col-md-3">
+        				<h6 style="color:white">Hola, <B>{{user}}</B></h6>
+        			</div>
+      			</ul>
+
+    		</div>
+  		</div>
+	</nav>
+{% endblock %} 
+
+
 {% block content %}
 
 <style>
@@ -48,7 +50,10 @@
 	}
 </style>
 
-<h2><center>Retiro de Fichas Voluntariamente</center></h2>
+<br><br>
+<h1><center>Retiro de Fichas</center></h1>
+<h2><center>Voluntariamente</center></h2>
+	
 	<div class="col-md-12">
 	<br><br>
 		<div class="form-group">
@@ -78,23 +83,43 @@
 			</div>
 		</div>
 	</div>
-	<div class="row ocultar" >
-	<div class="col-md-3 col-md-offset-3" >
-		<br><br><br>
-		<div class="form-group">
+
+
+
+
+<div class="row ocultar">
+
+	<div class="col-md-8 col-md-offset-2">
+	<br><br>
+	<div class="panel panel-danger">
+  		<div class="panel-heading">
+    	  <h3 class="panel-title"></h3>
+  		</div>
+
+  		<div class="panel-body">
+  		<div class="form-group">
+  			<div class="col-md-5 col-md-offset-1">
+			
 				<label for="retiro_voluntario">N° de Ficha a Retirar</label>
 				<input type="text" name="input_fichas" id="input_fichas" class="form-control">
-			<br><br></div>
-		</div>
-		<div class="col-md-3" >
-			<br><br><br>
-				<div class="form-group">
-						<button class="btn btn-danger" style="margin-top: 25px;" id="id_retiro_voluntario" ">Retiro Voluntario</button>
-					<br><br></div>
-				</div>
 			</div>
-	</div>
 
+			 <div class="col-md-4 col-md-offset-0">
+			 	<br>
+				<a class="btn btn-danger btn-sm btn-block" href="#" id= "id_retiro_voluntario">Retiro Voluntario</a>
+			 </div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+</div>	
+   
+    
+ 	<div class="col-md-2 col-md-offset-5">
+ 		<br><br>
+		<a class="btn btn-warning btn-block" href="/home/">Regresar</a>
+	</div>
 
 
 <script>

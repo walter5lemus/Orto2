@@ -17,26 +17,10 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="row">
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        </div>
-
 <form method="post">
 	{% csrf_token %}
+
+<br><br>	
 <h1><center>Tipo de Perfil</center></h1>
 <div class="row">
 	<div class="col-md-6 col-md-offset-1">
@@ -68,6 +52,9 @@
 
 	<!-- TIPO DE PERFIL -->
 
+ 	<div class="col-md-10 col-md-offset-1">
+	<div class="form-group">
+
 	<div class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Facial</h4>
@@ -95,9 +82,17 @@
 			</div>
 			<br>
 		</div>
+	  </div>
 	</div>
-</div>
 
+	</div>
+	</div>
+
+
+
+
+	<div class="col-md-10 col-md-offset-1">
+	<div class="form-group">
 
     <div class="panel panel-primary">
       <div class="panel-heading"> 
@@ -121,11 +116,19 @@
 			</div>
 			<br>
 		</div>
+	  </div>
 	</div>
-</div>
+
+	</div>
+	</div>
 	
+
+
 	<!-- TERCIOS -->
 	
+
+	<div class="col-md-10 col-md-offset-1">
+	<div class="form-group">
 
 	<div class="panel panel-primary">
       <div class="panel-heading"> 
@@ -178,10 +181,19 @@
 			</div>
 		</div>
 
+	   </div>
 	</div>
-</div>
+
+	</div>
+	</div>
+
+
 
 	<!-- Sonrisa -->
+
+	<div class="col-md-10 col-md-offset-1">
+	<div class="form-group">
+
 	<div class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Sonrisa</h4>
@@ -205,10 +217,19 @@
 			</div>
 			<br>
 		</div>		
+	  </div>
 	</div>
-</div>
+
+	</div>
+	</div>
+
+
 
 	<!-- Labios -->
+
+	<div class="col-md-10 col-md-offset-1">
+	<div class="form-group">
+
 	<div class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Labios</h4>
@@ -241,20 +262,26 @@
 			</div>
 		</div>
 
+	  </div>
 	</div>
-</div>
+
+	</div>
+	</div>
 
 
 
 
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<div class="col-md-3 col-md-offset-1">
-			  <a href="/informacion/estado_general/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-			</div>
+			<br>
 			<div class="col-md-3 col-md-offset-2">
-			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+			  <a href="/informacion/estado_general/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
 			</div>
+		
 		</div>
 		<br><br>
 	</div>

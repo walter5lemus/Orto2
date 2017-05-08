@@ -4,7 +4,10 @@
 
     {% load staticfiles %}
 
-    {% block title %}Nance{% endblock %}
+    {% block title %}
+    Nance
+    {% endblock %}
+
 
     {% block extrajs %}
     	
@@ -28,49 +31,37 @@
             
     	</style>
 
-    	
     {% endblock %}
 
+
+
     {% block content %}
+    <br><br>
+    <h1><center>Analisis de Espacio de la Denticion Mixta</center></h1>
+    <h2><center>Analisis de Nance</center></h2>
 
-    <div class="row">
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        </div>
+  
 
-<h2><center>Analisis de Nance</center></h2>
-
-
-
-<div class="col-md-10 col-md-offset-3">
+    <div class="col-md-10 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-4">
-            <label for="codigo">N° de Expediente </label>   
-            <input id="codigo" class="form-control" type="text" disabled="True">
-            <br>
+        <br>
+            <div class="col-md-4 col-md-offset-1">
+                <label for="codigo">N° de Expediente </label>   
+                <input id="codigo" class="form-control" type="text" disabled="True">
+                <br>
             </div>
-            <div class="col-md-4">
-            <label for="ficha">N° de Ficha</label>  
-            <input id="ficha" class="form-control" type="text" disabled="True">
-            <br>
+            
+            <div class="col-md-5">
+                <label for="ficha">N° de Ficha</label>  
+                <input id="ficha" class="form-control" type="text" disabled="True">
             </div>
             <br>
         </div>
         <br>
-</div>
-    
+    </div>
+
+
+
 
 <div class="analisis_nance">
     		
@@ -115,12 +106,12 @@
         </div>
         <br><br>
     </div>
+    {{form1.total}}
+    {{form1.total2}}  
+ 
 
 
-    
 
-            {{form1.total}}
-            {{form1.total2}}  
             <div class="row">
                 <div class="col-md-8 col-md-offset-0">
                     <h4 style="color: red">Si el diente esta permanente, ingresar el dato en Valor x</h4>
@@ -163,7 +154,7 @@
     	                <td></td>
     	                <td></td>
                         <td></td>
-                        <td><td><input id="total1" type="Number" step="0.01" class="form-control" readonly>
+                        <td><td><input id="total1" type="Number" step="0.01" class="form-control">
                         </td>
     	                <td></td>
                     </tr>
@@ -210,7 +201,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input id="total2" type="Number" step="0.01" class="form-control" readonly="">
+                        <td><input id="total2" type="Number" step="0.01" class="form-control">
                         </td>
                         <td></td>
                     </tr>
@@ -232,12 +223,12 @@
                             <tr>
                                 <td><input id="maxilar" type="Texto" class="form-control"></td>
                                 <td><input id="maxilareden" type="Texto" class="form-control"></td>
-                                <td><input id="maxilartotal" type="Number" step="0.01" class="form-control" readonly></td>
+                                <td><input id="maxilartotal" type="Number" step="0.01" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td><input id="mandibular" type="Texto" class="form-control"></td>
                                 <td><input id="mandibulareden" type="Texto" class="form-control"></td>
-                                <td><input id="mandibulartotal" type="Number" step="0.01" class="form-control" readonly></td>
+                                <td><input id="mandibulartotal" type="Number" step="0.01" class="form-control"></td>
                             </tr>
                     </tbody>
                   
@@ -246,19 +237,26 @@
 
 
 
-    <br><br><br>
+
+
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-        <br><br>
+            
+            <br><br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/diag_cefalo/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/diag_cefalo/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
     </div>
+
+
+
 
      <!-- Barra de progreso -->
         <br>

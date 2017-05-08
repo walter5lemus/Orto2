@@ -9811,23 +9811,6 @@
 
 {% block content %}
 
-    <div class="row">
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        </div>
-
 <!-- CSS -->
 
 <form method="post">
@@ -9866,7 +9849,13 @@
 
 {{ form1.fichas }}
 
-	    <div class="col-md-12 col-md-offset-2">
+
+	<br><br>
+	<h1 align="center">Analisis de Moyers Superior</h1>
+    <h2 align="center">Espacio Disponible Arcada Superior</h2> 
+
+
+	<div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
             <label for="codigo">N° de Expediente </label>   
@@ -9884,11 +9873,16 @@
     </div>
 
 
-<div class="container">
-    <div class="row">
-    <h2 align="center">ANALISI DE MOYERS SUPERIOR</h1><br><br>
-    <h5 align="center">ESPACIO DISPONIBLE ARCADA SUPERIOR</h5><br>    
-	<h5 align="center">ESPACIO DISPONIBLE ANTERIOR</h5>
+<!-- Espacio disponible posterior -->
+
+<div class="col-md-10 col-md-offset-1">
+
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title">Espacio Disponible Anterior</h3>
+  	</div>
+  <div class="panel-body">
+
 	<div class="col-sm-6" align="right" style="align-items: center">
 	<br><br><br>
 		<table>
@@ -9914,11 +9908,11 @@
 			<tbody>
 				<tr>
 					<th>Pieza</th>
-					<th>Medida</th>  
+					<th>Medida (mm)</th>  
 				</tr>
 				<tr>
 					<td>{{ formset.0.posicion }}3-1</td>
-					<td style="width: 105px"><div>{{ formset.0.ancho_mesiodistal }} mm</div></td>
+					<td style="width: 105px"><div>{{ formset.0.ancho_mesiodistal }}</div></td>
 				</tr>
 				<tr>
 					<td>{{ formset.1.posicion }}3-2</td>
@@ -9941,6 +9935,8 @@
 		</table>
 		</div>
     </div>
+
+
     <br><br>
     <div class="row">
         <div class="col-sm-12" align="center">
@@ -9956,14 +9952,27 @@
 					<td><div id="divi" align="center" style="height:20px"></div></td>				
 			</tbody>
 		</table>
+		<br><br>
         </div>
     </div>
 
-    <br><br><br><br>
+   </div>
+  </div>
 
-	<div class="row">
-        <div class="col-sm-12" align="center">
-        	<h5 align="center">ESPACIO DISPONIBLE POSTERIOR</h5>
+
+
+<!-- Espacio disponible posterior -->
+    
+<div class="col-md-10 col-md-offset-1">
+
+  <div class="panel panel-primary">
+  	<div class="panel-heading">
+    	<h3 class="panel-title">Espacio Disponible Posterior</h3>
+  	</div>
+  <div class="panel-body">
+
+  		<center>
+  			<br><br>
         	<img src=" {% static 'images/moysup2.jpg' %}">
         	<br><br>
         	<table>
@@ -9972,19 +9981,25 @@
 					<td style="width: 105px">{{ form1.ed_izquierdo }} mm</td>
 					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					<td style="width: 105px">{{ form1.ed_derecho }} mm</td>
-		
-			</tbody>
-		</table>
-        </div>
+				</tr>
+			  </tbody>
+			</table>
+		</center>
+
     </div>
+ 	</div>
+</div>
 
-      <br><br><br><br>
 
-    <div class="row">
-        <div class="col-sm-12" align="center">
 
-        	<table class='table-bordered'>
-				<h5 align="center">ESPACIO NECESARIO ARCADA SUPERIOR</h5>
+
+<!-- Espacio necesario - Tabla acumuladora -->
+
+ 	<br><br><br><br>
+	<div class="col-sm-12" align="center">
+        <table class='table-bordered'>
+        	<br><br>
+			<h3 align="center"><font color="teal">Espacio Necesario Arcada Superior</font></h3>
 								
 				<tbody>
 					<tr>
@@ -10059,16 +10074,14 @@
 					</tr>
 		
 				</tbody>
-			</table>
-		</div>
-    </div>
-
-      <br><br><br><br>
+		</table>
+	</div>
 
 
-     <div class="row">
-        <div class="col-sm-12" align="center">
-        	<h5 align="center">TABLA ACUMULADORA DE DATOS</h5>
+     <br><br><br><br>
+     <div class="col-sm-12" align="center">
+     	<br><br>
+        <h3 align="center"><font color="teal">Tabla Acumuladora de Datos</font></h3>
         	<br>
         	<table>
         	<tbody>
@@ -10108,24 +10121,27 @@
 				</tr>				
 			</tbody>
 			</table>
-        	
         </div>
-    </div>
-</div> 
+
 
 
 
     <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
-        </div>
-        <br><br>
-    </div>
+		<div class="form-group">
+			
+			<br><br>
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			</div>
+		
+		</div>
+		<br><br>
+	</div>
+
 
 
 

@@ -1,28 +1,16 @@
 {% extends 'base/base.html' %}
 
+{% block title %}
+Diagnostico General
+{% endblock %}
+
 {% block header %}
+<br><br>
 <h1><center>Diagnostico General</center></h1>
 {% endblock %}
 
 
 {% block content %}
-    <div class="row">
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endif %}
-        </div>
-
 <form method="post">
 	{% csrf_token %}
 
@@ -122,27 +110,23 @@
 
 
 
-<!--
-	<div class="col-md-8 col-md-offset-1">
+	<br>
+	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<button type="button" onclick=" location.href='/informacion/estado_general/editar2/{{codi}}/{{num}}'" class="btn btn-warning">Cancelar</button>
-			<button type="submit" class="btn btn-success">Siguiente</button>
+			
+			<br>
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/analisis_denticion_mixta/moyerssuperior/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			</div>
+		
 		</div>
+		<br><br>
 	</div>
--->
 
-
-    <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_denticion_mixta/moyerssuperior/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
-        </div>
-        <br><br>
-    </div>
 
 
 	<!-- Barra de progreso -->

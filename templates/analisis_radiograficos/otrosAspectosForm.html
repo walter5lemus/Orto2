@@ -8,6 +8,7 @@
 
 {% block content %}
 
+    <br><br>
     <h1 align="center">Analisis del Panorama Simoes de Simetria</h1>
     <h2 align="center">Aspectos Mandibulares</h2><br><br>
     <div class="col-md-8 col-md-offset-2">
@@ -29,24 +30,6 @@
     <form method="POST">
         {% csrf_token %}
 
-          <div class="row">
-          {% if form.errors %}
-              {% for field in form %}
-                  {% for error in field.errors %}
-                      <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
-                      </div>
-                  {% endfor %}
-              {% endfor %}
-              {% for error in form.non_field_errors %}
-                  <div class="alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
-                  </div>
-              {% endfor %}
-          {% endif %}
-          </div>
-        
-
         <div class="col-md-6 col-md-offset-1">
             <div class="form-group">
                 {{ form.fichas }}
@@ -63,11 +46,12 @@
               <h3 class="panel-title">Aspectos Sinusales</h3>
             </div>
 
-         <div class="panel-body">
+          <div class="panel-body">
             <div class="col-md-6 col-md-offset-1">
               <br><b>Aspectos Sinusales</b><br>
                 {{ form.aspectos_sinusales_simetrico }}
             </div>
+
 
             <div class="col-md-9 col-md-offset-1">
               <br><b>Aspectos observados</b><br>
@@ -190,18 +174,24 @@
 
 
 
-    <br>
+
     <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/asp_mandibular1/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
-        </div>
+      <div class="form-group">
+      
         <br><br>
+        <div class="col-md-3 col-md-offset-2">
+          <a href="/asp_mandibular1/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+        </div> 
+
+        <div class="col-md-3 col-md-offset-1">
+          <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+        </div>
+    
+      </div>
+    <br><br>
     </div>
+
+
 
 
      <!-- Barra de progreso -->

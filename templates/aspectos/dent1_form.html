@@ -2,7 +2,9 @@
 
 {% load staticfiles %}
 
-{% block title %}Aspectos de dentición - Parte 1{% endblock %}
+{% block title %}
+Aspectos de dentición - Parte 1
+{% endblock %}
 
 {% block extrajs %}
 
@@ -556,10 +558,7 @@
             {
                 alert("Esta pieza ya fue seleccionada.")
             }
-        });
-
-    $('#codigo').val("{{codi}}");
-    $('#ficha').val("{{num}}");
+        });   
     </script>
 
     <style type="text/css">
@@ -603,12 +602,21 @@
             {% endfor %}
         {% endif %}
         </div>
+
+
 <div class="row">
     <form method="POST" action="">
-    <center><h1>Examen de Dentición - Parte 1</h1></center>
 
-        <div class="col-md-12 col-md-offset-2">
+    <br><br>
+    <center><h1>Examen de Dentición</h1></center>
+    <center><h2>Parte I</h2></center>
+    {% csrf_token %} 
+
+
+
+    <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-4">
             <label for="codigo">N° de Expediente </label>   
             <input id="codigo" class="form-control" type="text" disabled="True">
@@ -617,16 +625,32 @@
             <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
-            <br>
+            <br><br><br>
             </div>
-            <br>
+            
         </div>
         <br>
     </div>
 
-    {% csrf_token %} 
+
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
+
+
+
+<!-- Tabla + Odontograma -->
+
+<br><br><br><br><br><br>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
 
     <div class="col-md-5">
+        <br><br>
         <center>
         <div class="form-group" style="width:200px">
             {{form1.fichas}}
@@ -726,12 +750,15 @@
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
 
+
+
     </div>
     <div class="col-md-7">
         <center>
-        <br/><br/><br/><br/>
-            <h4>Odontograma</h4>
-            <br/>
+            <br><br>
+            <h4><font color="blue"><B>Odontograma</B></font></h4>
+
+            <br>
             <div id="svgselect" style="width: 610px; height: 230px;"> <!-- background-color:red -->
                 <svg version="1.1" height="100%" width="100%">
                     <g transform="scale(1.5)" id="gmain">
@@ -1186,24 +1213,62 @@
                     </tr>
                 </tbody>
             </table>
-        </center>             
+        </center>   
+        <br/><br/><br/>          
     </div>
+
+    <div class="col-md-6">
+        {{form2.fichas}}
+        <center> 
+        <div class="form-group" style="width:400px">
+            <label for="{{form2.observaciones_generales.name}}">{{form2.observaciones_generales.label}}</label>  
+            {{form2.observaciones_generales}}
+        </div>
+
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.mal_posiciones.name}}">{{form2.mal_posiciones.label}}</label>  
+            {{form2.mal_posiciones}}
+            <br/>
+            <label for="{{form2.tejido_intraorales.name}}">{{form2.tejido_intraorales.label}}</label>
+            {{form2.tejido_intraorales}}
+        </div> 
+        </center>         
+    </div>
+
+    <div class="col-md-6">         
+    <center>
+        <div class="form-group" style="width:250px">
+            <label for="{{form2.encias.name}}">{{form2.encias.label}}</label>  
+            {{form2.encias}}
+            <br/>
+            <label for="{{form2.frenillos.name}}">{{form2.frenillos.label}}</label>  
+            {{form2.frenillos}}
+            <br/>
+            <label for="{{form2.lengua.name}}">{{form2.lengua.label}}</label>  
+            {{form2.lengua}}
+        </div> 
+    </center>   
+    </div>
+
 </div><!-- fin bootstrap -->
 
+
+    <br><br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-        <br><br>
+            
+            <br><br><br><br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
-    </div>  
-    </form>
-</div>
+    </div>
 
     <!-- Barra de progreso -->
     <br><br>

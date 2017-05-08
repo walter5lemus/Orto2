@@ -3,28 +3,30 @@
 {% block title %}
 Motivo Consulta
 {% endblock %}
-{% block header %}
 
+{% block header %}
 {% endblock %}
+
 
 {% block content %}
 
-	<div class="row">
-		{% if form.errors %}
-		    {% for field in form %}
-		        {% for error in field.errors %}
-		            <div class="alert alert-danger">
-		                <strong>{{ error|escape }}</strong>
-		            </div>
-		        {% endfor %}
-		    {% endfor %}
-		    {% for error in form.non_field_errors %}
-		        <div class="alert alert-danger">
-		            <strong>{{ error|escape }}</strong>
-		        </div>
-		    {% endfor %}
-		{% endif %}
-		</div>
+	<ul>
+	  {% if form.non_field_errors %}
+	    <li>{{ form.non_field_errors }}</li>
+	  {% endif %}
+	  {% for field in form %}
+	    {% if field.errors %}
+	      <li class="alert alert-danger">
+	        <strong>{{ field.label }}</strong>
+	        <ul>
+	          {% for error in field.errors %}
+	            <li class="alert alert-danger"><strong>{{ error }}</li></strong>
+	          {% endfor %}
+	        </ul>
+	      </li>
+	    {% endif %}
+	  {% endfor %}
+	</ul>
 
 <form method="POST">
 	{% csrf_token %}
@@ -105,15 +107,17 @@ Motivo Consulta
 </div>
 		
 
-
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<div class="col-md-3 col-md-offset-1">
-			  <a href="/informacion/datos_generales/nuevo2/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+			
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/informacion/datos_generales/nuevo2/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
 			</div> 
+
 			<div class="col-md-3 col-md-offset-1">
-			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
 			</div>
+		
 		</div>
 		<br><br>
 	</div>

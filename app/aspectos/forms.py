@@ -59,7 +59,7 @@ class registroForm_consultar(forms.ModelForm):
 			'problema': forms.HiddenInput(attrs={'class':'form-controls','readonly':True}),
 			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'detalle': forms.TextInput(attrs={'class':'form-control'}),
+			'detalle': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 class tipo_denticionForm(forms.ModelForm):

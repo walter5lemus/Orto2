@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block header %}
-
 {% endblock %}
 
+
+
 {% block extrajs %}
-
-
 
 
 <script type="text/javascript">
@@ -133,22 +132,10 @@ $('#id_form-1-snb').change(function() {
 
 <form method="post">
 
-	<div class="row">
-		{% if form.errors %}
-		    {% for field in form %}
-		        {% for error in field.errors %}
-		            <div class="alert alert-danger">
-		                <strong>{{ error|escape }}</strong>
-		            </div>
-		        {% endfor %}
-		    {% endfor %}
-		    {% for error in form.non_field_errors %}
-		        <div class="alert alert-danger">
-		            <strong>{{ error|escape }}</strong>
-		        </div>
-		    {% endfor %}
-		{% endif %}
-		</div>
+
+	<br><br>
+    <h1 align="center">Analisis Cefalometrico</h1>
+
 
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
@@ -374,19 +361,23 @@ $('#id_form-1-snb').change(function() {
 
 
 
-	 <br>
-    <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <div class="col-md-3 col-md-offset-2">
-              <a href="/analisis_radiograficos/otrosHallazgos/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
-        </div>
-        <br><br>
-    </div>
 
+    <br>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			
+			<br>
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/analisis_radiograficos/otrosHallazgos/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			</div>
+		
+		</div>
+		<br><br>
+	</div>
 
 
 

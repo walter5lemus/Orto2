@@ -19,7 +19,6 @@ Estado general
 {% block content %}
 <form method="POST">
 	{% csrf_token %}
-
 	<div class="row">
 		{% if form.errors %}
 		    {% for field in form %}
@@ -36,15 +35,12 @@ Estado general
 		    {% endfor %}
 		{% endif %}
 		</div>
-		
- <div class="panel panel-primary">
+
+ <div class="panel panel-success">
   <div class="panel-heading">
     <h3 class="panel-title"></h3>
   </div>
   <div class="panel-body">
-
-	<div class="mensaje" id="mensaje"></div>
-
 
 	<h1><center>Estado General</center></h1>
 	<div class="col-md-8 col-md-offset-2">
@@ -114,14 +110,15 @@ Estado general
 </div>
 		
 
-
+	<br>
 	<div class="col-md-8 col-md-offset-3">
 		<div class="form-group">
 			<div class="col-md-3 col-md-offset-1">
-			  <a href="/informacion/motivo_consultas/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+			  <a href="/informacion/motivo_consultas/consultar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
 			</div>
+
 			<div class="col-md-3 col-md-offset-1">
-			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+			  <button type="submit" class="btn btn-success btn-block">Siguiente</button>
 			</div>
 		</div>
 		<br><br>
@@ -132,7 +129,7 @@ Estado general
 		<br><br>
 		<div class="col-md-10 col-md-offset-1">
 		<div class="progress">
-  			<div class="progress-bar" style="width: 12%;"></div>
+  			<div class="progress-bar progress-bar-success" style="width: 12%;"></div>
 		</div>
 		</div>
 
@@ -145,23 +142,37 @@ Estado general
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
 
-	if ({{completada}}==0){
-	$("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
-	}else{
-		if ({{completada}}==1){
-			$("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
-		}else{
-			if ({{completada}}==2){
-				$("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
-			}else{
-				if ({{completada}}==3){
-					$("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
-				}
-				
-			}
-		}
+	$('#id_cambio_salud_1').click(function() {
+   		if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+	});
+
+	$('#id_cambio_salud_0').click(function() {
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			var texto =  $("#id_detalle_enf_operacion").text();
+   			$("#id_detalle_enf_operacion").val(texto);
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	});
+
+	$(function() {
+    	if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	})
+
+
+	function redireccionar(){
+		window.location.href="/informacion/motivo_consultas/editar/"+{{codi}}+"/"+{{num}};
 	}
 
+	
 </script>
 
 
