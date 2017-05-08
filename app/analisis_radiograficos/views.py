@@ -99,7 +99,7 @@ def AspectosArticulares_edit(request,codi,num):
 def otrosAspectos_crear(request, codi, num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		if aspectos_mandibulares2.objects.filter(fichas_id=ids.id).exists():
 			estado = aspectos_mandibulares2.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
@@ -179,7 +179,7 @@ def otrosAspectos_editar(request, codi, num):
 def otrosHallazgos_crear(request, codi, num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 		if estadios_de_nolla.objects.filter(fichas_id=ids.id).exists():
 			if secuencia_y_cronologia.objects.filter(fichas_id=ids.id).exists():

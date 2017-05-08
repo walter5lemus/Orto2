@@ -11,7 +11,6 @@ urlpatterns = [
 
 	url(r'^datos_generales/nuevo/$', login_required(DatosGeneral_crear), name='datos_generales_crear'),
 	url(r'^datos_generales/nuevo2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(DatosGeneral_crear2), name='datos_generales_crear2'),
-	url(r'^datos_generales/listar/', login_required(DatosGeneralesList.as_view()),name='datos_generales_listar'),
 	url(r'^datos_generales/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(DatosGenerales_consultar),name='datos_generales_consultar'),
 	url(r'^datos_generales/consultar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_consultar2),name='datos_generales_consultar2'),
 	url(r'^datos_generales/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(DatosGenerales_edit),name='datos_generales_editar'),
@@ -22,7 +21,6 @@ urlpatterns = [
 	url(r'^motivo_consultas/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(Motivo_Consulta_editar),name='motivo_consulta_editar'),
 
 	url(r'^estado_general/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_crear), name='estado_general_crear'),
-	url(r'^estado_general/listar', login_required(EstadoGeneralList.as_view()),name='estado_general_listar'),
 	url(r'^estado_general/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_edit),name='estado_general_editar'),
 	url(r'^estado_general/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_consultar),name='estado_general_consultar'),
 	url(r'^estado_general/editar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(EstadoGeneral_edit2),name='estado_general_editar2'),

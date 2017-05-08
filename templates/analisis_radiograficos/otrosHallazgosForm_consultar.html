@@ -32,6 +32,8 @@
         </div>
         <br>
     </div>
+                <div class="mensaje" id="mensaje"></div>
+
         <div class="col-md-6 col-md-offset-1">
             <div class="form-group">
                 {{ form1.fichas }}
@@ -335,6 +337,24 @@
     </form>
 <script>
     $('#codigo').val("{{codi}}");
-    $('#ficha').val("{{num}}");  
+    $('#ficha').val("{{num}}"); 
+
+    if ({{completada}}==0){
+    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+    }else{
+        if ({{completada}}==1){
+            $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
+        }else{
+            if ({{completada}}==2){
+                $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
+            }else{
+                if ({{completada}}==3){
+                    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
+                }
+                
+            }
+        }
+    }
+
 </script>
 {% endblock %}

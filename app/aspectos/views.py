@@ -19,7 +19,7 @@ def index(request):
 def denticion1_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		if ids:
 			if tipo_denticion.objects.filter(fichas_id=ids.id).exists():
 				max_num=5
@@ -97,49 +97,51 @@ def denticion1_view(request,codi,num):
 
 def denticion1_editar(request,codi,num):
 	str(codi)
-	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
-		if ids:
-			max_num=5
-			perdidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
-			anodonciaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
-			mordidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
-			tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
-			denticiones = denticion.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
-				anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
-				mordida_formset = mordidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='3'), prefix='mordidas')
-				form1 = tipo_denticionForm(instance=tipodenticion)
-				form2 = denticionForm(instance=denticiones)
-			else:
-				perdida_formset = perdidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='perdidas',)		
-				anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='anodoncias',)
-				mordida_formset = mordidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='mordidas',)
-				form1 = tipo_denticionForm(request.POST, instance=tipodenticion)
-				form2 = denticionForm(request.POST, instance=denticiones)
-				if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid() and form2.is_valid()):
-					form1.save()
-					form2.save()
+	if request.user.is_superuser==1:
+		try:
+			ids = fichas.objects.get(cod_expediente=codi, numero=num)
+			if ids:
+				max_num=5
+				perdidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+				anodonciaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+				mordidaFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+				tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+				denticiones = denticion.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					perdida_formset = perdidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='1'), prefix='perdidas')
+					anodoncia_formset = anodonciaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='2'), prefix='anodoncias')	
+					mordida_formset = mordidaFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='3'), prefix='mordidas')
+					form1 = tipo_denticionForm(instance=tipodenticion)
+					form2 = denticionForm(instance=denticiones)
+				else:
+					perdida_formset = perdidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='perdidas',)		
+					anodoncia_formset = anodonciaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='anodoncias',)
+					mordida_formset = mordidaFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='mordidas',)
+					form1 = tipo_denticionForm(request.POST, instance=tipodenticion)
+					form2 = denticionForm(request.POST, instance=denticiones)
+					if (perdida_formset.is_valid() and anodoncia_formset.is_valid() and mordida_formset.is_valid() and form1.is_valid() and form2.is_valid()):
+						form1.save()
+						form2.save()
 
-					for form in perdida_formset:
-						print form
-						form.save()
-						
-					for form in anodoncia_formset:
-						print form
-						form.save()				
+						for form in perdida_formset:
+							print form
+							form.save()
+							
+						for form in anodoncia_formset:
+							print form
+							form.save()				
 
-					for form in mordida_formset:
-						print form
-						form.save()
+						for form in mordida_formset:
+							print form
+							form.save()
 
-				return redirect('/aspectos/denticion2/editar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
-	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
-
+					return redirect('/aspectos/denticion2/editar/%s/%s/' %(codi,num))
+				return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
+		except Exception, e:
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+	else:
+		return render(request, 'base/error_no_hay_acceso.html')
 class EliminarAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		ides = request.GET['ides']
@@ -180,7 +182,7 @@ def denticion1_consultar(request,codi,num):
 def denticion2_view(request,codi,num):
 	str(codi)
 	#try:
-	ids = fichas.objects.get(cod_expediente=codi, numero=num)
+	ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 
 	if ids:
 		max_num=5
@@ -204,7 +206,7 @@ def denticion2_view(request,codi,num):
 def mordidas_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		if ids:
 			max_num=5
 			registro_mordidasFormSet = formset_factory(registro_mordidasForm, extra=1, max_num=5)
@@ -282,7 +284,7 @@ def mordidas_consultar(request, codi, num):
 def relacionsagital_crear(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		if ids:
 			if relaciones_sagitales.objects.filter(fichas_id=ids.id).exists():
 				relacionsagital = relaciones_sagitales.objects.get(fichas_id=ids.id)

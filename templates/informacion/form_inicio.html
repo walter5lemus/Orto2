@@ -68,7 +68,7 @@
 			<h2><p class="text-primary">ó crea uno nuevo</p></h2>
 			</center>
 
-			<div class="col-md-6 col-md-offset-2">
+			<div class="col-md-5 col-md-offset-1">
 				<div class="form-group has-warning has-feedback"" role="form">
 				    <label class="control-label" for="inputWarning">Nombre del paciente</label>
 					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
@@ -76,20 +76,33 @@
 					<datalist id="id_listanombres"></datalist>
 				</div>
 			</div>
-
-			<br>
-			<div class="col-md-2">
-				<a class="btn btn-warning btn-sm btn-block" href="/informacion/datos_generales/nuevo/">Nuevo</a>
-			</div>
-
+			<div class="col-md-4">
+				<div class="col-md-7 col-md-offset-3">
+					<div class="form-group">
+						<label for="nombre_paciente">Codigo del Expediente</label>
+						<div class="form-group has-warning has-feedback"" role="form">
+							<input type="search" class="form-control " id="id_codigo_expediente2" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo" autofocus >
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							<datalist id="id_listacodigo">
+							
+							</datalist></div>
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>		
+	<div class="row">
+		<div class="col-md-2 col-md-offset-7">
 
+			<br>
+				<a class="btn btn-warning btn-sm btn-block" href="/informacion/datos_generales/nuevo/">Nuevo</a>
+			</div>
+	</div>
 
 
 
 	<!-- Mensage informacion -->
-		<br><br><br><br><br>
+		<br><br><br>
 
 		<div class="col-md-4 col-md-offset-8">
 		<div class="alert alert-dismissible alert-info">
@@ -114,7 +127,7 @@
   	
   		   <div class="panel-body">
 			  <div class="col-md-6">
-			    Paciente: {{form.nombre_completo}}        
+			     Paciente: <br>{{form.nombre_completo}}        
 			  </div>
 
 			  <div class="col-md-2">
@@ -144,12 +157,28 @@
 
 
 	<!-- Nueva ficha o Consulta de ficha -->
-	<div class="row ocultar">
-		<div class="col-md-4 col-md-offset-1">
-			<div class="form-group">
-				<h3><center>Crear una Nueva Ficha</center></h3>
+
+			<div class="col-md-4 col-md-offset-1 ocultar222">
+			<div class="form-group ocultar222">
+				<h3><center>Por favor complete la ficha</center></h3>
+					
+				<div class="col-md-6 ocultar222">
+					<label for="fichas"> N° de Ficha a Completar </label>
+						<input type="number" id="input_fichas2" class="form-control">
+				</div>
 					
 				<div class="col-md-6">
+					<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar3()">Completar Ficha</button>
+				</div>
+
+				</div>
+			</div>
+	<div class="row ocultar">
+		<div class="col-md-4 col-md-offset-1 ocultar22">
+			<div class="form-group ocultar22">
+				<h3><center>Crear una Nueva Ficha</center></h3>
+					
+				<div class="col-md-6 ocultar22">
 					<label for="fichas"> N° de Ficha a Crear </label>
 						<input type="number" id="input_fichas" class="form-control">
 				</div>
@@ -184,7 +213,6 @@
 
 <!-- Busqueda y muestra de informacion -->
 <script>
-
 	$("input[name='nombre_paciente']").on('input', function(e){
 	$('#select_fichas').find('option').remove().end().val('whatever');
    var $input = $(this),
@@ -215,14 +243,13 @@
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
 					$('#id_cod_expediente').val(data[i].pk);
 				}
+
 				if(data==''){
-					
-					//	window.location="/informacion/datos_generales/nuevo/"+nombre;
-				}
+						}
 			},
 			
 		});
-		$.ajax({
+			$.ajax({
 			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax2/',
 			type : 'get',
@@ -231,6 +258,12 @@
 				for (var i = 0; i < data.length; i++) {
 					$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
 					$("#input_fichas").val(data.length+1);
+					$("#input_fichas2").val(data.length);
+					
+					if(data[i].fields.completada==0){
+						$(".ocultar222").css("display", "block");
+						$(".ocultar22").css("display", "none");
+					}
 
 					$('#select_fichas').css('display','block');
 					$('#boton_consulta').css('display','block');
@@ -263,7 +296,7 @@ $('#id_nombre_paciente').keyup(function(e){
  		success : function(data) {
  			$('#id_listanombres').empty().append('whatever');
         	for (var i = 0; i < data.length; i++) {
-					$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
+				$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
 			}
  		},
  		error : function(message) {
@@ -272,18 +305,97 @@ $('#id_nombre_paciente').keyup(function(e){
  	});
 });
 
+
+$("input[name='codigo_paciente']").on('input', function(e){
+var $input = $(this),
+   val = $input.val();
+   list = $input.attr('list'),
+   match = $('#'+list + ' option').filter(function() {
+       return ($(this).val() === val);
+   });
+
+var codigo = $('#id_codigo_expediente2').val();
+
+if(match.length > 0) {	
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$(".ocultar").css("display", "block");
+					$(".ocultar").css("display", "block");
+					$('#id_nombre_completo').val(data[i].fields.nombre_completo);
+					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
+					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
+					$('#id_cod_expediente').val(data[i].pk);
+			}
+		},
+		
+	});
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax2/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$("#input_fichas").val(data.length);
+				$("#input_fichas2").val(data.length);
+				$("#input_codigo").val(codigo);
+				$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
+				if(data[i].fields.completada==0){
+					$(".ocultar222").css("display", "block");
+					$(".ocultar22").css("display", "none");
+				}
+
+			}
+			if(data.length==0){
+				$("#input_fichas").val("No se encontraron fichas");
+			}
+
+		},
+		
+	});
+    } else {
+        limpiar();
+    }
+});
+
+$('#id_codigo_expediente2').keyup(function(e){
+ 	consulta = $("#id_codigo_expediente2").val();
+ 		
+ 	$('#id_listacodigo').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'codigo': consulta},
+ 		url: '/informacion/busqueda2/',
+ 		type: 'get',
+ 		success : function(data) {
+ 			$('#id_listacodigo').empty().append('whatever');
+        	for (var i = 0; i < data.length; i++) {
+					$("#id_listacodigo").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].cod_expediente+"'></option>");
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+});
+
+
 var codigo = $('#id_nombre_paciente').val();
 	$('#select_fichas')
     .find('option')
     .remove()
     .end()
     .val('whatever');
-
+id_cod_expediente
 $("#id_nombre_completo").prop('readonly', true);
 $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
-$("#id_cod_expediente").prop('readonly', true);
 $("#input_fichas").prop('readonly', true);
+$("#input_fichas2").prop('readonly', true);
+$("#id_cod_expediente").prop('readonly', true);
+$(".ocultar222").css("display", "none");
 
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
@@ -292,6 +404,11 @@ function redireccionar(){
 }
 function redireccionar2(){
 	var num = parseInt($("#input_fichas").val(), 10);
+	var codigo = $('#id_cod_expediente').val();
+	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
+}
+function redireccionar3(){
+	var num = parseInt($("#input_fichas2").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.location="/informacion/motivo_consultas/nuevo/"+codigo+"/"+num;
 }
@@ -313,6 +430,7 @@ function buscar(){
 					$('#id_nombre_completo').val(data[i].fields.nombre_completo);
 					$('#id_fecha_registro').val(data[i].fields.fechaRegistro);
 					$('#id_fecha_hora_creacion').val(data[i].fields.fecha_hora_creacion);
+					$('#id_cod_expediente').val(data[i].pk);
 				}
 			},
 			
@@ -328,11 +446,9 @@ function buscar(){
 					    text: i+1
 					}));
 				}
-
 				if(data==''){
 					window.location="/informacion/datos_generales/nuevo/"+codigo;
 				}
-
 			},
 			
 		});
@@ -342,13 +458,21 @@ function limpiar(){
 	$('#id_nombre_completo').val("");
 	$('#id_fecha_registro').val("");
 	$('#id_fecha_hora_creacion').val("");
-	$('#id_cod_expediente').val("");
+	$('#id_codigo_expediente').val("");
 	$('#select_fichas')
     .find('option')
     .remove()
     .end()
     .val('whatever')
 }
+
+	$('#btn_completos').on('click', function(e){
+	    $('#completas').toggleClass('hidden');
+	})
+
+	$('#btn_incompletos').on('click', function(e){
+	    $('#incompletas').toggleClass('hidden');
+	})
 </script>
 
 
