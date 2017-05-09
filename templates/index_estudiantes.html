@@ -1,168 +1,152 @@
+
 {% load staticfiles %}
 
+	<meta charset="UTF-8">
+	<title>Expediente Clinico</title>
+
+	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"/></script>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	 
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="/static/style/home_style.css"/>
 
 
 {% block navbar %}
-		<div class="bs-docs-section clearfix">
-		    <div class="row">
-		        <div class="col-lg-12">
-		            <div class="bs-component">
-		            	<nav class="navbar navbar-default">
-		                	<div class="container-fluid">
-		                  		<div class="navbar-header">
-		                    		<a class="navbar-brand" href="http://localhost:8000/">SOUES</a>
-		                  		</div>
-		                  		
-		                  		<ul class="nav navbar-nav navbar-right">
-		                        	<li class="">
-		                        		<a href="{%url 'logout' %}" role="button" aria-expanded="false">Cerrar Sesión<span></span></a>
-		                        		
-		                      		</li>
-		                    	</ul>
-		                    	<div>	
-		                    	<ul class="nav navbar-nav navbar-right">
-		                        	<li class="">
-		                        		<a href="#" class="navbar-brand" role="button" aria-expanded="false">{{user}}<span></span></a>
-		                      		</li>
-		                    	</ul>
-		                    	</div>
-		                  		<h1 style="color:white "> <center> Universidad de El Salvador</center></h1> 
-		                  		<h2 style="color:white "> <center> Facultad de Odontología</center></h2> 
-		                  		
 
-		                </div>
+	<nav class="navbar navbar-inverse">
+  		<div class="container-fluid">
 
-		            </nav>
-		        </div>
-           	</div>
-        </div>
-    </div>   
-    {% endblock %} 
+    		<div class="navbar-header">
+     			 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
+        			<span class="sr-only">Toggle navigation</span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+      			</button>
+      			<a class="navbar-brand" href="#"></a>
+    		</div>
+
+    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      			<ul id="btn_completos" class="nav navbar-nav navbar-left">
+       				<li class="active">
+           				<a href="#myModal2" data-toggle="modal">
+           				<img src="/media/imagenes/Menu/pin.png"> Completos</a>
+       				</li> 
+      			</ul>
 
 
-
-<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
-	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+      			<ul id="btn_incompletos" class="nav navbar-nav navbar-left">
+       				<li class="active">
+           				<a href="#myModal" data-toggle="modal">
+           				<img src="/media/imagenes/Menu/clock.png"> Pendientes</a>
+       				</li> 
+      			</ul>
 
 
-	<style type="text/css">
-		.hidden{
-			display: none;
-		}
+      			<ul class="nav navbar-nav navbar-right">
+       				<li class="active">
+           				<a href="{%url 'logout' %}">Cerrar Sesión</a>
+       				</li> 
+      			</ul>
 
-		.dropdown-toggle{
-		 display:block;
-		  width: 9em;
-		  word-wrap: break-word;
-		} 
-		.contenedor{
-			border:2px solid #000;
-			border-radius:25px;
-			position: absolute;
-			top: 50%;
-			left:50%;
-			transform: translate(-50%,-50%);
-			
-		}
+      			<ul class="nav navbar-nav navbar-right">
+        			<div class="col-md-3">
+        				<h6 style="color:white">Hola, <B>{{user}}</B></h6>
+        			</div>
+      			</ul>
 
-		.uno{
-			background-color: #004D40;
-		}
-		.dos{
-			background-color: #009688;
-		}
-		.tercero{
-			background-color: #004D40;
-		}
-	</style>
+      			<h2 style="color:white "> <center>Universidad de El Salvador</center></h2>
+      			<h3 style="color:white "> <center>Facultad de Odontología</center></h3>
+
+    		</div>
+  		 </div>
+	  </nav>
+
+{% endblock %}
 
 
-	<style>
-
-    /* Transicion de imagenes */
-
-		#container {
-			margin: 0 auto;
-		}
-	
-		.ex2 img{
-			margin: 15px 0;
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -ms-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-		}
-
- 		.ex2 img:hover {
-			margin-top: -50px;
-		}
-
-
-
-	/* Transparencia de imagenes */
-
-		div.background {
-  			background: url(klematis.jpg) repeat;
-  			/*border: 2px solid black;*/
-		}
-
-		div.transbox {
- 			/*margin: 30px;
-  			background-color: #ffffff;
-  			border: 1px solid black;*/
-  			opacity: 0.6;                     /*Nivel Tranparencia*/
-  			/*filter: alpha(opacity=60);*/    /* For IE8 and earlier */
-		}
-
-		div.transbox p {
- 			margin: 5%;
-  			font-weight: bold;
-  			color: #000000;
-			}
-	</style>
-
-
-
-  
 <body>
-<div style="position:relative">
 
-    <center> 
-    <img src="\media\imagenes\Menu\Bienvenidos.jpg" width="75%" height="70%">
-    </center>
+	<div class="contenedor-nav-inferior">
+		<div class="contenedor" id="imagen1">
+			<a href="/informacion/inicio/nuevo/">
+			<img class="icon-nav" src="/media/imagenes/Menu/nuevo.png"></a>
+			<p class="texto">Nuevo</p>
+		</div>
 
-   <div style="position:absolute; top:280; left:630;">
+		<div class="contenedor" id="imagen2">
+			<a href="/informacion/inicio/consultar/">
+			<img class="icon-nav" src="/media/imagenes/Menu/consultar.png"></a>
+			<p class="texto">Consultar</p>
+		</div>
 
-   	<div class="background">
-      <div class="transbox">
+		<div class="contenedor" id="imagen3">
+			<img class="icon-nav" src="/media/imagenes/Menu/informe.png">
+			<p class="texto">Informes</p>
+		</div>
 
-         <div id="container">
-	         <div class="ex2">
+		
 
-	    		<a href="/informacion/inicio/nuevo/"><img src="\media\imagenes\Menu\nuevo.png"></a></td>
-	    		<a href="/informacion/inicio/consultar/"><img src="\media\imagenes\Menu\consulta.png"></a></td>
-	    		<a href="#"><img src="\media\imagenes\Menu\imagen.png"></a></td>
-	    		<a href="/citas/nuevo/"><img src="\media\imagenes\Menu\citas.png"></a></td>
+	</div>	
 
 
-	         </div>
-	     </div>
 
-	  </div>
+
+<!-- Expedientes Pendientes -->
+<!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  	  <div class="modal-dialog" role="document">
+    	<div class="modal-content">
+
+      	  <!-- Header del Expedientes Pendientes -->
+      	  <div class="modal-header">
+          	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        	<h3 class="modal-title" id="myModalLabel"><p style="color:dodgerblue;">Fichas Pendientes</h3>
+      	  </div>
+
+      	  <!-- Contenido de Expedientes Pendientes -->
+      	  <div id="incompletas" class="modal-body"></div>
+
+    	</div>
+  	  </div>
 	</div>
 
-   </div>
-</div>
+
+	<!-- Expedientes Completos -->
+	<!-- Modal2 -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+    	<div class="modal-content">
+
+      	  <!-- Header del Expedientes Pendientes -->
+      	  <div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        	<h3 class="modal-title" id="myModalLabel"><p style="color:dodgerblue;">Fichas Completas</h3>
+      	  </div>
+     
+      	  <!-- Contenido de Expedientes Pendientes -->
+      	  <div id="completas" class="modal-body"></div>
+
+    	</div>
+  	  </div>
+	</div>
+
+
+
+
+
+<!-- Proceso Completos / Pendientes -->
+
 <script type="text/javascript">
 	var i=0;
 </script>
-<button id="btn_completos" > Completas</button>
+
+
+<!-- Completos -->
 <div id="completas" class="hidden">
 	
 		{% for elemento in completos %}
@@ -187,19 +171,20 @@
 				}
 				
 				$('#completas').append( completas );
-				completas = '';
+				completas = ''; 
 			}
 			</script>
 	{% empty %}
-		<h3>No existen expedientes llenos</h3>
+		<h3>No existen expedientes terminados!</h3>
 	{% endfor %}
 </div>
 
-<button id="btn_incompletos"> Incompletos</button>
+
+
+
+<!-- Pendientes -->
 
 <div id="incompletas" class="hidden">
-
-
 
 	{% for elemento in incompletos %}
 			<script type="text/javascript">
@@ -282,23 +267,15 @@
 			}
 			</script>
 	{% empty %}
-		<h3>Lista de Expedientes Incompletos</h3>
+		<h3>Expedientes Pendientes</h3>
 	{% endfor %}
 
 </div>
 
-
-
-
-
-	<blockquote class="blockquote-reverse">
-  	    <p>Universidad de El Salvador. Facultad de Odontología</p>
-  	    <small>Aplicación Proyecto Social <cite title="Source Title">FIA</cite></small>
-	</blockquote>
-
-
-
 </body>
+
+
+
 
 <script type="text/javascript">
 	$('#id_cod_expediente').click(function() {
@@ -329,21 +306,3 @@
 	var textoCodigo,completas,co,numero;
 </script>
 	
-	
-
-
-	
-
-<script>
-	$('#btn_completos').on('click', function(e){
-	    $('#completas').toggleClass('hidden');
-	})
-
-	$('#btn_incompletos').on('click', function(e){
-	    $('#incompletas').toggleClass('hidden');
-	})
-
-
-
-	
-</script>

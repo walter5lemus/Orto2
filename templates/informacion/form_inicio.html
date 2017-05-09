@@ -71,7 +71,7 @@
 			<div class="col-md-5 col-md-offset-1">
 				<div class="form-group has-warning has-feedback"" role="form">
 				    <label class="control-label" for="inputWarning">Nombre del paciente</label>
-					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" >
+					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" autofocus >
 					<span class="glyphicon glyphicon-search form-control-feedback"></span>
 					<datalist id="id_listanombres"></datalist>
 				</div>
@@ -81,7 +81,7 @@
 					<div class="form-group">
 						<label for="nombre_paciente">Codigo del Expediente</label>
 						<div class="form-group has-warning has-feedback"" role="form">
-							<input type="search" class="form-control " id="id_codigo_expediente2" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo" autofocus >
+							<input type="search" class="form-control " id="id_codigo_expediente2" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo">
 							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 							<datalist id="id_listacodigo">
 							
@@ -225,8 +225,7 @@
     if(match.length > 0) {
         // value is in list
     var nombre = $('#id_nombre_paciente').val();
-	//$('#select_fichas').find('option').remove().end().val('whatever');
-		
+	
 		$.ajax({
 			data : {'codigo':codigo},
 			url : '/informacion/busqueda_ajax/',
@@ -270,7 +269,7 @@
 				}
 				if(data==''){
 					$("#input_fichas").val(1);					
-
+					$(".ocultar222").css("display", "none");
 					$('#select_fichas').css('display','none');
 					$('#boton_consulta').css('display','none');
 					$('#label_consulta').css('display','none');
@@ -285,7 +284,7 @@
 });
 $('#id_nombre_paciente').keyup(function(e){
  	consulta = $("#id_nombre_paciente").val();
- 		$(".ocultar222").css("display", "none");
+ 		
  	$('#id_listanombres').empty().append('whatever');
  	$.ajax({
  		data: {'nombre': consulta},
@@ -389,7 +388,7 @@ var codigo = $('#id_nombre_paciente').val();
     .remove()
     .end()
     .val('whatever');
-id_cod_expediente
+
 $("#id_nombre_completo").prop('readonly', true);
 $("#id_fecha_registro").prop('readonly', true);
 $("#id_fecha_hora_creacion").prop('readonly', true);
@@ -456,6 +455,7 @@ function buscar(){
 }
 function limpiar(){
 	$(".ocultar").css("display", "none");
+	$(".ocultar222").css("display", "none");
 	$('#id_nombre_completo').val("");
 	$('#id_fecha_registro').val("");
 	$('#id_fecha_hora_creacion').val("");

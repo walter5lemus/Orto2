@@ -100,6 +100,11 @@ def busqueda(request):
 		resultado = datos_generales.objects.filter(nombre_completo__istartswith= request.GET['nombre'] ).values('nombre_completo', 'cod_expediente')
 		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
+def busqueda2(request):
+	if request.is_ajax():
+		resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
+		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
+
 def busqueda_admin(request):
 	if request.user.is_superuser==1:
 		if request.is_ajax():
@@ -111,6 +116,7 @@ def busqueda2_admin(request):
 		if request.is_ajax():
 			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
+
 
 class busquedaCodigo(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -131,17 +137,9 @@ class busqueda_codigo(TemplateView):
 		return HttpResponse("")	
 """
 def CodExpediente_consular(request):
-	if request.method == 'POST':
-		form = (request.POST)
-		codi = form.data['codigo']
-		if form.is_valid():
-		 	form.save()
-			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-		else:
-			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-	else:
-			form = DatosGeneralesForm()
-			return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
+
+	form = DatosGeneralesForm()
+	return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
 
 def CodExpediente_editar(request):
 
@@ -212,7 +210,7 @@ def DatosGenerales_consultar(request,codi,num):
 			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente")
+		return render(request, 'base/error_no_encontrado.html')
 
 
 def DatosGenerales_consultar2(request,codi):
