@@ -1,0 +1,3 @@
+﻿Crear usuarios normales is_superuser = 0 si es superusuario = 1.
+
+INSERT INTO `informacion_usuario`(`password`, `is_superuser`, `username`,`is_active`) VALUES (MD5('clave'),0,'username',1);

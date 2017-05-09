@@ -16,37 +16,39 @@ codi="0000-00"
 def cefalometrico_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-
-		if analisis_cefalometrico.objects.filter(fichas_id=ids.id).exists():
-			cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)
-			if ids:
-				if request.method == 'GET':
-					formset = cefalometricoFormSet(queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
-				else:
-					formset = cefalometricoFormSet(request.POST, request.FILES, queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
-					if formset.is_valid():
-						formset.save()
-						fecha =timezone.now()
-						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
-				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if analisis_cefalometrico.objects.filter(fichas_id=ids.id).exists():
+				cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)
+				if ids:
+					if request.method == 'GET':
+						formset = cefalometricoFormSet(queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
+					else:
+						formset = cefalometricoFormSet(request.POST, request.FILES, queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
+						if formset.is_valid():
+							formset.save()
+							fecha =timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+						return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
+					return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})
+			else:
+				if ids:
+					max_num=2
+					cefalometricoFormSet = formset_factory(analisis_cefalometricoForm, extra=2, max_num=2)
+					if request.method == 'POST':
+						formset = cefalometricoFormSet(request.POST)
+						if formset.is_valid():
+							for form in formset:
+								print form
+								form.save()
+							fecha =  timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+						return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
+					else:
+						formset = cefalometricoFormSet()
+				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset, 'codi':codi, 'num':num,'ids':ids.id,'max':max_num})
 		else:
-			if ids:
-				max_num=2
-				cefalometricoFormSet = formset_factory(analisis_cefalometricoForm, extra=2, max_num=2)
-				if request.method == 'POST':
-					formset = cefalometricoFormSet(request.POST)
-					if formset.is_valid():
-						for form in formset:
-							print form
-							form.save()
-						fecha =  timezone.now()
-						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
-				else:
-					formset = cefalometricoFormSet()
-			return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset, 'codi':codi, 'num':num,'ids':ids.id,'max':max_num})
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})

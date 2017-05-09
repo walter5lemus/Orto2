@@ -87,6 +87,19 @@ class BusquedaAjaxView(TemplateView):
 class BusquedaAjaxView2(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
+		try:
+			fi=fichas.objects.filter(cod_expediente=codigo)
+			for ficha in fi:
+				ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero, usuario_creador_id=request.user.id)
+			fi=list(fichas.objects.filter(cod_expediente=codigo))
+			data = serializers.serialize('json', fi, fields=('numero','completada'))
+			return HttpResponse(data, content_type='application/json')
+		except Exception, e:
+			return HttpResponse('Error', status=401)
+
+class BusquedaAjaxView22(TemplateView):
+	def get(self,request,*args,**kwargs):
+		codigo = request.GET['codigo']
 		fi=fichas.objects.filter(cod_expediente=codigo)
 		for ficha in fi:
 			ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero)
@@ -94,10 +107,14 @@ class BusquedaAjaxView2(TemplateView):
 		data = serializers.serialize('json', fi, fields=('numero','completada'))
 		return HttpResponse(data, content_type='application/json')
 
-
 def busqueda(request):
 	if request.is_ajax():
 		resultado = datos_generales.objects.filter(nombre_completo__istartswith= request.GET['nombre'] ).values('nombre_completo', 'cod_expediente')
+		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
+
+def busqueda2(request):
+	if request.is_ajax():
+		resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
 		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda_admin(request):
@@ -112,6 +129,7 @@ def busqueda2_admin(request):
 			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
+
 class busquedaCodigo(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
@@ -120,28 +138,11 @@ class busquedaCodigo(TemplateView):
 			data = serializers.serialize('json', cod, fields=('cod_expediente'))
 			return HttpResponse(data, content_type='application/json')
 		return HttpResponse("")
-"""
-class busqueda_codigo(TemplateView):
-	def get(self,request,*args,**kwargs):
-		codigo = request.GET['cod_expediente']
-		if fichas.objects.filter(cod_expediente=codigo).exists():
-			cod = datos_generales.objects.filter(cod_expediente=codigo)
-			data = serializers.serialize('json', cod, fields=('cod_expediente'))
-			return HttpResponse(data, content_type='application/json')
-		return HttpResponse("")	
-"""
+
 def CodExpediente_consular(request):
-	if request.method == 'POST':
-		form = (request.POST)
-		codi = form.data['codigo']
-		if form.is_valid():
-		 	form.save()
-			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-		else:
-			return HttpResponseRedirect('/informacion/estado_general/consultar/%s/' %codi)
-	else:
-			form = DatosGeneralesForm()
-			return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
+
+	form = DatosGeneralesForm()
+	return render(request, 'informacion/form_inicio_consultar.html', {'form':form})
 
 def CodExpediente_editar(request):
 
@@ -212,7 +213,7 @@ def DatosGenerales_consultar(request,codi,num):
 			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente")
+		return render(request, 'base/error_no_encontrado.html')
 
 
 def DatosGenerales_consultar2(request,codi):
@@ -269,38 +270,41 @@ def Motivo_Consulta_crear(request,codi,num):
 			raise e
 	try:
 		fecha =  timezone.now()
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-		if motivo_consulta.objects.filter(fichas_id=ids.id).exists():
-			if ids:
-				estado = motivo_consulta.objects.get(fichas_id=ids.id)
-				if request.method == 'GET':
-					form = MotivoConsultaForm(instance=estado)
-				else: 
-					form = MotivoConsultaForm(request.POST, instance=estado)
-					if form.is_valid():
-						form.save()
-						fecha =  timezone.now()
-						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-						return redirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
-					else:
-						return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
-				return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
-			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
-		else:
-			fecha =  timezone.now()
-			if ultima_modificacion.objects.filter(fichas_id=ids.id).exists():{}
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if motivo_consulta.objects.filter(fichas_id=ids.id).exists():
+				if ids:
+					estado = motivo_consulta.objects.get(fichas_id=ids.id)
+					if request.method == 'GET':
+						form = MotivoConsultaForm(instance=estado)
+					else: 
+						form = MotivoConsultaForm(request.POST, instance=estado)
+						if form.is_valid():
+							form.save()
+							fecha =  timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+							return redirect('/informacion/estado_general/nuevo/%s/%s/' %(codi,num))
+						else:
+							return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
+					return render(request,'informacion/form_motivoconsulta.html',{'form':form,'num':num,'codi':codi})
+				return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 			else:
-				ultima_modificacion.objects.create(fichas_id=ids.id,fecha=fecha)
-			if request.method == 'POST':
-				form = MotivoConsultaForm(request.POST)
-				if form.is_valid():
-				 	form.save()
-					return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
+				fecha =  timezone.now()
+				if ultima_modificacion.objects.filter(fichas_id=ids.id).exists():{}
 				else:
+					ultima_modificacion.objects.create(fichas_id=ids.id,fecha=fecha)
+				if request.method == 'POST':
+					form = MotivoConsultaForm(request.POST)
+					if form.is_valid():
+					 	form.save()
+						return HttpResponseRedirect('/informacion/estado_general/nuevo/%s/%s' %(codi,num))
+					else:
+						return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
+				else:
+					form = MotivoConsultaForm(initial={'fichas':ids.id,'fecha_hora_creacion':fecha})
 					return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
-			else:
-				form = MotivoConsultaForm(initial={'fichas':ids.id,'fecha_hora_creacion':fecha})
-				return render(request, 'informacion/form_motivoconsulta.html', {'form':form,'codi': codi,'num':num})
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception as e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
@@ -371,29 +375,32 @@ def Motivo_Consulta_editar(request,codi,num):
 def EstadoGeneral_crear(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-		if estado_general.objects.filter(fichas_id=ids.id).exists():
-			estado = estado_general.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = EstadoGeneralForm(instance=estado)
-			else: 
-				form = EstadoGeneralForm(request.POST, instance=estado)
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_estadoGeneral.html',{'form':form,'num':num,'codi':codi})
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if estado_general.objects.filter(fichas_id=ids.id).exists():
+				estado = estado_general.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = EstadoGeneralForm(instance=estado)
+				else: 
+					form = EstadoGeneralForm(request.POST, instance=estado)
+					if form.is_valid():
+						form.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+					return redirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))
+				return render(request,'informacion/form_estadoGeneral.html',{'form':form,'num':num,'codi':codi})
 
-		if request.method == 'POST':
-			form = EstadoGeneralForm(request.POST)
-			if form.is_valid():
-			 	form.save()
-			return HttpResponseRedirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))		
+			if request.method == 'POST':
+				form = EstadoGeneralForm(request.POST)
+				if form.is_valid():
+				 	form.save()
+				return HttpResponseRedirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))		
+			else:
+				form = EstadoGeneralForm(initial={'fichas':ids.id})
+				
+				return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
 		else:
-			form = EstadoGeneralForm(initial={'fichas':ids.id})
-			
-			return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})	
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception as e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
@@ -466,7 +473,7 @@ def eliminar(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/eliminar.html', {'form':form})
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 
 
 class ajax_eliminar(TemplateView):
@@ -499,9 +506,9 @@ def retiro_voluntario(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/retiro_voluntario.html', {'form':form})	
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 
 class ajax_retiro_voluntario(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -514,7 +521,7 @@ class ajax_retiro_voluntario(TemplateView):
 				fichas.objects.filter(cod_expediente_id=codigo,numero=numero).update(completada=2)
 				return HttpResponse("Se retiro correctamente")
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')
 ################################################################################################
 
 def caducada(request):
@@ -523,7 +530,7 @@ def caducada(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/caducada.html', {'form':form})
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 class ajax_caducada(TemplateView):
 	def get(self,request,*args,**kwargs):
 		if request.user.is_superuser==1:
@@ -536,4 +543,4 @@ class ajax_caducada(TemplateView):
 			else:
 				return HttpResponse('No se encuentran fichas incompletas', status=401)
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')

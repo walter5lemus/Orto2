@@ -32,9 +32,11 @@ urlpatterns = [
 
 	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
 	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
+	url(r'^busqueda_ajax22/$', login_required(BusquedaAjaxView22.as_view())),
 	url(r'^busqueda/$', login_required(busqueda), name='busquedaNombre'),
 	url(r'^busqueda_admin/$', login_required(busqueda_admin), name='busquedaNombre'),
-	url(r'^busqueda2/$', login_required(busqueda2_admin), name='busquedaCodigo'),
+	url(r'^busqueda2/$', login_required(busqueda2), name='busquedaCodigo'),
+	url(r'^busqueda2_admin/$', login_required(busqueda2_admin), name='busquedaCodigo'),	
 	url(r'^codigo/$', login_required(busquedaCodigo.as_view()), name='busquedaCodigo'), 
 	url(r'^eliminar_expediente/$', login_required(ajax_eliminar.as_view()), name="ajax_eliminar"),
 	url(r'^eliminar_ficha/$', login_required(ajax_eliminar_ficha.as_view()), name="ajax_eliminar_ficha"),

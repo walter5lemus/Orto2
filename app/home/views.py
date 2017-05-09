@@ -74,10 +74,9 @@ def index(request):
 
 	if request.user.is_superuser == 1:
 		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
-	if request.user.is_superuser == 2:
-		return render(request,'index_docentes.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
-	if request.user.is_superuser== 3:
-			return render(request,'index_estudiantes.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+	if request.user.is_superuser != 1:
+		return render(request,'index_usuarios.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+
 			
 
 class BusquedaAjaxView(TemplateView):
