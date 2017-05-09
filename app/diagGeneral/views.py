@@ -17,34 +17,35 @@ def diag_general(request):
 def diag_general_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-
-		if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
-			datos = diagnostico_general.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = diagGeneralForm(instance=datos)
-			else: 
-				form = diagGeneralForm(request.POST, instance=datos)
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/')
-			return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
-
-		else:
-			if ids:	
-				if request.method == 'POST':
-					form = diagGeneralForm(request.POST,initial={'fichas':ids.id})
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
+				datos = diagnostico_general.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = diagGeneralForm(instance=datos)
+				else: 
+					form = diagGeneralForm(request.POST, instance=datos)
 					if form.is_valid():
 						form.save()
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-						return HttpResponseRedirect('/')
-				else: 
-					form = diagGeneralForm(initial={'fichas':ids.id})
-			
-		return render(request,'diag_general/form_diag_general.html', {'form':form,'codi':codi,'num':num})
+						return redirect('/')
+				return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
+
+			else:
+				if ids:	
+					if request.method == 'POST':
+						form = diagGeneralForm(request.POST,initial={'fichas':ids.id})
+						if form.is_valid():
+							form.save()
+							fecha =  timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+							return HttpResponseRedirect('/')
+					else: 
+						form = diagGeneralForm(initial={'fichas':ids.id})
+			return render(request,'diag_general/form_diag_general.html', {'form':form,'codi':codi,'num':num})
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})

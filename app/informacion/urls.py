@@ -32,6 +32,7 @@ urlpatterns = [
 
 	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
 	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
+	url(r'^busqueda_ajax22/$', login_required(BusquedaAjaxView22.as_view())),
 	url(r'^busqueda/$', login_required(busqueda), name='busquedaNombre'),
 	url(r'^busqueda_admin/$', login_required(busqueda_admin), name='busquedaNombre'),
 	url(r'^busqueda2/$', login_required(busqueda2), name='busquedaCodigo'),

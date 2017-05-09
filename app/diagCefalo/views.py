@@ -16,33 +16,35 @@ def diag_cefalo(request):
 def diag_cefalo_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
+				datos = diagnostico_cefalometrico.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = diagCefaloForm(instance=datos)
+				else: 
+					form = diagCefaloForm(request.POST, instance=datos)
+					if form.is_valid():
+						form.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+						return redirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s' %(codi,num))
+				return render(request, 'diag_cefalo/form_diag_cefalo.html',{'form':form,'num':num,'codi':codi})
 
-		if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
-			datos = diagnostico_cefalometrico.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = diagCefaloForm(instance=datos)
-			else: 
-				form = diagCefaloForm(request.POST, instance=datos)
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s' %(codi,num))
-			return render(request, 'diag_cefalo/form_diag_cefalo.html',{'form':form,'num':num,'codi':codi})
-
-		if ids:	
-			if request.method == 'POST':
-				form = diagCefaloForm(request.POST,initial={'fichas':ids.id})
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return HttpResponseRedirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s/' %(codi,num))
-			else: 
-				form = diagCefaloForm(initial={'fichas':ids.id})
-				
-		return render(request,'diag_cefalo/form_diag_cefalo.html', {'form':form,'codi':codi,'num':num})
+			if ids:	
+				if request.method == 'POST':
+					form = diagCefaloForm(request.POST,initial={'fichas':ids.id})
+					if form.is_valid():
+						form.save()
+						fecha =  timezone.now()
+						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+						return HttpResponseRedirect('/analisis_denticion_mixta/analisis_nance/nuevo/%s/%s/' %(codi,num))
+				else: 
+					form = diagCefaloForm(initial={'fichas':ids.id})
+					
+			return render(request,'diag_cefalo/form_diag_cefalo.html', {'form':form,'codi':codi,'num':num})
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})

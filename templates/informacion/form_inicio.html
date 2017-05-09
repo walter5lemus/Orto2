@@ -95,7 +95,7 @@
 		<div class="col-md-2 col-md-offset-7">
 
 			<br>
-				<a class="btn btn-warning btn-sm btn-block" href="/informacion/datos_generales/nuevo/">Nuevo</a>
+				<a class="btn btn-warning btn-sm btn-block" href="/informacion/datos_generales/nuevo/">Nuevo Expediente</a>
 			</div>
 	</div>
 
@@ -274,9 +274,31 @@
 					$('#boton_consulta').css('display','none');
 					$('#label_consulta').css('display','none');
 					$('#h3_consulta').css('display','none');
+					
+
 				}
 			},
-			
+ 		error : function(message) {
+			$(".ocultar222").css("display", "none");
+				$.ajax({
+					data : {'codigo':codigo},
+					url : '/informacion/busqueda_ajax22/',
+					type : 'get',
+					success: function(data){
+						$("#select_fichas").val(1);
+						for (var i = 0; i < data.length; i++) {
+							$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
+							$("#input_fichas").val(data.length+1);
+							$("#input_fichas2").val(data.length);
+						}
+						if(data==''){
+							$("#input_fichas").val(1);
+							
+
+						}
+					},
+				});
+     	}
 		});
     } else {
         limpiar();
@@ -354,6 +376,27 @@ if(match.length > 0) {
 			}
 
 		},
+ 		error : function(message) {
+			$(".ocultar222").css("display", "none");
+				$.ajax({
+					data : {'codigo':codigo},
+					url : '/informacion/busqueda_ajax22/',
+					type : 'get',
+					success: function(data){
+						$("#select_fichas").val(1);
+						for (var i = 0; i < data.length; i++) {
+							$('#select_fichas').append($('<option>', { value: i+1, text: i+1}));
+							$("#input_fichas").val(data.length+1);
+							$("#input_fichas2").val(data.length);
+						}
+						if(data==''){
+							$("#input_fichas").val(1);
+							
+
+						}
+					},
+				});
+     	}
 		
 	});
     } else {

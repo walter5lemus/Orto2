@@ -16,34 +16,36 @@ def asp_mandibular1(request):
 def asp_mandibular1_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-
-		if aspectos_mandibulares1.objects.filter(fichas_id=ids.id).exists():
-			datos = aspectos_mandibulares1.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = aspMandibularForm(instance=datos)
-			else: 
-				form = aspMandibularForm(request.POST, instance=datos)
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return redirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s' %(codi,num))
-			return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form,'codi':codi,'num':num})
-		else:
-			if ids:	
-				if request.method == 'POST':
-					form = aspMandibularForm(request.POST,initial={'fichas':ids.id})
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if aspectos_mandibulares1.objects.filter(fichas_id=ids.id).exists():
+				datos = aspectos_mandibulares1.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = aspMandibularForm(instance=datos)
+				else: 
+					form = aspMandibularForm(request.POST, instance=datos)
 					if form.is_valid():
 						form.save()
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-						return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s/' %(codi,num))
-					return render(request,'asp_mandibular1/form_asp_mandibular1.html', {'form':form,'codi':codi,'num':num}) 
-				else: 
-					form = aspMandibularForm(initial={'fichas':ids.id})
-					
-			return render(request,'asp_mandibular1/form_asp_mandibular1.html', {'form':form,'codi':codi,'num':num}) 		   
+						return redirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s' %(codi,num))
+				return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form,'codi':codi,'num':num})
+			else:
+				if ids:	
+					if request.method == 'POST':
+						form = aspMandibularForm(request.POST,initial={'fichas':ids.id})
+						if form.is_valid():
+							form.save()
+							fecha =  timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+							return HttpResponseRedirect('/analisis_radiograficos/otrosAspectos/nuevo/%s/%s/' %(codi,num))
+						return render(request,'asp_mandibular1/form_asp_mandibular1.html', {'form':form,'codi':codi,'num':num}) 
+					else: 
+						form = aspMandibularForm(initial={'fichas':ids.id})
+						
+				return render(request,'asp_mandibular1/form_asp_mandibular1.html', {'form':form,'codi':codi,'num':num}) 
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})

@@ -20,34 +20,37 @@ codi=""
 def AspectosArticulares_Crear(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-		if aspectos_articulares.objects.filter(fichas_id=ids.id).exists():
-			estado = aspectos_articulares.objects.get(fichas_id=ids.id)
-			if request.method == 'GET':
-				form = AspectosArticularesForm(instance=estado)
-			else:
-				form = AspectosArticularesForm(request.POST, instance=estado)
-				if form.is_valid():
-					form.save()
-					fecha =  timezone.now()
-					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-					return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
-			return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
-		else:
-			if ids:
-				if request.method == 'POST':
-					form = AspectosArticularesForm(request.POST)
+		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+			if aspectos_articulares.objects.filter(fichas_id=ids.id).exists():
+				estado = aspectos_articulares.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = AspectosArticularesForm(instance=estado)
+				else:
+					form = AspectosArticularesForm(request.POST, instance=estado)
 					if form.is_valid():
 						form.save()
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
+				return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num})
+			else:
+				if ids:
+					if request.method == 'POST':
+						form = AspectosArticularesForm(request.POST)
+						if form.is_valid():
+							form.save()
+							fecha =  timezone.now()
+							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+							return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
+						return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num})
+					else:
+						ids = fichas.objects.get(cod_expediente=codi, numero=num)
+						form = AspectosArticularesForm(initial={'fichas':ids.id})
 					return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num})
-				else:
-					ids = fichas.objects.get(cod_expediente=codi, numero=num)
-					form = AspectosArticularesForm(initial={'fichas':ids.id})
-				return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num})
-			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+				return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
 		if int(num)>1:
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
