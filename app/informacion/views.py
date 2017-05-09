@@ -473,7 +473,7 @@ def eliminar(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/eliminar.html', {'form':form})
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 
 
 class ajax_eliminar(TemplateView):
@@ -506,9 +506,9 @@ def retiro_voluntario(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/retiro_voluntario.html', {'form':form})	
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 
 class ajax_retiro_voluntario(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -521,7 +521,7 @@ class ajax_retiro_voluntario(TemplateView):
 				fichas.objects.filter(cod_expediente_id=codigo,numero=numero).update(completada=2)
 				return HttpResponse("Se retiro correctamente")
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')
 ################################################################################################
 
 def caducada(request):
@@ -530,7 +530,7 @@ def caducada(request):
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/caducada.html', {'form':form})
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_tiene_permiso_admin.html')
 class ajax_caducada(TemplateView):
 	def get(self,request,*args,**kwargs):
 		if request.user.is_superuser==1:
@@ -543,4 +543,4 @@ class ajax_caducada(TemplateView):
 			else:
 				return HttpResponse('No se encuentran fichas incompletas', status=401)
 		else:
-			return render(request, 'base/error_no_hay_acceso.html')
+			return render(request, 'base/error_no_tiene_permiso_admin.html')
