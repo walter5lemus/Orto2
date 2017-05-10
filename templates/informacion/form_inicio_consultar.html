@@ -122,11 +122,10 @@ var nombre = $('#id_nombre_paciente').val();
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
 				$(".ocultar").css("display", "block");
-				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
 				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
 				$('#id_codigo_expediente').val(data[i].pk);
 			}
-			$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+			
 
 		},
 		
@@ -139,6 +138,7 @@ var nombre = $('#id_nombre_paciente').val();
 			for (var i = 0; i < data.length; i++) {
 				$("#input_fichas").val(data.length);
 				$("#input_codigo").val(codigo);
+				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
 			}
 			if(data.length==0){
 				$("#input_fichas").val("No se encontraron fichas");

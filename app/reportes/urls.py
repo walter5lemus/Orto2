@@ -6,7 +6,9 @@ from app.reportes.views import *
 urlpatterns = [
 	url(r'^reportes/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReportePersonasPDF.as_view()), name='generar_pdf'),
 	url(r'^nuevo/$', login_required(reporte_crear), name='generar_pdf_nuevo'),
-	url(r'^nombre/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(BusquedaNombre.as_view()), name='busqueda_nombre'),
-	url(r'^numero/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/$', login_required(BusquedaNumero.as_view()), name='busqueda_numero'),
+	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
+	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
+	url(r'^error/$', login_required(reporte_error), name='reporte_error'),
 
+	
 ]

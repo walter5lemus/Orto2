@@ -96,7 +96,10 @@ def denticion1_view(request,codi,num):
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
-		return render(request, 'base/error_no_existe.html', {'num':int(num)-1})		
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
 
 def denticion1_editar(request,codi,num):
 	str(codi)
@@ -326,7 +329,10 @@ def relacionsagital_crear(request,codi,num):
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception as e:
-		return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 def relacionsagital_list(request):
 	relacionsagital = relaciones_sagitales.objects.all().order_by('id')

@@ -415,6 +415,7 @@ $('#id_codigo_expediente2').keyup(function(e){
  		success : function(data) {
  			$('#id_listacodigo').empty().append('whatever');
         	for (var i = 0; i < data.length; i++) {
+        		$('#id_listacodigo').empty().append('whatever');
 					$("#id_listacodigo").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].cod_expediente+"'></option>");
 			}
  		},
@@ -519,15 +520,6 @@ function limpiar(){
 	})
 </script>
 
-
-	<!-- Barra de progreso-->
-	<br><br><br><br>
-	<br><br><br><br>
-
-	<div class="col-md-10 col-md-offset-1">
-	<div class="progress">
-  		<div class="progress-bar" style="width: 1%;"></div>
-	</div>
 
 
 	<!-- Direccionamiento pagina-->
