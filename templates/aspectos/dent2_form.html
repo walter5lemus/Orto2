@@ -15,7 +15,7 @@
     <script type="text/javascript">
     document.getElementById("id_tipo").disabled=true; 
     del = 1;
-    t = 0;  
+    contador = 1;
 
         //Tipo problema y color por pestaña
         nombre = 'diastemas';
@@ -114,71 +114,47 @@
         $('g polygon').click(function (evt) {
             var sector = $(evt.target); 
 
-            iden = sector.parent().attr('id')
-            cuadrante = iden[1] 
-            pieza = iden[2]
+            if(contador == 1)
+            {
+                iden = sector.parent().attr('id')
+                cuadrante1 = iden[1] 
+                pieza = iden[2]     
+                contador = 0
+                t = 0
+            }
+            else
+            {
+                iden = sector.parent().attr('id')
+                cuadrante2 = iden[1] 
+                pieza = iden[2]    
+                contador = 1  
+                t = 1          
+            }
+
+            switch (cuadrante2) {
+                case 1:
+                    alert("Cuadrante 1")
+                    break; 
+                case 2:
+                    alert("Cuadrante 2")
+                    break; 
+                default: 
+                    text = "Looking forward to the Weekend";
+            }
 
             b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             b1 = b - 1       
 
-            if(t == 0)
+            if(t==0)
             {
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;        
-                diente = c + p                
-
-                if(diente!='')   
-                {
-                    c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                    p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                } 
-
-                $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
-                $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );                
-                t = 1;
-
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
+                
             }
             else
             {
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;        
-                diente = c + p      
 
-                if(diente!='')   
-                {
-                    c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
-                    p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                } 
-
-                $("#id_"+nombre+"-"+b1+"-cuad_dos").val( cuadrante );
-                $("#id_"+nombre+"-"+b1+"-pieza_dos").val( pieza ); 
-                t = 0;
-
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
             }
+
+
         });  
 
     </script>
