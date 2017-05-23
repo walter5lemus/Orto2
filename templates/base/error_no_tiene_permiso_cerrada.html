@@ -1,0 +1,78 @@
+
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Error 404
+{% endblock %}
+
+{% block menu-social %}
+{% endblock %}
+
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span> Home</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="{%url 'logout' %}">Cerrar Sesión</a>
+                    </li> 
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <div class="col-md-3">
+                        <h6 style="color:white">Hola, <B>{{user}}</B></h6>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+{% endblock %} 
+
+
+
+{% block header %}
+<style type="text/css">
+
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn { margin-right:10px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                            <img src="{%  static 'images/stop.png' %}">
+
+                <h1> <strong> ¡ALTO! </strong> </h1>
+                <div class="error-details">
+                    <h3><b>¡Usted no tiene permisos para realizar esta acción!</b></h3>
+                    <h3><b>¡Puede que la ficha no este disponible para su modificación!</b></h3>
+                </div>
+                <div class="error-actions">
+                    <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

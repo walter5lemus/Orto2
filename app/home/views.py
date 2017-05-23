@@ -71,6 +71,7 @@ def index(request):
 			incompletos.append(-15)
 		if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-16)
+			
 
 	if request.user.is_superuser == 1:
 		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
