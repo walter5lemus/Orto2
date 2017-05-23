@@ -2,7 +2,7 @@
 .social {
 	list-style: none;
 	position: fixed; /* Hacemos que la posición en pantalla sea fija para que siempre se muestre en pantalla*/
-	left: -40px; /* Establecemos la barra en la izquierda */
+	left: -145px; /* Establecemos la barra en la izquierda */
 	top: 150px; /* Bajamos la barra 200px de arriba a abajo */
 	z-index: 2000; /* Utilizamos la propiedad z-index para que no se superponga algún otro elemento como sliders, galerías, etc */
 }
@@ -17,7 +17,7 @@
 
 /*Cualidades de imagen*/
 
-.social ul li .icon-cita{
+.social ul li .icon-cita{ 
 	display: inline-block;
 	background: #000;
 	padding: 10px 10px;
@@ -69,18 +69,18 @@
 
 .social ul li :hover img.icon-cita{
 	background-color: rgb(233,147,26);   /* Cambiamos el fondo cuando el usuario pase el mouse */
-	padding: 10px 25px;		/* Hacemos mas grande el espacio cuando el usuario pase el mouse*/
+	padding: 10px 85px;		/* Hacemos mas grande el espacio cuando el usuario pase el mouse*/
 }
 
 
 .social ul li :hover img.icon-imagen{
 	background-color: rgb(22,107,162); 
-	padding: 10px 25px; 
+	padding: 10px 85px; 
 }
 
 
 .social ul li :hover img.icon-reporte{
 	background-color: rgb(22,145,190);
-	padding: 10px 25px;
+	padding: 10px 85px;
 }
 

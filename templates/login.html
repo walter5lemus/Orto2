@@ -1,32 +1,22 @@
 {% load staticfiles %}
 
 {% block navbar %}
-	<nav class="navbar navbar-inverse">
-  		<div class="container-fluid">
-
-    		<div class="navbar-header">
-     			 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-      			</button>
-      			<a class="navbar-brand" href="#">Sistema Odontologico</a>
-    		</div>
-
-    	</div>
-	</nav>
-
-    {% endblock %}
+{% endblock %}
 
 <html lang="es">
+<title>Iniciar Sesion</title>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"> 
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script> 
 	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="/static/style/login_style.css"/>
 
 
 	<style type="text/css"> 
@@ -37,43 +27,47 @@
 		} 
 
 	</style>
+</head>
 
-<div>
-<form method="POST">
+
+<body>
+	<div>
+	<form method="POST">
 	{% csrf_token %}
-	<div class="row">
-		{% if form.non_field_errors %}
-		<ul class='form-errors'>
-		    {% for error in form.non_field_errors %}
-		        <li class="alert alert-danger">{{ error }}</li>
-		    {% endfor %}
-		</ul>
-		<br><br>
-		{% endif %}
-	</div>
-	<div class="row">
-		<div>
-			<div class="col-md-12">	
-				<h1> <center> Facultad de Odontología </center></h1>
-				<h1> <center> Universidad de El Salvador   </center></h1>
-
-			</div>
+		<div class="row">
+			{% if form.non_field_errors %}
+			<ul class='form-errors'>
+		   	 {% for error in form.non_field_errors %}
+		    	<li class="alert alert-danger">{{ error }}</li>
+		    	{% endfor %}
+			</ul>
+			<br><br>
+			{% endif %}
 		</div>
-		<br><br><br>
-		
+
+		<div class="row">
+		<br><br>
+			<div class="col-md-12">	
+				<h2 style="color:white"> <center><b class="text-warning">Sistema</b> de Control de Expedientes</center></h2>
+
+				<h3 style="color:white"> <center>Area de Ortodoncia</center></h3>
+			<br>
+			</div>
+
+
 		
 			<div class="contenedor row">
 					<div class="col-md-4 col-md-offset-4">
 					<br><br>
 						<div class="form-group">
-								<label for="username">Nombre de Usuario</label>
+								<label for="username" style="color:white">Nombre de Usuario</label>
 								<input class="form-control" type="text" name="username" autofocus >
 						</div>
 					</div>
 
 					<div class="col-md-4 col-md-offset-4">
 						<div class="form-group">
-								<label for="username">Contraseña</label>
+								<label for="username" style="color:white">Contraseña</label>
 								<input class="form-control" type="password" name="password">
 						</div>
 					<br><br>
@@ -89,5 +83,7 @@
 				</div>		
 			</div>
 		</div>
-</form>
-</div>
+	</form>
+	</div>
+
+</body>

@@ -19,9 +19,13 @@ div.contenedor-nav-inferior{
 	padding:0px;
 	font-family: verdana;
 
+	/* Posicion */
 	margin:auto;
-	margin-top: 350px;  
-	width: 875px;
+	margin-top: 325px;  
+	margin-right: 100px;			
+	
+	/* Tamaño */
+	width: 375px;
 	height: 150px;
 	background-color: red; 
 }
@@ -43,26 +47,8 @@ div#imagen2{
 }
 
 div#imagen3{
-	background-color: rgb(103,49,250);
-}
-
-div#imagen4{
 	background-color: rgb(22,145,190);
 }
-
-div#imagen5{
-	background-color: rgb(22,107,162);
-}
-
-div#imagen6{
-	background-color: rgb(27,54,71);
-}
-
-div#imagen7{
-	background-color: rgb(21,40,54);
-}
-
-
 
 
 img.icon-nav{
