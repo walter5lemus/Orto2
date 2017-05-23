@@ -207,11 +207,12 @@ class ReportePersonasPDF(View):
 #**********************************************************************************************
 
 def generar_pdf_Caducar(request):
-  
+    fecha = time.strftime("%x")
+    str(fecha)
     response = HttpResponse(content_type='application/pdf')
-    pdf_name = "producto.pdf"  # llamado producto
-    # la linea 26 es por si deseas descargar el pdf a tu computadora
-    # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+    pdf_name = "fichas_caducadas_"+fecha+".pdf"  # llamado producto
+    response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
     buff = BytesIO()
     doc = SimpleDocTemplate(buff,
                             pagesize=letter,
@@ -290,16 +291,8 @@ def generar_pdf_Caducar(request):
         ],
     ))
     clientes.append(t)
-
-
-
-    fecha = time.strftime("%x")
-    str(fecha)
     p1 = Paragraph(fecha,fechaStyle)
     clientes.append(p1)
-
-    
-
 
     doc.build(clientes)
     response.write(buff.getvalue())

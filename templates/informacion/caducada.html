@@ -301,16 +301,13 @@ $( "#id_caducar_todo" ).click(function() {
 			  showLoaderOnConfirm: true,
 			},
 			function(){
+				window.open('/reportes/reporte_caducada/');
 			  setTimeout(function(){
-  			  window.open('/reportes/reporte_caducada',"width=400, height=400");
-				
-						  
 			    $.ajax({
 					data : {'codigo':codigo,'numero':ficha},
 					url : '/informacion/caduca/',
 					type : 'get',
 					success: function(data){
-						swal("Las fichas se transfirieron a CADUCADAS satisfactoriamente!", "You clicked the button!", "success")
 						swal({
 						  title: "¡Excelente!",
 						  text: "¡La ficha se retiro satisfactoriamente!",
