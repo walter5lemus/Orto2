@@ -246,12 +246,12 @@
 					case -3:
 						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/">Tipo de perfil</a></li>');
 						break;
-					case -4:
+					/*case -4:
 						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro FALTA ESTE ARREGLAR</a></li>');
 						break;
 					case -5:
 						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Registro Mordidas FALTA ESTE ARREGLAR</a></li>');
-						break;
+						break;*/
 					case -6:
 						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
 						break;
@@ -285,7 +285,9 @@
 					case -16:
 						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
 						break;
-					
+					case -17:
+						$('#'+co+'_'+numero).append('<li><a href="/citas/nuevo/'+co+'/'+numero+'/">No ha finalizado el control</a></li>');
+						break;
 				}
 				incompletas = '';
 			}

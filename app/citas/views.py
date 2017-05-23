@@ -168,7 +168,7 @@ class finalizar(TemplateView):
 					if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
 						if estado_general.objects.filter(fichas_id=fi.id).exists():
 							if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-								if registro.objects.filter(fichas_id=fi.id).exists():
+								#if registro.objects.filter(fichas_id=fi.id).exists():
 									#if registro_mordidas.objects.filter(fichas_id=fi.id).exists():
 										#if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
 									if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
@@ -206,8 +206,8 @@ class finalizar(TemplateView):
 											return HttpResponse('8', status=401)
 									else:
 										return HttpResponse('7', status=401)	
-								else:
-									return HttpResponse('4', status=401)
+								#else:
+								#	return HttpResponse('4', status=401)
 							else:
 								return HttpResponse('3', status=401)
 						else:

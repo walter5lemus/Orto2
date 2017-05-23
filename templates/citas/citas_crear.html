@@ -909,7 +909,6 @@ $( "#finalizar_control" ).click(function() {
 				url : '/citas/finalizar/',
 				type : 'get',
 				success: function(data){
-					swal("La ficha se retiro satisfactoriamente!", "You clicked the button!", "success")
 					swal({
 					  title: "¡Excelente!",
 					  text: "¡La ficha se concluyo satisfactoriamente!",
@@ -921,13 +920,13 @@ $( "#finalizar_control" ).click(function() {
 					  closeOnConfirm: false
 					},
 					function(){
-					  location.reload();
+					  location.href = "/";
 					});
 				},
 				error: function(response){				
 					swal({
 					  title: "ERROR!",
-					  text: "¡Complete todas las partes de la ficha!",
+					  text: "¡Complete todas las partes de la ficha o puede que la cita no este aprobada!",
 					  type: "error",
 					  showCancelButton: true,
 					  confirmButtonColor: "#DD6B55",
