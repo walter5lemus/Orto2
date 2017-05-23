@@ -114,7 +114,7 @@ def busqueda(request):
 
 def busqueda2(request):
 	if request.is_ajax():
-		resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
+		resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente').distinct()
 		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda_admin(request):
@@ -126,7 +126,7 @@ def busqueda_admin(request):
 def busqueda2_admin(request):
 	if request.user.is_superuser==1:
 		if request.is_ajax():
-			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente')
+			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente').distinct()
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 

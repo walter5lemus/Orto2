@@ -237,7 +237,7 @@ $('#id_codigo_expediente').keyup(function(e){
  		url: '/informacion/busqueda2/',
  		type: 'get',
  		success : function(data) {
- 			$('#id_listacodigo').empty().append('whatever');
+ 			
         	for (var i = 0; i < data.length; i++) {
 					$("#id_listacodigo").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].cod_expediente+"'></option>");
 			}
