@@ -540,7 +540,7 @@ class ajax_caducada(TemplateView):
 				fi = fichas.objects.filter(completada=0)
 				for ficha in fi:
 					print ficha
-				fichas.objects.filter(completada=0).update(completada=3)
+				#fichas.objects.filter(completada=0).update(completada=3)
 				return render(request, 'base/error_no_tiene_permiso_admin.html')
 			else:
 				return HttpResponse('No se encuentran fichas incompletas', status=401)

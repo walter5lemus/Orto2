@@ -40,6 +40,12 @@ from app.tipo_perfil.models import *
 def citas_crear(request,codi,num):
 	
 	user = request.user.id
+	usuario = request.user.is_superuser
+	usuario2=0
+	if usuario:
+		usuario2=1
+
+
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num,completada=0)
@@ -48,7 +54,7 @@ def citas_crear(request,codi,num):
 			form2 = citasForm(initial={})
 			form3 = citasGeneralesForm2()
 			form4 = citasForm2(initial={})
-			return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num})
+			return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num})
 	except Exception as e:
 			return render(request, 'base/error_no_hay_acceso.html')
 
@@ -168,8 +174,11 @@ class finalizar(TemplateView):
 																if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
 																	if moyers_superior.objects.filter(fichas_id=fi.id).exists():
 																		if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-																			fichas.objects.filter(id=fi.id).update(completada=1)
-																			return HttpResponse('<script>alert("Se autorizo");</script>')
+																			if imagenes_afmp.objects.filter(fichas_id=fi.id).exists():
+																				fichas.objects.filter(id=fi.id).update(completada=1)
+																				return HttpResponse('<script>alert("Se autorizo");</script>')
+																			else:
+																				return HttpResponse('Sin imagen AFMP', status=401)
 																		else:
 																			return HttpResponse('16', status=401)
 																	else:

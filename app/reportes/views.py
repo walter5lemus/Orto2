@@ -31,6 +31,7 @@ from app.aspMandibular.choices import *
 from app.informacion.models import *
 from app.informacion.forms import *
 
+
 from app.diagCefalo.models import *
 from app.diagGeneral.models import *
 from app.reportes.models import *
@@ -40,7 +41,7 @@ from django.conf import settings
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from django.views.generic import View
-
+import time
 import locale
 
 # Establecemos el locale de nuestro sistema
@@ -198,3 +199,109 @@ class ReportePersonasPDF(View):
         pdf.drawImage(archivo_imagen3, 440 , 25, 40, 40,preserveAspectRatio=True)
         archivo_imagen4 = settings.MEDIA_ROOT+'/imagenes/logotw.jpg'
         pdf.drawImage(archivo_imagen4, 500 , 25, 40, 40,preserveAspectRatio=True)
+
+
+
+
+
+#**********************************************************************************************
+
+def generar_pdf_Caducar(request):
+  
+    response = HttpResponse(content_type='application/pdf')
+    pdf_name = "producto.pdf"  # llamado producto
+    # la linea 26 es por si deseas descargar el pdf a tu computadora
+    # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+    buff = BytesIO()
+    doc = SimpleDocTemplate(buff,
+                            pagesize=letter,
+                            rightMargin=20,
+                            leftMargin=20,
+                            topMargin=60,
+                            bottomMargin=18,
+                            )
+    doc.title = "fichas_caducadas"
+    clientes = []
+    styles = getSampleStyleSheet()
+    headerStyle = ParagraphStyle(
+            name='Total',
+            fontSize=18,
+            fontName='Helvetica-BoldOblique',
+            textColor=colors.black,
+            spaceBefore=0.5 * cm,
+            spaceAfter=0.5 * cm,
+            alignment=TA_CENTER)
+    headerStyle2 = ParagraphStyle(
+            name='Total',
+            fontSize=16,
+            fontName='Helvetica-BoldOblique',
+            textColor=colors.black,
+            spaceBefore=0.5 * cm,
+            spaceAfter=0.5 * cm,
+            alignment=TA_CENTER)
+
+    parrafoStyle = ParagraphStyle(
+            name='Total1',
+            fontSize=12,
+            fontName='Helvetica',
+            textColor=colors.black,
+            spaceBefore=0.5 * cm,
+            spaceAfter=0.5 * cm,
+            alignment=TA_CENTER)
+
+    fechaStyle = ParagraphStyle(
+            name='Total1',
+            fontSize=14,
+            fontName='Helvetica',
+            textColor=colors.black,
+            spaceBefore=0.5 * cm,
+            spaceAfter=0.5 * cm,
+            alignment=TA_RIGHT)
+
+    universidad= "UNIVERSIDAD DE EL SALVADOR"
+    p1 = Paragraph(universidad, headerStyle)
+    clientes.append(p1)
+
+    facultad = "FACULTAD DE ODONTOLOGIA"
+    p1 = Paragraph(facultad, headerStyle2)
+    clientes.append(p1)
+
+    image = Image(settings.MEDIA_ROOT+'/imagenes/logo.png', width=100, height=100)
+    clientes.append(image)
+
+    text= "FICHAS QUE SE CADUCARON"
+    p1 = Paragraph(text, headerStyle)
+    clientes.append(p1)
+    tex= "\n"
+    p1 = Paragraph(tex, headerStyle)
+    clientes.append(p1) 
+
+    headings = ('Codigo Expediente', 'N° de Ficha','Nombre Completo','Usuario Creador')
+    allclientes = [(p.cod_expediente, p.numero, p.cod_expediente.nombre_completo,p.cod_expediente.usuario_creador) for p in fichas.objects.filter(completada=0)  ]
+
+
+    t = Table([headings] + allclientes)
+    t.setStyle(TableStyle( 
+        [
+            ('GRID', (0, 0), (4, -1), 1, colors.black),
+            ('LINEBELOW', (0, 0), (-1, 0), 2, colors.black),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.white),
+            #('ALIGN', (1,1), (-1,0), 'CENTER'),
+        ],
+    ))
+    clientes.append(t)
+
+
+
+    fecha = time.strftime("%x")
+    str(fecha)
+    p1 = Paragraph(fecha,fechaStyle)
+    clientes.append(p1)
+
+    
+
+
+    doc.build(clientes)
+    response.write(buff.getvalue())
+    buff.close()
+    return response

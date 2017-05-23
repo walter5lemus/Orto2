@@ -299,6 +299,9 @@ $( "#id_caducar_todo" ).click(function() {
 			},
 			function(){
 			  setTimeout(function(){
+  			  window.open('/reportes/reporte_caducada',"width=400, height=400");
+				
+						  
 			    $.ajax({
 					data : {'codigo':codigo,'numero':ficha},
 					url : '/informacion/caduca/',
@@ -318,7 +321,7 @@ $( "#id_caducar_todo" ).click(function() {
 						function(){
 						  location.reload();
 						});
-					},
+					},//reporte_caducada
 					error: function(data){
 						swal({
 						  title: "ERROR!",

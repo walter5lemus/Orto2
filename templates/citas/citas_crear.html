@@ -517,16 +517,20 @@ Control de Citas
 
 						                for (i = 0; i < data2.length; i++){
 						                    tr += '<tr>';
-						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td><td>';
+						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
 						                    	if(data2[i].fields.autorizacion==true){
-						                    		tr += "Aprobada</td>";
+						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
 						                    	}else{
-						                    		tr += '<button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
+
+						                    		if ({{usuario}}==true) {
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
 						                    		$("#aparato1").css("display", "none");
+						                    		}else{
+						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}
 						                    	}
-						                    if(data2[i].fields.tutor!=""){
-						                    	tr+='<td>'+data2[i].fields.tutor+'</td></tr>';
-						                    }
+						                    
 						                    fechaCita= data2[i].fields.proxima_cita;
 
 						                }
@@ -695,16 +699,20 @@ $(function() {
 
 						                for (i = 0; i < data2.length; i++){
 						                    tr += '<tr>';
-						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td><td>';
+						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
 						                    	if(data2[i].fields.autorizacion==true){
-						                    		tr += "Aprobada</td>";
+						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
 						                    	}else{
-						                    		tr += '<button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
+
+						                    		if ({{usuario}}==true) {
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
 						                    		$("#aparato1").css("display", "none");
+						                    		}else{
+						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}
 						                    	}
-						                    if(data2[i].fields.tutor!=""){
-						                    	tr+='<td>'+data2[i].fields.tutor+'</td></tr>';
-						                    }
+						                    
 						                    fechaCita= data2[i].fields.proxima_cita;
 
 						                }
