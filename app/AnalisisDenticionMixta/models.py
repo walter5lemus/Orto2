@@ -14,18 +14,18 @@ class nance_general(models.Model):
 		return '{}'.format(self.fichas)
 
 class nance_tablas(models.Model):
-    fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
-    seleccion = models.BooleanField()
-    tabla = models.IntegerField()
-    posicion = models.CharField(max_length=50)
-    mdm = models.FloatField(null=True,blank=True)
-    mprx = models.FloatField(null=True,blank=True)
-    multiplicacion = models.FloatField(null=True,blank=True)
-    mdrx = models.FloatField(null=True,blank=True)
-    valor_x= models.FloatField(blank=False)
+	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
+	seleccion = models.BooleanField()
+	tabla = models.IntegerField()
+	posicion = models.CharField(max_length=50)
+	mdm = models.FloatField(null=True,blank=True)
+	mprx = models.FloatField(null=True,blank=True)
+	multiplicacion = models.FloatField(null=True,blank=True)
+	mdrx = models.FloatField(null=True,blank=True)
+	valor_x= models.FloatField(blank=False)
 
-    def __unicode__(self):
-    	return '{}'.format(self.fichas)
+	def __unicode__(self):
+		return '{}'.format(self.fichas)
 
 
 class moyers_superior(models.Model):	
@@ -33,7 +33,8 @@ class moyers_superior(models.Model):
 	fichas = models.ForeignKey(fichas,null=True, blank=True, on_delete=models.CASCADE)
 	ed_izquierdo = models.FloatField(null=True, blank=True)
 	ed_derecho = models.FloatField(null=True, blank=True)
-	
+	espacio_sup = models.FloatField(null=True, blank=True)
+
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
@@ -53,17 +54,18 @@ class moyers_superior_ancho(models.Model):
 		return '{}'.format(self.fichas)
 
 class moyers_inferior(models.Model):
-    fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
-    ed_izquierdo = models.FloatField(null=True, blank=True)
-    ed_derecho = models.FloatField(null=True, blank=True)
+	fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
+	ed_izquierdo = models.FloatField(null=True, blank=True)
+	ed_derecho = models.FloatField(null=True, blank=True)
+	espacio_inf = models.FloatField(null=True, blank=True)	
 
-    def __str__(self):
-        return '{}'.format(self.fichas)
+	def __str__(self):
+		return '{}'.format(self.fichas)
 
 class moyers_inferior_ancho(models.Model):
-    fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
-    posicion = models.ForeignKey(pos, null=True, blank=True)
-    ancho_mesiodistal = models.FloatField(null=True, blank=True)
+	fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
+	posicion = models.ForeignKey(pos, null=True, blank=True)
+	ancho_mesiodistal = models.FloatField(null=True, blank=True)
 
-    def __str__(self):
-        return '{}'.format(self.fichas)
+	def __str__(self):
+		return '{}'.format(self.fichas)

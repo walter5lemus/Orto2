@@ -26,6 +26,7 @@ class datos_generales(models.Model):
     nombre_resp = models.CharField(max_length=100)
     usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
     fecha_hora_creacion = models.DateTimeField()
+    departamento = models.IntegerField()
 
     def __unicode__(self):
         return '{}'.format(self.cod_expediente)
