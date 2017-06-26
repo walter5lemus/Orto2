@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 
 {% block title %}
-	Inicio
+	Editar
 {% endblock %}
 
 {% block header %}
@@ -10,96 +11,285 @@
 {% block menu-social %}
 {% endblock %}
 
+{% block navbar %}
+	<nav class="navbar navbar-inverse">
+  		<div class="container-fluid">
+
+    		<div class="navbar-header">
+     			 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
+        			<span class="sr-only">Toggle navigation</span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+      			</button>
+      			<a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span> Home</a>
+    		</div>
+
+    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+
+      			<ul class="nav navbar-nav navbar-right">
+       				<li class="active">
+           				<a href="{%url 'logout' %}">Cerrar Sesión</a>
+       				</li> 
+      			</ul>
+
+      			<ul class="nav navbar-nav navbar-right">
+        			<div class="col-md-3">
+        				<h6 style="color:white">Hola, <B>{{user}}</B></h6>
+        			</div>
+      			</ul>
+
+    		</div>
+  		</div>
+	</nav>
+{% endblock %} 
 {% block content %}
-<form method="POST">
-	{% csrf_token %}
-</form>
+<style>
+	.ocultar{
+		display: none;
+	}
+</style>
 
-<div class="col-md-10 col-md-offset-1">
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title"></h3>
-  </div>
 
-  <div class="panel-body">
-    <br><br>
-	<div class="col-md-6 col-md-offset-3">
+<h2><center>Editar Fichas</center></h2>
+	<div class="col-md-12">
+	<br><br>
 		<div class="form-group">
-			<label for="{{form.codigo.name}}">{{form.codigo.label}}</label>	
-		{{form.codigo}}
-		<button class="btn btn-primary" onclick="buscar()">Buscar</button>
+			<div class="col-md-6 col-md-offset-1">
+				<label for="nombre_paciente">Nombre del paciente</label>
+				<div class="form-group has-success has-feedback"" role="form">
+					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" autofocus >
+					<span class="glyphicon glyphicon-search form-control-feedback"></span>
+					<datalist id="id_listanombres">
+					
+					</datalist>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="col-md-6 col-md-offset-1">
+					<div class="form-group">
+						<label for="nombre_paciente">Codigo del Expediente</label>
+						<div class="form-group has-success has-feedback"" role="form">
+							<input type="search" class="form-control " id="id_codigo_expediente" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo" >
+							<span class="glyphicon glyphicon-search form-control-feedback"></span>
+							<datalist id="id_listacodigo">
+							
+							</datalist>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	
+	<div class="row ocultar" >
+			<div class="col-md-5 col-md-offset-3" >
+			<br><br>
+				<div class="form-group">
+					<div class="col-md-6">
+						<label for="codigo"> N° de ficha a editar </label>
+						<select id="select_fichas" class="form-control"></select>
+					</div>
+					<div class="col-md-4">
+						<button class="btn btn-primary" id="boton_consulta" style="margin-top: 25px;" id="consultar_ficha" onclick="redireccionar()">Editar</button>
+					<br><br></div>
+					
+				</div>
+				
+			</div>
 
-	<div class="col-md-6 col-md-offset-3">
-		<div class="form-group" >
-			<label for="ficha">Ficha</label>	
-		<select name="select" id="select" class="form-control"></select>
-		</div>
 	</div>
-
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			<center>	<button type="submit" onclick="redireccionar()" class="btn btn-success">Actualizar expediente</button></center>
-		</div>
-	</div>
-
-  </div>
-</div>
-
-
-
-
-<div class="col-md-6 col-md-offset-8">
-<div class="alert alert-dismissible alert-warning">
-  <button class="close" type="button" data-dismiss="alert">&times;</button>
-  <h4>Indicacion!</h4>
-  <p>Para actualizar una ficha clinica de un expediente existente, <a class="alert-link" href="#">debes ingresar el codigo del expediente</a>, y luego seleccionar la ficha clinica a modificar.</p>
-</div>
-</div>
-
-
-</div>
 
 
 <script>
 
-	function buscar(){
+//Ajax para completar el datalist del imput nombre
 
-		var codigo = $('#id_codigo').val();
+$("input[name='nombre_paciente']").on('input', function(e){
+$('#select_fichas').find('option').remove().end().val('whatever');
+var $input = $(this),
+   val = $input.val();
+   list = $input.attr('list'),
+   match = $('#'+list + ' option').filter(function() {
+       return ($(this).val() === val);
+   });
 
-		$.ajax({
-			data : {'codigo':codigo},
-			url : '/reportes/numero/'+codigo+'/',
-			type : 'get',
-			success: function(data){
-				for (var i = 0; i < data.length; i++) {
-					
-					$("#select").append('<option value='+(i+1)+'>'+data[i].fields.numero+'</option>');
-				}
-				if (data.length==0) {
-					
-					$('#select').empty();
-				}
+var codigo = $('#id_nombre_paciente').val();
+var nombre = $('#id_listanombres option[value="' + codigo +'"]').attr('id');
+
+if(match.length > 0) {
+    // value is in list
+var nombre = $('#id_nombre_paciente').val();
+//$('#select_fichas').find('option').remove().end().val('whatever');
+	
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$(".ocultar").css("display", "block");
+				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+				$('#id_codigo_expediente').val(data[i].pk);
 			}
-		});
+			
 
-	}
+		},
+		
+	});
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax2/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$("#input_fichas").val(data.length);
+				$("#input_codigo").val(codigo);
+				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+			}
+			if(data.length==0){
+				$("#input_fichas").val("No se encontraron fichas");
+			}
 
-	function redireccionar(){
+		},
+		
+	});
+    } else {
+        limpiar();
+    }
+});
+$('#id_nombre_paciente').keyup(function(e){
+ 	consulta = $("#id_nombre_paciente").val();
+ 		
+ 	$('#id_listanombres').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'nombre': consulta},
+ 		url: '/informacion/busqueda/',
+ 		type: 'get',
+ 		success : function(data) {
+ 			$('#id_listanombres').empty().append('whatever');
+        	for (var i = 0; i < data.length; i++) {
+					$("#id_listanombres").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].nombre_completo+"'>"+data[i].nombre_completo+"</option>");
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+});
 
-		var codigo = $('#id_codigo').val();
-		var numero = $('#select').val();
-		location.href='/informacion/motivo_consultas/nuevo/'+codigo+'/'+numero+'/'	; 
-		$('#id_codigo').val("");
-		$('#nombre').val("");
-		$('#id_numero').empty();id_codigo
-		}
+
+
+$("input[name='codigo_paciente']").on('input', function(e){
+
+var $input = $(this),
+   val = $input.val();
+   list = $input.attr('list'),
+   match = $('#'+list + ' option').filter(function() {
+       return ($(this).val() === val);
+   });
+
+var codigo = $('#id_codigo_expediente').val();
+
+if(match.length > 0) {	
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$(".ocultar").css("display", "block");
+				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+				$('#id_codigo_expediente').val(data[i].pk);
+					
+			}
+			$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+		},
+		
+	});
+	$.ajax({
+		data : {'codigo':codigo},
+		url : '/informacion/busqueda_ajax2/',
+		type : 'get',
+		success: function(data){
+			for (var i = 0; i < data.length; i++) {
+				$("#input_fichas").val(data.length);
+				$("#input_codigo").val(codigo);
+			}
+			if(data.length==0){
+				$("#input_fichas").val("No se encontraron fichas");
+			}
+
+		},
+		
+	});
+    } else {
+        limpiar();
+    }
+});
+
+//Ajax para completar el datalist del imput codigo
+$('#id_codigo_expediente').keyup(function(e){
+ 	consulta = $("#id_codigo_expediente").val();
+	
+ 	$('#id_listacodigo').empty().append('whatever');
+ 	$.ajax({
+ 		data: {'codigo': consulta},
+ 		url: '/informacion/busqueda2/',
+ 		type: 'get',
+ 		success : function(data) {
+ 			$('#id_listacodigo').empty().append('whatever');
+        	for (var i = 0; i < data.length; i++) {
+        		
+					$("#id_listacodigo").append("<option value='" + data[i].cod_expediente + "' id='"+data[i].cod_expediente+"'></option>");
+			}
+ 		},
+ 		error : function(message) {
+        	console.log(message);
+     	}
+ 	});
+
+});
+
+var codigo = $('#id_nombre_paciente').val();
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever');
+
+$("#id_nombre_completo").prop('readonly', true);
+$("#id_cod_expediente").prop('readonly', true);
+
+
+function limpiar(){
+	$(".ocultar").css("display", "none");
+	$('#cod_expediente').val("");
+	$('#id_fecha_hora_creacion').val("");
+	$('#id_cod_expediente').val("");
+	$('#input_codigo').val("");
+	$('#select_fichas')
+    .find('option')
+    .remove()
+    .end()
+    .val('whatever')
+
+}
+
+function redireccionar(){
+	var num = parseInt($("#select_fichas").val(), 10);
+	var codigo = $('#id_codigo_expediente').val();
+	window.location="/informacion/motivo_consultas/editar/"+codigo+"/"+num;
+}
+
+
 </script>
 
- 	<div class="col-md-2 col-md-offset-5">
+ 	<div class="col-md-2 col-md-offset-8">
  		<br><br>
 		<a class="btn btn-warning btn-block" href="/home/">Regresar</a>
 	</div>
 
+
+	
 {% endblock %}
