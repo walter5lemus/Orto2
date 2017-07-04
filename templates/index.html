@@ -211,8 +211,8 @@
 
 	{% for elemento in incompletos %}
 			<script type="text/javascript">
-			
-			if ({{elemento}} > 0) {
+			var cadena="{{elemento}}";
+			if (cadena > 0) {
 				numero = {{elemento}};
 			}
 			
@@ -235,7 +235,6 @@
 				incompletas = '';
 			}else{
 				//entra si es un numero
-
 				switch({{elemento}}){
 					case -1:
 						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Motivo de Consulta</a></li>');
@@ -325,7 +324,6 @@
 	     	}
 	 	});
 	});
-
 </script>
 <script type="text/javascript">
 	var codigo;
@@ -339,10 +337,8 @@
 	$('#btn_completos').on('click', function(e){
 	    $('#completas').toggleClass('hidden');
 	})
-
 	$('#btn_incompletos').on('click', function(e){
 	    $('#incompletas').toggleClass('hidden');
 	})
-
 </script>
 -->

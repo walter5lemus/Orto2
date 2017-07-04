@@ -36,7 +36,7 @@ def index(request):
 	incompletos =list()
 	ficha = fichas.objects.filter(usuario_creador=user, completada=0)
 	for fi in ficha:
-		incompletos.append(fi.numero)
+		incompletos.append("0"+str(fi.numero))
 		incompletos.append(fi.cod_expediente)
 		
 		if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():

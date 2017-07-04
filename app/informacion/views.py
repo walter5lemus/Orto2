@@ -13,6 +13,7 @@ from django.core import serializers
 from django.http import HttpResponse
 import json
 import time
+import string
 
 
 
@@ -39,7 +40,15 @@ def CodExpediente_crear(request):
 		ficha = fichas.objects.filter(usuario_creador=user, completada=0)
 		for fi in ficha:
 			incompletos.append(fi.numero)
-			incompletos.append(fi.cod_expediente)
+			strings = fi.cod_expediente
+			str(strings)
+			
+			nueva_String = string.replace(strings.cod_expediente,"-","_")
+			print nueva_String
+			#print string.replace("-","_")
+			#print string.replace("-","_")
+			incompletos.append(nueva_String)
+			
 			
 			if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
 				incompletos.append(-1)
@@ -73,7 +82,7 @@ def CodExpediente_crear(request):
 				incompletos.append(-15)
 			if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 				incompletos.append(-16)
-
+			print incompletos
 		form = DatosGeneralesForm()
 		return render(request, 'informacion/form_inicio.html', {'form':form,'incompletos':incompletos})
 
