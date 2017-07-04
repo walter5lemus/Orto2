@@ -40,14 +40,7 @@ def CodExpediente_crear(request):
 		ficha = fichas.objects.filter(usuario_creador=user, completada=0)
 		for fi in ficha:
 			incompletos.append(fi.numero)
-			strings = fi.cod_expediente
-			str(strings)
-			
-			nueva_String = string.replace(strings.cod_expediente,"-","_")
-			print nueva_String
-			#print string.replace("-","_")
-			#print string.replace("-","_")
-			incompletos.append(nueva_String)
+			incompletos.append(fi.cod_expediente)
 			
 			
 			if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
@@ -82,7 +75,7 @@ def CodExpediente_crear(request):
 				incompletos.append(-15)
 			if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 				incompletos.append(-16)
-			print incompletos
+			
 		form = DatosGeneralesForm()
 		return render(request, 'informacion/form_inicio.html', {'form':form,'incompletos':incompletos})
 
@@ -397,7 +390,7 @@ def EstadoGeneral_crear(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 					return redirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))
-				return render(request,'informacion/form_estadoGeneral.html',{'form':form,'num':num,'codi':codi})
+				return render(request,'informacion/form_estadoGeneral.html',{'form':form,'num':num,'codi':codi,'ids':ids.id})
 
 			if request.method == 'POST':
 				form = EstadoGeneralForm(request.POST)
@@ -415,11 +408,11 @@ def EstadoGeneral_crear(request,codi,num):
 							estado = estado_general.objects.get(fichas_id=numero.id)
 							form = EstadoGeneralForm(instance=estado)
 
-					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
+					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num,'ids':ids.id})
 					
 				else:
 					form = EstadoGeneralForm(initial={'fichas':ids.id})		
-					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
+					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num,'ids':ids.id})
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception as e:
