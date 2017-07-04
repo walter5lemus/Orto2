@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_editar.html' %}
 
 {% block title %}
 Motivo Consulta
@@ -114,10 +114,15 @@ Motivo Consulta
 
 	<div class="col-md-8 col-md-offset-2">
 		<div class="form-group">
-			<br>
-			<div class="col-md-3 col-md-offset-4">
-			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+			
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/informacion/datos_generales/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
 			</div>
+		
 		</div>
 		<br><br>
 	</div>

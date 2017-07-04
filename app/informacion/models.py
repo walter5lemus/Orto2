@@ -23,10 +23,11 @@ class datos_generales(models.Model):
     telefono = models.IntegerField()
     genero = models.IntegerField(choices=genero_choices, default=1)
     direccion = models.CharField(max_length=200)
+    departamento = models.IntegerField(choices=departamento_choices, default=1)
     nombre_resp = models.CharField(max_length=100)
     usuario_creador = models.ForeignKey(Usuario,null=False, blank=False)
     fecha_hora_creacion = models.DateTimeField()
-    departamento = models.IntegerField()
+    
 
     def __unicode__(self):
         return '{}'.format(self.cod_expediente)

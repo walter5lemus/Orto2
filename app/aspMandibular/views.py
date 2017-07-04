@@ -70,7 +70,7 @@ def asp_mandibular1_edit(request,codi,num):
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/analisis_radiograficos/otrosAspectos/editar/%s/%s' %(codi,num))
-		return render(request, 'asp_mandibular1/form_asp_mandibular1.html',{'form':form,'codi':codi,'num':num})
+		return render(request, 'asp_mandibular1/form_asp_mandibular1_editar.html',{'form':form,'codi':codi,'num':num})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

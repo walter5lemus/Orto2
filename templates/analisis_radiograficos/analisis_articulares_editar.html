@@ -1,0 +1,244 @@
+{% extends 'base/base_editar.html' %}
+
+{% block title %}
+Aspectos Articulares
+{% endblock %}
+{% block header %}
+<style>
+	
+	.dentro{
+		border:2px solid #000;
+		border-radius:25px;
+	}
+</style>
+{% endblock %}
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	{{form.fichas}}
+
+	<br><br>
+	<h1> <center> Aspectos Artículares</center></h1>
+		<div class="col-md-12 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-4">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-4">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+	
+
+	
+<!-- Condilo Mandibular -->	
+
+<br><br><br><br><br><br>
+<div class="col-md-10 col-md-offset-1">
+	<div class="panel panel-primary">
+  	   <div class="panel-heading">
+   		 <h3 class="panel-title">Condilo Mandibular</h3>
+  	   </div>
+  	   <div class="panel-body">
+
+		  <div class="col-md-5" >
+			 <div class="row">
+				<h5><b>Izquierdo</b></h5>
+				 <div class="col-md-4">
+					<div class="form-group">
+							<label for="{{form.condilo_mand_izq_alto.name}}">{{form.condilo_mand_izq_alto.label}}</label>	
+							{{form.condilo_mand_izq_alto}}
+					</div>
+				 </div>
+				  	<div class="col-md-2">
+		   				<br><h5>mm</h5>
+	    		  	</div>
+
+
+				<div class="col-md-4">
+					<div class="form-group">
+							<label for="{{form.condilo_mand_izq_ancho.name}}">{{form.condilo_mand_izq_ancho.label}}</label>	
+							{{form.condilo_mand_izq_ancho}}
+					</div>
+				</div>
+				<div class="col-md-2">
+		   			<br><h5>mm</h5>
+	    		 </div>
+
+			</div>
+
+			<div class="row">
+			<h5><b>Derecho</b></h5>
+					<div class="col-md-4">
+						<div class="form-group">
+								<label for="{{form.condilo_mand_der_alto.name}}">{{form.condilo_mand_der_alto.label}}</label>	
+							{{form.condilo_mand_der_alto}}
+						</div>
+					</div>
+					<div class="col-md-2">
+		   				<br><h5>mm</h5>
+	    		  	</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+								<label for="{{form.condilo_mand_der_ancho.name}}">{{form.condilo_mand_der_ancho.label}}</label>	
+								{{form.condilo_mand_der_ancho}}
+						</div>
+					</div>
+					<div class="col-md-2">
+		   				<br><h5>mm</h5>
+	    		    </div>
+			</div>
+		</div>
+
+
+		<div class="col-md-7">
+			<div class="col-md-4">
+			<br><br><br><br>
+				<div class="form-group">
+						<label for="{{form.condilo_mand_simetrico.name}}">{{form.condilo_mand_simetrico.label}}</label>	
+						{{form.condilo_mand_simetrico}}
+				</div>
+			</div>
+
+
+			
+			<br><br>
+			<div class="col-md-8">
+				<div class="form-group">
+						<label for="{{form.condilo_mand_aspectos_observados.name}}">{{form.condilo_mand_aspectos_observados.label}}</label>	
+						{{form.condilo_mand_aspectos_observados}}
+				</div>
+			</div>
+		</div>	
+	  </div>
+	</div>
+</div>
+
+
+
+<!-- Eminencia -->
+
+<br>
+<div class="col-md-10 col-md-offset-1">
+   <div class="panel panel-primary">
+  	   <div class="panel-heading">
+   		 <h3 class="panel-title">Eminencia</h3>
+  	   </div>
+  	      <div class="panel-body">
+		    <div class="col-md-5" >
+		    <br>
+			<div class="row">
+				<div class="col-md-4">
+						<label for="{{form.eminencia_izq.name}} ">{{form.eminencia_izq.label}}</label>	
+						{{form.eminencia_izq}}
+				</div>
+				<div class="col-md-2">
+		   			<br><h5>mm</h5>
+	    		</div>
+
+				<div class="col-md-4">
+						<label for="{{form.eminencia_der.name}}">{{form.eminencia_der.label}}</label>	
+						{{form.eminencia_der}}
+				</div>
+				<div class="col-md-2">
+		   			<br><h5>mm</h5>
+	    		</div>
+
+			</div>
+		</div>
+
+		<div class="col-md-7" >
+			<div class="col-md-4">
+			<br>
+				<label for="{{form.eminencia_simetrico.name}}">{{form.eminencia_simetrico.label}}</label>	
+				{{form.eminencia_simetrico}}
+			</div>
+
+			<div class="col-md-8">
+					<div class="form-group">
+						<label for="{{form.eminencia_aspectos_observados.name}}">{{form.eminencia_aspectos_observados.label}}</label>	
+						{{form.eminencia_aspectos_observados}}
+					</div>
+			</div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+
+<!-- Espacio Articular -->
+
+<br>
+<div class="col-md-10 col-md-offset-1">
+   <div class="panel panel-primary">
+  	   <div class="panel-heading">
+   		 <h3 class="panel-title">Espacio Artícular</h3>
+  	   </div>
+  	      <div class="panel-body">
+			<div class="col-md-3 col-md-offset-1">
+				<div class="form-group">
+						<label for="{{form.espacio_articular_simetrico.name}}" >{{form.espacio_articular_simetrico.label}}</label>	
+					{{form.espacio_articular_simetrico}}
+				</div>
+			</div>
+			<div class="col-md-6 col-md-offset-1">
+				<div class="form-group">
+					<label for="{{form.espacio_articular_aspectos_observados.name}}">{{form.espacio_articular_aspectos_observados.label}}</label>	
+					{{form.espacio_articular_aspectos_observados}}
+				</div>
+			</div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
+
+	<br><br>
+    <div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<br>
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/aspectos/sagitales/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			</div>
+		
+		</div>
+		<br><br>
+	</div>
+
+
+
+
+     <!-- Barra de progreso -->
+        <br>
+        <div class="col-md-8 col-md-offset-2">
+        <div class="progress">
+            <div class="progress-bar" style="width: 42%;"></div>
+        </div>
+        </div>
+
+
+
+<script>
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
+
+</form>
+{% endblock %}

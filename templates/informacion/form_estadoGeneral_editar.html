@@ -1,0 +1,182 @@
+{% extends 'base/base_editar.html' %}
+
+{% block title %}
+Estado general
+{% endblock %}
+{% block header %}
+<style>
+	#id_cambio_salud {
+		column-count: 2;
+	}
+	#id_otras_enfermedades {
+		column-count: 2;
+	}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	<div class="row">
+		{% if form.errors %}
+		    {% for field in form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-danger">
+		                <strong>{{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in form.non_field_errors %}
+		        <div class="alert alert-danger">
+		            <strong>{{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		</div>
+
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
+	<h1><center>Estado General</center></h1>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>	
+	
+
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-6">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br><br><br>
+	</div>
+
+
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.cambio_salud.name}}">{{form.cambio_salud.label}}</label>	
+			{{form.cambio_salud}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+		
+			<label for="{{form.detalle_enf_operacion.name}}">{{form.detalle_enf_operacion.label}}</label>
+			{{form.detalle_enf_operacion}}
+		</div>
+	</div>
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.otras_enfermedades.name}}">{{form.otras_enfermedades.label}}</label>	
+			{{form.otras_enfermedades}}
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.detalle_otra_enfermedad.name}}">{{form.detalle_otra_enfermedad.label}}</label>	
+			{{form.detalle_otra_enfermedad}}
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<label for="{{form.detalle_medicamento.name}}">
+			{{form.detalle_medicamento.label}}</label>	
+			{{form.detalle_medicamento}}
+		</div>
+	</div>
+
+
+</div>
+</div>
+		
+
+	<br>
+	<div class="col-md-8 col-md-offset-3">
+		<div class="form-group">
+			<div class="col-md-3 col-md-offset-1">
+			  <a href="/informacion/motivo_consultas/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div>
+
+			<div class="col-md-3 col-md-offset-1">
+			  <button type="submit" class="btn btn-primary btn-block">Siguiente</button>
+			</div>
+		</div>
+		<br><br>
+	</div>
+
+
+		<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 12%;"></div>
+		</div>
+		</div>
+
+
+
+<script>
+
+	$('#{{form.fichas.auto_id}}').val({{fichas}});
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+	$('#id_cambio_salud_1').click(function() {
+   		if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+	});
+
+	$('#id_cambio_salud_0').click(function() {
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			var texto =  $("#id_detalle_enf_operacion").text();
+   			$("#id_detalle_enf_operacion").val(texto);
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	});
+
+	$(function() {
+    	if($('#id_cambio_salud_1').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").val("");
+   			$("#id_detalle_enf_operacion").prop('readonly', true);
+   		}
+   		if($('#id_cambio_salud_0').is(':checked')) { 
+   			$("#id_detalle_enf_operacion").prop('readonly', false);
+   		}
+	})
+
+
+	function redireccionar(){
+		window.location.href="/informacion/motivo_consultas/editar/"+{{codi}}+"/"+{{num}};
+	}
+
+	
+</script>
+
+
+</form>
+
+	
+{% endblock %}

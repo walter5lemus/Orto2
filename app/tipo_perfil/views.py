@@ -74,7 +74,7 @@ def tipo_perfil_edit(request,codi,num):
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/aspectos/denticion1/editar/%s/%s' %(codi,num))
-		return render(request, 'tipo_perfil/form_tipo_perfil.html',{'form':form,'num':num,'codi':codi})
+		return render(request, 'tipo_perfil/form_tipo_perfil_editar.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

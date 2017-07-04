@@ -1,0 +1,325 @@
+{% extends 'base/base_editar.html' %}
+
+{% block title %}
+Aspectos Mandibulares
+{% endblock %}
+
+{% block header %}
+<br><br>
+<center><h1>Aspectos Mandibulares</h1></center>
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+
+	<div class="col-md-12 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-4">
+			<label for="codigo">N° de Expediente </label>	
+			<input id="codigo" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<div class="col-md-4">
+			<label for="ficha">N° de Ficha</label>	
+			<input id="ficha" class="form-control" type="text" disabled="True">
+			<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+
+
+<div class="row">
+	<div class="col-md-3 col-md-offset-0">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+</div>
+<br><br>
+
+
+
+<!-- Rama Mandibular -->
+<div class="col-md-10 col-md-offset-1">
+<div class="form-group">
+
+	<div class="panel panel-primary">
+  	  <div class="panel-heading">
+    	<h3 class="panel-title">Rama Mandibular</h3>
+      </div>
+
+  	  <div class="panel-body">
+
+
+  	  	<!-- Anchura R - R' -->
+
+        <br><h4><b>Anchura R - R'</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_izq_altura.name}}">{{form.rama_mand_anch_izq_altura.label}}</label>
+				{{form.rama_mand_anch_izq_altura}}
+			</div>	
+		</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
+
+
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.rama_mand_anch_simetrico.name}}">{{form.rama_mand_anch_simetrico.label}}</label>
+				{{form.rama_mand_anch_simetrico}}
+			</div>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_izq_aspect_observ.name}}">{{form.rama_mand_anch_izq_aspect_observ.label}}</label>
+				{{form.rama_mand_anch_izq_aspect_observ}}
+			</div>
+		</div>
+
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_der_altura.name}}">{{form.rama_mand_anch_der_altura.label}}</label>
+				{{form.rama_mand_anch_der_altura}}
+			</div>
+		</div>
+		<div class="col-md-1">
+			<br><h5>mm</h5>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.rama_mand_anch_der_aspect_observ.name}}">{{form.rama_mand_anch_der_aspect_observ.label}}</label>
+				{{form.rama_mand_anch_der_aspect_observ}}
+			</div>
+			<br><br>
+		</div>
+
+    
+
+         <!-- Altura (Plano M - Redorde Albeolar) -->
+    	
+        <h4><b>Altura (Plano M - Redorde Albeolar)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_izq_altura.name}}">{{form.rama_mand_altur_izq_altura.label}}</label>
+				{{form.rama_mand_altur_izq_altura}}
+			</div>	
+		</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
+
+
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.rama_mand_altur_simetrico.name}}">{{form.rama_mand_altur_simetrico.label}}</label>
+				{{form.rama_mand_altur_simetrico}}
+			</div>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_izq_aspect_observ.name}}">{{form.rama_mand_altur_izq_aspect_observ.label}}</label>
+				{{form.rama_mand_altur_izq_aspect_observ}}
+			</div>
+		</div>
+
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_der_altura.name}}">{{form.rama_mand_altur_der_altura.label}}</label>
+				{{form.rama_mand_altur_der_altura}}
+			</div>
+		</div>
+		<div class="col-md-1">
+			<br><h5>mm</h5>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.rama_mand_altur_der_aspect_observ.name}}">{{form.rama_mand_altur_der_aspect_observ.label}}</label>
+				{{form.rama_mand_altur_der_aspect_observ}}
+			</div>
+		</div>
+
+	  </div>
+    </div>
+
+ <br>
+</div>
+</div>
+
+
+
+
+
+<!-- Cuerpo Mandibular -->
+<div class="col-md-10 col-md-offset-1">
+<div class="form-group">
+
+	<div class="panel panel-primary">
+  	  <div class="panel-heading">
+    	<h3 class="panel-title">Cuerpo Mandibular</h3>
+      </div>
+
+  	  <div class="panel-body">
+
+
+  	  	<!-- Altura (Plano M - Tangente de plano T) -->
+
+        <br><h4><b>Altura (Plano M - Tangente de plano T)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_izq_altura.name}}">{{form.cuerpo_mand_altur_izq_altura.label}}</label>
+				{{form.cuerpo_mand_altur_izq_altura}}
+			</div>	
+		</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
+
+
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_simetrico.name}}">{{form.cuerpo_mand_altur_simetrico.label}}</label>
+				{{form.cuerpo_mand_altur_simetrico}}
+			</div>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_izq_aspect_observ.name}}">{{form.cuerpo_mand_altur_izq_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_altur_izq_aspect_observ}}
+			</div>
+		</div>
+
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_der_altura.name}}">{{form.cuerpo_mand_altur_der_altura.label}}</label>
+				{{form.cuerpo_mand_altur_der_altura}}
+			</div>
+		</div>
+		<div class="col-md-1">
+			<br><h5>mm</h5>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_altur_der_aspect_observ.name}}">{{form.cuerpo_mand_altur_der_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_altur_der_aspect_observ}}
+			</div>
+			<br><br>
+		</div>
+
+
+
+
+		 <!-- Longitud (Go-Limite de sinfisis madibular) -->
+    	
+        <h4><b>Longitud (Go-Limite de sinfisis madibular)</b></h4>
+		<div class="col-md-2 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_izq_altura.name}}">{{form.cuerpo_mand_long_izq_altura.label}}</label>
+				{{form.cuerpo_mand_long_izq_altura}}
+			</div>	
+		</div>
+	    <div class="col-md-1">
+		   <br><h5>mm</h5>
+	    </div>
+
+
+	    <div class="col-md-3">
+		  	<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_simetrico.name}}">{{form.cuerpo_mand_long_simetrico.label}}</label>
+				{{form.cuerpo_mand_long_simetrico}}
+			</div>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-0">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_izq_aspect_observ.name}}">{{form.cuerpo_mand_long_izq_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_long_izq_aspect_observ}}
+			</div>
+		</div>
+
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_der_altura.name}}">{{form.cuerpo_mand_long_der_altura.label}}</label>
+				{{form.cuerpo_mand_long_der_altura}}
+			</div>
+		</div>
+		<div class="col-md-1">
+			<br><h5>mm</h5>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group">
+				<label for="{{form.cuerpo_mand_long_der_aspect_observ.name}}">{{form.cuerpo_mand_long_der_aspect_observ.label}}</label>
+				{{form.cuerpo_mand_long_der_aspect_observ}}
+			</div>
+		</div>
+
+	  </div>
+    </div>
+</div>
+</div>
+
+
+	
+    <div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+		
+			<br>
+			<div class="col-md-3 col-md-offset-2">
+			  <a href="/analisis_radiograficos/aspectos_articulares/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+			</div> 
+
+			<div class="col-md-3 col-md-offset-1">
+			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			</div>
+		
+		</div>
+		<br><br>
+	</div>
+
+
+
+	<!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 48%;"></div>
+		</div>
+		</div>
+
+
+
+
+<script>
+
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+		 
+</script>
+
+	</form>
+{% endblock %}

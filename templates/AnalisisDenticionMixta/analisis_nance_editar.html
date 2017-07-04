@@ -1,4 +1,4 @@
-    {% extends 'base/base.html' %}
+    {% extends 'base/base_editar.html' %}
     {% block header %}
     {% endblock %}
 
@@ -151,6 +151,7 @@
     	                <td></td>  
     	                <td></td>
     	                <td></td>
+                        <td></td>
                         <td><td><input id="total1" type="Number" step="0.01" class="form-control">
                         </td>
     	                <td></td>
@@ -198,6 +199,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td><input id="total2" type="Number" step="0.01" class="form-control">
                         </td>
                         <td></td>
@@ -237,15 +239,18 @@
     <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-
-            <br><br>
-            <div class="col-md-3 col-md-offset-5">
-                <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
-            <br><br>
             
+            <br><br>
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/diag_cefalo/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+            </div>
+        
         </div>
-    </div>
+        <br><br>
     </div>
 
      <!-- Barra de progreso -->

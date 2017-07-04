@@ -14,6 +14,35 @@
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");  
 
+    $(document).ready(function(){
+
+        if(document.getElementById("id_molar_derecha").value || document.getElementById("id_molar_izquierda").value)
+            {
+                document.getElementById("id_plano_termina_recto").disabled=true;
+                document.getElementById("id_escalon_mesial").disabled=true;
+                document.getElementById("id_escalon_distal").disabled=true;
+                {{form.molar_derecha.text_help}}
+
+            }
+            else
+            {   
+                document.getElementById("id_plano_termina_recto").disabled=false; 
+                document.getElementById("id_escalon_mesial").disabled=false;  
+                document.getElementById("id_escalon_distal").disabled=false;      
+            }
+
+        if(document.getElementById("id_plano_termina_recto").value || document.getElementById("id_escalon_mesial").value || document.getElementById("id_escalon_distal").value)
+            {
+                document.getElementById("id_molar_derecha").disabled=true;
+                document.getElementById("id_molar_izquierda").disabled=true;
+            }
+            else
+            {   
+                document.getElementById("id_molar_derecha").disabled=false; 
+                document.getElementById("id_molar_izquierda").disabled=false;       
+            }
+    });
+
 
     $('#id_molar_derecha, #id_molar_izquierda').change(function() {
         if(document.getElementById("id_molar_derecha").value || document.getElementById("id_molar_izquierda").value)

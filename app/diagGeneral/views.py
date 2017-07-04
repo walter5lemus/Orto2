@@ -30,7 +30,7 @@ def diag_general_view(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/citas/nuevo/%s/%s/' %(codi,num))
-				return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
+				return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi})
 
 			else:
 				if ids:	
@@ -69,7 +69,7 @@ def diag_general_edit(request,codi,num):
 				fecha =  timezone.now()
 				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 				return redirect('/citas/nuevo/%s/%s/' %(codi,num))
-		return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi})
+		return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi})
 	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	#except Exception, e:
 	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")

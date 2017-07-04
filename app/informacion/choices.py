@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 genero_choices = (
     (1, ("Masculino")),
     (2, ("Femenino"))
@@ -42,4 +42,21 @@ rotacion_choices = (
 	(8,(8)),
 	(9,(9)),
 	(10,(10))
+)
+
+departamento_choices = (
+	(1,("Ahuachapán")),
+	(2,("Cabañas")),
+	(3,("Chalatenango")),
+	(4,("Cuscatlán")),
+	(5,("La Libertad")),
+	(6,("La Paz")),
+	(7,("La Unión")),
+	(8,("Morazán")),
+	(9,("San Miguel")),
+	(10,("San Salvador")),
+	(11,("San Vicente")),
+	(12,("Santa Ana")),
+	(13,("Sonsonate")),
+	(14,("Usulután"))
 )

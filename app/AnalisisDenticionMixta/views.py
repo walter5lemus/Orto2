@@ -222,7 +222,7 @@ def moyerssup_editar(request, codi, num):
                         formset.save()
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-                        return redirect('/diag_general/edit/%s/%s' % (codi, num))
+                        return redirect('/diag_general/editar/%s/%s' % (codi, num))
                 return render(request, 'AnalisisDenticionMixta/moyerssuperior_editar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})  
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
