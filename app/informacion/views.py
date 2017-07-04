@@ -396,9 +396,21 @@ def EstadoGeneral_crear(request,codi,num):
 				 	form.save()
 				return HttpResponseRedirect('/tipo_perfil/nuevo/%s/%s/' %(codi,num))		
 			else:
-				form = EstadoGeneralForm(initial={'fichas':ids.id})
-				
-				return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
+				if int(num)>1:
+					form = EstadoGeneralForm(initial={'fichas':ids.id})	
+					fichass = fichas.objects.filter(cod_expediente=codi)
+					num_fichas = len(fichass)
+					for i in fichass:
+						numero = fichas.objects.get(cod_expediente=codi,numero=i.numero)
+						if estado_general.objects.filter(fichas_id=numero.id):
+							estado = estado_general.objects.get(fichas_id=numero.id)
+							form = EstadoGeneralForm(instance=estado)
+
+					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
+					
+				else:
+					form = EstadoGeneralForm(initial={'fichas':ids.id})		
+					return render(request, 'informacion/form_estadoGeneral.html', {'form':form,'codi': codi,'num':num})
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception as e:
