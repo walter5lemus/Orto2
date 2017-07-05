@@ -41,9 +41,9 @@ class Tipo_perfilForm(forms.ModelForm):
 			'tercio_superior': 'Tercio Superior',
 			'tercio_medio': 'Tercio Medio',
 			'tercio_inferior': 'Tercio Inferior',
-			'tamanoSonrisa': 'Tamano de Sonrisa',
+			'tamanoSonrisa': 'Tamaño de Sonrisa',
 			'grosorLabios': 'Grosor de labios',
-			'tamanoLabios': 'Tamano de labios',
+			'tamanoLabios': 'Tamaño de labios',
 			
 
 		}
@@ -51,20 +51,20 @@ class Tipo_perfilForm(forms.ModelForm):
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'frontal_facial': forms.Select(attrs={'class':'form-control'}),
-			'tipoPerfiltotal': forms.Select(attrs={'class':'form-control'}), 
-			'perfilTercio_inferior': forms.Select(attrs={'class':'form-control'}), 
-			'tipoSonrisa': forms.Select(attrs={'class':'form-control'}), 
-			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control'}),
+			'frontal_facial': forms.Select(attrs={'class':'form-control','min':1}),
+			'tipoPerfiltotal': forms.Select(attrs={'class':'form-control','min':1}), 
+			'perfilTercio_inferior': forms.Select(attrs={'class':'form-control','min':1}), 
+			'tipoSonrisa': forms.Select(attrs={'class':'form-control','min':1}), 
+			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control','min':1}),
 
-			'tipoNariz': forms.Select(attrs={'class':'form-control'}),
-			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control'}),
-			'tercio_superior': forms.NumberInput(attrs={'class':'form-control'}),
-			'tercio_medio': forms.NumberInput(attrs={'class':'form-control'}),
-			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control'}),
-			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control'}),
-			'grosorLabios':forms.Select(attrs={'class':'form-control'}),
-			'tamanoLabios': forms.Select(attrs={'class':'form-control'}),
+			'tipoNariz': forms.Select(attrs={'class':'form-control','min':1}),
+			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control','min':1}),
+			'tercio_superior': forms.NumberInput(attrs={'class':'form-control','min':1}),
+			'tercio_medio': forms.NumberInput(attrs={'class':'form-control','min':1}),
+			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control','min':1}),
+			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control','min':1}),
+			'grosorLabios':forms.Select(attrs={'class':'form-control','min':1}),
+			'tamanoLabios': forms.Select(attrs={'class':'form-control','min':1}),
 
 		}
 
@@ -109,9 +109,9 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 			'tercio_superior': 'Tercio Superior',
 			'tercio_medio': 'Tercio Medio',
 			'tercio_inferior': 'Tercio Inferior',
-			'tamanoSonrisa': 'Tamano de Sonrisa',
+			'tamanoSonrisa': 'Tamaño de Sonrisa',
 			'grosorLabios': 'Grosor de labios',
-			'tamanoLabios': 'Tamano de labios',
+			'tamanoLabios': 'Tamaño de labios',
 			
 
 		}

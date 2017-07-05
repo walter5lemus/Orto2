@@ -13,13 +13,13 @@ class aspectos_articulares(models.Model):
 	condilo_mand_der_alto = models.FloatField()
 	condilo_mand_der_ancho = models.FloatField()
 	condilo_mand_simetrico = models.IntegerField(choices=simetrico_choices, default=1)
-	condilo_mand_aspectos_observados = models.CharField(max_length=50)
+	condilo_mand_aspectos_observados = models.CharField(max_length=50, blank=True, null=True)
 	eminencia_izq = models.FloatField()
 	eminencia_der = models.FloatField()
 	eminencia_simetrico = models.IntegerField(choices=simetrico_choices, default=1)
-	eminencia_aspectos_observados = models.CharField(max_length=50)
+	eminencia_aspectos_observados = models.CharField(max_length=50, blank=True, null=True)
 	espacio_articular_simetrico = models.IntegerField(choices=simetrico_choices, default=1)
-	espacio_articular_aspectos_observados = models.CharField(max_length=50)
+	espacio_articular_aspectos_observados = models.CharField(max_length=50, blank=True, null=True)
 
 	def __unicode__(self):
 		return '{}'.format(self.fichas)
