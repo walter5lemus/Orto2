@@ -5,7 +5,7 @@
     {% load staticfiles %}
 
     {% block title %}
-    Nance
+    Análisis de Nance
     {% endblock %}
 
 
@@ -30,7 +30,17 @@
     	    }
             
     	</style>
+<script>
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())+parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())+parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())+parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));
+         $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())+parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())+parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())+parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()));
+         $('#maxilareden').val($('#id_ed_maxi').val()+"-"+$('#total1').val());
+         $('#maxilartotal').val($('#id_ed_maxi').val()-$('#total1').val());
 
+          $('#mandibulareden').val($('#id_ed_mand').val()+"-"+$('#total2').val());
+         $('#mandibulartotal').val($('#id_ed_mand').val()-$('#total2').val());
+
+
+    </script>
     {% endblock %}
 
 
@@ -121,6 +131,7 @@
                     <thead>
                         <tr>
                         	<th scope="col"></th>
+                            <th scope="col"></th>
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -223,12 +234,12 @@
                             <tr>
                                 <td><input id="maxilar" type="Texto" class="form-control"></td>
                                 <td><input id="maxilareden" type="Texto" class="form-control"></td>
-                                <td><input id="maxilartotal" type="Number" step="0.01" class="form-control"></td>
+                                <td><input id="maxilartotal" type="Number" step="0.000000000001" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td><input id="mandibular" type="Texto" class="form-control"></td>
                                 <td><input id="mandibulareden" type="Texto" class="form-control"></td>
-                                <td><input id="mandibulartotal" type="Number" step="0.01" class="form-control"></td>
+                                <td><input id="mandibulartotal" type="Number" step="0.000000000001" class="form-control"></td>
                             </tr>
                     </tbody>
                   
@@ -273,7 +284,10 @@
     </div>  
 
     <script>
-//alert({{max}});
+    
+     $('#total1').prop('readonly', true); 
+     $('#total2').prop('readonly', true); 
+
     for (var i = 0; i < {{max}}; i++) {
         
         $('#id_1tablas-'+i+'-fichas').val({{ids}});
@@ -301,5 +315,12 @@
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");
     
+    $('#total1').prop('readonly', true);
+    $('#total2').prop('readonly', true);
+
+    $('#maxilareden').prop('readonly', true);
+    $('#maxilartotal').prop('readonly', true);
+    $('#mandibulareden').prop('readonly', true);
+    $('#mandibulartotal').prop('readonly', true);
     </script>
     {% endblock %}

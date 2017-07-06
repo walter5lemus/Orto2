@@ -30,10 +30,10 @@ class nance_tablas(models.Model):
 
 class moyers_superior(models.Model):	
 
-	fichas = models.ForeignKey(fichas,null=True, blank=True, on_delete=models.CASCADE)
-	ed_izquierdo = models.FloatField(null=True, blank=True)
-	ed_derecho = models.FloatField(null=True, blank=True)
-	espacio_sup = models.FloatField(null=True, blank=True)
+	fichas = models.ForeignKey(fichas, on_delete=models.CASCADE)
+	ed_izquierdo = models.FloatField()
+	ed_derecho = models.FloatField()
+	espacio_sup = models.FloatField()
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -46,26 +46,26 @@ class pos(models.Model):
 
 class moyers_superior_ancho(models.Model):	
 
-	fichas = models.ForeignKey(fichas,null=True, blank=True, on_delete=models.CASCADE)
-	posicion = models.ForeignKey(pos,null=True, blank=True)
-	ancho_mesiodistal = models.FloatField(null=True, blank=True)
+	fichas = models.ForeignKey(fichas, on_delete=models.CASCADE)
+	posicion = models.ForeignKey(pos)
+	ancho_mesiodistal = models.FloatField()
 	
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class moyers_inferior(models.Model):
-	fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
-	ed_izquierdo = models.FloatField(null=True, blank=True)
-	ed_derecho = models.FloatField(null=True, blank=True)
-	espacio_inf = models.FloatField(null=True, blank=True)	
+	fichas = models.ForeignKey(fichas, on_delete=models.CASCADE)
+	ed_izquierdo = models.FloatField()
+	ed_derecho = models.FloatField()
+	espacio_inf = models.FloatField()	
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class moyers_inferior_ancho(models.Model):
-	fichas = models.ForeignKey(fichas, null=True, blank=True, on_delete=models.CASCADE)
-	posicion = models.ForeignKey(pos, null=True, blank=True)
-	ancho_mesiodistal = models.FloatField(null=True, blank=True)
+	fichas = models.ForeignKey(fichas,  on_delete=models.CASCADE)
+	posicion = models.ForeignKey(pos)
+	ancho_mesiodistal = models.FloatField()
 
 	def __str__(self):
 		return '{}'.format(self.fichas)

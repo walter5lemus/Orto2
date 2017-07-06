@@ -423,13 +423,13 @@ class RelacionSagitalForm(forms.ModelForm):
 
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
-			'molar_derecha': forms.Select(attrs={'class':'form-control'}),
-			'molar_izquierda': forms.Select(attrs={'class':'form-control'}),
-			'canina_derecha': forms.Select(attrs={'class':'form-control'}),
-			'canina_izquierda': forms.Select(attrs={'class':'form-control'}),
-			'plano_termina_recto': forms.Select(attrs={'class':'form-control'}),
-			'escalon_mesial': forms.Select(attrs={'class':'form-control'}),
-			'escalon_distal': forms.Select(attrs={'class':'form-control'}),
+			'molar_derecha': forms.Select(attrs={'class':'form-control','min':0}),
+			'molar_izquierda': forms.Select(attrs={'class':'form-control','min':0}),
+			'canina_derecha': forms.Select(attrs={'class':'form-control','min':0}),
+			'canina_izquierda': forms.Select(attrs={'class':'form-control','min':0}),
+			'plano_termina_recto': forms.Select(attrs={'class':'form-control','min':0}),
+			'escalon_mesial': forms.Select(attrs={'class':'form-control','min':0}),
+			'escalon_distal': forms.Select(attrs={'class':'form-control','min':0}),
 			'observaciones': forms.Textarea(attrs={'class':'form-control','rows':8, 'cols':3}),
 		}
 

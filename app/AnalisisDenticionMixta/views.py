@@ -40,7 +40,7 @@ def nance_crear(request,codi,num):
                                 form1.save()
                                 
                                 for form in formset:
-                                    print form
+                                    
                                     form.save()
                                 for form in formset2:
                                        form.save()
@@ -108,7 +108,6 @@ def nance_consultar(request, codi, num):
                 form1 = nance_generalForm_Consultar(request.POST, instance=nance_general1)
                 formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
                 formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
-
                 return redirect('/analisis_denticion_mixta/moyersinferior/consultar/%s/%s/' %(codi,num))            
             return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
@@ -136,7 +135,6 @@ def nance_editar(request, codi, num):
                     if (form1.is_valid() and formset.is_valid() and formset2.is_valid()):
                         form1.save()
                         for form in formset:
-                            print form
                             form.save()
                         for form in formset2:
                                form.save()
@@ -284,9 +282,7 @@ def moyersinf_view(request, codi, num):
                     formset = moyersinfFormSet(request.POST)
                     if (form1.is_valid() and formset.is_valid()):
                         form1.save()
-
                         for form in formset:
-                            print form
                             form.save()
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)

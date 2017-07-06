@@ -932,3 +932,340 @@ $('#id_2tablas-9-mdm').change(function() {
 $('#id_2tablas-9-mprx').change(function() {
         $('#id_2tablas-9-multiplicacion').val($('#id_2tablas-9-mdm').val()*$('#id_2tablas-9-mprx').val()); 
 });
+
+//-------------------------Tabla 1------------------------------------------
+
+$('#id_1tablas-0-mdm').change(function() {
+        $('#id_1tablas-0-multiplicacion').val($('#id_1tablas-0-mdm').val()*$('#id_1tablas-0-mprx').val());
+        $('#id_1tablas-0-valor_x').val($('#id_1tablas-0-multiplicacion').val()/$('#id_1tablas-0-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+
+});
+$('#id_1tablas-0-mprx').change(function() {
+        $('#id_1tablas-0-multiplicacion').val($('#id_1tablas-0-mdm').val()*$('#id_1tablas-0-mprx').val());
+        $('#id_1tablas-0-valor_x').val($('#id_1tablas-0-multiplicacion').val()/$('#id_1tablas-0-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));  
+});
+$('#id_1tablas-1-mdm').change(function() {
+        $('#id_1tablas-1-multiplicacion').val($('#id_1tablas-1-mdm').val()*$('#id_1tablas-1-mprx').val()); 
+        $('#id_1tablas-1-valor_x').val($('#id_1tablas-1-multiplicacion').val()/$('#id_1tablas-1-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-1-mprx').change(function() {
+        $('#id_1tablas-1-multiplicacion').val($('#id_1tablas-1-mdm').val()*$('#id_1tablas-1-mprx').val()); 
+        $('#id_1tablas-1-valor_x').val($('#id_1tablas-1-multiplicacion').val()/$('#id_1tablas-1-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-2-mdm').change(function() {
+        $('#id_1tablas-2-multiplicacion').val($('#id_1tablas-2-mdm').val()*$('#id_1tablas-2-mprx').val()); 
+        $('#id_1tablas-2-valor_x').val($('#id_1tablas-2-multiplicacion').val()/$('#id_1tablas-2-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-2-mprx').change(function() {
+        $('#id_1tablas-2-multiplicacion').val($('#id_1tablas-2-mdm').val()*$('#id_1tablas-2-mprx').val()); 
+        $('#id_1tablas-2-valor_x').val($('#id_1tablas-2-multiplicacion').val()/$('#id_1tablas-2-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-3-mdm').change(function() {
+        $('#id_1tablas-3-multiplicacion').val($('#id_1tablas-3-mdm').val()*$('#id_1tablas-3-mprx').val()); 
+        $('#id_1tablas-3-valor_x').val($('#id_1tablas-3-multiplicacion').val()/$('#id_1tablas-3-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-3-mprx').change(function() {
+        $('#id_1tablas-3-multiplicacion').val($('#id_1tablas-3-mdm').val()*$('#id_1tablas-3-mprx').val()); 
+        $('#id_1tablas-3-valor_x').val($('#id_1tablas-3-multiplicacion').val()/$('#id_1tablas-3-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-4-mdm').change(function() {
+        $('#id_1tablas-4-multiplicacion').val($('#id_1tablas-4-mdm').val()*$('#id_1tablas-4-mprx').val()); 
+        $('#id_1tablas-4-valor_x').val($('#id_1tablas-4-multiplicacion').val()/$('#id_1tablas-4-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-4-mprx').change(function() {
+        $('#id_1tablas-4-multiplicacion').val($('#id_1tablas-4-mdm').val()*$('#id_1tablas-4-mprx').val()); 
+        $('#id_1tablas-4-valor_x').val($('#id_1tablas-4-multiplicacion').val()/$('#id_1tablas-4-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-5-mdm').change(function() {
+        $('#id_1tablas-5-multiplicacion').val($('#id_1tablas-5-mdm').val()*$('#id_1tablas-5-mprx').val()); 
+        $('#id_1tablas-5-valor_x').val($('#id_1tablas-5-multiplicacion').val()/$('#id_1tablas-5-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-5-mprx').change(function() {
+        $('#id_1tablas-5-multiplicacion').val($('#id_1tablas-5-mdm').val()*$('#id_1tablas-5-mprx').val()); 
+        $('#id_1tablas-5-valor_x').val($('#id_1tablas-5-multiplicacion').val()/$('#id_1tablas-5-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-6-mdm').change(function() {
+        $('#id_1tablas-6-multiplicacion').val($('#id_1tablas-6-mdm').val()*$('#id_1tablas-6-mprx').val()); 
+        $('#id_1tablas-6-valor_x').val($('#id_1tablas-6-multiplicacion').val()/$('#id_1tablas-6-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-6-mprx').change(function() {
+        $('#id_1tablas-6-multiplicacion').val($('#id_1tablas-6-mdm').val()*$('#id_1tablas-6-mprx').val());
+        $('#id_1tablas-6-valor_x').val($('#id_1tablas-6-multiplicacion').val()/$('#id_1tablas-6-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));  
+});
+$('#id_1tablas-7-mdm').change(function() {
+        $('#id_1tablas-7-multiplicacion').val($('#id_1tablas-7-mdm').val()*$('#id_1tablas-7-mprx').val());
+        $('#id_1tablas-7-valor_x').val($('#id_1tablas-7-multiplicacion').val()/$('#id_1tablas-7-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));  
+});
+$('#id_1tablas-7-mprx').change(function() {
+        $('#id_1tablas-7-multiplicacion').val($('#id_1tablas-7-mdm').val()*$('#id_1tablas-7-mprx').val()); 
+        $('#id_1tablas-7-valor_x').val($('#id_1tablas-7-multiplicacion').val()/$('#id_1tablas-7-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-8-mdm').change(function() {
+        $('#id_1tablas-8-multiplicacion').val($('#id_1tablas-8-mdm').val()*$('#id_1tablas-8-mprx').val());
+        $('#id_1tablas-8-valor_x').val($('#id_1tablas-8-multiplicacion').val()/$('#id_1tablas-8-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));  
+});
+$('#id_1tablas-8-mprx').change(function() {
+        $('#id_1tablas-8-multiplicacion').val($('#id_1tablas-8-mdm').val()*$('#id_1tablas-8-mprx').val()); 
+        $('#id_1tablas-8-valor_x').val($('#id_1tablas-8-multiplicacion').val()/$('#id_1tablas-8-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-9-mdm').change(function() {
+        $('#id_1tablas-9-multiplicacion').val($('#id_1tablas-9-mdm').val()*$('#id_1tablas-9-mprx').val()); 
+        $('#id_1tablas-9-valor_x').val($('#id_1tablas-9-multiplicacion').val()/$('#id_1tablas-9-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())); 
+});
+$('#id_1tablas-9-mprx').change(function() {
+        $('#id_1tablas-9-multiplicacion').val($('#id_1tablas-9-mdm').val()*$('#id_1tablas-9-mprx').val());
+        $('#id_1tablas-9-valor_x').val($('#id_1tablas-9-multiplicacion').val()/$('#id_1tablas-9-mdrx').val());
+        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())
+        +parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())
+        +parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())
+        +parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));  
+});
+
+//-------------------------Tabla 2  ------------------------------------------
+
+$('#id_2tablas-0-mdm').change(function() {
+        $('#id_2tablas-0-multiplicacion').val($('#id_2tablas-0-mdm').val()*$('#id_2tablas-0-mprx').val());
+
+        $('#id_2tablas-0-valor_x').val($('#id_2tablas-0-multiplicacion').val()/$('#id_2tablas-0-mdrx').val()); 
+
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+        $('#id_ed_mand').change(function() {
+        $('#mandibulareden').val($('#id_ed_mand').val()+"-"+$('#total2').val());
+        $('#mandibulartotal').val($('#id_ed_mand').val()-$('#total2').val());
+    });
+});
+$('#id_2tablas-0-mprx').change(function() {
+        $('#id_2tablas-0-multiplicacion').val($('#id_2tablas-0-mdm').val()*$('#id_2tablas-0-mprx').val());
+        $('#id_2tablas-0-valor_x').val($('#id_2tablas-0-multiplicacion').val()/$('#id_2tablas-0-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()));  
+        $('#id_ed_mand').change(function() {
+        $('#mandibulareden').val($('#id_ed_mand').val()+"-"+$('#total2').val());
+        $('#mandibulartotal').val($('#id_ed_mand').val()-$('#total2').val());
+    });
+});
+$('#id_2tablas-1-mdm').change(function() {
+        $('#id_2tablas-1-multiplicacion').val($('#id_2tablas-1-mdm').val()*$('#id_2tablas-1-mprx').val());
+        $('#id_2tablas-1-valor_x').val($('#id_2tablas-1-multiplicacion').val()/$('#id_2tablas-1-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()));  
+});
+$('#id_2tablas-1-mprx').change(function() {
+        $('#id_2tablas-1-multiplicacion').val($('#id_2tablas-1-mdm').val()*$('#id_2tablas-1-mprx').val()); 
+        $('#id_2tablas-1-valor_x').val($('#id_2tablas-1-multiplicacion').val()/$('#id_2tablas-1-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-2-mdm').change(function() {
+        $('#id_2tablas-2-multiplicacion').val($('#id_2tablas-2-mdm').val()*$('#id_2tablas-2-mprx').val()); 
+        $('#id_2tablas-2-valor_x').val($('#id_2tablas-2-multiplicacion').val()/$('#id_2tablas-2-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-2-mprx').change(function() {
+        $('#id_2tablas-2-multiplicacion').val($('#id_2tablas-2-mdm').val()*$('#id_2tablas-2-mprx').val()); 
+        $('#id_2tablas-2-valor_x').val($('#id_2tablas-2-multiplicacion').val()/$('#id_2tablas-2-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-3-mdm').change(function() {
+        $('#id_2tablas-3-multiplicacion').val($('#id_2tablas-3-mdm').val()*$('#id_2tablas-3-mprx').val()); 
+        $('#id_2tablas-3-valor_x').val($('#id_2tablas-3-multiplicacion').val()/$('#id_2tablas-3-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-3-mprx').change(function() {
+        $('#id_2tablas-3-multiplicacion').val($('#id_2tablas-3-mdm').val()*$('#id_2tablas-3-mprx').val()); 
+        $('#id_2tablas-3-valor_x').val($('#id_2tablas-3-multiplicacion').val()/$('#id_2tablas-3-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-4-mdm').change(function() {
+        $('#id_2tablas-4-multiplicacion').val($('#id_2tablas-4-mdm').val()*$('#id_2tablas-4-mprx').val()); 
+        $('#id_2tablas-4-valor_x').val($('#id_2tablas-4-multiplicacion').val()/$('#id_2tablas-4-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-4-mprx').change(function() {
+        $('#id_2tablas-4-multiplicacion').val($('#id_2tablas-4-mdm').val()*$('#id_2tablas-4-mprx').val()); 
+        $('#id_2tablas-4-valor_x').val($('#id_2tablas-4-multiplicacion').val()/$('#id_2tablas-4-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-5-mdm').change(function() {
+        $('#id_2tablas-5-multiplicacion').val($('#id_2tablas-5-mdm').val()*$('#id_2tablas-5-mprx').val()); 
+        $('#id_2tablas-5-valor_x').val($('#id_2tablas-5-multiplicacion').val()/$('#id_2tablas-5-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-5-mprx').change(function() {
+        $('#id_2tablas-5-multiplicacion').val($('#id_2tablas-5-mdm').val()*$('#id_2tablas-5-mprx').val()); 
+        $('#id_2tablas-5-valor_x').val($('#id_2tablas-5-multiplicacion').val()/$('#id_2tablas-5-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-6-mdm').change(function() {
+        $('#id_2tablas-6-multiplicacion').val($('#id_2tablas-6-mdm').val()*$('#id_2tablas-6-mprx').val()); 
+        $('#id_2tablas-6-valor_x').val($('#id_2tablas-6-multiplicacion').val()/$('#id_2tablas-6-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-6-mprx').change(function() {
+        $('#id_2tablas-6-multiplicacion').val($('#id_2tablas-6-mdm').val()*$('#id_2tablas-6-mprx').val()); 
+        $('#id_2tablas-6-valor_x').val($('#id_2tablas-6-multiplicacion').val()/$('#id_2tablas-6-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-7-mdm').change(function() {
+        $('#id_2tablas-7-multiplicacion').val($('#id_2tablas-7-mdm').val()*$('#id_2tablas-7-mprx').val()); 
+        $('#id_2tablas-7-valor_x').val($('#id_2tablas-7-multiplicacion').val()/$('#id_2tablas-7-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-7-mprx').change(function() {
+        $('#id_2tablas-7-multiplicacion').val($('#id_2tablas-7-mdm').val()*$('#id_2tablas-7-mprx').val()); 
+        $('#id_2tablas-7-valor_x').val($('#id_2tablas-7-multiplicacion').val()/$('#id_2tablas-7-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-8-mdm').change(function() {
+        $('#id_2tablas-8-multiplicacion').val($('#id_2tablas-8-mdm').val()*$('#id_2tablas-8-mprx').val()); 
+        $('#id_2tablas-8-valor_x').val($('#id_2tablas-8-multiplicacion').val()/$('#id_2tablas-8-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-8-mprx').change(function() {
+        $('#id_2tablas-8-multiplicacion').val($('#id_2tablas-8-mdm').val()*$('#id_2tablas-8-mprx').val()); 
+        $('#id_2tablas-8-valor_x').val($('#id_2tablas-8-multiplicacion').val()/$('#id_2tablas-8-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-9-mdm').change(function() {
+        $('#id_2tablas-9-multiplicacion').val($('#id_2tablas-9-mdm').val()*$('#id_2tablas-9-mprx').val()); 
+        $('#id_2tablas-9-valor_x').val($('#id_2tablas-9-multiplicacion').val()/$('#id_2tablas-9-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});
+$('#id_2tablas-9-mprx').change(function() {
+        $('#id_2tablas-9-multiplicacion').val($('#id_2tablas-9-mdm').val()*$('#id_2tablas-9-mprx').val()); 
+        $('#id_2tablas-9-valor_x').val($('#id_2tablas-9-multiplicacion').val()/$('#id_2tablas-9-mdrx').val());
+        $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())
+        +parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())
+        +parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())
+        +parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val())); 
+});

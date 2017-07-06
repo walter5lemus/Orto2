@@ -22,8 +22,8 @@ class nance_generalForm(forms.ModelForm):
 
         widgets={
             'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
-            'ed_maxi': forms.NumberInput(attrs={'class':'form-control','min':1}),
-            'ed_mand': forms.NumberInput(attrs={'class':'form-control','min':1}),
+            'ed_maxi': forms.NumberInput(attrs={'class':'form-control','min':0}),
+            'ed_mand': forms.NumberInput(attrs={'class':'form-control','min':0}),
         }
 
 class nance_generalForm_Consultar(forms.ModelForm):
@@ -44,8 +44,8 @@ class nance_generalForm_Consultar(forms.ModelForm):
 
         widgets={
             'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
-            'ed_maxi': forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'ed_mand': forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
+            'ed_maxi': forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'ed_mand': forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
         }
 
 class nance_tabla(forms.ModelForm):
@@ -84,11 +84,11 @@ class nance_tabla(forms.ModelForm):
             'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
             'tabla':forms.HiddenInput(attrs={'class':'form-control'}),
             'posicion':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'valor_x':forms.NumberInput(attrs={'class':'form-control x','required':True,'min':1}),
+            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'valor_x':forms.NumberInput(attrs={'class':'form-control x','required':True,'min':0}),
         }
 
 class nance_tabla_consultar(forms.ModelForm):
@@ -124,11 +124,11 @@ class nance_tabla_consultar(forms.ModelForm):
             'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
             'tabla':forms.HiddenInput(attrs={'class':'form-control'}),
             'posicion':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':1}),
-            'valor_x':forms.NumberInput(attrs={'class':'form-control x','readonly':True,'min':1}),
+            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0}),
+            'valor_x':forms.NumberInput(attrs={'class':'form-control x','readonly':True,'min':0}),
     }        
 
 
