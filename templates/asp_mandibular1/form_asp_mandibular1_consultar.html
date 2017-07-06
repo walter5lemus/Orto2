@@ -1,7 +1,11 @@
 {% extends 'base/base_consultar.html' %}
 
+{% block title %}
+Aspectos Mandibulares
+{% endblock %}
+
 {% block header %}
-<br><br>
+<br><div class="mensaje" id="mensaje"></div>
 <center><h1>Aspectos Mandibulares</h1></center>
 {% endblock %}
 
@@ -29,9 +33,6 @@
 
 
 <div class="row">
-<div class="row">
-        <div class="mensaje" id="mensaje"></div>
-</div>
 	<div class="col-md-3 col-md-offset-0">
 		<div class="form-group">
 			{{form.fichas}}

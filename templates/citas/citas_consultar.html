@@ -1,5 +1,7 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_consultar.html' %}
+
 {% load staticfiles %}
+
 {% block title %}
 Control de Citas
 {% endblock %}
@@ -9,34 +11,32 @@ Control de Citas
 
 
 {% block navbar %}
-		<nav class="navbar navbar-inverse">
-  		<div class="container-fluid">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-    		<div class="navbar-header">
-     			 <button class="navbar-toggle collapsed" type="button" data-toggle="modal" data-target="#bs-example-navbar-collapse-2">
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-      			</button>
-      			<a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span> Home</a>
-    		</div>
+      <a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span></a>
 
-    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      			
-      			<ul class="nav navbar-nav navbar-right">
-       				<li class="active">
-           				<a href="{%url 'logout' %}">Cerrar Sesión</a>
-       				</li> 
-      			</ul>
+      	<ul class="nav navbar-nav navbar-right">
+       	  <li class="active">
+           	<a style="background-color: green" href="{%url 'logout' %}">Cerrar Sesión</a>
+       	  </li> 
+      	</ul>
 
-      			<ul class="nav navbar-nav navbar-right">
-        			<div class="col-md-3">
-        				<h6 style="color:white">Hola, <B>{{user}}</B></h6>
-        			</div>
-      			</ul>
+      	<ul class="nav navbar-nav navbar-right">
+        	<div class="col-md-3">
+        		<h6 style="color:white">Hola, <B>{{user}}</B></h6>
+        	</div>
+      	</ul>
 
-    		</div>
-  		 </div>
-	  </nav>
+     </div>
+  </div>
+ </nav>
 {% endblock %} 
 
 
@@ -117,7 +117,7 @@ Control de Citas
 
 <br><br><br>
 <div class="col-md-10 col-md-offset-1">
-<div class="panel panel-primary">
+<div class="panel panel-success">
   <div class="panel-heading">
     <h3 class="panel-title"></h3>
   </div>
@@ -399,7 +399,7 @@ $(function() {
 									     var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
 									    tabla += '<table class="table table-striped table-hover">';
 						                tabla += '<thead>';
-						                tabla += '<tr class = "info">';
+						                tabla += '<tr class = "success">';
 						                tabla += '<th>N° de Control</th><th>Fecha de Cita</th><th>Aspectos Observados</th><th>Fecha proxima cita</th><th>Resultados Esperados</th><th>Autorización del tutor</th><th>Tutor</th>';		
 						                tabla += '</tr>';
 						                tabla += '</thead>';

@@ -410,15 +410,26 @@
                 </div>
             {% endfor %}
         {% endif %}
-        </div>
+    </div>
+
 
 <div class="row">
     <form method="POST" action="">
-    <center><h3>Examen de Dentición - Parte 1</h3></center>
-    {% csrf_token %} 
-<div class="mensaje" id="mensaje"></div>
+
+    <div class="mensaje" id="mensaje"></div>
+    <center><h1>Examen de Dentición</h1></center>
+    <center><h2>Parte I</h2></center>
+    {% csrf_token %}
+
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
     <div class="col-md-5">
-        <center>
+        <center><br>
         <div class="form-group" style="width:200px">
             {{form1.fichas}}
             <label for="{{form1.tipo.name}}">{{form1.tipo.label}}</label>  
@@ -516,11 +527,13 @@
                 </div>
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
-
     </div>
+
+
+    <!-- Odontograma -->
     <div class="col-md-7">
         <center>
-        <br/><br/><br/><br/>
+        <br/>
             <h4>Odontograma</h4>
             <br/>
             <div id="svgselect" style="width: 610px; height: 230px;"> <!-- background-color:red -->
@@ -1013,31 +1026,37 @@
         </div> 
     </center>   
     </div>
+  </div><!-- fin bootstrap -->
+</div>
 
-</div><!-- fin bootstrap -->
 
-    <div class="col-md-8 col-md-offset-3">
+    <br>
+    <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-        <br><br>
-            <div class="col-md-3 col-md-offset-1">
-              <a href="/tipo_perfil/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
+            
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/tipo_perfil/consultar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
             <div class="col-md-3 col-md-offset-1">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
+        
         </div>
         <br><br>
-    </div>  
-    </form>
-</div>
+    </div>
 
     <!-- Barra de progreso -->
     <br><br>
     <div class="col-md-10 col-md-offset-1">
-    <div class="progress">
-        <div class="progress-bar" style="width: 24%;"></div>
+        <div class="progress">
+         <div class="progress-bar progress-bar-success" style="width: 24%"></div>
+        </div>
     </div>
-    </div>
+</form>
+</div>
+
+
 
     <script type="text/javascript">
         if ({{completada}}==0){

@@ -20,7 +20,8 @@
 <form method="post">
 	{% csrf_token %}
 
-<br><br>
+<br>
+<div class="mensaje" id="mensaje"></div>
 <h1><center>Tipo de Perfil</center></h1>
 <div class="row">
 	<div class="col-md-6 col-md-offset-1">
@@ -109,10 +110,16 @@
 			</div>
 		</div>
 
-		<div class="col-md-4 col-md-offset-1">
+		<div class="col-md-5 col-md-offset-1">
 			<div class="form-group">
-				<label for="{{form.angulo_Naso_labial.name}}">{{form.angulo_Naso_labial.label}}</label>
-				{{form.angulo_Naso_labial}}
+				<div class="col-md-6">
+					<label for="{{form.angulo_Naso_labial.name}}">{{form.angulo_Naso_labial.label}}</label>
+					{{form.angulo_Naso_labial}} 
+				</div>
+
+				<div class="col-md-1 ">
+					<br><h4>mm</h4>
+				</div>
 			</div>
 			<br>
 		</div>
@@ -300,7 +307,30 @@
   			<div class="progress-bar progress-bar-success" style="width: 18%;"></div>
 		</div>
 		</div>
-
-
 	</form>
+
+
+
+
+<!-- Mensaje -->
+ <script type="text/javascript">
+        if ({{completada}}==0){
+        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+        }else{
+            if ({{completada}}==1){
+                $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
+            }else{
+                if ({{completada}}==2){
+                    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
+                }else{
+                    if ({{completada}}==3){
+                        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
+                    }
+                    
+                }
+            }
+        }
+ </script>
+
+
 {% endblock %}

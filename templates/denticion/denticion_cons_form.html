@@ -9,6 +9,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
     <script src="{% static 'js/jquery.formset.js' %}"></script>
 
+    <script type="text/javascript">
+        $(function() {
+            a = document.getElementById("id_form-TOTAL_FORMS").value;
+            a1 = a - 1  
+            $('#id_form-'+a1+'-fichas').val({{ids}});                    
+        });
+
+        $(function() {
+            $('#registro_mordidas tbody tr').formset({
+            })
+
+            $('.add-row').click(function(){
+                for (i = 0; i < {{max}}; i++) {
+                    $('#id_form-'+i+'-fichas').val({{ids}});
+                }
+            });            
+        })
+    </script>
+
     <style type="text/css">
         .add-row {
             padding-left:18px;
@@ -35,6 +54,7 @@
 
 {% block content %}
 <div class="row">
+<br><br><br>
     <form method="POST" action="">
     {% csrf_token %} 
 
@@ -42,6 +62,8 @@
     <div class="col-md-2">
 
         {{form1.fichas}}
+
+
 
         <center>
         <div class="form-group" style="width:100px">
@@ -95,6 +117,7 @@
                 <tr>
                     <th scope="col">Cuadrante superior</th>
                     <th scope="col">Pieza superior</th>
+                    <th scope="col"></th>
                     <th scope="col">Cuadrante inferior</th>
                     <th scope="col">Pieza inferior</th>
                 </tr>
@@ -105,6 +128,7 @@
                 <tr>
                     <td>{{ form.fichas }} {{ form.cuad_superior }}</td>
                     <td>{{ form.pieza_superior }}</td>
+                    <td></td>
                     <td>{{ form.cuad_inferior }}</td>
                     <td>{{ form.pieza_inferior }}</td>
                     <td></td>
@@ -569,18 +593,19 @@
     </div>
 </div>
 <div class="row"></div><!-- fin bootstrap -->
-    
-    
+
+
+
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-
-            <br><br><br>
-            <div class="col-md-3 col-md-offset-4">
-                <center><button type="submit" class="btn btn-success btn-block"> Siguiente </button></center>
+            <div class="col-md-3 col-md-offset-1">
+              <a href="/denticion/aspectos/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
-            <br><br>
-            
+            <div class="col-md-3 col-md-offset-2">
+              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
         </div>
+        <br><br>
     </div>
 
     </form>
@@ -595,5 +620,47 @@
         </div>
         </div>
 
+
+
+
+
+
+<script type="text/javascript">
+    t=0
+    $('polygon').click(function (evt) {
+        var sector = $(evt.target); 
+
+        palabra = sector.parent().attr('id')
+        b = document.getElementById("id_form-TOTAL_FORMS").value;
+        b1 = b - 1
+            
+        var n = palabra.length;
+        if(n==3 && t==0)
+        {
+            cuadrante1 = palabra[1]
+            pieza1 = palabra[2]
+
+            $('#id_form-'+b1+'-cuad_superior').val( cuadrante1 );
+            $('#id_form-'+b1+'-pieza_superior').val( pieza1 );
+
+            t=1
+        }
+        else
+        {
+            cuadrante2 = palabra[1]
+            pieza2 = palabra[2]
+
+            if(cuadrante1==cuadrante2){
+                alert("El cuadrante 2 no puede ser el mismo que el cuadrante 1");
+            }
+            else
+            {                       
+                $('#id_form-'+b1+'-cuad_inferior').val( cuadrante2 );
+                $('#id_form-'+b1+'-pieza_inferior').val( pieza2 );
+                t=0        
+            }
+        }
+    });
+</script>
 
 {% endblock %}

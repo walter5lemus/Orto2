@@ -49,10 +49,16 @@
 	}
 </style>
 
-
+<br>
 <h2><center>Consultar Fichas</center></h2>
 	<div class="col-md-12">
-	<br><br>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-1">
 				<label for="nombre_paciente">Nombre del paciente</label>
@@ -81,22 +87,20 @@
 		</div>
 	</div>
 	
-	<div class="row ocultar" >
-			<div class="col-md-5 col-md-offset-3" >
-			<br><br>
+	<div class="row ocultar">
+			<center>
 				<div class="form-group">
-					<div class="col-md-6">
+				  <span>
+					<div class="col-md-2 col-md-offset-4">
 						<label for="codigo"> N° de ficha a consultar </label>
 						<select id="select_fichas" class="form-control"></select>
 					</div>
-					<div class="col-md-4">
-						<button class="btn btn-primary" id="boton_consulta" style="margin-top: 25px;" id="consultar_ficha" onclick="redireccionar()">Consultar</button>
-					<br><br></div>
-					
+					<div class="col-md-2">
+						<button class="btn btn-primary btn-block" id="boton_consulta" style="margin-top: 25px;" id="consultar_ficha" onclick="redireccionar()">Consultar</button>
+					</div>
+				  </span>
 				</div>
-				
-			</div>
-
+			</center>
 	</div>
 
 
@@ -282,11 +286,13 @@ function redireccionar(){
 	window.location="/informacion/motivo_consultas/consultar/"+codigo+"/"+num;
 }
 
-
 </script>
 
- 	<div class="col-md-2 col-md-offset-8">
- 		<br><br>
+	<br>
+  </div>
+</div> <!-- Final Panel -->
+
+ 	<div class="col-md-2 col-md-offset-9">
 		<a class="btn btn-warning btn-block" href="/home/">Regresar</a>
 	</div>
 

@@ -36,7 +36,7 @@
 
 
     {% block content %}
-    <br><br>
+    <br><div class="mensaje" id="mensaje"></div>
     <h1><center>Analisis de Espacio de la Denticion Mixta</center></h1>
     <h2><center>Analisis de Nance</center></h2>
 
@@ -55,26 +55,23 @@
                 <label for="ficha">N° de Ficha</label>  
                 <input id="ficha" class="form-control" type="text" disabled="True">
             </div>
-            <br>
         </div>
-        <br>
     </div>
 
 
 
 
 <div class="analisis_nance">
-            
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-12 col-md-offset-0">
     <!-- <h5>Nance</h5> -->
 
-            <form method="POST" action="">
-                {% csrf_token %}
-                 {{ formset.management_form }}      
-                 {{form1.fichas}} 
+    <form method="POST" action="">
+     {% csrf_token %}
+     {{ formset.management_form }}      
+     {{form1.fichas}} 
 
 
-    <br><br><br>
+    <br>
     <div class="col-md-10 col-md-offset-1">
                 
         <div class="panel panel-success">
@@ -83,9 +80,6 @@
           </div>
 
          <div class="panel-body">
-
-        <div class="mensaje" id="mensaje"></div>
-
          <div class="form-group">
             <div class="col-md-3 col-md-offset-1">
                 <label for="{{form1.ed_maxi.name}}">{{form1.ed_maxi.label}}</label> 
@@ -107,13 +101,17 @@
          </div>
          </div>
         </div>
-        <br><br>
     </div>
     {{form1.total}}
     {{form1.total2}}  
- 
 
 
+    <br><br><br><br><br><br><br><br>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
 
             <div class="row">
                 <div class="col-md-8 col-md-offset-0">
@@ -238,14 +236,13 @@
                 </table>  
             </div>
 
-
-
+    </div>
+</div>
 
   
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             
-            <br><br>
             <div class="col-md-3 col-md-offset-2">
               <a href="/diag_cefalo/consultar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
             </div> 

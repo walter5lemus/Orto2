@@ -53,33 +53,41 @@
 	}
 </style>
 
+
+
 	<!-- Titulo e ingreso de expediente -->
+<br>
+<center>
+	<h2>Generar Informes</h2>
+</center>
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
 	<div class="col-md-12">
-	    <br><br>
 		<div class="form-group">
-
-			<center>
-			<h1><p class="text-primary">Generar Informes</p></h1>
-			</center>
-
-			<br>
 			<div class="col-md-5 col-md-offset-1">
-				<div class="form-group has-success has-feedback"" role="form">
+				<div class="form-group has-feedback"" role="form">
 				    <label class="control-label" for="inputWarning">Nombre del paciente</label>
-					<input type="search" class="form-control " id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" autofocus >
-					<span class="glyphicon glyphicon-search form-control-feedback"></span>
-					<datalist id="id_listanombres"></datalist>
+					<div class="form-group has-success has-feedback"" role="form">
+						<input type="search" class="form-control" id="id_nombre_paciente" placeholder="EJ. Juan Perez" name="nombre_paciente" list="id_listanombres" autofocus >
+						<span class="glyphicon glyphicon-search form-control-feedback"></span>
+						<datalist id="id_listanombres"></datalist>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="col-md-7 col-md-offset-3">
-					<div class="form-group has-success has-feedback"" role="form">
+					<div class="form-group has-feedback"" role="form">
 						<label class="control-label" for="inputWarning">Codigo del Expediente</label>
 						<div class="form-group has-success has-feedback"" role="form">
 							<input type="search" class="form-control " id="id_codigo_expediente2" placeholder="EJ. 0001-17" name="codigo_paciente" list="id_listacodigo">
 							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 							<datalist id="id_listacodigo">
-							
 							</datalist></div>
 						</div>
 					</div>
@@ -126,13 +134,19 @@
 	  </div>
 
 	  	<ul class="pager">
-       		<button class="btn btn-primary btn-lg" style="margin-top: 25px;" onclick="redireccionar()"><span class="glyphicon glyphicon-list-alt"></span> Reporte Diagnostico</button>
+       		<button class="btn btn-primary" style="margin-top: 25px;" onclick="redireccionar()"><span class="glyphicon glyphicon-list-alt"></span> Reporte Diagnostico</button>
 		</ul>
 
-	<!-- 	<ul class="pager">
-       		<a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Home</a>      
-		</ul>
-	</div> -->
+
+  </div>
+</div> <!-- Final Panel -->
+
+ 	<div class="col-md-2 col-md-offset-9">
+ 		<br>
+		<a class="btn btn-warning btn-block" href="/home/">Regresar</a>
+		<br>
+	</div>
+
 
 
 
