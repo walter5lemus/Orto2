@@ -11,7 +11,6 @@ class diagGeneralForm(forms.ModelForm):
 		model = diagnostico_general
 
 		fields = [
-			#'cod_expediente',
 			'fichas',
 
 			'diagnostico_ortodontico_general', 
@@ -22,7 +21,6 @@ class diagGeneralForm(forms.ModelForm):
 		]
 
 		labels = {
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
 			'diagnostico_ortodontico_general': "Diagnostico Ortodontico General", 
@@ -33,7 +31,6 @@ class diagGeneralForm(forms.ModelForm):
 		}
 
 		widgets = {
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
 			'diagnostico_ortodontico_general':forms.Textarea(attrs={'class':'form-control', 'rows':4}),
@@ -51,7 +48,6 @@ class diagGeneralForm_consultar(forms.ModelForm):
 		model = diagnostico_general
 
 		fields = [
-			#'cod_expediente',
 			'fichas',
 
 			'diagnostico_ortodontico_general', 
@@ -62,7 +58,6 @@ class diagGeneralForm_consultar(forms.ModelForm):
 		]
 
 		labels = {
-			#'cod_expediente': 'Codigo expediente',
 			'fichas': 'Numero de Ficha',
 
 			'diagnostico_ortodontico_general': "Diagnostico Ortodontico General", 
@@ -73,7 +68,6 @@ class diagGeneralForm_consultar(forms.ModelForm):
 		}
 
 		widgets = {
-			#'cod_expediente': forms.Select(attrs={'class':'form-control'}),
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
 			'diagnostico_ortodontico_general':forms.Textarea(attrs={'class':'form-control', 'rows':4,'readonly':True}),

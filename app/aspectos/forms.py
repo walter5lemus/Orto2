@@ -496,9 +496,9 @@ class FuncionMandibularForm(forms.ModelForm):
 
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
-			'apertura': forms.NumberInput(attrs={'class':'form-control','min':0}),
-			'desv_afmp_derecho': forms.NumberInput(attrs={'class':'form-control','min':0}),
-			'desv_afmp_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0}),
+			'apertura': forms.NumberInput(attrs={'class':'form-control','min':0,'max': 2147483647}),
+			'desv_afmp_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max': 2147483647}),
+			'desv_afmp_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max': 2147483647}),
 			'signos_sintomas_atm': forms.Textarea(attrs={'class':'form-control'}),
 		}
 

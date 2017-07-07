@@ -324,5 +324,19 @@
     $('#mandibulareden').prop('readonly', true);
     $('#mandibulartotal').prop('readonly', true);
     
+
+     $(".form-control").change(function(){
+        $("input[type=number]").each(function(){
+          var valor = parseFloat($(this).val()).toFixed(2);
+          $(this).val(valor);
+        })
+    });
+
+         $(".form-control").blur(function(){
+        $("input[type=number]").each(function(){
+          var valor = parseFloat($(this).val()).toFixed(2);
+          $(this).val(valor);
+        })
+    });
     </script>
     {% endblock %}

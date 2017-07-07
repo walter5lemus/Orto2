@@ -31,8 +31,8 @@
             
     	</style>
 <script>
-        $('#total1').val(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())+parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())+parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())+parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val()));
-         $('#total2').val(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())+parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())+parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())+parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()));
+        $('#total1').val(parseFloat(parseFloat($('#id_1tablas-0-valor_x').val())+parseFloat($('#id_1tablas-1-valor_x').val())+parseFloat($('#id_1tablas-2-valor_x').val())+parseFloat($('#id_1tablas-3-valor_x').val())+parseFloat($('#id_1tablas-4-valor_x').val())+parseFloat($('#id_1tablas-5-valor_x').val())+parseFloat($('#id_1tablas-6-valor_x').val())+parseFloat($('#id_1tablas-7-valor_x').val())+parseFloat($('#id_1tablas-8-valor_x').val())+parseFloat($('#id_1tablas-9-valor_x').val())).toFixed(2));
+         $('#total2').val(parseFloat(parseFloat($('#id_2tablas-0-valor_x').val())+parseFloat($('#id_2tablas-1-valor_x').val())+parseFloat($('#id_2tablas-2-valor_x').val())+parseFloat($('#id_2tablas-3-valor_x').val())+parseFloat($('#id_2tablas-4-valor_x').val())+parseFloat($('#id_2tablas-5-valor_x').val())+parseFloat($('#id_2tablas-6-valor_x').val())+parseFloat($('#id_2tablas-7-valor_x').val())+parseFloat($('#id_2tablas-8-valor_x').val())+parseFloat($('#id_2tablas-9-valor_x').val()).toFixed(2)));
          $('#maxilareden').val($('#id_ed_maxi').val()+"-"+$('#total1').val());
          $('#maxilartotal').val($('#id_ed_maxi').val()-$('#total1').val());
 
@@ -234,12 +234,12 @@
                             <tr>
                                 <td><input id="maxilar" type="Texto" class="form-control"></td>
                                 <td><input id="maxilareden" type="Texto" class="form-control"></td>
-                                <td><input id="maxilartotal" type="Number" step="0.000000000001" class="form-control"></td>
+                                <td><input id="maxilartotal" type="Number" step="0.001" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td><input id="mandibular" type="Texto" class="form-control"></td>
                                 <td><input id="mandibulareden" type="Texto" class="form-control"></td>
-                                <td><input id="mandibulartotal" type="Number" step="0.000000000001" class="form-control"></td>
+                                <td><input id="mandibulartotal" type="Number" step="0.001" class="form-control"></td>
                             </tr>
                     </tbody>
                   
@@ -322,5 +322,22 @@
     $('#maxilartotal').prop('readonly', true);
     $('#mandibulareden').prop('readonly', true);
     $('#mandibulartotal').prop('readonly', true);
+
+
+     $(".form-control").change(function(){
+        $("input[type=number]").each(function(){
+          var valor = parseFloat($(this).val()).toFixed(2);
+          $(this).val(valor);
+        })
+    });
+
+    $(".form-control").blur(function(){
+        $("input[type=number]").each(function(){
+          var valor = parseFloat($(this).val()).toFixed(2);
+          $(this).val(valor);
+        })
+    });
+    
+
     </script>
     {% endblock %}

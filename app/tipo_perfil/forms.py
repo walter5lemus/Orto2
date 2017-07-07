@@ -51,20 +51,20 @@ class Tipo_perfilForm(forms.ModelForm):
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
 
-			'frontal_facial': forms.Select(attrs={'class':'form-control','min':1}),
-			'tipoPerfiltotal': forms.Select(attrs={'class':'form-control','min':1}), 
-			'perfilTercio_inferior': forms.Select(attrs={'class':'form-control','min':1}), 
-			'tipoSonrisa': forms.Select(attrs={'class':'form-control','min':1}), 
-			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control','min':1}),
+			'frontal_facial': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tipoPerfiltotal': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}), 
+			'perfilTercio_inferior': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}), 
+			'tipoSonrisa': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}), 
+			'tipo_competenciaLabial': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}),
 
-			'tipoNariz': forms.Select(attrs={'class':'form-control','min':1}),
-			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control','min':1}),
-			'tercio_superior': forms.NumberInput(attrs={'class':'form-control','min':1}),
-			'tercio_medio': forms.NumberInput(attrs={'class':'form-control','min':1}),
-			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control','min':1}),
-			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control','min':1}),
-			'grosorLabios':forms.Select(attrs={'class':'form-control','min':1}),
-			'tamanoLabios': forms.Select(attrs={'class':'form-control','min':1}),
+			'tipoNariz': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'angulo_Naso_labial': forms.NumberInput(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tercio_superior': forms.NumberInput(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tercio_medio': forms.NumberInput(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tercio_inferior':forms.NumberInput(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tamanoSonrisa':forms.NumberInput(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'grosorLabios':forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}),
+			'tamanoLabios': forms.Select(attrs={'class':'form-control','min':1,'max': 2147483647}),
 
 		}
 
