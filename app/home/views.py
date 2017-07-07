@@ -51,6 +51,10 @@ def index(request):
 			incompletos.append(-5)
 		if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-6)
+		if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+			imagenes = imagenes_afmp.objects.get(fichas_id=fi.id)
+			if imagenes.imagen == "":
+				incompletos.append(-18)
 		if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-7)
 		if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
@@ -71,6 +75,7 @@ def index(request):
 			incompletos.append(-15)
 		if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-16)
+
 		incompletos.append(-17)
 
 

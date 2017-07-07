@@ -93,13 +93,13 @@ class registro_mordidas(models.Model):
 
 class relaciones_sagitales(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	molar_derecha = models.IntegerField(choices=molar_canina_choices,)
-	molar_izquierda = models.IntegerField(choices=molar_canina_choices)
+	molar_derecha = models.IntegerField(choices=molar_canina_choices,null=True, blank=True)
+	molar_izquierda = models.IntegerField(choices=molar_canina_choices,null=True, blank=True)
 	canina_derecha = models.IntegerField(choices=molar_canina_choices)
 	canina_izquierda = models.IntegerField(choices=molar_canina_choices)
-	plano_termina_recto = models.IntegerField(choices=plano_escalon_choices)
-	escalon_mesial = models.IntegerField(choices=plano_escalon_choices)
-	escalon_distal = models.IntegerField(choices=plano_escalon_choices)
+	plano_termina_recto = models.IntegerField(choices=plano_escalon_choices,null=True, blank=True)
+	escalon_mesial = models.IntegerField(choices=plano_escalon_choices,null=True, blank=True)
+	escalon_distal = models.IntegerField(choices=plano_escalon_choices,null=True, blank=True)
 	observaciones = models.TextField(null=True, blank=True)
 
 	def __str__(self):
