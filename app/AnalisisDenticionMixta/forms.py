@@ -150,8 +150,8 @@ class moyersSupForm(forms.ModelForm):
 
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class':'form-control'}),
-            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30}),
-            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30}),
+            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'required':True}),
+            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'required':True}),
         }
 
 class moyersSupAncForm(forms.ModelForm):
@@ -173,7 +173,7 @@ class moyersSupAncForm(forms.ModelForm):
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class':'form-control'}),
             'posicion': forms.HiddenInput(attrs={'class':'form-control'}),
-            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15}),
+            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':1,'max':15,'required':True}),
         }
 
 class moyersSupForm_consultar(forms.ModelForm):
@@ -194,8 +194,8 @@ class moyersSupForm_consultar(forms.ModelForm):
 
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class':'form-control'}),
-            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'readonly':True}),
-            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'readonly':True}),
+            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'readonly':True}),
+            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'readonly':True}),
             }
 
 class moyersSupAncForm_consultar(forms.ModelForm):
@@ -217,7 +217,7 @@ class moyersSupAncForm_consultar(forms.ModelForm):
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class':'form-control'}),
             'posicion': forms.HiddenInput(attrs={'class':'form-control'}),
-            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15,'readonly':True}),
+            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':1,'max':15,'readonly':True}),
         }
 
 
@@ -239,8 +239,8 @@ class moyersInfForm(forms.ModelForm):
 
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30}),
-            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30}),
+            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'required':True}),
+            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'required':True}),
                    }
 
 
@@ -263,7 +263,7 @@ class moyersInfAncForm(forms.ModelForm):
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
             'posicion': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15}),
+            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15,'required':True}),
         }
 
 
