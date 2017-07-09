@@ -94,7 +94,10 @@ def AspectosArticulares_edit(request,codi,num):
 			return render(request,'analisis_radiograficos/analisis_articulares_editar.html',{'form':form,'codi': codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 
 # Otros Aspectos
@@ -174,8 +177,10 @@ def otrosAspectos_editar(request, codi, num):
 			return render(request, 'analisis_radiograficos/otrosAspectosForm_editar.html', {'form': form, 'codi': codi, 'num': num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
-
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 # Otros Hallazgos
 
@@ -273,4 +278,7 @@ def otrosHallazgos_editar(request, codi, num):
 			return render(request, 'analisis_radiograficos/otrosHallazgosForm_editar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	

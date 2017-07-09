@@ -77,7 +77,10 @@ def cefalometrico_editar(request, codi, num):
 				return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})	
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 		except Exception, e:
-			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+			if int(num)>1:
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			else:
+				return render(request, 'base/error_no_encontrado.html')	
 	else:
 		return render(request, 'base/error_no_hay_acceso.html')
 

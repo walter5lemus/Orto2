@@ -56,23 +56,26 @@ def diag_general_view(request,codi,num):
 
 def diag_general_edit(request,codi,num):
 	str(codi)
-	#try:
-	ids = fichas.objects.get(cod_expediente=codi, numero=num)
-	if ids:
-		datos = diagnostico_general.objects.get(fichas_id=ids.id)
-		if request.method == 'GET':
-			form = diagGeneralForm(instance=datos)
-		else: 
-			form = diagGeneralForm(request.POST, instance=datos)
-			if form.is_valid():
-				form.save()
-				fecha =  timezone.now()
-				ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-				return redirect('/citas/nuevo/%s/%s/' %(codi,num))
-		return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi})
-	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
-	#except Exception, e:
-	#	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		if ids:
+			datos = diagnostico_general.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = diagGeneralForm(instance=datos)
+			else: 
+				form = diagGeneralForm(request.POST, instance=datos)
+				if form.is_valid():
+					form.save()
+					fecha =  timezone.now()
+					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
+					return redirect('/citas/editar/%s/%s/' %(codi,num))
+			return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')	
 
 
 def diag_general_consultar(request,codi,num):

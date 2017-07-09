@@ -57,6 +57,28 @@ def citas_crear(request,codi,num):
 				return render(request, 'base/error_no_tiene_permiso_cerrada.html')
 	else:
 		return render(request, 'base/error_no_encontrado.html')
+
+def citas_editar(request,codi,num):
+	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
+		user = request.user.id
+		usuario = request.user.is_superuser
+		usuario2=0
+		if usuario:
+			usuario2=1
+
+		#try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num,completada=0)
+		if ids:
+			form = citasGeneralesForm(initial={'estudiante':request.user.username})
+			form2 = citasForm(initial={})
+			form3 = citasGeneralesForm2()
+			form4 = citasForm2(initial={})
+			return render(request, 'citas/citas_editar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num})
+	#except Exception as e:
+			#return render(request, 'base/error_no_tiene_permiso_cerrada.html')
+	else:
+		return render(request, 'base/error_no_encontrado.html')
+
 def citas_consultar(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		user = request.user.id

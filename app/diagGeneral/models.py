@@ -12,10 +12,10 @@ class diagnostico_general(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
 
 	diagnostico_ortodontico_general = models.TextField()
-	problemas = models.TextField()
-	objetivos = models.TextField()
+	problemas = models.TextField(max_length=500)
+	objetivos = models.TextField(max_length=500)
 	tratamiento = models.IntegerField(choices=Tratamiento_choices,default=1)
-	descripcion_tratamiento = models.TextField()
+	descripcion_tratamiento = models.TextField(max_length=500)
 	
 def __unicode__(self):
          return '{}'.format(self.diagnostico_general)

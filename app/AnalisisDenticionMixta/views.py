@@ -146,7 +146,10 @@ def nance_editar(request, codi, num):
                 return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
-            return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+            if int(num)>1:
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            else:
+                return render(request, 'base/error_no_encontrado.html') 
     else:
         return render(request, 'base/error_no_hay_acceso.html')
 ################################################################################################################
@@ -224,7 +227,10 @@ def moyerssup_editar(request, codi, num):
                 return render(request, 'AnalisisDenticionMixta/moyerssuperior_editar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})  
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
-            return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+            if int(num)>1:
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            else:
+                return render(request, 'base/error_no_encontrado.html') 
     else:
         return render(request, 'base/error_no_hay_acceso.html')
 
@@ -309,6 +315,7 @@ def moyersinf_editar(request, codi, num):
             if ids:
                 moyinf = moyers_inferior.objects.get(fichas_id=ids.id)
                 if request.method == 'GET':
+                    print moyinf
                     form1 = moyersInfForm(instance=moyinf)
                     formset = moyersinfFormSet(queryset=moyers_inferior_ancho.objects.filter(fichas_id=ids.id))
                 else:
@@ -324,7 +331,10 @@ def moyersinf_editar(request, codi, num):
                 return render(request, 'AnalisisDenticionMixta/moyersinferior_editar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
-            return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+            if int(num)>1:
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            else:
+                return render(request, 'base/error_no_encontrado.html') 
     else:
         return render(request, 'base/error_no_hay_acceso.html')
 

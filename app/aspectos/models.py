@@ -110,7 +110,7 @@ class funcion_mandibular(models.Model):
 	apertura = models.IntegerField()
 	desv_afmp_derecho = models.IntegerField()
 	desv_afmp_izquierdo = models.IntegerField()
-	signos_sintomas_atm = models.TextField()
+	signos_sintomas_atm = models.TextField(max_length=500)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)

@@ -84,11 +84,11 @@ class nance_tabla(forms.ModelForm):
             'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
             'tabla':forms.HiddenInput(attrs={'class':'form-control'}),
             'posicion':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647}),
-            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647}),
-            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647}),
-            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647}),
-            'valor_x':forms.NumberInput(attrs={'class':'form-control x','required':True,'min':0,'max': 2147483647,'step':0.01}),
+            'mdm':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647,'step':'0.01'}),
+            'mprx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647,'step':'0.01'}),
+            'mdrx':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647,'step':'0.01'}),
+            'multiplicacion':forms.NumberInput(attrs={'class':'form-control','readonly':True,'min':0,'max': 2147483647,'step':'0.01'}),
+            'valor_x':forms.NumberInput(attrs={'class':'form-control x','required':True,'min':0,'max': 2147483647,'step':'0.01'}),
         }
 
 class nance_tabla_consultar(forms.ModelForm):
@@ -239,8 +239,8 @@ class moyersInfForm(forms.ModelForm):
 
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'required':True}),
-            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'required':True}),
+            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'required':True}),
+            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'required':True}),
                    }
 
 
@@ -263,7 +263,7 @@ class moyersInfAncForm(forms.ModelForm):
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
             'posicion': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15,'required':True}),
+            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':1,'max':15,'required':True}),
         }
 
 
@@ -285,8 +285,8 @@ class moyersInfForm_consultar(forms.ModelForm):
 
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'readonly':True}),
-            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':0,'max':30,'readonly':True}),
+            'ed_izquierdo': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'readonly':True}),
+            'ed_derecho': forms.NumberInput(attrs={'class':'form-control','min':1,'max':30,'readonly':True}),
         }
 
 
@@ -309,5 +309,5 @@ class moyersInfAncForm_consultar(forms.ModelForm):
         widgets = {
             'fichas': forms.HiddenInput(attrs={'class': 'form-control'}),
             'posicion': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':0,'max':15,'readonly':True}),
+            'ancho_mesiodistal': forms.NumberInput(attrs={'class':'form-control','min':1,'max':15,'readonly':True}),
         }

@@ -14,7 +14,7 @@ class diagnostico_cefalometrico(models.Model):
 	medidas_dentales = models.IntegerField(choices=medidas_dentales_choices)
 
 	otro_patron = models.CharField(max_length=100, blank=True, null=True)
-	medidas_esteticas = models.TextField()
+	medidas_esteticas = models.TextField(max_length=500)
 
 def __unicode__(self):
          return '{}'.format(self.fichas)

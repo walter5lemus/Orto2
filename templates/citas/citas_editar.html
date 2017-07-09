@@ -1,0 +1,912 @@
+{% extends 'base/base_editar.html' %}
+{% load staticfiles %}
+{% block title %}
+Control de Citas
+{% endblock %}
+
+
+{% block header %}
+<style type="text/css">
+	
+.divOcultar{
+    padding: 20px;
+
+}
+.divOcultar2{
+    padding: 20px;
+
+}
+.divOcultar{
+	display: none;
+}
+
+.ocultarmx{
+	display: none;
+}
+
+.divOcultar2{
+	display: none;
+}
+.divOcultar {
+  padding: 20px;
+  border-color: solid black;
+  border-style: ridge;
+}
+
+
+.divOcultar2{
+  padding: 20px;
+  border-color: solid black;
+  border-style: ridge;
+}
+
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+	</form>
+
+  
+<div class="row">
+	<div class="col-md-6 col-md-offset-1">
+		<div class="form-group">
+			{{form.fichas}}
+		</div>
+	</div>
+	</div>
+	
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<div class="col-md-6">
+				<label for="codigo">N° de Expediente </label>	
+				<input id="codigo" class="form-control" type="text" disabled="True">
+				<br>
+			</div>
+			<div class="col-md-6">
+				<label for="ficha">N° de Ficha</label>	
+				<input id="ficha" class="form-control" type="text" disabled="True">
+				<br>
+			</div>
+			<br>
+		</div>
+		<br>
+	</div>
+<br><br>
+
+{% block menu-social %}
+{% endblock %}
+<br><br><br>
+<div class="col-md-10 col-md-offset-1">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+   
+  
+	<div class="row fuera" >
+		<div class="col-md-6 col-md-offset-1">
+			<div class="form-group">
+				<label for="cod_expediente">Nombre del Paciente</label>	
+				<input readonly type="text" class="form-control" id="id_nombre_estudiante">
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
+				{{form.aparato}}
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-1">
+			<div class="form-group">
+				{{form.estudiante}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="form-group fuera ocultarmx">
+			<div class="col-md-4 col-md-offset-3">
+					<label for="{{form.mx.name}}">{{form.mx.label}}</label>	
+					{{form.mx}}
+			</div>
+			<div class="col-md-2">
+					<label for="{{form.md.name}}">{{form.md.label}}</label>	
+					{{form.md}}
+			</div>	
+				
+		</div>
+
+		<br><br>
+		<div class="col-md-4 col-md-offset-4">
+			<div class="form-group">
+				<button class="btn btn-primary btn-block" id="aparato1" onclick="urlss()">Registrar Cita</button>
+				<button class="btn btn-primary btn-block" id="aparato2" onclick="urlss()">Añadir Aparato</button>
+			</div>
+		</div>	
+	</div>
+
+		</div>
+	</div>
+</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 divOcultar">	
+			{% csrf_token %}
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-4 col-md-offset-2">
+						<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
+						{{form3.aparato}}
+					</div>
+					<div class="col-md-6">
+						<div class="col-md-4">
+							<br>
+							<label for="mx">Maxilar (Mx)</label>
+							<input type="checkbox" name="radio" id="mx" value="mx">
+						</div>
+						<div class="col-md-6 ">
+							<br>
+							<label for="md">Mandibular (Md)</label>
+							<input type="checkbox" name="radio2" id="md" value="md">
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			<br>
+				<div class="col-md-4 col-md-offset-4">
+					<button class="btn btn-primary btn-block" onclick="post1()" id="boton1">Registrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+	<br><br>
+		<div class="col-md-10 col-md-offset-1 divOcultar2">	
+			<div class="col-md-5">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+								<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
+									{{form2.fecha_cita}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+						<br>
+									<label for="{{form4.observaciones.name}}">{{form4.observaciones.label}}</label>	
+								{{form4.observaciones}}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-5 col-md-offset-1">
+				<div class="col-md-12">
+							<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
+						{{form2.proxima_cita}}
+				</div>
+
+				<div class="col-md-12">
+							<br>
+							<label for="{{form4.resultados.name}}">{{form4.resultados.label}}</label>	
+						{{form4.resultados}}
+				</div>
+
+				<!--  <div class="col-md-1">
+				<div class="well well-sm">
+							<FONT SIZE=5 COLOR=FF8000>
+							  <label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
+							</FONT>
+						{{form2.autorizacion}}
+				</div>
+				</div> -->
+
+			</div>
+			
+			
+			<div class="row">
+
+				<div class="col-md-3 col-md-offset-4">
+				<br>
+					<button class="btn btn-primary btn-block" onclick="post2()" id="boton2">Registrar</button>
+				<br>
+				</div>
+				
+			</div>
+			</div>
+		</div>
+
+	<br><br>
+	<div class="table-responsive col-md-12 fuera">
+		<div id="conteiner">
+	
+		</div>
+	</div>
+
+	<div class="row">
+	<div class="col-md-3 col-md-offset-9">
+		<br>
+			<button class="btn btn-danger btn-block" id="finalizar_control">Finalizar Control</button>
+		<br>
+		</div>
+	</div>
+
+
+
+
+<script>
+
+	var fechaCita="";
+	$('#codigo').val("{{codi}}");
+	$('#ficha').val("{{num}}");
+
+	function post1(){
+		var codigo = $('#codigo').val();
+		var numero = $('#ficha').val();
+		var radioMx = 0;
+		var radioMd = 0;
+		var aparato = $("#id_aparato2 option:selected").val();
+		if ($('#mx').is(":checked")) {
+			radioMx = 1
+		}
+		if ($('#md').is(":checked")) {
+			radioMd = 1
+		}  
+		var estudiante = $('#id_estudiante').val();
+
+		if(codigo!=""){
+			if(numero!=""){
+				if(aparato!=""){
+					if($("input[name=radio]:checked").val() || $('input[name=radio2]:checked').val() ) {	
+						if(estudiante!=""){
+									$.ajax({
+									data : {'aparato':aparato,'radio1':radioMx,'radio2':radioMd,'codigo':codigo,'numero':numero,'estudiante':estudiante},
+									url : '/citas/post1/',
+									type : 'POST',
+									success: function(response){
+										buscar();
+										$(".divOcultar").css("display", "none");
+										$("#aparato2").css("display", "none");
+										$("#aparato1").css("display", "block");
+										$(".ocultarmx").css("display", "block");
+										$(".divOcultar2").css("display", "block");
+										$("#boton2").css("display", "block");
+									}
+								});
+							}
+						}else{
+							swal("¡Error!", "No ha seleccionado MX o MD!", "error")
+						}
+				}else{
+					swal("¡Error!", "No ha seleccionado NINGUN APARATO!", "error")
+				}
+			}else{
+				//
+			}
+		}else{
+			swal("Good job!", "You clicked the button!", "error")
+		}
+	}
+
+	$('.fuera').click(function() {
+		$(".divOcultar").css("display", "none");
+		$(".divOcultar2").css("display", "none");
+	});
+
+	function post2(){
+		var codigo = $('#codigo').val();
+		var numero = $('#ficha').val();
+		var fecha1 = $("#id_fecha_cita").val();
+		var fecha2 = $("#id_proxima_cita").val();
+		var observaciones = $('#id_observaciones').val();
+		var resultados = $('#id_resultados').val();
+	
+		var estudiante = $('#id_estudiante').val();
+
+		if (codigo!='') {
+				if (fecha2!='') {
+					if (observaciones!='') {
+						if (resultados!='') {
+							$.ajax({
+								data : {'fecha1':fecha1,'fecha2':fecha2,'observaciones':observaciones,'resultados':resultados,'codigo':codigo,'numero':numero},
+								url : '/citas/post2/',
+								type : 'POST',
+								success: function(response){
+									buscar();
+									limpiar2();
+									$(".divOcultar2").css("display", "none");
+								}
+							});
+
+						}else{
+							alert("LLene el campo Resultados Esperados");
+						}
+					}else{
+						alert("LLene el campo Observaciones");
+					}
+				}else{
+					alert("Seleccione una fecha en proxima cita");
+				}
+
+		}else{
+			alert("Digite el codigo del estudiante");
+		}
+
+
+		
+	}
+
+	function buscar(){
+		var codigo = $('#codigo').val();
+		var num = $('#ficha').val();
+
+		$.ajax({
+			data : {'codigo':codigo,'numero':num},
+			url : '/citas/busqueda_ajax/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].fields.nombre_completo=="fallo") {
+						alert("No se encontraron datos con ese codigo de expediente");
+					}
+					else{
+						$('#id_nombre_estudiante').val(data[i].fields.nombre_completo);
+						$("#id_mx").attr("disabled", true);
+						$("#id_md").attr("disabled", true);
+
+								$.ajax({
+									data : {'codigo':codigo,'numero':num},
+									url : '/citas/busqueda_ajax2/',
+									type : 'get',
+									success: function(data){
+										for (var i = 0; i < data.length; i++) {
+											var apa = data[i].fields.aparato;
+											var mdd = data[i].fields.md;
+											var mxx = data[i].fields.mx;
+											
+										if(mdd=="1"){
+											$("#id_md").prop("checked", "checked");
+											$(".ocultarmx").css("display", "block");
+
+										}
+										if(mxx=="1"){
+											$("#id_mx").prop("checked", "checked");
+											$(".ocultarmx").css("display", "block");
+
+										}	
+										switch ((apa-1)) {
+										    case 0:
+										        day = "Ortodoncia Fija";
+										        break;
+										    case 1:
+										        day = "Boton de Nance";
+										        break;
+										    case 2:
+										        day = "Boton de Nance";
+										        break;
+										    case 3:
+										        day = "Arco Lingua";
+										        break;
+										    case 4:
+										        day = "Tornillo Hirax";
+										        break;
+										    case 5:
+										        day = "Barra Transpalatina";
+										        break;
+										    case 6:
+										        day = "Botones";
+										        break;
+										    case 7:
+										        day = "SN1";
+										        break;
+										    case 8:
+										        day = "SN2";
+										        break;
+										    case 9:
+										        day = "SN3";
+										        break;
+										    case 10:
+										        day = "SN4";
+										        break;
+										    case 11:
+										        day = "SN5";
+										        break;
+										    case 12:
+										        day = "SN6";
+										        break;
+										    case 13:
+										        day = "SN7";
+										        break;
+										    case 14:
+										        day = "SN8";
+										        break;
+										    case 15:
+										        day = "SN9";
+										        break;
+										    case 16:
+										        day = "SN10";
+										        break;
+										    case 17:
+										        day = "Pistas Planas Directas";
+										        break;
+										    case 18:
+										        day = "Pistas Planas Indirectas";
+										        break;
+										    case 19:
+										        day = "Aparato Bimler";
+										        break;
+										    case 20:
+										        day = "Bionator";
+										        break;
+										    case 21:
+										        day = "Otros";
+										        break;
+										}
+											$('#id_aparato').val(day);
+										}
+									}
+								});
+
+								$.ajax({
+									data : {'codigo':codigo,'numero':num},
+									url : '/citas/registro_listar_citas/',
+									type : 'get',	
+									success: function(data2){
+
+									    var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
+									    tabla += '<table class="table table-striped table-hover">';
+						                tabla += '<thead>';
+						                tabla += '<tr class = "info">';
+						                tabla += '<th>N° de Control</th><th>Fecha de Cita</th><th>Aspectos Observados</th><th>Fecha proxima cita</th><th>Resultados Esperados</th><th>Autorización del tutor</th><th>Tutor</th>';		
+						                tabla += '</tr>';
+						                tabla += '</thead>';
+						                tabla += '<tbody>';
+						                tr = '';
+						 				
+						                valorSi = "Si";
+						                valorNo = "No";
+
+						                for (i = 0; i < data2.length; i++){
+						                    tr += '<tr>';
+						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
+						                    	if(data2[i].fields.autorizacion==true){
+						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
+						                    	}else{
+
+						                    		if ({{usuario}}==true) {
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}else{
+						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}
+						                    	}
+						                    
+						                    fechaCita= data2[i].fields.proxima_cita;
+
+						                }
+						 
+						                tabla += tr;
+						                tabla += '</tbody></table>';
+						 				$("#id_fecha_cita").val(fechaCita);
+						                $('#conteiner').html( tabla );
+									}
+								});
+
+					}
+				}
+
+			},
+			error: function(data){
+				alert("No se encontraron datos con ese codigo de expediente");
+				$("#id_nombre_estudiante").val("");
+				$("#id_aparato").val("");
+				$(".divOcultar").css("display", "none");
+				$(".divOcultar2").css("display", "none");
+				$("#conteiner tr").remove();
+			},
+		});
+
+	    if(fechaCita==""){
+	    	$('#id_fecha_cita').attr('disabled', false);
+	    }else{
+	    	datePickerfunction();
+	    }
+}
+
+	
+$(function() {
+
+		var codigo = $('#codigo').val();
+		var num = $('#ficha').val();
+
+		$.ajax({
+			data : {'codigo':codigo,'numero':num},
+			url : '/citas/busqueda_ajax/',
+			type : 'get',
+			success: function(data){
+				for (var i = 0; i < data.length; i++) {
+					if (data[i].fields.nombre_completo=="fallo") {
+						alert("No se encontraron datos con ese codigo de expediente");
+					}
+					else{
+						$('#id_nombre_estudiante').val(data[i].fields.nombre_completo);
+						$("#id_mx").attr("disabled", true);
+						$("#id_md").attr("disabled", true);
+						$("#aparato1").css("display", "none");
+								$.ajax({
+									data : {'codigo':codigo,'numero':num},
+									url : '/citas/busqueda_ajax2/',
+									type : 'get',
+									success: function(data){
+										for (var i = 0; i < data.length; i++) {
+											var apa = data[i].fields.aparato;
+											var mdd = data[i].fields.md;
+											var mxx = data[i].fields.mx;
+											
+										if(mdd=="1"){
+											$("#id_md").prop("checked", "checked");
+											$(".ocultarmx").css("display", "block");
+
+										}
+										if(mxx=="1"){
+											$("#id_mx").prop("checked", "checked");
+											$(".ocultarmx").css("display", "block");
+
+										}		
+										switch ((apa-1)) {
+										    case 0:
+										        day = "Ortodoncia Fija";
+										        break;
+										    case 1:
+										        day = "Boton de Nance";
+										        break;
+										    case 2:
+										        day = "Boton de Nance";
+										        break;
+										    case 3:
+										        day = "Arco Lingua";
+										        break;
+										    case 4:
+										        day = "Tornillo Hirax";
+										        break;
+										    case 5:
+										        day = "Barra Transpalatina";
+										        break;
+										    case 6:
+										        day = "Botones";
+										        break;
+										    case 7:
+										        day = "SN1";
+										        break;
+										    case 8:
+										        day = "SN2";
+										        break;
+										    case 9:
+										        day = "SN3";
+										        break;
+										    case 10:
+										        day = "SN4";
+										        break;
+										    case 11:
+										        day = "SN5";
+										        break;
+										    case 12:
+										        day = "SN6";
+										        break;
+										    case 13:
+										        day = "SN7";
+										        break;
+										    case 14:
+										        day = "SN8";
+										        break;
+										    case 15:
+										        day = "SN9";
+										        break;
+										    case 16:
+										        day = "SN10";
+										        break;
+										    case 17:
+										        day = "Pistas Planas Directas";
+										        break;
+										    case 18:
+										        day = "Pistas Planas Indirectas";
+										        break;
+										    case 19:
+										        day = "Aparato Bimler";
+										        break;
+										    case 20:
+										        day = "Bionator";
+										        break;
+										    case 21:
+										        day = "Otros";
+										        break;
+										}
+											$('#id_aparato').val(day);
+												$("#aparato1").css("display", "block");
+												$("#aparato2").css("display", "none");
+										}
+									}
+								});
+
+								$.ajax({
+									data : {'codigo':codigo,'numero':num},
+									url : '/citas/registro_listar_citas/',
+									type : 'get',	
+									success: function(data2){
+
+									     var tabla = '<table cellpadding="0"  cellspacing="0" border: 1px; class="table table-bordered" id="conteiner">';
+									    tabla += '<table class="table table-striped table-hover">';
+						                tabla += '<thead>';
+						                tabla += '<tr class = "info">';
+						                tabla += '<th>N° de Control</th><th>Fecha de Cita</th><th>Aspectos Observados</th><th>Fecha proxima cita</th><th>Resultados Esperados</th><th>Autorización del tutor</th><th>Tutor</th>';		
+						                tabla += '</tr>';
+						                tabla += '</thead>';
+						                tabla += '<tbody>';
+						                tr = '';
+						 				
+						                valorSi = "Si";
+						                valorNo = "No";
+
+						                for (i = 0; i < data2.length; i++){
+						                    tr += '<tr>';
+						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
+						                    	if(data2[i].fields.autorizacion==true){
+						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
+						                    	}else{
+
+						                    		if ({{usuario}}==true) {
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}else{
+						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td></tr>';
+						                    		$("#aparato1").css("display", "none");
+						                    		}
+						                    	}
+						                    
+						                    fechaCita= data2[i].fields.proxima_cita;
+
+						                }
+						 
+						                tabla += tr;
+						                tabla += '</tbody></table>';
+						 				$("#id_fecha_cita").val(fechaCita);
+						                $('#conteiner').html( tabla );
+									}
+						 		});
+
+					}
+				}
+
+			},
+			error: function(data){
+				alert("No se encontraron datos con ese codigo de expediente");
+				$("#id_nombre_estudiante").val("");
+				$("#id_aparato").val("");
+				$(".divOcultar").css("display", "none");
+				$(".divOcultar2").css("display", "none");
+				$("#conteiner tr").remove();
+			},
+		});
+
+	    if(fechaCita==""){
+	    	$('#id_fecha_cita').attr('disabled', false);
+	    }else{
+	    	datePickerfunction();
+	    }
+})
+
+	function urlss(){
+
+		var codigo = $('#id_codigo').val();
+		var nombre = $('#id_nombre_estudiante').val();
+		datePickerfunction();
+		if (nombre==''){
+			alert("No se encontraron sobre la ficha y el expediente");
+		}
+		else{
+			if ($("#id_aparato").val()=="") {
+				$(".divOcultar").css("display", "block");
+				$(".divOcultar2").css("display", "none");
+				$("#boton1").css("display", "block");
+				$("#boton2").css("display", "none");
+			}else{
+				$(".divOcultar2").css("display", "block");
+				$("#boton1").css("display", "none");
+				}
+			}
+
+		if(fechaCita==""){
+			$(document).ready(function(){
+			    $("#id_fecha_cita").datepicker({
+			        dateFormat: 'yy-mm-dd',
+			        numberOfMonths: 2,
+			        onSelect: function(selected) {
+			          var fechaParse = new Date($("#id_fecha_cita").val())
+					  fechaParse.setDate(fechaParse.getDate() + 2);
+			          $("#id_proxima_cita").datepicker("option","minDate", fechaParse)
+			        }
+			    });
+			    $("#id_proxima_cita").datepicker({ 
+			        minDate: 0,
+			        dateFormat: 'yy-mm-dd',
+			        maxDate:"+60D",
+			        numberOfMonths: 2,
+			        onSelect: function(selected) {
+			           $("#id_fecha_cita").datepicker("option","maxDate", selected)
+			        }
+			    });  
+			});
+	    }else{
+	    	$("#id_fecha_cita").val(fechaCita);
+	    	$('#id_fecha_cita').attr('readonly', true);
+
+	    }
+	}
+
+	function limpiar2(){
+		var fecha1 = $("#id_fecha_cita").val("");
+		var fecha2 = $("#id_proxima_cita").val("");
+		var observaciones = $('#id_observaciones').val("");
+		var resultados = $('#id_resultados').val("");
+		$("#id_autorizacion").prop("checked", "");
+	
+	}
+
+	function datePickerfunction(){
+		if ($("#id_fecha_cita").val()!="") {
+			var fech1 = $("#id_fecha_cita").val();
+			var fechaParse = new Date($("#id_fecha_cita").val())
+			fechaParse.setDate(fechaParse.getDate() + 2);
+			$(document).ready(function(){
+			    $("#id_proxima_cita").datepicker({
+			        dateFormat: 'yy-mm-dd',
+			        minDate:fechaParse,
+			        maxDate: '+99Y',
+			        changeMonth: true,
+	      			changeYear: true,
+			        onSelect: function(selected) {
+			          $("#id_proxima_cita").datepicker({minDate: fechaParse})
+			        }
+			    });
+			});
+		}	
+			
+	}
+
+	function aprobar(){
+
+		var codigo = $('#codigo').val();
+		var numero = $('#ficha').val();
+
+		swal({
+		  title: "¡ADVERTENCIA!",
+		  text: "¡¿Desea Aprobar esta FICHA?!",
+		  type: "warning",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  showLoaderOnConfirm: true,
+		},
+		function(){
+		  setTimeout(function(){
+		    $.ajax({
+				data : {'codigo':codigo,'numero':numero},
+				url : '/citas/autorizacion/',
+				type : 'POST',
+				success: function(data){
+					swal("La FICHA se aprobo satisfactoriamente!", "You clicked the button!", "success")
+					swal({
+					  title: "¡Excelente!",
+					  text: "¡La FICHA se aprobo satisfactoriamente!",
+					  type: "success",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					function(){
+					  location.reload();
+					});
+				},
+				error: function(data){
+					swal({
+					  title: "ERROR!",
+					  text: "¡La FICHA no se ha podido finalizar!",
+					  type: "error",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					}
+					); // <- this should run if user is not activated
+				}
+			});
+		  }, 2000);
+		});
+
+	}
+
+
+$( "#finalizar_control" ).click(function() {
+	
+	var codigo = $("#codigo").val();
+	var ficha = $("#ficha").val();
+
+	swal({
+		  title: "¡ADVERTENCIA!",
+		  text: "¡Esta ficha ya no se podra MODIFICAR en el futuro!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Ok",
+		  showCancelButton: true,
+		  closeOnConfirm: false
+		},
+		function(){
+		swal({
+		  title: "¡¿Desea cerrar este ficha por completo?!",
+		  text: "¿Desea completar la FICHA "+ficha+" del EXPEDIENTE "+codigo+"?",
+		  type: "warning",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  showLoaderOnConfirm: true,
+		},
+		function(){
+		  setTimeout(function(){
+		    $.ajax({
+				data : {'codigo':codigo,'numero':ficha},
+				url : '/citas/finalizar/',
+				type : 'get',
+				success: function(data){
+					swal({
+					  title: "¡Excelente!",
+					  text: "¡La ficha se concluyo satisfactoriamente!",
+					  type: "success",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+					},
+					function(){
+					  location.href = "/";
+					});
+				},
+				error: function(response){				
+					swal({
+					  title: "ERROR!",
+					  text: "¡Complete todas las partes de la ficha o puede que la cita no este aprobada!",
+					  type: "error",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Ok",
+					  showCancelButton: false,
+					  closeOnConfirm: false
+						}
+					); // <- this should run if user is not activated
+				}
+			});
+		  }, 2000);
+		});
+	});
+});
+
+</script>
+
+
+{% endblock %}
