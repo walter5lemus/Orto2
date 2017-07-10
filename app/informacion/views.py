@@ -345,8 +345,7 @@ def Motivo_Consulta_consultar(request,codi,num):
 			else: 
 				form = MotivoConsultaForm_consultar(request.POST, instance=estado)
 				return redirect('/informacion/estado_general/consultar/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_motivoconsulta_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+		return render(request,'informacion/form_motivoconsulta_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
 
@@ -363,9 +362,10 @@ def Motivo_Consulta_editar(request,codi,num):
 					form = MotivoConsultaForm(request.POST, instance=estado)
 					if form.is_valid():
 						form.save()
-					return redirect('/informacion/estado_general/editar/%s/%s/' %(codi,num))
-				return render(request,'informacion/form_motivoconsulta_editar1.html',{'form':form,'num':num,'codi':codi})
-			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+						return redirect('/informacion/estado_general/editar/%s/%s/' %(codi,num))
+					else:
+						return render(request,'informacion/form_motivoconsulta_editar1.html',{'form':form,'num':num,'codi':codi})
+			return render(request,'informacion/form_motivoconsulta_editar1.html',{'form':form,'num':num,'codi':codi})
 		except Exception, e:
 			if int(num)>1:
 				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})

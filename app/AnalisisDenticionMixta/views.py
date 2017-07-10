@@ -140,7 +140,7 @@ def nance_editar(request, codi, num):
                                form.save()
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
-                        return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num)) 
+                        return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num))
                     else: 
                         return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
                 return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id})   
