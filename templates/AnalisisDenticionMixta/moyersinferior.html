@@ -9809,7 +9809,6 @@
 {% block content %}
 
 <!-- CSS -->
-
 <form method="post">
 	{% csrf_token %}
 	{{ formset.management_form }}	 
@@ -9846,11 +9845,8 @@
 
 {{ form1.fichas }}
 
-
-
-	
 	<h1 align="center">Analisis de Moyers Inferior</h1>
-    <h2 align="center">Espacio Disponible Arcada Inferior</h2>   
+    <h2 align="center">Espacio Disponible Arcada Inferior</h2> 
 
 
 	    <div class="col-md-12 col-md-offset-2">
@@ -9863,17 +9859,14 @@
             <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
-            <br><br><br>
+            <br>
             </div>
-            
         </div>
-        
+        <br>
     </div>
 
 
-
 <!-- Espacio disponible posterior -->
-
 <div class="col-md-10 col-md-offset-1">
 
   <div class="panel panel-primary">
@@ -9893,16 +9886,15 @@
 					<th><div id="d4-2" align="center" style="height:20px"></div></th>   
 				</tr>
 				<tr>
-					<td><img src=" {% static 'images/denticionMixta/3-2.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/3-1.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/4-1.png' %}"></td>
-					<td><img src=" {% static 'images/denticionMixta/4-2.png' %}"></td>
+					<td><img src=" {% static 'images/3-2.png' %}"></td>
+					<td><img src=" {% static 'images/3-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-1.png' %}"></td>
+					<td><img src=" {% static 'images/4-2.png' %}"></td>
 				</tr>
 			</tbody>
 		</table>
     </div>
        
-       	<br><br>
         <div class="col-sm-6" align="left">
         <table class='table-bordered'>
 			<tbody>
@@ -9912,7 +9904,7 @@
 				</tr>
 				<tr>
 					<td>{{ formset.0.posicion }}3-1</td>
-					<td style="width: 105px">{{ formset.0.ancho_mesiodistal }}</td>
+					<td style="width: 105px"><div>{{ formset.0.ancho_mesiodistal }}</div></td>
 				</tr>
 				<tr>
 					<td>{{ formset.1.posicion }}3-2</td>
@@ -9967,16 +9959,16 @@
 
   <div class="panel panel-primary">
   	<div class="panel-heading">
-    	<h3 class="panel-title">Espacio Disponible Posterior</h3>
+    	<h3 class="panel-title"  align="left">Espacio Disponible Posterior</h3>
   	</div>
   <div class="panel-body">
 
   		<center>
   			<br><br>
-        	<img src=" {% static 'images/denticionMixta/m1.png' %}">
+        	<img src=" {% static 'images/moysup2.jpg' %}">
         	<br><br>
         	<table>
-			  <tbody>
+			<tbody>
 				<tr>
 					<td style="width: 105px">{{ form1.ed_izquierdo }} mm</td>
 					<td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -9996,11 +9988,14 @@
 <!-- Espacio necesario - Tabla acumuladora -->
 
  	<br><br><br><br>
-	<div class="col-sm-12" align="center">
+	<div class="col-md-10 col-md-offset-1" align="center">
+	<div class="panel panel-primary">
+	  	<div class="panel-heading">
+	    	<h3 class="panel-title"  align="left">Espacio Necesario Arcada Inferior</h3>
+	  	</div>
+	  <div class="panel-body">
         <table class='table-bordered'>
-        	<br><br>
-			<h3 align="center"><font color="teal">Espacio Necesario Arcada Inferior</font></h3>
-
+        	<br><br>							
 				<tbody>
 					<tr>
 						<th id="a1">Ancho MD</th>						
@@ -10076,14 +10071,20 @@
 				</tbody>
 		</table>
 	</div>
+	</div>
+	
 
-
-     <br><br><br><br>
-     <div class="col-sm-12" align="center">
+     
+     <div class="col-md-10 col-md-offset-1" align="center">
      	<br><br>
-        <h3 align="center"><font color="teal">Tabla Acumuladora de Datos</font></h3>
-        <br>
-        <table>
+     	  <div class="panel panel-primary">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title"  align="left">Tabla Acumuladora de Datos</h3>
+		  	</div>
+		  <div class="panel-body">
+        <h3 align="center"><font color="green"></font></h3>
+        	<br>
+        	<table>
         	<tbody>
         		<tr>
 					<td>Sumatoria de Incisivos Superior&nbsp;&nbsp;&nbsp;</td>
@@ -10103,7 +10104,7 @@
 				<tr>
 					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
 					<td id = "edi2"></td>
-					<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/denticionMixta/m2.png' %}">&nbsp;&nbsp;&nbsp;</td>
+					<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/moysup3.jpg' %}">&nbsp;&nbsp;&nbsp;</td>
 					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
 					<td id = "edd2"></td>
 				</tr>
@@ -10122,32 +10123,34 @@
 			</tbody>
 			</table>
         </div>
-
-
-
-    
-	<div class="col-md-8 col-md-offset-2">
-		<div class="form-group">
-			
-			<br><br>
-			<div class="col-md-3 col-md-offset-2">
-			  <a href="/analisis_denticion_mixta/analisis_nance/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
-			</div> 
-
-			<div class="col-md-3 col-md-offset-1">
-			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
-			</div>
-		
-		</div>
-		<br><br>
 	</div>
+
+
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            
+            <br><br>
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/analisis_denticion_mixta/analisis_nance/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+            </div>
+        
+        </div>
+        <br><br>
+    </div>
+
+
 
 
      <!-- Barra de progreso -->
         <br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 90%;"></div>
+            <div class="progress-bar progress-bar-primary" style="width: 90%;"></div>
         </div>
         </div>
 

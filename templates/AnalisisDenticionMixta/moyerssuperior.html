@@ -9850,12 +9850,12 @@
 {{ form1.fichas }}
 
 
-	
+	<div class="mensaje" id="mensaje"></div>
 	<h1 align="center">Analisis de Moyers Superior</h1>
     <h2 align="center">Espacio Disponible Arcada Superior</h2> 
 
 
-	<div class="col-md-12 col-md-offset-2">
+	    <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
             <label for="codigo">N° de Expediente </label>   
@@ -9865,9 +9865,8 @@
             <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
-            <br><br><br>
+            <br>
             </div>
-            
         </div>
         <br>
     </div>
@@ -9877,7 +9876,7 @@
 
 <div class="col-md-10 col-md-offset-1">
 
-  <div class="panel panel-primary">
+  <div class="panel panel-success">
   	<div class="panel-heading">
     	<h3 class="panel-title">Espacio Disponible Anterior</h3>
   	</div>
@@ -9965,7 +9964,7 @@
     
 <div class="col-md-10 col-md-offset-1">
 
-  <div class="panel panel-primary">
+  <div class="panel panel-success">
   	<div class="panel-heading">
     	<h3 class="panel-title">Espacio Disponible Posterior</h3>
   	</div>
@@ -9996,131 +9995,142 @@
 <!-- Espacio necesario - Tabla acumuladora -->
 
  	<br><br><br><br>
-	<div class="col-sm-12" align="center">
+	<div class="col-md-10 col-md-offset-1" align="center">
+		<div class="panel panel-success">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title">Espacio Necesario Arcada Superior</h3>
+		  	</div>
+		  <div class="panel-body">
         <table class='table-bordered'>
         	<br><br>
-			<h3 align="center"><font color="teal">Espacio Necesario Arcada Superior</font></h3>
-								
-				<tbody>
-					<tr>
-						<th id="a1">Ancho MD</th>						
-						<th id="a2">19.5</th>  
-						<th id="a3">20.0</th> 
-						<th id="a4">20.5</th>
-						<th id="a5">21.0</th>  
-						<th id="a6">21.5</th> 
-						<th id="a7">22.0</th>
-						<th id="a8">22.5</th>  
-						<th id="a9">23.0</th> 
-						<th id="a10">23.5</th>
-						<th id="a11">24.0</th>  
-						<th id="a12">24.5</th> 
-						<th id="a13">25.0</th>
-						<th id="a14">25.5</th>  
-						<th id="a15">26.0</th> 
-						<th id="a16">26.5</th>
-						<th id="a17">27.0</th>  
-						<th id="a18">27.5</th> 
-						<th id="a19">28.0</th>
-						<th id="a20">28.5</th>  
-						<th id="a21">29.0</th> 					
-					</tr>
+        	  
+									
+					<tbody>
+						<tr>
+							<th id="a1">Ancho MD</th>						
+							<th id="a2">19.5</th>  
+							<th id="a3">20.0</th> 
+							<th id="a4">20.5</th>
+							<th id="a5">21.0</th>  
+							<th id="a6">21.5</th> 
+							<th id="a7">22.0</th>
+							<th id="a8">22.5</th>  
+							<th id="a9">23.0</th> 
+							<th id="a10">23.5</th>
+							<th id="a11">24.0</th>  
+							<th id="a12">24.5</th> 
+							<th id="a13">25.0</th>
+							<th id="a14">25.5</th>  
+							<th id="a15">26.0</th> 
+							<th id="a16">26.5</th>
+							<th id="a17">27.0</th>  
+							<th id="a18">27.5</th> 
+							<th id="a19">28.0</th>
+							<th id="a20">28.5</th>  
+							<th id="a21">29.0</th> 					
+						</tr>
 
-					<tr>
-						<th id="v1" style="display: none;">Varones</th>
-						<th id="v2" style="display: none;">20.3</td>
-						<th id="v3" style="display: none;">20.5</td>
-						<th id="v4" style="display: none;">20.8</td>
-						<th id="v5" style="display: none;">21.0</td>
-						<th id="v6" style="display: none;">21.3</td>
-						<th id="v7" style="display: none;">21.5</td>
-						<th id="v8" style="display: none;">21.8</td>
-						<th id="v9" style="display: none;">22.0</td>
-						<th id="v10" style="display: none;">22.3</td>
-						<th id="v11" style="display: none;">22.5</td>
-						<th id="v12" style="display: none;">22.8</td>
-						<th id="v13" style="display: none;">23.0</td>
-						<th id="v14" style="display: none;">23.3</td>
-						<th id="v15" style="display: none;">24.2</td>
-						<th id="v16" style="display: none;">24.5</td>
-						<th id="v17" style="display: none;">24.8</td>
-						<th id="v18" style="display: none;">25.0</td>
-						<th id="v19" style="display: none;">25.3</td>
-						<th id="v20" style="display: none;">25.6</td>
-						<th id="v21" style="display: none;">25.9</td>
-					</tr>
-					<tr>
-						<th id="h1" style="display: none;">Hembras</th>
-						<th id="h2" style="display: none;">20.4</td>
-						<th id="h3" style="display: none;">20.5</td>
-						<th id="h4" style="display: none;">20.6</td>
-						<th id="h5" style="display: none;">20.8</td>
-						<th id="h6" style="display: none;">20.9</td>
-						<th id="h7" style="display: none;">21.0</td>
-						<th id="h8" style="display: none;">21.2</td>
-						<th id="h9" style="display: none;">21.3</td>
-						<th id="h10" style="display: none;">21.5</td>
-						<th id="h11" style="display: none;">21.6</td>
-						<th id="h12" style="display: none;">21.8</td>
-						<th id="h13" style="display: none;">21.9</td>
-						<th id="h14" style="display: none;">22.1</td>
-						<th id="h15" style="display: none;">24.2</td>
-						<th id="h16" style="display: none;">24.5</td>
-						<th id="h17" style="display: none;">24.8</td>
-						<th id="h18" style="display: none;">25.0</td>
-						<th id="h19" style="display: none;">25.3</td>
-						<th id="h20" style="display: none;">25.6</td>
-						<th id="h21" style="display: none;">25.9</td>
-					</tr>
-		
-				</tbody>
-		</table>
+						<tr>
+							<th id="v1" style="display: none;">Varones</th>
+							<th id="v2" style="display: none;">20.3</td>
+							<th id="v3" style="display: none;">20.5</td>
+							<th id="v4" style="display: none;">20.8</td>
+							<th id="v5" style="display: none;">21.0</td>
+							<th id="v6" style="display: none;">21.3</td>
+							<th id="v7" style="display: none;">21.5</td>
+							<th id="v8" style="display: none;">21.8</td>
+							<th id="v9" style="display: none;">22.0</td>
+							<th id="v10" style="display: none;">22.3</td>
+							<th id="v11" style="display: none;">22.5</td>
+							<th id="v12" style="display: none;">22.8</td>
+							<th id="v13" style="display: none;">23.0</td>
+							<th id="v14" style="display: none;">23.3</td>
+							<th id="v15" style="display: none;">24.2</td>
+							<th id="v16" style="display: none;">24.5</td>
+							<th id="v17" style="display: none;">24.8</td>
+							<th id="v18" style="display: none;">25.0</td>
+							<th id="v19" style="display: none;">25.3</td>
+							<th id="v20" style="display: none;">25.6</td>
+							<th id="v21" style="display: none;">25.9</td>
+						</tr>
+						<tr>
+							<th id="h1" style="display: none;">Hembras</th>
+							<th id="h2" style="display: none;">20.4</td>
+							<th id="h3" style="display: none;">20.5</td>
+							<th id="h4" style="display: none;">20.6</td>
+							<th id="h5" style="display: none;">20.8</td>
+							<th id="h6" style="display: none;">20.9</td>
+							<th id="h7" style="display: none;">21.0</td>
+							<th id="h8" style="display: none;">21.2</td>
+							<th id="h9" style="display: none;">21.3</td>
+							<th id="h10" style="display: none;">21.5</td>
+							<th id="h11" style="display: none;">21.6</td>
+							<th id="h12" style="display: none;">21.8</td>
+							<th id="h13" style="display: none;">21.9</td>
+							<th id="h14" style="display: none;">22.1</td>
+							<th id="h15" style="display: none;">24.2</td>
+							<th id="h16" style="display: none;">24.5</td>
+							<th id="h17" style="display: none;">24.8</td>
+							<th id="h18" style="display: none;">25.0</td>
+							<th id="h19" style="display: none;">25.3</td>
+							<th id="h20" style="display: none;">25.6</td>
+							<th id="h21" style="display: none;">25.9</td>
+						</tr>
+			
+					</tbody>
+			</table>
+		</div>
 	</div>
 
 
-     <br><br><br><br>
-     <div class="col-sm-12" align="center">
+     
+     <div class="col-md-10 col-md-offset-1" align="center">
      	<br><br>
-        <h3 align="center"><font color="teal">Tabla Acumuladora de Datos</font></h3>
-        	<br>
-        	<table>
-        	<tbody>
-        		<tr>
-					<td>Sumatoria de Incisivos Superior&nbsp;&nbsp;&nbsp;</td>
-					<td id="td1"></td>
-					<td>&nbsp;&nbsp; + &nbsp;&nbsp;</td>
-					<td id="td2"></td>
-					<td id="to1"></td>
-				</tr>
-        	</tbody>
-        	</table>
+     	<div class="panel panel-success">
+		  	<div class="panel-heading">
+		    	<h3 class="panel-title">Espacio Disponible Anterior</h3>
+		  	</div>
+		  <div class="panel-body">
+	        	<br>
+	        	<table>
+	        	<tbody>
+	        		<tr>
+						<td>Sumatoria de Incisivos Superior&nbsp;&nbsp;&nbsp;</td>
+						<td id="td1"></td>
+						<td>&nbsp;&nbsp; + &nbsp;&nbsp;</td>
+						<td id="td2"></td>
+						<td id="to1"></td>
+					</tr>
+	        	</tbody>
+	        	</table>
 
-        	<br>
-        	<br>
+	        	<br>
+	        	<br>
 
-        	<table>
-			<tbody>
-				<tr>
-					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
-					<td id = "edi2"></td>
-					<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/moysup3.jpg' %}">&nbsp;&nbsp;&nbsp;</td>
-					<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
-					<td id = "edd2"></td>
-				</tr>
-				<tr>
-					<td>Tamaño predecible <br> para 1-3, 1-4 y 1-5 <br> segun tabla de Moyers</td>
-					<td id = "tpi"></td>
-					<td>Tamaño predecible <br> para 2-3, 2-4 y 2-5 <br> segun tabla de Moyers</td>
-					<td id = "tpd"></td>
-				</tr>
-				<tr>
-					<td>DIFERENCIA</td>
-					<td id = "ri"></td>
-					<td>DIFERENCIA</td>
-					<td id = "rd"></td>
-				</tr>				
-			</tbody>
-			</table>
+	        	<table>
+				<tbody>
+					<tr>
+						<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
+						<td id = "edi2"></td>
+						<td rowspan=3>&nbsp;&nbsp;&nbsp;<img src=" {% static 'images/moysup3.jpg' %}">&nbsp;&nbsp;&nbsp;</td>
+						<td>Espacio disponible posterior <br> dista de lateral a mesial <br> de 1° molar</td>
+						<td id = "edd2"></td>
+					</tr>
+					<tr>
+						<td>Tamaño predecible <br> para 1-3, 1-4 y 1-5 <br> segun tabla de Moyers</td>
+						<td id = "tpi"></td>
+						<td>Tamaño predecible <br> para 2-3, 2-4 y 2-5 <br> segun tabla de Moyers</td>
+						<td id = "tpd"></td>
+					</tr>
+					<tr>
+						<td>DIFERENCIA</td>
+						<td id = "ri"></td>
+						<td>DIFERENCIA</td>
+						<td id = "rd"></td>
+					</tr>				
+				</tbody>
+				</table>
+			</div>
         </div>
 
 
@@ -10135,7 +10145,7 @@
 			</div> 
 
 			<div class="col-md-3 col-md-offset-1">
-			  <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
+			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
 			</div>
 		
 		</div>
@@ -10149,7 +10159,7 @@
         <br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 90%;"></div>
+            <div class="progress-bar progress-bar-success" style="width: 90%;"></div>
         </div>
         </div>
 
