@@ -341,7 +341,7 @@ $( "#eliminar_expediente" ).click(function() {
 		    $.ajax({
 				data : {'codigo':codigo},
 				url : '/informacion/eliminar_expediente/',
-				type : 'get',
+				type : 'post',
 				success: function(data){
 					swal("Se elimino correctamente!", "You clicked the button!", "success")
 					swal({

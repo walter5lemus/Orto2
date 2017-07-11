@@ -65,20 +65,41 @@ def citas_editar(request,codi,num):
 		usuario2=0
 		if usuario:
 			usuario2=1
-
-		#try:
-		ids = fichas.objects.get(cod_expediente=codi,numero=num,completada=0)
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
 		if ids:
 			form = citasGeneralesForm(initial={'estudiante':request.user.username})
 			form2 = citasForm(initial={})
 			form3 = citasGeneralesForm2()
 			form4 = citasForm2(initial={})
 			return render(request, 'citas/citas_editar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num})
-	#except Exception as e:
-			#return render(request, 'base/error_no_tiene_permiso_cerrada.html')
 	else:
 		return render(request, 'base/error_no_encontrado.html')
 
+def citas_editar2(request,codi,num,numeroCita):
+
+	if request.user.is_superuser==1:
+		if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
+			ids = fichas.objects.get(cod_expediente=codi,numero=num)
+			if ids:
+				datos_generale = datos_generales.objects.get(cod_expediente=codi)
+				datosCitas = citas.objects.get(fichas_id=ids.id,num_cita=numeroCita)
+				datosCitasGenerales = citas_general.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = citasGeneralesForm_editar(instance=datosCitasGenerales)
+					form2 = citasForm(instance=datosCitas)
+					return render(request, 'citas/citas_editar2.html', {'form':form,'form2':form2,'codi':codi,'num':num,'numeroCita':numeroCita,'nombre':datos_generale.nombre_completo})
+				else:
+					form = citasGeneralesForm(request.POST,instance=datosCitasGenerales)
+					form2 = citasForm(request.POST,instance=datosCitas)
+					if form.is_valid():
+						form.save()
+						form2.save()
+					return redirect('/citas/editar/%s/%s/' %(codi,num))
+
+		else:
+			return render(request, 'base/error_no_encontrado.html')
+	else:
+		return render(request, 'base/error_no_hay_acceso.html')
 def citas_consultar(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		user = request.user.id
@@ -130,6 +151,22 @@ def post1(request):
 			ids= fichas.objects.get(cod_expediente=cod,numero=num)
 			citas_general.objects.create(aparato=aparato,fichas_id=ids.id,estudiante_id=id_estudiante.id,mx=radioMx,md=radioMd)
 			return HttpResponse('<script>alert("cita creada con exito");</script>')
+		else:
+			return HttpResponse('No se encuentran fichas incompletas', status=401)
+
+def eliminar_cita(request):
+	cod = request.POST['codigo']
+	num = request.POST['numero']
+	numeroCita = request.POST['numeroCita']
+
+	if request.method == 'POST':
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+			ids= fichas.objects.get(cod_expediente=cod,numero=num)
+			if citas.objects.filter(fichas_id=ids.id,num_cita=numeroCita).exists():
+				citas.objects.filter(fichas_id=ids.id,num_cita=numeroCita).delete()
+				return HttpResponse('<script>alert("cita creada con exito");</script>')
+			else:
+				return HttpResponse('No se encuentran fichas incompletas', status=401)
 		else:
 			return HttpResponse('No se encuentran fichas incompletas', status=401)
 

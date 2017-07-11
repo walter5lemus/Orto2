@@ -1,0 +1,178 @@
+	{% extends 'base/base_editar.html' %}
+
+{% block title %}
+	Editar Cita
+
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+	{% csrf_token %}
+
+	<div class="row">
+	<ul>
+	  {% if form.non_field_errors %}
+	    <li>{{ form.non_field_errors }}</li>
+	  {% endif %}
+	  {% for field in form %}
+	    {% if field.errors %}
+	      <li class="alert alert-danger">
+	        <strong>{{ field.label }}</strong>
+	        <ul>
+	          {% for error in field.errors %}
+	            <li class="alert alert-danger"><strong>{{ error }}</li></strong>
+	          {% endfor %}
+	        </ul>
+	      </li>
+	    {% endif %}
+	  {% endfor %}
+	</ul>
+	</div>
+	<h2><center>Editar Cita</center></h2>
+<br>
+
+ <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+  <div class="panel-body">
+
+ 	
+	<div class="row fuera" >
+
+		<div class="col-md-1 col-md-offset-2">
+			<div class="form-group">
+				<label for="{{form2.num_cita.name}}">{{form2.num_cita.label}}</label>
+				{{form2.num_cita}}
+			</div>
+		</div>
+			
+
+		<div class="col-md-5">
+			<div class="form-group">
+				<label for="cod_expediente">Nombre del Paciente</label>	
+				<input readonly type="text" class="form-control" id="id_nombre">
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="{{form.aparato.name}}">{{form.aparato.label}}</label>	
+				{{form.aparato}}
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-1">
+			<div class="form-group">
+				{{form.estudiante}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="form-group fuera ocultarmx">
+			<div class="col-md-4 col-md-offset-3">
+					<label for="{{form.mx.name}}">{{form.mx.label}}</label>	
+					{{form.mx}}
+			</div>
+			<div class="col-md-2">
+					<label for="{{form.md.name}}">{{form.md.label}}</label>	
+					{{form.md}}
+			</div>	
+				
+		</div>
+
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			{{form.fichas}}
+
+		</div>
+	</div>
+	
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-6">
+				<label for="{{form2.fecha_cita.name}}" >{{form2.fecha_cita.label}}</label>
+					{{form2.fecha_cita}}
+		</div>
+		<div class="col-md-6">
+				<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
+				{{form2.proxima_cita}}
+		</div>
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-6">
+			<label for="{{form2.observaciones.name}}">{{form2.observaciones.label}}</label>	
+			{{form2.observaciones}}
+		</div>
+
+		<div class="col-md-6">
+			<label for="{{form2.resultados.name}}">{{form2.resultados.label}}</label>	
+			{{form2.resultados}}
+		</div>
+	</div>
+
+		<div class="col-md-2 col-md-offset-3">
+			<div class="form-group">
+			<br><br><br>
+				<label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
+				{{form2.autorizacion}}
+			</div>
+		</div>
+	
+	<div class="col-md-4">
+		<div class="form-group">
+		<br><br>
+			<label for="{{form2.tutor.name}}">{{form2.tutor.label}}</label>	
+			{{form2.tutor}}	
+		</div>
+	</div>
+</div>
+</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="form-group">
+			<br>
+			<div class="col-md-3 col-md-offset-3">
+			  <center><button type="button" onclick=" location.href='/citas/editar/{{codi}}/{{num}}'" class="btn btn-warning btn-block">Cancelar</button>
+			  </center>
+			</div>
+			<div class="col-md-3 ">
+			  <center><button type="submit" class="btn btn-success btn-block">Siguiente</button>
+			  </center>
+			</div>
+		    <br><br>
+		</div>
+	</div>
+
+        <!-- Barra de progreso -->
+		<br><br>
+		<div class="col-md-10 col-md-offset-1">
+		<div class="progress">
+  			<div class="progress-bar" style="width: 6%;"></div>
+		</div>
+		</div>
+		<br><br>
+
+
+</form>
+
+
+<script type="text/javascript">
+
+	$('#id_aparato').prop("readonly", false);
+	$('#id_num_cita').prop("readonly", true);
+	$('#id_nombre').val("{{nombre}}");
+
+</script>
+	
+{% endblock %}

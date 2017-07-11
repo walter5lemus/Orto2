@@ -107,6 +107,34 @@ class citasGeneralesForm(forms.ModelForm):
 
 		}
 
+class citasGeneralesForm_editar(forms.ModelForm):
+	class Meta:
+		model = citas_general
+
+		fields = [
+		'fichas',
+		'aparato',
+		'mx',
+		'md',
+		'estudiante',
+		]
+
+		labels={
+		'fichas': 'Codigo Expediente',
+		'aparato':'Aparato',
+		'mx':'Maxilar (Mx)',
+		'md':'Mandibular (Md)',
+		'estudiante':'Estudiante',
+		}
+		widgets = {
+		'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
+		'aparato':forms.Select(attrs={'class':'form-control'}),
+		'mx':forms.CheckboxInput(attrs={'class':''}),
+		'md':forms.CheckboxInput(attrs={'class':''}),
+		'estudiante':forms.HiddenInput(attrs={'class':'form-control'}),
+
+		}
+
 class citasGeneralesForm2(forms.ModelForm):
 	class Meta:
 		model = citas_general

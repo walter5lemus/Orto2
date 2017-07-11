@@ -8,12 +8,13 @@ from app.citas.views import *
 urlpatterns = [
  url(r'^nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(citas_crear), name= 'citasCrear'),
  url(r'^editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(citas_editar), name= 'citaseditar'),
-
+ url(r'^editar2/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/(?P<numeroCita>\d+)/$', login_required(citas_editar2), name= 'citaseditar2'),
  url(r'^consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(citas_consultar), name= 'citasConsultar'),
 
 
 
  url(r'^post1/', login_required(post1), name= 'post1'),
+ url(r'^eliminar/', login_required(eliminar_cita), name= 'eliminar_cita'),
  url(r'^post2/', login_required(post2), name= 'post2'),
  
 
