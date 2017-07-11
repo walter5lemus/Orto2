@@ -173,6 +173,29 @@
 	$('#id_num_cita').prop("readonly", true);
 	$('#id_nombre').val("{{nombre}}");
 
+	$(document).ready(function(){
+	    $("#id_fecha_cita").datepicker({
+	        dateFormat: 'yy-mm-dd',
+	        numberOfMonths: 2,
+	        onSelect: function(selected) {
+	          var fechaParse = new Date($("#id_fecha_cita").val())
+			  fechaParse.setDate(fechaParse.getDate() + 2);
+	          $("#id_proxima_cita").datepicker("option","minDate", fechaParse)
+	        }
+	    });
+	    $("#id_proxima_cita").datepicker({ 
+	        minDate: 0,
+	        dateFormat: 'yy-mm-dd',
+	        maxDate:"+60D",
+	        numberOfMonths: 2,
+	        onSelect: function(selected) {
+	           $("#id_fecha_cita").datepicker("option","maxDate", selected)
+	        }
+	    });  
+	});
+
+	
+
 </script>
 	
 {% endblock %}
