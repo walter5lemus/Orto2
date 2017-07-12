@@ -23,7 +23,7 @@ class diagGeneralForm(forms.ModelForm):
 		labels = {
 			'fichas': 'Numero de Ficha',
 
-			'diagnostico_ortodontico_general': "Diagnostico Ortodontico General", 
+			'diagnostico_ortodontico_general': "Diagnóstico Ortodóntico General", 
 			'problemas': "Problemas",
 			'objetivos': "Objetivos",
 			'tratamiento': "Tratamiento",
@@ -60,7 +60,7 @@ class diagGeneralForm_consultar(forms.ModelForm):
 		labels = {
 			'fichas': 'Numero de Ficha',
 
-			'diagnostico_ortodontico_general': "Diagnostico Ortodontico General", 
+			'diagnostico_ortodontico_general': "Diagnóstico Ortodóntico General", 
 			'problemas': "Problemas",
 			'objetivos': "Objetivos",
 			'tratamiento': "Tratamiento",

@@ -57,7 +57,7 @@ class DatosGeneralesForm(forms.ModelForm):
 			'edad_registro':'Edad Registro',
 			'fecha_nac':'Fecha de Nacimiento',
 			'telefono':'Teléfono',
-			'genero':'Genero',
+			'genero':'Género',
 			'direccion':'Dirección',
 			'departamento':'Departamento',
 			'nombre_resp':'Nombre del Padre o Encargado',
@@ -109,7 +109,7 @@ class DatosGeneralesForm_consultar(forms.ModelForm):
 			'edad_registro':'Edad Registro',
 			'fecha_nac':'Fecha de Nacimiento',
 			'telefono':'Teléfono',
-			'genero':'Genero',
+			'genero':'Género',
 			'direccion':'Dirección',
 			'departamento':'Departamento',
 			'nombre_resp':'Nombre del Padre o Encargado',
@@ -172,7 +172,7 @@ class MotivoConsultaForm(forms.ModelForm):
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
 			'curso':'Curso',
-			'rotacion':'Rotacion',
+			'rotacion':'Rotación',
 			'turno':'Turno',
 		}
 		widgets={

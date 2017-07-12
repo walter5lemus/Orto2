@@ -5,7 +5,7 @@ genero_choices = (
 )
 
 YES_OR_NO = (
-    (True, 'Si'),
+    (True, 'Sí'),
     (False, 'No')
 )
 

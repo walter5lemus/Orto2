@@ -1,7 +1,7 @@
 INSERT INTO `informacion_catalogo_enfermedades` (`id_enfermedad`, `nombre_enfermedad`) VALUES
 (1, 'Alergias'),
 (2, 'Desmayos'),
-(3, 'Presión sanguinea alta'),
+(3, 'Presión sanguínea alta'),
 (4, 'Sinusitis'),
 (5, 'Hepatitis'),
 (6, 'Transtornos de la sangre'),

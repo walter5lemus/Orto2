@@ -12,14 +12,14 @@ competencia_labial_choices = (
 )
 
 perfil_total_choices = (
-    (1, ("Ortonagtico")),
+    (1, ("Ortognático")),
     (2, ("Divergente Anterior")),
     (3, ("Divergente Posterior"))
 )
 
 ptercio_inferior_choices = (
     (1, ("Recto")),
-    (2, ("Concavo")),
+    (2, ("Cóncavo")),
     (3, ("Convexo"))
 )
 

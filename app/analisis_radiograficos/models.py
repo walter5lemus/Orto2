@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from app.informacion.models import fichas
@@ -27,7 +28,7 @@ class aspectos_articulares(models.Model):
 
 #Otros Aspectos
 
-BOOL_CHOICES = ((True, 'Simetria'), (False, 'Asimetria'))
+BOOL_CHOICES = ((True, 'Simetría'), (False, 'Asimetría'))
 
 class aspectos_mandibulares2(models.Model):
 

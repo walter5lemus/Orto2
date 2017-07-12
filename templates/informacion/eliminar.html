@@ -319,7 +319,7 @@ $( "#eliminar_expediente" ).click(function() {
 	var codigo = $("#input_codigo").val();
 	swal({
 		  title: "¿Desea Eliminar el Expediente "+codigo+"?",
-		  text: "¡Al eliminar este expediente se borraron todo lo que este relacionado con el!",
+		  text: "¡Al eliminar este expediente se borrará todo lo que este relacionado con él!",
 		  type: "error",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
@@ -330,7 +330,7 @@ $( "#eliminar_expediente" ).click(function() {
 		function(){
 		swal({
 		  title: "¡AVISO!",
-		  text: "¡El expediente "+codigo+" que esta apunto de eliminar no se podrá recuperar!",
+		  text: "¡El expediente "+codigo+" que está apunto de eliminar no se podrá recuperar!",
 		  type: "error",
 		  showCancelButton: true,
 		  closeOnConfirm: false,
@@ -341,7 +341,7 @@ $( "#eliminar_expediente" ).click(function() {
 		    $.ajax({
 				data : {'codigo':codigo},
 				url : '/informacion/eliminar_expediente/',
-				type : 'post',
+				type : 'get',
 				success: function(data){
 					swal("Se elimino correctamente!", "You clicked the button!", "success")
 					swal({
@@ -371,7 +371,7 @@ $( "#eliminar_ficha" ).click(function() {
 
 	swal({
 		  title: "¿Desea Eliminar la Ficha "+ficha+" del Expediente "+codigo+"?",
-		  text: "¡Se eliminaran los datos que esten relacionados con ella!",
+		  text: "¡Se eliminarán los datos que estén relacionados con ella!",
 		  type: "error",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
@@ -382,7 +382,7 @@ $( "#eliminar_ficha" ).click(function() {
 		function(){
 		swal({
 		  title: "AVISO!",
-		  text: "¿Esta acción no se podra deshacer?",
+		  text: "¿Esta acción no se podrá deshacer?",
 		  type: "warning",
 		  showCancelButton: true,
 		  closeOnConfirm: false,
@@ -395,10 +395,10 @@ $( "#eliminar_ficha" ).click(function() {
 				url : '/informacion/eliminar_ficha/',
 				type : 'get',
 				success: function(data){
-					swal("Se elimino correctamente!", "You clicked the button!", "success")
+					swal("¡Se eliminó correctamente!", "You clicked the button!", "success")
 					swal({
-					  title: "Ok!",
-					  text: "¡Se elimino correctamente!",
+					  title: "¡Ok!",
+					  text: "¡Se eliminó correctamente!",
 					  type: "success",
 					  showCancelButton: true,
 					  confirmButtonColor: "#DD6B55",

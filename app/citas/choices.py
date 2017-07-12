@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 aparato_choices = (
     (1, ("Ortodoncia Fija")),
-    (2, ("Boton de Nance")),
-    (3, ("Boton de Nance")),
+    (2, ("Botón de Nance")),
+    (3, ("Botón de Nance")),
     (4, ("Arco Lingua")),
     (5, ("Tornillo Hirax")),
     (6, ("Barra Transpalatina")),

@@ -155,20 +155,20 @@ class ReportePersonasPDF(View):
         diagCefalo =  diagnostico_cefalometrico.objects.get(fichas_id=ids.id)   
         diagGen =  diagnostico_general.objects.get(fichas_id=ids.id)
        
-        pdf.drawString(50, 560, "Radiograficamente presenta:")
-        pdf.drawString(80, 520, "Patron Esqueletal")
+        pdf.drawString(50, 560, "Radiográficamente presenta:")
+        pdf.drawString(80, 520, "Patrón Esqueletal")
         pdf.drawString(250, 520, diagCefalo.get_patron_esqueletal_display())
         pdf.drawString(80, 480, "Tipo de Crecimiento")
         pdf.drawString(250, 480, diagCefalo.get_tipo_de_crecimiento_display())
         pdf.drawString(80, 440, "Medidas Dentales")
         pdf.drawString(250, 440, diagCefalo.get_medidas_dentales_display())
-        pdf.drawString(80, 400, "Medidas Esteticas")
+        pdf.drawString(80, 400, "Medidas Estéticas")
         pdf.drawString(250, 400, diagCefalo.medidas_esteticas)
 
 
 
-        pdf.drawString(50, 340, "Clinicamente se Observa:")
-        pdf.drawString(80, 300, "Diagnostico Ortodontico General")
+        pdf.drawString(50, 340, "Clínicamente se Observa:")
+        pdf.drawString(80, 300, "Diagnóstico Ortodóntico General")
         
         styles = getSampleStyleSheet()
 
@@ -194,7 +194,7 @@ class ReportePersonasPDF(View):
         pdf.drawString(190, 58, u"Universidad de El Salvador")
         pdf.drawString(130, 46, u"Final 25 Av. Nte, Ciudad Universitaria, San Salvador")
         pdf.drawString(200, 34, u"Tels.: (503) 2225 7198")
-        pdf.drawString(182, 20, u"www.odontología.ues.edu.sv")
+        pdf.drawString(182, 20, u"www.odontologia.ues.edu.sv")
         archivo_imagen3 = settings.MEDIA_ROOT+'/imagenes/logofb.jpg'
         pdf.drawImage(archivo_imagen3, 440 , 25, 40, 40,preserveAspectRatio=True)
         archivo_imagen4 = settings.MEDIA_ROOT+'/imagenes/logotw.jpg'
@@ -263,7 +263,7 @@ def generar_pdf_Caducar(request):
     p1 = Paragraph(universidad, headerStyle)
     clientes.append(p1)
 
-    facultad = "FACULTAD DE ODONTOLOGIA"
+    facultad = "FACULTAD DE ODONTOLOGÍA"
     p1 = Paragraph(facultad, headerStyle2)
     clientes.append(p1)
 
@@ -277,7 +277,7 @@ def generar_pdf_Caducar(request):
     p1 = Paragraph(tex, headerStyle)
     clientes.append(p1) 
 
-    headings = ('Codigo Expediente', 'N° de Ficha','Nombre Completo','Usuario Creador')
+    headings = ('Código Expediente', 'N° de Ficha','Nombre Completo','Usuario Creador')
     allclientes = [(p.cod_expediente, p.numero, p.cod_expediente.nombre_completo,p.cod_expediente.usuario_creador) for p in fichas.objects.filter(completada=0)  ]
 
 

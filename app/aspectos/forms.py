@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 from django import forms
 from app.aspectos.models import *
 from app.aspectos.choices import *
@@ -73,7 +74,7 @@ class tipo_denticionForm(forms.ModelForm):
 		]
 		labels = {
 			'fichas': 'Ficha',
-			'tipo': 'Tipo de denticion',
+			'tipo': 'Tipo de dentición',
 		}
 		widgets = {
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
@@ -91,7 +92,7 @@ class tipo_denticionForm_consultar(forms.ModelForm):
 		]
 		labels = {
 			'fichas': 'Ficha',
-			'tipo': 'Tipo de denticion',
+			'tipo': 'Tipo de dentición',
 		}
 		widgets = {
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
@@ -147,7 +148,7 @@ class denticionForm(forms.ModelForm):
 			'fichas': 'Ficha',
 			'mal_posiciones': 'Mal posiciones',
 			'tejido_intraorales': 'Tejidos intraorales',
-			'encias': 'Encias',
+			'encias': 'Encías',
 			'frenillos': 'Frenillos',
 			'lengua': 'Lengua',
 			'observaciones_generales': 'Observaciones',
@@ -180,7 +181,7 @@ class denticionForm_consultar(forms.ModelForm):
 			'fichas': 'Ficha',
 			'mal_posiciones': 'Mal posiciones',
 			'tejido_intraorales': 'Tejidos intraorales',
-			'encias': 'Encias',
+			'encias': 'Encías',
 			'frenillos': 'Frenillos',
 			'lengua': 'Lengua',
 			'observaciones_generales': 'Observaciones',
@@ -416,8 +417,8 @@ class RelacionSagitalForm(forms.ModelForm):
 			'canina_derecha': 'Canina Derecha',
 			'canina_izquierda': 'Canina Izquierda',
 			'plano_termina_recto': 'Plano Termina Recto',
-			'escalon_mesial': 'Escalon Mesial',
-			'escalon_distal': 'Escalon Distal',
+			'escalon_mesial': 'Escalón Mesial',
+			'escalon_distal': 'Escalón Distal',
 			'observaciones': 'Observaciones',
 		}
 
@@ -457,8 +458,8 @@ class RelacionSagitalForm_consultar(forms.ModelForm):
 			'molar_izquierda': 'Molar Izquierda',
 			'canina_derecha': 'Canina Derecha',
 			'canina_izquierda': 'Canina Izquierda',
-			'escalon_mesial': 'Escalon Mesial',
-			'escalon_distal': 'Escalon Distal',
+			'escalon_mesial': 'Escalón Mesial',
+			'escalon_distal': 'Escalón Distal',
 			'observaciones': 'Observaciones',
 		}
 
@@ -489,9 +490,9 @@ class FuncionMandibularForm(forms.ModelForm):
 		labels = {
 			'fichas': 'Numero de Ficha'	,
 			'apertura': 'Apertura',
-			'desv_afmp_derecho': 'Desviacion AFMP Derecho',
-			'desv_afmp_izquierdo': 'Desviacion AFMP Izquierdo',
-			'signos_sintomas_atm': 'Signos y Sintomas ATM',
+			'desv_afmp_derecho': 'Desviación AFMP Derecho',
+			'desv_afmp_izquierdo': 'Desviación AFMP Izquierdo',
+			'signos_sintomas_atm': 'Signos y Síntomas ATM',
 		}
 
 		widgets = {
@@ -517,9 +518,9 @@ class FuncionMandibularForm_consultar(forms.ModelForm):
 		labels = {
 			'fichas': 'Codigo Expediente y Numero de Ficha'	,
 			'apertura': 'Apertura',
-			'desv_afmp_derecho': 'Desviacion AFMP Derecho',
-			'desv_afmp_izquierdo': 'Desviacion AFMP Izquierdo',
-			'signos_sintomas_atm': 'Signos y Sintomas ATM',
+			'desv_afmp_derecho': 'Desviación AFMP Derecho',
+			'desv_afmp_izquierdo': 'Desviación AFMP Izquierdo',
+			'signos_sintomas_atm': 'Signos y Síntomas ATM',
 		}
 
 		widgets = {

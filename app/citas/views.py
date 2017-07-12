@@ -227,7 +227,7 @@ class finalizar(TemplateView):
 					if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
 						if estado_general.objects.filter(fichas_id=fi.id).exists():
 							if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-								#if registro.objects.filter(fichas_id=fi.id).exists():
+								if registro.objects.filter(fichas_id=fi.id).exists():
 									#if registro_mordidas.objects.filter(fichas_id=fi.id).exists():
 										#if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
 									if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():

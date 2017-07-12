@@ -37,7 +37,7 @@ class Tipo_perfilForm(forms.ModelForm):
 			'tipo_competenciaLabial': 'Competencia labial', 
 
 			'tipoNariz': 'Tipo de nariz',
-			'angulo_Naso_labial': 'Angulo naso labial',
+			'angulo_Naso_labial': 'Ángulo nasolabial',
 			'tercio_superior': 'Tercio Superior',
 			'tercio_medio': 'Tercio Medio',
 			'tercio_inferior': 'Tercio Inferior',
@@ -105,7 +105,7 @@ class Tipo_perfilForm_consultar(forms.ModelForm):
 			'tipo_competenciaLabial': 'Competencia labial', 
 
 			'tipoNariz': 'Tipo de nariz',
-			'angulo_Naso_labial': 'Angulo naso labial',
+			'angulo_Naso_labial': 'Ángulo nasolabial',
 			'tercio_superior': 'Tercio Superior',
 			'tercio_medio': 'Tercio Medio',
 			'tercio_inferior': 'Tercio Inferior',

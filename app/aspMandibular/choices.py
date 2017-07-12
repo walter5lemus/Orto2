@@ -1,4 +1,5 @@
+# -*- coding: utf-8 -*-
 Simetria = (
-    (1, 'Simetrica'),
-    (0, 'Asimetrica')
+    (1, 'Simétrica'),
+    (0, 'Asimétrica')
 )
