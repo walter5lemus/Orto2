@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from app.diagCefalo.models import diagnostico_cefalometrico
 from app.informacion.models import fichas
@@ -20,11 +21,11 @@ class diagCefaloForm(forms.ModelForm):
 
 		labels = {
 			'fichas': 'Numero de Ficha',
-			'patron_esqueletal': "Patron Esqueletal",
+			'patron_esqueletal': "Patrón Esqueletal",
 			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
 			'medidas_dentales': "Medidas Dentales",
-			'medidas_esteticas': "Medidas Esteticas",
+			'medidas_esteticas': "Medidas Estéticas",
 		}
 
 		widgets = {
@@ -54,11 +55,11 @@ class diagCefaloForm_consultar(forms.ModelForm):
 
 		labels = {
 			'fichas': 'Numero de Ficha',
-			'patron_esqueletal': "Patron Esqueletal",
+			'patron_esqueletal': "Patrón Esqueletal",
 			'otro_patron': "Otros:", 
 			'tipo_de_crecimiento': "Tipo de Crecimiento",
 			'medidas_dentales': "Medidas Dentales",
-			'medidas_esteticas': "Medidas Esteticas",
+			'medidas_esteticas': "Medidas Estéticas",
 		}
 
 		widgets = {

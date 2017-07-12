@@ -51,18 +51,18 @@ class DatosGeneralesForm(forms.ModelForm):
 		]
 
 		labels={
-			'cod_expediente':'Codigo Expediente',
+			'cod_expediente':'Código Expediente',
 			'nombre_completo':'Nombre Completo',
 			'edad':'Edad Actual',
 			'edad_registro':'Edad Registro',
 			'fecha_nac':'Fecha de Nacimiento',
-			'telefono':'Telefono',
+			'telefono':'Teléfono',
 			'genero':'Genero',
-			'direccion':'Direccion',
+			'direccion':'Dirección',
 			'departamento':'Departamento',
 			'nombre_resp':'Nombre del Padre o Encargado',
 			'usuario_creador':'Nombre y Carne del creador',
-			'fecha_hora_creacion':'Fecha y hora de creacion',
+			'fecha_hora_creacion':'Fecha y hora de creación',
 		}
 
 		widgets={
@@ -103,18 +103,18 @@ class DatosGeneralesForm_consultar(forms.ModelForm):
 		]
 
 		labels={
-			'cod_expediente':'Codigo Expediente',
+			'cod_expediente':'Código Expediente',
 			'nombre_completo':'Nombre Completo',
 			'edad':'Edad Actual',
 			'edad_registro':'Edad Registro',
 			'fecha_nac':'Fecha de Nacimiento',
-			'telefono':'Telefono',
+			'telefono':'Teléfono',
 			'genero':'Genero',
-			'direccion':'Direccion',
+			'direccion':'Dirección',
 			'departamento':'Departamento',
 			'nombre_resp':'Nombre del Padre o Encargado',
 			'usuario_creador':'Nombre y Carne del creador',
-			'fecha_hora_creacion':'Fecha y hora de creacion',
+			'fecha_hora_creacion':'Fecha y hora de creación',
 		}
 
 		widgets={
@@ -144,7 +144,7 @@ class FichasForm(forms.ModelForm):
 		]
 
 		labels={
-			'cod_expediente': 'Codigo de Expediente',
+			'cod_expediente': 'Código de Expediente',
 			'numero':'Numero de ficha a crear',
 		}
 		widgets={
@@ -168,7 +168,7 @@ class MotivoConsultaForm(forms.ModelForm):
 			'turno',
 		]
 		labels={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
+			'fichas': 'Código Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
 			'curso':'Curso',
@@ -209,11 +209,11 @@ class MotivoConsultaForm_consultar(forms.ModelForm):
 			'turno',
 		]
 		labels={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
+			'fichas': 'Código Expediente y Numero de Ficha'	,
 			'motivo_consulta':'Motivo de Consulta',
 			'fechaRegistro':'Fecha de Registro',
 			'curso':'Curso',
-			'rotacion':'Rotacion',
+			'rotacion':'Rotación',
 			'turno':'Turno',
 		}
 		widgets={
@@ -242,10 +242,10 @@ class EstadoGeneralForm(forms.ModelForm):
 		]
 
 		labels ={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
-			'cambio_salud' : '¿Ha habido cambio en su salud en el ultimo año?  ',
+			'fichas': 'Código Expediente y Numero de Ficha'	,
+			'cambio_salud' : '¿Ha habido cambio en su salud en el último año?  ',
 			'detalle_enf_operacion' : '¿En que consistió la enfermedad u operación?',
-			'detalle_medicamento' : '¿Toma algun medicamento?',
+			'detalle_medicamento' : '¿Toma algún medicamento?',
 			'detalle_otra_enfermedad' : '¿Otras enfermedades?',
 			'otras_enfermedades': 'Padeció alguna vez las siguientes enfermedades:',
 		}
@@ -273,12 +273,12 @@ class EstadoGeneralForm_consultar(forms.ModelForm):
 		]
 
 		labels ={
-			'fichas': 'Codigo Expediente y Numero de Ficha',
-			'cambio_salud' : 'Cambio de Salud',
-			'detalle_enf_operacion' : 'En que Consistio la enfermedad u operacion',
-			'detalle_medicamento' : 'Medicamento Que ha tomado',
-			'detalle_otra_enfermedad' : 'otras enfermedades',
-			'otras_enfermedades': 'Tuvo alguna de estas enfermedades ',
+			'fichas': 'Código Expediente y Numero de Ficha'	,
+			'cambio_salud' : '¿Ha habido cambio en su salud en el último año?  ',
+			'detalle_enf_operacion' : '¿En que consistió la enfermedad u operación?',
+			'detalle_medicamento' : '¿Toma algún medicamento?',
+			'detalle_otra_enfermedad' : '¿Otras enfermedades?',
+			'otras_enfermedades': 'Padeció alguna vez las siguientes enfermedades:',
 		}	
 		widgets={
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),

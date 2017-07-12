@@ -27,7 +27,7 @@ class diagGeneralForm(forms.ModelForm):
 			'problemas': "Problemas",
 			'objetivos': "Objetivos",
 			'tratamiento': "Tratamiento",
-			'descripcion_tratamiento': "Descripcion del Plan de Tratamiento",
+			'descripcion_tratamiento': "Descripción del Plan de Tratamiento",
 		}
 
 		widgets = {
@@ -64,7 +64,7 @@ class diagGeneralForm_consultar(forms.ModelForm):
 			'problemas': "Problemas",
 			'objetivos': "Objetivos",
 			'tratamiento': "Tratamiento",
-			'descripcion_tratamiento': "Descripcion del Plan de Tratamiento",
+			'descripcion_tratamiento': "Descripción del Plan de Tratamiento",
 		}
 
 		widgets = {

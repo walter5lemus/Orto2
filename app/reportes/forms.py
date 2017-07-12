@@ -15,8 +15,8 @@ class reportesForms(forms.ModelForm):
 		]
 
 		labels={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
-			'codigo':'Codigo',
+			'fichas': 'Código Expediente y Numero de Ficha'	,
+			'codigo':'Código',
 			'numero':'Numero de Ficha',
 		}
 

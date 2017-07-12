@@ -19,11 +19,11 @@ class citasForm(forms.ModelForm):
 		]
 
 		labels={
-		'fichas': 'Codigo Expediente',
+		'fichas': 'Código Expediente',
 		'num_cita':'N° de Cita',
 		'fecha_cita':'Fecha de Cita',
 		'observaciones':'Observaciones',
-		'proxima_cita':'Fecha de proxima cita',
+		'proxima_cita':'Fecha de próxima cita',
 		'resultados':'Resultados Esperados',
 		'autorizacion':'Autorización del Tutor',
 		'tutor':'Tutor',
@@ -57,11 +57,11 @@ class citasForm2(forms.ModelForm):
 		]
 
 		labels={
-		'fichas': 'Codigo Expediente',
+		'fichas': 'Código Expediente',
 		'num_cita':'N° de Cita',
 		'fecha_cita':'Fecha de Cita',
 		'observaciones':'Observaciones',
-		'proxima_cita':'Fecha de proxima cita',
+		'proxima_cita':'Fecha de próxima cita',
 		'resultados':'Resultados Esperados',
 		'autorizacion':'Autorización del Tutor',
 		'tutor':'Tutor',
@@ -92,7 +92,7 @@ class citasGeneralesForm(forms.ModelForm):
 		]
 
 		labels={
-		'fichas': 'Codigo Expediente',
+		'fichas': 'Código Expediente',
 		'aparato':'Aparato',
 		'mx':'Maxilar (Mx)',
 		'md':'Mandibular (Md)',
@@ -120,7 +120,7 @@ class citasGeneralesForm_editar(forms.ModelForm):
 		]
 
 		labels={
-		'fichas': 'Codigo Expediente',
+		'fichas': 'Código Expediente',
 		'aparato':'Aparato',
 		'mx':'Maxilar (Mx)',
 		'md':'Mandibular (Md)',
@@ -148,7 +148,7 @@ class citasGeneralesForm2(forms.ModelForm):
 		]
 
 		labels={
-		'fichas': 'Codigo Expediente',
+		'fichas': 'Código Expediente',
 		'aparato':'Aparato',
 		'mx':'Maxilar (Mx)',
 		'md':'Mandibular (Md)',

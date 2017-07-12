@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from app.aspMandibular.models import aspectos_mandibulares1
 from app.informacion.models import fichas
@@ -44,25 +45,25 @@ class aspMandibularForm(forms.ModelForm):
 
 			'rama_mand_anch_izq_altura': 'Izquierdo: (Altura)', 
 			'rama_mand_anch_der_altura': 'Derecho: (Altura)',
-			'rama_mand_anch_simetrico': 'Simetria:',
+			'rama_mand_anch_simetrico': 'Simetría:',
 			'rama_mand_anch_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'rama_mand_anch_der_aspect_observ':'Aspectos observados (derecho):',
 
 			'rama_mand_altur_izq_altura': 'Izquierdo: (Altura)', 
 			'rama_mand_altur_der_altura': 'Derecho: (Altura)',
-			'rama_mand_altur_simetrico': 'Simetria:',
+			'rama_mand_altur_simetrico': 'Simetría:',
 			'rama_mand_altur_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'rama_mand_altur_der_aspect_observ': 'Aspectos observados (derecho):',
 
 			'cuerpo_mand_altur_izq_altura': 'Izquierdo: (Altura)', 
 			'cuerpo_mand_altur_der_altura': 'Derecho: (Altura)',
-			'cuerpo_mand_altur_simetrico': 'Simetria:',
+			'cuerpo_mand_altur_simetrico': 'Simetría:',
 			'cuerpo_mand_altur_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'cuerpo_mand_altur_der_aspect_observ': 'Aspectos observados (derecho):',
 
 			'cuerpo_mand_long_izq_altura': 'Izquierdo: (Altura)', 
 			'cuerpo_mand_long_der_altura': 'Derecho: (Altura)',
-			'cuerpo_mand_long_simetrico': 'Simetria:',
+			'cuerpo_mand_long_simetrico': 'Simetría:',
 			'cuerpo_mand_long_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'cuerpo_mand_long_der_aspect_observ': 'Aspectos observados (derecho):',
 			
@@ -139,25 +140,25 @@ class aspMandibularForm_consultar(forms.ModelForm):
 
 			'rama_mand_anch_izq_altura': 'Izquierdo: (Altura)', 
 			'rama_mand_anch_der_altura': 'Derecho: (Altura)',
-			'rama_mand_anch_simetrico': 'Simetria:',
+			'rama_mand_anch_simetrico': 'Simetría:',
 			'rama_mand_anch_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'rama_mand_anch_der_aspect_observ':'Aspectos observados (derecho):',
 
 			'rama_mand_altur_izq_altura': 'Izquierdo: (Altura)', 
 			'rama_mand_altur_der_altura': 'Derecho: (Altura)',
-			'rama_mand_altur_simetrico': 'Simetria:',
+			'rama_mand_altur_simetrico': 'Simetría:',
 			'rama_mand_altur_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'rama_mand_altur_der_aspect_observ': 'Aspectos observados (derecho):',
 
 			'cuerpo_mand_altur_izq_altura': 'Izquierdo: (Altura)', 
 			'cuerpo_mand_altur_der_altura': 'Derecho: (Altura)',
-			'cuerpo_mand_altur_simetrico': 'Simetria:',
+			'cuerpo_mand_altur_simetrico': 'Simetría:',
 			'cuerpo_mand_altur_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'cuerpo_mand_altur_der_aspect_observ': 'Aspectos observados (derecho):',
 
 			'cuerpo_mand_long_izq_altura': 'Izquierdo: (Altura)', 
 			'cuerpo_mand_long_der_altura': 'Derecho: (Altura)',
-			'cuerpo_mand_long_simetrico': 'Simetria:',
+			'cuerpo_mand_long_simetrico': 'Simetría:',
 			'cuerpo_mand_long_izq_aspect_observ': 'Aspectos observados (izquierdo)',
 			'cuerpo_mand_long_der_aspect_observ': 'Aspectos observados (derecho):',
 			

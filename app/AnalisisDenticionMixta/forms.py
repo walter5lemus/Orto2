@@ -15,7 +15,7 @@ class nance_generalForm(forms.ModelForm):
         ]
 
         labels={
-            'fichas': 'Codigo Expediente y Numero de Ficha' ,
+            'fichas': 'Código Expediente y Numero de Ficha' ,
             'ed_maxi':'Espacio Disponible Maxilar M1-6 a M2-6',
             'ed_mand': 'Espacio Disponible Mandibular M4-6 a M3-6',
         }
@@ -37,7 +37,7 @@ class nance_generalForm_Consultar(forms.ModelForm):
         ]
 
         labels={
-            'fichas': 'Codigo Expediente y Numero de Ficha' ,
+            'fichas': 'Código Expediente y Numero de Ficha' ,
             'ed_maxi':'Espacio Disponible Maxilar M1-6 a M2-6',
             'ed_mand': 'Espacio Disponible Mandibular M4-6 a M3-6',
         }
@@ -143,7 +143,7 @@ class moyersSupForm(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'ed_izquierdo': 'Ed Izquierdo',
             'ed_derecho': 'Ed Derecho',
         }
@@ -187,7 +187,7 @@ class moyersSupForm_consultar(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'ed_izquierdo': 'Ed Izquierdo',
             'ed_derecho': 'Ed Derecho',
         }
@@ -209,7 +209,7 @@ class moyersSupAncForm_consultar(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'posicion': 'Posición',
             'ancho_mesiodistal': 'Ancho Mesiodistal',
         }
@@ -232,7 +232,7 @@ class moyersInfForm(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'ed_izquierdo': 'Ed Izquierdo',
             'ed_derecho': 'Ed Derecho',
         }
@@ -255,7 +255,7 @@ class moyersInfAncForm(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'posicion': 'Posición',
             'ancho_mesiodistal': 'Ancho Mesiodistal',
         }
@@ -278,7 +278,7 @@ class moyersInfForm_consultar(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'ed_izquierdo': 'Ed Izquierdo',
             'ed_derecho': 'Ed Derecho',
         }
@@ -301,7 +301,7 @@ class moyersInfAncForm_consultar(forms.ModelForm):
         ]
 
         labels = {
-            'fichas': 'Numero de ficha',
+            'fichas': 'Número de ficha',
             'posicion': 'Posición',
             'ancho_mesiodistal': 'Ancho Mesiodistal',
         }

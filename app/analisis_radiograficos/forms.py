@@ -25,7 +25,7 @@ class AspectosArticularesForm(forms.ModelForm):
 		]
 
 		labels={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
+			'fichas': 'Código Expediente y Numero de Ficha'	,
 			'condilo_mand_izq_alto':'Altura',
 			'condilo_mand_izq_ancho':'Ancho',
 			'condilo_mand_der_alto':'Altura',
@@ -77,7 +77,7 @@ class AspectosArticularesForm_consultar(forms.ModelForm):
 		]
 
 		labels={
-			'fichas': 'Codigo Expediente y Numero de Ficha'	,
+			'fichas': 'Código Expediente y Numero de Ficha'	,
 			'condilo_mand_izq_alto':'Altura',
 			'condilo_mand_izq_ancho':'Ancho',
 			'condilo_mand_der_alto':'Altura',
@@ -132,7 +132,7 @@ class aspectos_mandibulares2Form(forms.ModelForm):
 		]
 
 		labels = {
-			'fichas': 'Numero de expediente y ficha',
+			'fichas': 'Número de expediente y ficha',
 			'aspectos_sinusales_simetrico': 'Aspectos Sinusales',
 			'aspectos_sinusales_izq_aspect_observ': 'Izquierdo',
 			'aspectos_sinusales_der_aspect_observ': 'Derecho',
@@ -272,7 +272,7 @@ class estadios_de_nollaForm(forms.ModelForm):
 
 		labels = {
 
-			'fichas': 'Numero de expediente y ficha',
+			'fichas': 'Número de expediente y ficha',
 			'e_1_1': '1-1',
 			'e_1_2': '1-2',
 			'e_1_3': '1-3',
@@ -305,7 +305,7 @@ class estadios_de_nollaForm(forms.ModelForm):
 			'e_4_6': '4-6',
 			'e_4_7': '4-7',
 			'e_4_8': '4-8',
-			'otros_hallazgos': 'Otros Hallazgos En Radiografia Panoramica',
+			'otros_hallazgos': 'Otros Hallazgos En Radiografía Panorámica',
 
 		}
 
@@ -541,7 +541,7 @@ class estadios_de_nollaConsultarForm(forms.ModelForm):
 			'e_4_6': '4-6',
 			'e_4_7': '4-7',
 			'e_4_8': '4-8',
-			'otros_hallazgos': 'Otros Hallazgos En Radiografia Panoramica',
+			'otros_hallazgos': 'Otros Hallazgos En Radiografía Panorámica',
 
 		}
 

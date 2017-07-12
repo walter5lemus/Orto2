@@ -157,7 +157,7 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				completas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				completas = '<ul id="{{elemento}}_'+numero+'"><h3>Código: {{elemento}} N° Ficha: '+numero+'</h3>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
@@ -195,7 +195,7 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Código: {{elemento}} N° Ficha: '+numero+'</h3>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
@@ -291,7 +291,7 @@
 	 		success : function(data) {
 	        	//console.log(data[0].nombre_completo);
 	        	for (var i = 0; i < data.length; i++) {
-						alert("El codigo ya se ha ingresado anteriormente, por favor digite uno diferente");
+						alert("El código ya se ha ingresado anteriormente, por favor digite uno diferente");
 						$("#id_cod_expediente").focus();
 						codigo = $("#id_cod_expediente").val("");
 				}
