@@ -65,7 +65,7 @@ def denticion1_view(request,codi,num):
 								print form
 								form.save()
 
-							return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
+						return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
 					return render(request, 'aspectos/dent1_form2.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 				else:
 					max_num=5
