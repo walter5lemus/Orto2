@@ -44,8 +44,6 @@ def CodExpediente_crear(request):
 			
 			
 			for fi in ficha:
-				if not datos_generales.objects.filter(cod_expediente=codi).exists():
-					incompletos.append(0)
 				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-1)
 				if not estado_general.objects.filter(fichas_id=fi.id).exists():
