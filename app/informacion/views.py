@@ -204,6 +204,44 @@ def DatosGenerales_consultar(request,codi,num):
 	try:
 		ids = datos_generales.objects.get(cod_expediente=codi)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-6)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)
+
 			datos = datos_generales.objects.get(cod_expediente=codi)
 			if request.method == 'GET':
 				form = DatosGeneralesForm_consultar(instance=datos)
@@ -212,7 +250,8 @@ def DatosGenerales_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num})
+
+			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num,'incompletos':incompletos})
 		return HttpResponse("No se encontro el Codigo de Expediente")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
@@ -339,13 +378,50 @@ def Motivo_Consulta_consultar(request,codi,num):
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-6)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)			
 			estado = motivo_consulta.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = MotivoConsultaForm_consultar(instance=estado)
 			else: 
 				form = MotivoConsultaForm_consultar(request.POST, instance=estado)
 				return redirect('/informacion/estado_general/consultar/%s/%s/' %(codi,num))
-		return render(request,'informacion/form_motivoconsulta_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
+		return render(request,'informacion/form_motivoconsulta_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
 
@@ -429,13 +505,50 @@ def EstadoGeneral_consultar(request,codi,num):
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-6)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)			
 			estado = estado_general.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = EstadoGeneralForm_consultar(instance=estado)
 			else: 
 				form = EstadoGeneralForm_consultar(request.POST, instance=estado)
 				return redirect('/tipo_perfil/consultar/%s/%s/' %(codi,num))
-			return render(request,'informacion/form_estadoGeneral_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
+			return render(request,'informacion/form_estadoGeneral_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
 		return render(request, 'base/error_no_encontrado.html')	
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')	

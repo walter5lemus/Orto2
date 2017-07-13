@@ -185,7 +185,82 @@ if ({{completada}}==0){
 
 
 </script>
+{% for elemento in incompletos %}
+			<script type="text/javascript">
+				//entra si es un numero
+				switch({{elemento}}){
+					case 0:
+						$('#datos_generales').bind('click', false);
+ 						$('#datos_generales').css({'color':'grey'});
+						break;
+					case -1:
+						$('#motivo_consultas').bind('click', false);
+ 						$('#motivo_consultas').css({'color':'grey'});
+						break;
+					case -2:
+						$('#estado_general').bind('click', false);
+ 						$('#estado_general').css({'color':'grey'});
+						break;
+					case -3:
+						$('#tipo_perfil').bind('click', false);
+ 						$('#tipo_perfil').css({'color':'grey'});
+						break;
+					case -4:
+						$('#denticion1').bind('click', false);
+ 						$('#denticion1').css({'color':'grey'});
+						break;
+					case -5:
+						$('#denticion2').bind('click', false);
+ 						$('#denticion2').css({'color':'grey'});
+						break;
+					case -6:
+						$('#sagitales').bind('click', false);
+ 						$('#sagitales').css({'color':'grey'});
+						break;
+					case -7:
+						$('#aspectos_articulares').bind('click', false);
+ 						$('#aspectos_articulares').css({'color':'grey'});
+						break;
+					case -8:
+						$('#asp_mandibular').bind('click', false);
+ 						$('#asp_mandibular').css({'color':'grey'});
+						break;
+					case -9:
+						$('#otros_aspectos').bind('click', false);
+ 						$('#otros_aspectos').css({'color':'grey'});
+ 						break;
+					case -10:
+						$('#otros_hallazgos').bind('click', false);
+ 						$('#otros_hallazgos').css({'color':'grey'});
+						break;
+					case -11:
+						$('#analisis_cefalometrico').bind('click', false);
+ 						$('#analisis_cefalometrico').css({'color':'grey'});
+						break;
+					case -12:
+						$('#diag_cefalo').bind('click', false);
+ 						$('#diag_cefalo').css({'color':'grey'});
+						break;
+					case -13:
+						$('#analisis_nance').bind('click', false);
+ 						$('#analisis_nance').css({'color':'grey'});
+						break;
+					case -14:
+						$('#moyers_inferior').bind('click', false);
+ 						$('#moyers_inferior').css({'color':'grey'});
+						break;
+					case -15:
+						$('#moyers_superior').bind('click', false);
+ 						$('#moyers_superior').css({'color':'grey'});
+						break;
+					case -16:
+						$('#diag_general').bind('click', false);
+ 						$('#diag_general').css({'color':'grey'});
+						break;
+				}
 
+			</script>
+	{% endfor %}
 
 </form>
 

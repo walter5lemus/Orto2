@@ -1,9 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from app.tipo_perfil.forms import Tipo_perfilForm,Tipo_perfilForm_consultar 
-from app.tipo_perfil.models import TipoPerfil
+from app.analisis_cefalometrico.models import *
+from app.analisis_radiograficos.models import *
+from app.AnalisisDenticionMixta.models import *
+from app.aspMandibular.models import *
+from app.aspectos.models import *
+from app.diagCefalo.models import *
+from app.diagGeneral.models import *
 from app.informacion.models import *
-# Create your views here.
+from app.tipo_perfil.models import *
 
 def tipo_perfil(request):
 	return render(request, 'tipo_perfil/tipo_perfil.html')
@@ -89,6 +95,43 @@ def tipo_perfil_consultar(request,codi,num):
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-6)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)			
 			datos = TipoPerfil.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = Tipo_perfilForm_consultar(instance=datos)
@@ -97,7 +140,7 @@ def tipo_perfil_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return HttpResponseRedirect('/aspectos/denticion1/consultar/%s/%s/' %(codi,num))
-			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
+			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
