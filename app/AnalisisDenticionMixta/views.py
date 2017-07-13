@@ -10,6 +10,16 @@ from app.AnalisisDenticionMixta.models import *
 from app.informacion.models import *
 from django.forms import modelformset_factory
 
+from app.analisis_cefalometrico.models import *
+from app.analisis_radiograficos.models import *
+from app.AnalisisDenticionMixta.models import *
+from app.aspMandibular.models import *
+from app.aspectos.models import *
+from app.diagCefalo.models import *
+from app.diagGeneral.models import *
+from app.informacion.models import *
+from app.tipo_perfil.models import *
+
 codi="0000-00"
 
 ################################################################################################################
@@ -99,6 +109,43 @@ def nance_consultar(request, codi, num):
         nanceFormSet2 = modelformset_factory(nance_tablas, nance_tabla_consultar, extra=0)
         max_numero=10
         if ids:
+            incompletos =list()
+            ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+            for fi in ficha:
+                if not datos_generales.objects.filter(cod_expediente=codi).exists():
+                    incompletos.append(0)
+                if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-1)
+                if not estado_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-2)
+                if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-3)
+                if not registro.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-4)
+                if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-5)
+                if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-6)
+                if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-7)
+                if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-8)
+                if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-9)
+                if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-10)
+                if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-11)
+                if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-12)
+                if not nance_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-13)
+                if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-14)
+                if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-15)
+                if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-16)
             nance_general1 = nance_general.objects.get(fichas_id=ids.id)
             if request.method == 'GET':
                 form1 = nance_generalForm_Consultar(instance=nance_general1)
@@ -109,7 +156,7 @@ def nance_consultar(request, codi, num):
                 formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
                 formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
                 return redirect('/analisis_denticion_mixta/moyersinferior/consultar/%s/%s/' %(codi,num))            
-            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada})    
+            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada,'incompletos':incompletos})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')
@@ -241,6 +288,43 @@ def moyerssup_consultar(request, codi, num):
         genero = datos_generales.objects.get(cod_expediente=codi)
         moyerssupFormSet = modelformset_factory(moyers_superior_ancho, moyersSupAncForm_consultar, extra=0)
         if ids:
+            incompletos =list()
+            ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+            for fi in ficha:
+                if not datos_generales.objects.filter(cod_expediente=codi).exists():
+                    incompletos.append(0)
+                if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-1)
+                if not estado_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-2)
+                if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-3)
+                if not registro.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-4)
+                if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-5)
+                if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-6)
+                if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-7)
+                if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-8)
+                if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-9)
+                if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-10)
+                if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-11)
+                if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-12)
+                if not nance_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-13)
+                if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-14)
+                if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-15)
+                if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-16)
             moysup = moyers_superior.objects.get(fichas_id=ids.id)
             if request.method == 'GET':
                 form1 = moyersSupForm_consultar(instance=moysup)
@@ -250,7 +334,7 @@ def moyerssup_consultar(request, codi, num):
                 formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
                     
                 return redirect('/diag_general/consultar/%s/%s' % (codi, num))
-            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'completada':ids.completada})    
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')
@@ -346,6 +430,43 @@ def moyersinf_consultar(request, codi, num):
         moyersinfFormSet = modelformset_factory(moyers_inferior_ancho, moyersInfAncForm_consultar, extra=0)
         if ids:
             moyinf = moyers_inferior.objects.get(fichas_id=ids.id)
+            incompletos =list()
+            ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+            for fi in ficha:
+                if not datos_generales.objects.filter(cod_expediente=codi).exists():
+                    incompletos.append(0)
+                if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-1)
+                if not estado_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-2)
+                if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-3)
+                if not registro.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-4)
+                if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-5)
+                if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-6)
+                if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-7)
+                if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-8)
+                if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-9)
+                if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-10)
+                if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-11)
+                if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-12)
+                if not nance_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-13)
+                if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-14)
+                if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-15)
+                if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+                    incompletos.append(-16)
             if request.method == 'GET':
                 form1 = moyersInfForm_consultar(instance=moyinf)
                 formset = moyersinfFormSet(queryset=moyers_inferior_ancho.objects.filter(fichas_id=ids.id))
@@ -357,7 +478,7 @@ def moyersinf_consultar(request, codi, num):
                     form1.save()
                     formset.save()
                     return redirect('/analisis_denticion_mixta/moyerssuperior/consultar/%s/%s/' %(codi,num))
-            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'completada':ids.completada})
+            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos})
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
         return render(request, 'base/error_no_encontrado.html')

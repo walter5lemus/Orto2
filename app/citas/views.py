@@ -111,11 +111,48 @@ def citas_consultar(request,codi,num):
 		try:
 			ids = fichas.objects.get(cod_expediente=codi,numero=num)
 			if ids:
+				incompletos =list()
+				ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+				for fi in ficha:
+					if not datos_generales.objects.filter(cod_expediente=codi).exists():
+						incompletos.append(0)
+					if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-1)
+					if not estado_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-2)
+					if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-3)
+					if not registro.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-4)
+					if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-5)
+					if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-6)
+					if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-7)
+					if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-8)
+					if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-9)
+					if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-10)
+					if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-11)
+					if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-12)
+					if not nance_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-13)
+					if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-14)
+					if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-15)
+					if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-16)
 				form = citasGeneralesForm(initial={'estudiante':request.user.username})
 				form2 = citasForm(initial={})
 				form3 = citasGeneralesForm2()
 				form4 = citasForm2(initial={})
-				return render(request, 'citas/citas_consultar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num})
+				return render(request, 'citas/citas_consultar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num,'incompletos':incompletos})
 		except Exception as e:
 				return render(request, 'base/error_no_encontrado.html')
 	else:

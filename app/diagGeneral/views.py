@@ -4,8 +4,15 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect	
 
 from app.diagGeneral.forms import *
-from app.diagGeneral.models import diagnostico_general
+from app.analisis_cefalometrico.models import *
+from app.analisis_radiograficos.models import *
+from app.AnalisisDenticionMixta.models import *
+from app.aspMandibular.models import *
+from app.aspectos.models import *
+from app.diagCefalo.models import *
+from app.diagGeneral.models import *
 from app.informacion.models import *
+from app.tipo_perfil.models import *
 
 
 # Create your views here.
@@ -83,6 +90,43 @@ def diag_general_consultar(request,codi,num):
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-6)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)			
 			datos = diagnostico_general.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = diagGeneralForm_consultar(instance=datos)
@@ -91,7 +135,7 @@ def diag_general_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return redirect('/citas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada})
+			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
 		return render(request, 'base/error_no_existe.html')
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
