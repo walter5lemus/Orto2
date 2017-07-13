@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'app.aspMandibular',
     'app.reportes',
     'app.analisis_cefalometrico',
-    'app.AnalisisDenticionMixta'
+    'app.AnalisisDenticionMixta',
+    'app.gestorImg'
 ]
 
 MIDDLEWARE = [
