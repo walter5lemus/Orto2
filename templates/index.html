@@ -220,12 +220,12 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				incompletas = '<li id="{{elemento}}_'+numero+'">Código: {{elemento}} N° Ficha: '+numero+'<ul>';
+				incompletas = '<ul id="{{elemento}}_'+numero+'">Código: {{elemento}} N° Ficha: '+numero+'';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
 				if(codigo != {{elemento}}){
-					incompletas += '</lasi>';
+					incompletas += '</ul>';
 					incompletas = '';
 					i++;
 					numero =1;
