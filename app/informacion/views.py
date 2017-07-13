@@ -43,38 +43,46 @@ def CodExpediente_crear(request):
 			incompletos.append(fi.cod_expediente)
 			
 			
-			if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-1)
-			if not estado_general.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-2)
-			if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-3)
-			if not registro.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-4)
-			if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-5)
-			if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-6)
-			if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-7)
-			if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-8)
-			if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-9)
-			if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-10)
-			if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-11)
-			if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-12)
-			if not nance_general.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-13)
-			if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-14)
-			if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-15)
-			if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-				incompletos.append(-16)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+						incompletos.append(-6)
+				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)	
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-17)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-18)
 			
 		form = DatosGeneralesForm()
 		return render(request, 'informacion/form_inicio.html', {'form':form,'incompletos':incompletos})
@@ -217,30 +225,35 @@ def DatosGenerales_consultar(request,codi,num):
 					incompletos.append(-3)
 				if not registro.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-4)
-				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-5)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+						incompletos.append(-6)
+				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)	
 				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-6)
-				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-7)
-				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-8)
-				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-9)
-				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-10)
-				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-11)
-				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-12)
-				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-13)
-				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-14)
-				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-15)
-				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-16)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-17)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-18)
 
 			datos = datos_generales.objects.get(cod_expediente=codi)
 			if request.method == 'GET':
@@ -391,30 +404,35 @@ def Motivo_Consulta_consultar(request,codi,num):
 					incompletos.append(-3)
 				if not registro.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-4)
-				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-5)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+						incompletos.append(-6)
+				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)	
 				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-6)
-				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-7)
-				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-8)
-				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-9)
-				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-10)
-				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-11)
-				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-12)
-				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-13)
-				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-14)
-				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-15)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-17)
 				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-16)			
+					incompletos.append(-18)		
 			estado = motivo_consulta.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = MotivoConsultaForm_consultar(instance=estado)
@@ -518,30 +536,35 @@ def EstadoGeneral_consultar(request,codi,num):
 					incompletos.append(-3)
 				if not registro.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-4)
-				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
+				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-5)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+						incompletos.append(-6)
+				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)	
 				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-6)
-				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-7)
-				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-8)
-				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-9)
-				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-10)
-				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-11)
-				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-12)
-				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-13)
-				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-14)
-				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-15)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-17)
 				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-16)			
+					incompletos.append(-18)		
 			estado = estado_general.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				form = EstadoGeneralForm_consultar(instance=estado)
