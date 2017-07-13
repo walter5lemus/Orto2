@@ -208,7 +208,7 @@
 <!-- Pendientes -->
 
 <div id="incompletas" class="hidden">
-
+<ul>
 	{% for elemento in incompletos %}
 			<script type="text/javascript">
 			var cadena="{{elemento}}";
@@ -220,12 +220,12 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Código: {{elemento}} N° Ficha: '+numero+'</h3>';
+				incompletas = '<li id="{{elemento}}_'+numero+'">Código: {{elemento}} N° Ficha: '+numero+'<ul>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
 				if(codigo != {{elemento}}){
-					incompletas += '</ul>';
+					incompletas += '</lasi>';
 					incompletas = '';
 					i++;
 					numero =1;
@@ -299,12 +299,18 @@
 
 				}
 				incompletas = '';
+				if(codigo != {{elemento}}){
+					incompletas += '</li>';
+					incompletas = '';
+					i++;
+					numero =1;
+				}
 			}
 			</script>
 	{% empty %}
 		<h3>Expedientes Pendientes</h3>
 	{% endfor %}
-
+</ul>
 </div>
 
 </body>
