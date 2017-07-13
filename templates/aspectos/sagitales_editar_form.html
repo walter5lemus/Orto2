@@ -1,4 +1,4 @@
-{% extends 'base/base_editar.html' %}
+{% extends 'base/base.html' %}
 
 {% block title %}
     Funciones Sagitales
@@ -74,6 +74,40 @@
             }
     });
 
+$(document).ready(function(){
+
+    var codigo = $('#codigo').val();
+    var numero = $('#ficha').val();
+
+    $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/aspectos/mostrar/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var img = data[i].fields.imagen;
+                if (img == "")
+                {
+                }
+                else{
+                    document.getElementById("simg").style.display = 'inline';
+                    document.getElementById("simg").src= {{MEDIA_URL}}+img;
+                }
+            }
+        },
+    });
+});
+
+var nW,nH,oH,oW;
+  function zoomToggle(iWideSmall,iHighSmall,iWideLarge,iHighLarge,whichImage){
+    oW=whichImage.style.width;oH=whichImage.style.height;
+    if((oW==iWideLarge)||(oH==iHighLarge)){
+      nW=iWideSmall;nH=iHighSmall;
+    }else{
+      nW=iWideLarge;nH=iHighLarge;
+    }
+    whichImage.style.width=nW;whichImage.style.height=nH;
+  }
 
 </script>
 
@@ -195,8 +229,6 @@
       </div>
     
      <div class="panel-body">
-
-    <br><br>
         <div class="col-md-6 col-md-offset-1">
             <div class="form-group">
                 <label for="{{form3.nombreimagen.name}}">{{form3.nombreimagen.label}}</label>   
@@ -208,7 +240,7 @@
         </div>
         <div class="col-md-4 col-md-offset-1">
             <div class="form-group">
-                <img id="simg" width="300" height="300" style='display:none;' onclick="zoomToggle('300px','300px','100','100',this);"/>
+                <img id="simg" width="300" height="300" style='display:none;' onclick="zoomToggle('300px','300px','100%','100%',this);"/>
             </div>
         </div>
     </div>

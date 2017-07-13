@@ -98,6 +98,17 @@ $(document).ready(function(){
     });
 });
 
+var nW,nH,oH,oW;
+  function zoomToggle(iWideSmall,iHighSmall,iWideLarge,iHighLarge,whichImage){
+    oW=whichImage.style.width;oH=whichImage.style.height;
+    if((oW==iWideLarge)||(oH==iHighLarge)){
+      nW=iWideSmall;nH=iHighSmall;
+    }else{
+      nW=iWideLarge;nH=iHighLarge;
+    }
+    whichImage.style.width=nW;whichImage.style.height=nH;
+  }
+
 </script>
 
 {% endblock %}
@@ -110,7 +121,8 @@ $(document).ready(function(){
     {{form2.fichas}}
     {{form3.fichas}}
 
-       <h1> <center> Relaciones Sagitales </center></h1>
+    <br><br>
+    <h1> <center> Relaciones Sagitales </center></h1>
 
     <div class="col-md-12 col-md-offset-2">
         <br>
@@ -217,8 +229,6 @@ $(document).ready(function(){
       </div>
     
      <div class="panel-body">
-
-    <br><br>
         <div class="col-md-6 col-md-offset-1">
             <div class="form-group">
                 <label for="{{form3.nombreimagen.name}}">{{form3.nombreimagen.label}}</label>   
@@ -235,6 +245,7 @@ $(document).ready(function(){
         </div>
     </div>
 </div>
+
 
 
     <div class="col-md-8 col-md-offset-2">

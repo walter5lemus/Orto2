@@ -43,8 +43,7 @@ urlpatterns = [
     url(r'^analisis_cefalometrico/', include ('app.analisis_cefalometrico.urls', namespace="analisis_cefalometrico")),
     url(r'^analisis_denticion_mixta/', include ('app.AnalisisDenticionMixta.urls', namespace="analisis_denticion_mixta")),
     url(r'^gestor_img/', include ('app.gestorImg.urls', namespace="gestor_img")),
-
 ]
 
-if settings.DEBUG is True:
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

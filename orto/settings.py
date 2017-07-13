@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'app.reportes',
     'app.analisis_cefalometrico',
     'app.AnalisisDenticionMixta',
-    'app.gestorImg'
+    'app.gestorImg',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +75,8 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
