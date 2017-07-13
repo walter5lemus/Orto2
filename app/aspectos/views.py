@@ -54,15 +54,12 @@ def denticion1_view(request,codi,num):
 							form2.save()
 
 							for form in perdida_formset:
-								print form
 								form.save()
 								
 							for form in anodoncia_formset:
-								print form
 								form.save()				
 
 							for form in mordida_formset:
-								print form
 								form.save()
 
 						return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
@@ -82,15 +79,12 @@ def denticion1_view(request,codi,num):
 							form1.save()
 							form2.save()
 							for form in perdida_formset:
-								print form
 								form.save()
 
 							for form in anodoncia_formset:
-								print form
 								form.save()
 
 							for form in mordida_formset:
-								print form
 								form.save()					
 
 						return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
@@ -138,15 +132,12 @@ def denticion1_editar(request,codi,num):
 						form2.save()
 
 						for form in perdida_formset:
-							print form
 							form.save()
 							
 						for form in anodoncia_formset:
-							print form
 							form.save()				
 
 						for form in mordida_formset:
-							print form
 							form.save()
 
 					return redirect('/aspectos/denticion2/editar/%s/%s/' %(codi,num))
@@ -243,7 +234,6 @@ def denticion2_view(request,codi,num):
 			diastema_formset = diastemaFormSet(request.POST, request.FILES, prefix='diatemas')		
 			if (diastema_formset.is_valid()):
 				for form in diastema_formset:
-					print form
 					form.save()			
 
 			return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
@@ -270,7 +260,6 @@ def mordidas_view(request,codi,num):
 					form2.save()
 					
 					for form in formset:
-						print form
 						form.save()
 
 				return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
@@ -303,7 +292,6 @@ def mordidas_editar(request,codi,num):
 				form2.save()
 					
 				for form in formset:
-					print form
 					form.save()
 			return redirect('/aspectos/sagitales/editar/%s/%s/'%(codi,num))		
 		return render(request, 'aspectos/denticion_edit_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})	
