@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_consultar.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -7,6 +7,21 @@
 
 {% block header %}
 
+{% endblock %}
+
+{% block menu-social %}
+  <!-- Menu Social -->
+
+  <div class="social">
+    <ul>
+
+      <li>
+        <a href="/citas/consultar/{{codi}}/{{num}}">
+        <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
+      </li>
+
+    </ul>
+  </div>
 {% endblock %}
 
 {% block extrajs %}
@@ -225,7 +240,7 @@ function Asignar28() {
 
 <br><br><br><br><br><br><br><br>
 
-<div id="fp1" class="panel panel-primary">
+<div id="fp1" class="panel panel-success">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
@@ -273,7 +288,7 @@ function Asignar28() {
 
 <br>
 
-<div id="fi1" class="panel panel-primary">
+<div id="fi1" class="panel panel-success">
       <div class="panel-heading"> 
         <h4 class="panel-title">Fotografías intraorales</h4>
         <br>
@@ -333,7 +348,7 @@ function Asignar28() {
     </div>
 </div>
 
-<div id="fp2" style='display:none;' class="panel panel-primary">
+<div id="fp2" style='display:none;' class="panel panel-success">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
