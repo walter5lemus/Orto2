@@ -611,7 +611,7 @@ Aspectos de dentición - Parte 1
     <center><h2>Parte I</h2></center>
     {% csrf_token %} 
 
-
+<!-- Encabezado # Expediente y Ficha-->
 
     <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
@@ -631,11 +631,10 @@ Aspectos de dentición - Parte 1
         <br>
     </div>
 
-
-<script>
-    $('#codigo').val("{{codi}}");
-    $('#ficha').val("{{num}}");  
-</script>
+    <script>
+        $('#codigo').val("{{codi}}");
+        $('#ficha').val("{{num}}");  
+    </script>
 
 <!-- Tabla + Odontograma -->
 
@@ -747,9 +746,8 @@ Aspectos de dentición - Parte 1
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
     </div>
-
-
-
+    
+    <!-- Odontograma -->
     <div class="col-md-7">
         <center>
             <br><br>
@@ -1246,11 +1244,10 @@ Aspectos de dentición - Parte 1
         </div> 
     </center>   
     </div>
-
   </div>
 </div><!-- fin bootstrap -->
 
-
+    <!-- Botones -->
     <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">

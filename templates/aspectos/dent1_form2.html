@@ -2,7 +2,9 @@
 
 {% load staticfiles %}
 
-{% block title %}Aspectos de dentición - Parte 1{% endblock %}
+{% block title %}
+Aspectos de dentición - Parte 1
+{% endblock %}
 
 {% block extrajs %}
 
@@ -757,13 +759,65 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
 
 <div class="row">
     <form method="POST" action="">
-    <center><h3>Examen de Dentición - Parte 1</h3></center>
+
+    <center><h1>Examen de Dentición</h1></center>
+    <center><h2>Parte I</h2></center>
     {% csrf_token %} 
 
+    <div class="col-md-12 col-md-offset-2">
+        <div class="form-group">
+            <br>
+            <div class="col-md-4">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-4">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br><br><br>
+            </div>
+            
+        </div>
+        <br>
+    </div>
+
+
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
+
+<!-- Tabla + Odontograma -->
+
+<br><br><br><br><br><br>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"></h3>
+  </div>
+
+  <div class="panel-body">
     <div class="col-md-5">
+        <br>
         <center>
         <div class="form-group" style="width:200px">
             {{form1.fichas}}
@@ -792,9 +846,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in perdida_formset.forms %}                                               
+                        {% for form in perdida_formset.forms %}                                              
                         <tr>
-                            <td>{{ form.id }}  {{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -819,9 +873,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in anodoncia_formset %}                                          
+                        {% for form in anodoncia_formset %}                                                                 
                         <tr>
-                            <td>{{ form.id }}  {{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -846,9 +900,9 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in mordida_formset %}                  
+                        {% for form in mordida_formset %}                                              
                         <tr>
-                            <td>{{ form.id }}  {{ form.fichas }} {{ form.problema }}</td>
+                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
                             <td>{{ form.pieza }}</td>
                             <td style="width:300px">{{ form.detalle }}</td>
@@ -862,13 +916,14 @@
                 </div>
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
-
     </div>
+
     <div class="col-md-7">
         <center>
-        <br/><br/><br/><br/>
-            <h4>Odontograma</h4>
-            <br/>
+            <br><br>
+            <h4><font color="blue"><B>Odontograma</B></font></h4>
+
+            <br>
             <div id="svgselect" style="width: 610px; height: 230px;"> <!-- background-color:red -->
                 <svg version="1.1" height="100%" width="100%">
                     <g transform="scale(1.5)" id="gmain">
@@ -1323,8 +1378,8 @@
                     </tr>
                 </tbody>
             </table>
-        </center>  
-        <br/><br/><br/>            
+        </center>   
+        <br/><br/><br/>          
     </div>
 
     <div class="col-md-6">
@@ -1359,24 +1414,25 @@
         </div> 
     </center>   
     </div>
-    
+
+  </div>
 </div><!-- fin bootstrap -->
 
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-        <br><br>
+            
             <div class="col-md-3 col-md-offset-2">
-              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
-    </div>  
-
-    </form>
-</div>
+    </div>
 
     <!-- Barra de progreso -->
     <br><br>

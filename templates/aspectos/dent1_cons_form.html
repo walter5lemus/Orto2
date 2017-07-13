@@ -421,15 +421,43 @@
     <center><h2>Parte I</h2></center>
     {% csrf_token %}
 
+<!-- Encabezado # Expediente y Ficha-->
 
+    <div class="col-md-12 col-md-offset-2">
+        <div class="form-group">
+            <br>
+            <div class="col-md-4">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-4">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br><br><br>
+            </div>
+            
+        </div>
+        <br>
+    </div>
+
+    <script>
+        $('#codigo').val("{{codi}}");
+        $('#ficha').val("{{num}}");  
+    </script>
+
+<!-- Tabla + Odontograma -->
+
+<br><br><br><br><br><br>
 <div class="panel panel-success">
   <div class="panel-heading">
     <h3 class="panel-title"></h3>
   </div>
-  <div class="panel-body">
 
+  <div class="panel-body">
     <div class="col-md-5">
-        <center><br>
+        <br>
+        <center>
         <div class="form-group" style="width:200px">
             {{form1.fichas}}
             <label for="{{form1.tipo.name}}">{{form1.tipo.label}}</label>  
@@ -457,7 +485,7 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in perdida_formset.forms %}                                               
+                        {% for form in perdida_formset.forms %}                                              
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
@@ -484,7 +512,7 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in anodoncia_formset %}                                          
+                        {% for form in anodoncia_formset %}                                                                 
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
@@ -511,7 +539,7 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in mordida_formset %}                  
+                        {% for form in mordida_formset %}                                              
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
@@ -528,14 +556,14 @@
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
     </div>
-
-
+    
     <!-- Odontograma -->
     <div class="col-md-7">
         <center>
-        <br/>
-            <h4>Odontograma</h4>
-            <br/>
+            <br><br>
+            <h4><font color="blue"><B>Odontograma</B></font></h4>
+
+            <br>
             <div id="svgselect" style="width: 610px; height: 230px;"> <!-- background-color:red -->
                 <svg version="1.1" height="100%" width="100%">
                     <g transform="scale(1.5)" id="gmain">
@@ -990,8 +1018,8 @@
                     </tr>
                 </tbody>
             </table>
-        </center>    
-        <br/><br/><br/>         
+        </center>   
+        <br/><br/><br/>          
     </div>
 
     <div class="col-md-6">
@@ -1026,10 +1054,10 @@
         </div> 
     </center>   
     </div>
-  </div><!-- fin bootstrap -->
-</div>
+  </div>
+</div><!-- fin bootstrap -->
 
-
+    <!-- Botones -->
     <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
@@ -1056,25 +1084,25 @@
 </form>
 </div>
 
+<!-- Informacion sobre ficha -->
 
-
-    <script type="text/javascript">
-        if ({{completada}}==0){
-        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+<script type="text/javascript">
+    if ({{completada}}==0){
+    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-danger alert-danger"><strong><center> ¡FICHA INCOMPLETA!</center></strong></div></div>')
+    }else{
+        if ({{completada}}==1){
+            $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
         }else{
-            if ({{completada}}==1){
-                $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-success alert-success"><strong><center> ¡FICHA COMPLETA!</center></strong></div></div>')
+            if ({{completada}}==2){
+                $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
             }else{
-                if ({{completada}}==2){
-                    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-info alert-info"><strong><center> ¡FICHA RETIRADA!</center></strong></div></div>')
-                }else{
-                    if ({{completada}}==3){
-                        $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
-                    }
-                    
+                if ({{completada}}==3){
+                    $("#mensaje").append('<div class="col-md-4 col-md-offset-8"><div class="alert alert-warning alert-warning"><strong><center> ¡FICHA CADUCADA!</center></strong></div></div>')
                 }
+                
             }
         }
-    </script>
+    }
+</script>
 
 {% endblock %}

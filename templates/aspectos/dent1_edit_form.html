@@ -15,45 +15,108 @@ Aspectos de dentición - Parte 1
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
+
     del = 1;
         //Ocultar parte odontograma
         $(".tipo").change(function() {
             del = 0;
+            vacio = 1;
+            
             maximo = document.getElementById("id_perdidas-TOTAL_FORMS").value;
-
+        
             for (var i = 0; i < maximo; i++) {
-                $('#id_perdidas-'+i+'-cuadrante').val('');
-                $('#id_perdidas-'+i+'-pieza').val('');
-                $('#id_perdidas-'+i+'-detalle').val('');
+                if (document.getElementById("id_perdidas-"+ i +"-id").value) {
+                    ides = document.getElementById("id_perdidas-"+ i +"-id").value;
+                    //Borrando tupla bd
+
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                        success: function(data){
+                            valor = document.getElementById("id_perdidas-INITIAL_FORMS").value;
+                            valor = valor - 1;
+                            $('#id_perdidas-INITIAL_FORMS').val(valor);  
+                        }                           
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
             }
 
-            for (var i = 1; i < maximo; i++) {
+            for(var i = 1; i < maximo; i++){
                 document.getElementById("perdidas-"+i).click();
             }
+            $('#id_perdidas-0-id').val('');
+            $('#id_perdidas-0-cuadrante').val('');
+            $('#id_perdidas-0-pieza').val('');
+            $('#id_perdidas-0-detalle').val('');
 
             maximo = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
-
+        
             for (var i = 0; i < maximo; i++) {
-                $('#id_anodoncias-'+i+'-cuadrante').val('');
-                $('#id_anodoncias-'+i+'-pieza').val('');
-                $('#id_anodoncias-'+i+'-detalle').val('');
+                if (document.getElementById("id_anodoncias-"+ i +"-id").value) {
+                    ides = document.getElementById("id_anodoncias-"+ i +"-id").value;
+                    //Borrando tupla bd
+
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                        success: function(data){
+                            valor = document.getElementById("id_anodoncias-INITIAL_FORMS").value;
+                            valor = valor - 1;
+                            $('#id_anodoncias-INITIAL_FORMS').val(valor);  
+                        }                           
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
             }
 
-            for (var i = 1; i < maximo; i++) {
+            for(var i = 1; i < maximo; i++){
                 document.getElementById("anodoncias-"+i).click();
-            }        
+            }
+            $('#id_anodoncias-0-id').val('');
+            $('#id_anodoncias-0-cuadrante').val('');
+            $('#id_anodoncias-0-pieza').val('');
+            $('#id_anodoncias-0-detalle').val('');
 
             maximo = document.getElementById("id_mordidas-TOTAL_FORMS").value;
-
+        
             for (var i = 0; i < maximo; i++) {
-                $('#id_mordidas-'+i+'-cuadrante').val('');
-                $('#id_mordidas-'+i+'-pieza').val('');
-                $('#id_mordidas-'+i+'-detalle').val('');
+                if (document.getElementById("id_mordidas-"+ i +"-id").value) {
+                    ides = document.getElementById("id_mordidas-"+ i +"-id").value;
+                    //Borrando tupla bd
+
+                    $.ajax({
+                        data : {'ides':ides},
+                        url : '/aspectos/denticion1/eliminar/',
+                        type : 'get',
+                        success: function(data){
+                            valor = document.getElementById("id_mordidas-INITIAL_FORMS").value;
+                            valor = valor - 1;
+                            $('#id_mordidas-INITIAL_FORMS').val(valor);  
+                        }                           
+                    });                                         
+                }         
+                else
+                {
+                    
+                }       
             }
 
-            for (var i = 1; i < maximo; i++) {
+            for(var i = 1; i < maximo; i++){
                 document.getElementById("mordidas-"+i).click();
             }
+            $('#id_mordidas-0-id').val('');
+            $('#id_mordidas-0-cuadrante').val('');
+            $('#id_mordidas-0-pieza').val('');
+            $('#id_mordidas-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -264,6 +327,47 @@ Aspectos de dentición - Parte 1
             del = 1;
         });
 
+    //Pintar odontograma
+    $(function() {
+        n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-perdidas");
+        for (i = 0; i < n1; i++) {
+            list[i].setAttribute("id", "perdidas-" + i);
+            c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
+            p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
+        }  
+
+        n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-anodoncias");
+        for (i = 0; i < n2; i++) {
+            list[i].setAttribute("id", "anodoncias-" + i);            
+            c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
+            p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
+        }  
+
+        n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-mordidas");
+        for (i = 0; i < n3; i++) {
+            list[i].setAttribute("id", "mordidas-" + i);
+            c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
+            p = document.getElementById("id_mordidas-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
+        } 
+    });
 
         //Tipo problema y color por pestaña
         nombre = 'perdidas';
@@ -325,8 +429,77 @@ Aspectos de dentición - Parte 1
             }              
         }
 
+        //Guarda valor de id a borrar
+        $(document).ready(function(){
+            vacio = 1;
+            $(".delete-row-perdidas").hover(function() {
+                num = $(this).attr("id")
+                if (document.getElementById("id_perdidas-"+ num[9] +"-id").value) {
+                    ides = document.getElementById("id_perdidas-"+ num[9] +"-id").value;
+                    vacio = 0;   
+                }
+                else{
+                    vacio = 1;
+                }
+            });
+
+            $(".add-row-perdidas").hover(function() {
+                vacio = 1;
+            });            
+
+            $(".delete-row-anodoncias").hover(function() {
+                num = $(this).attr("id")
+                if (document.getElementById("id_anodoncias-"+ num[11] +"-id").value) {
+                    ides = document.getElementById("id_anodoncias-"+ num[11] +"-id").value;
+                    vacio = 0;   
+                }
+                else{
+                    vacio = 1;
+                }
+            });
+
+            $(".add-row-anodoncias").hover(function() {
+                vacio = 1;
+            });   
+
+            $(".delete-row-mordidas").hover(function() {
+                num = $(this).attr("id")
+                if (document.getElementById("id_mordidas-"+ num[9] +"-id").value) {
+                    ides = document.getElementById("id_mordidas-"+ num[9] +"-id").value;
+                    vacio = 0;   
+                }
+                else{
+                    vacio = 1;
+                }  
+            });  
+
+            $(".add-row-mordidas").hover(function() {
+                vacio = 1;
+            });                         
+        });
+
         //Función eliminar plugin formset
         eliminar = function(){
+
+            if(vacio == 0)
+            {
+                //Borrando tupla bd
+
+                $.ajax({
+                    data : {'ides':ides},
+                    url : '/aspectos/denticion1/eliminar/',
+                    type : 'get',
+                    success: function(data){
+                        valor = document.getElementById("id_"+nombre+"-INITIAL_FORMS").value;
+                        valor = valor - 1;
+                        $('#id_'+nombre+"-INITIAL_FORMS").val(valor);  
+                    }
+                });
+            }
+            else{
+
+            }
+
             //Borrado manual?
             if(del == 1)
             {
@@ -603,15 +776,12 @@ Aspectos de dentición - Parte 1
         {% endif %}
         </div>
 
-
 <div class="row">
     <form method="POST" action="">
 
     <center><h1>Examen de Dentición</h1></center>
     <center><h2>Parte I</h2></center>
     {% csrf_token %} 
-
-
 
     <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
@@ -747,8 +917,6 @@ Aspectos de dentición - Parte 1
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
     </div>
-
-
 
     <div class="col-md-7">
         <center>
@@ -1250,13 +1418,12 @@ Aspectos de dentición - Parte 1
   </div>
 </div><!-- fin bootstrap -->
 
-
     <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             
             <div class="col-md-3 col-md-offset-2">
-              <a href="/tipo_perfil/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
             </div> 
 
             <div class="col-md-3 col-md-offset-1">
