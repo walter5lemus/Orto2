@@ -1,0 +1,467 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    Fotos del paciente
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+
+$(document).ready(function(){
+
+    var codigo = $('#codigo').val();
+    var numero = $('#ficha').val();
+
+    img1 = 0;
+    img2 = 0;
+    img3 = 0;
+    img4 = 0;
+    img5 = 0;
+    img6 = 0;
+    img7 = 0;
+    img8 = 0;
+
+    $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/gestor_img/paciente/mostrar/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                img1 = data[i].fields.pfacial;
+                img2 = data[i].fields.pfrontal; 
+                img3 = data[i].fields.psonrisa;
+                img4 = data[i].fields.osuperior;
+                img5 = data[i].fields.oinferior;
+                img6 = data[i].fields.lizquierdo;
+                img7 = data[i].fields.frontal;
+                img8 = data[i].fields.lderecho;
+            }
+        },
+    });
+});
+
+document.getElementById("v1").onclick = Asignar1;
+document.getElementById("v2").onclick = Asignar2;
+document.getElementById("v3").onclick = Asignar3;
+document.getElementById("v4").onclick = Asignar4;
+document.getElementById("v5").onclick = Asignar5;
+document.getElementById("v6").onclick = Asignar6;
+document.getElementById("v7").onclick = Asignar7;
+document.getElementById("v8").onclick = Asignar8;
+
+function Asignar1() {
+    document.getElementById("pimg").style.display = 'inline';
+    document.getElementById("pimg").src= {{MEDIA_URL}}+img1;
+}
+
+function Asignar2() {
+    document.getElementById("pimg").style.display = 'inline';
+    document.getElementById("pimg").src= {{MEDIA_URL}}+img2;
+}
+
+function Asignar3() {
+    document.getElementById("pimg").style.display = 'inline';
+    document.getElementById("pimg").src= {{MEDIA_URL}}+img3;
+}
+
+function Asignar4() {
+    document.getElementById("iimg").style.display = 'inline';
+    document.getElementById("iimg").src= {{MEDIA_URL}}+img4;
+}
+function Asignar5() {
+    document.getElementById("iimg").style.display = 'inline';
+    document.getElementById("iimg").src= {{MEDIA_URL}}+img5;
+}
+function Asignar6() {
+    document.getElementById("iimg").style.display = 'inline';
+    document.getElementById("iimg").src= {{MEDIA_URL}}+img6;
+}
+function Asignar7() {
+    document.getElementById("iimg").style.display = 'inline';
+    document.getElementById("iimg").src= {{MEDIA_URL}}+img7;
+}
+function Asignar8() {
+    document.getElementById("iimg").style.display = 'inline';
+    document.getElementById("iimg").src= {{MEDIA_URL}}+img8;
+}
+
+function ocultar(){
+  var myselect = document.getElementById("control");
+
+  if(myselect.options[myselect.selectedIndex].value == 1){
+    document.getElementById("fp2").style.display = "none";
+    document.getElementById("fi2").style.display = "none";
+    document.getElementById("fp1").style.display = "block";
+    document.getElementById("fi1").style.display = "block";
+    }
+
+  if(myselect.options[myselect.selectedIndex].value == 2){
+    document.getElementById("fp2").style.display = "block";
+    document.getElementById("fi2").style.display = "block";
+    document.getElementById("fp1").style.display = "none";
+    document.getElementById("fi1").style.display = "none";
+    }
+}
+
+$(document).ready(function(){
+
+    var codigo = $('#codigo').val();
+    var numero = $('#ficha').val();
+
+    img21 = 0;
+    img22 = 0;
+    img23 = 0;
+    img24 = 0;
+    img25 = 0;
+    img26 = 0;
+    img27 = 0;
+    img28 = 0;
+
+    $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/gestor_img/paciente/mostrar2/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                img21 = data[i].fields.pfacial2;
+                img22 = data[i].fields.pfrontal2; 
+                img23 = data[i].fields.psonrisa2;
+                img24 = data[i].fields.osuperior2;
+                img25 = data[i].fields.oinferior2;
+                img26 = data[i].fields.lizquierdo2;
+                img27 = data[i].fields.frontal2;
+                img28 = data[i].fields.lderecho2;
+            }
+        },
+    });
+});
+
+document.getElementById("v21").onclick = Asignar21;
+document.getElementById("v22").onclick = Asignar22;
+document.getElementById("v23").onclick = Asignar23;
+document.getElementById("v24").onclick = Asignar24;
+document.getElementById("v25").onclick = Asignar25;
+document.getElementById("v26").onclick = Asignar26;
+document.getElementById("v27").onclick = Asignar27;
+document.getElementById("v28").onclick = Asignar28;
+
+function Asignar21() {
+    document.getElementById("pimg2").style.display = 'inline';
+    document.getElementById("pimg2").src= {{MEDIA_URL}}+img21;
+}
+
+function Asignar22() {
+    document.getElementById("pimg2").style.display = 'inline';
+    document.getElementById("pimg2").src= {{MEDIA_URL}}+img22;
+}
+
+function Asignar23() {
+    document.getElementById("pimg2").style.display = 'inline';
+    document.getElementById("pimg2").src= {{MEDIA_URL}}+img23;
+}
+
+function Asignar24() {
+    document.getElementById("iimg2").style.display = 'inline';
+    document.getElementById("iimg2").src= {{MEDIA_URL}}+img24;
+}
+function Asignar25() {
+    document.getElementById("iimg2").style.display = 'inline';
+    document.getElementById("iimg2").src= {{MEDIA_URL}}+img25;
+}
+function Asignar26() {
+    document.getElementById("iimg2").style.display = 'inline';
+    document.getElementById("iimg2").src= {{MEDIA_URL}}+img26;
+}
+function Asignar27() {
+    document.getElementById("iimg2").style.display = 'inline';
+    document.getElementById("iimg2").src= {{MEDIA_URL}}+img27;
+}
+function Asignar28() {
+    document.getElementById("iimg2").style.display = 'inline';
+    document.getElementById("iimg2").src= {{MEDIA_URL}}+img28;
+}
+</script>
+
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {{form.fichas}}
+
+    <h1> <center> Fotos del paciente </center></h1>
+        <div class="col-md-12 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-4">
+            <label for="codigo">N° de Expediente </label>   
+            <input id="codigo" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+            <div class="col-md-4">
+            <label for="ficha">N° de Ficha</label>  
+            <input id="ficha" class="form-control" type="text" disabled="True">
+            <br>
+            </div>
+        </div>
+        <br>
+    </div>
+
+<div style="margin-left: 475px;" class="col-md-2 col-md-offset-2" class="form-group">
+  <label for="control">Control:</label>
+  <select class="form-control" id="control" onChange="ocultar();">
+    <option value = "1">Inicial</option>
+    <option value = "2">2</option>
+  </select>
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+<div id="fp1" class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Fotos del paciente</h4>
+       <br>
+       <h4 class="panel-title">Control inicial</h4>
+      </div>
+    
+     <div class="panel-body">
+    <br>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="{{form.pfacial.name}}">{{form.pfacial.label}}</label>
+                {{form.pfacial}} 
+                <br>
+                <label for="{{form.pfrontal.name}}">{{form.pfrontal.label}}</label> 
+                {{form.pfrontal}}
+                <br>
+                <label for="{{form.psonrisa.name}}">{{form.psonrisa.label}}</label>
+                {{form.psonrisa}}
+                <br>   
+            </div>            
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <br>
+                <img id="v1" src=" {% static 'images/ver.png' %}">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v2" src=" {% static 'images/ver.png' %}">  
+                <br>
+                <br>
+                <br>
+                <img id="v3" src=" {% static 'images/ver.png' %}"> 
+                <br>   
+            </div>            
+        </div> 
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group">
+            <img id="pimg" width="400" height="450" style='display:none;'/>
+            </div>            
+        </div> 
+    </div>
+</div>
+
+<br>
+
+<div id="fi1" class="panel panel-primary">
+      <div class="panel-heading"> 
+        <h4 class="panel-title">Fotografías intraorales</h4>
+        <br>
+        <h4 class="panel-title">Control inicial</h4>
+      </div>
+    
+     <div class="panel-body">
+
+    <br>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="{{form.osuperior.name}}">{{form.osuperior.label}}</label>  
+                {{form.osuperior}}
+                <br>
+                <label for="{{form.oinferior.name}}">{{form.oinferior.label}}</label>   
+                {{form.oinferior}}
+                <br>
+                <label for="{{form.lizquierdo.name}}">{{form.lizquierdo.label}}</label>   
+                {{form.lizquierdo}}
+                <br>
+                <label for="{{form.frontal.name}}">{{form.frontal.label}}</label>
+                {{form.frontal}}
+                <br>
+                <label for="{{form.lderecho.name}}">{{form.lderecho.label}}</label>  
+                {{form.lderecho}}
+            </div> 
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <br>
+                <img id="v4" src=" {% static 'images/ver.png' %}">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v5" src=" {% static 'images/ver.png' %}">  
+                <br>
+                <br>
+                <br>
+                <img id="v6" src=" {% static 'images/ver.png' %}"> 
+                <br>   
+                <br>
+                <br>
+                <img id="v7" src=" {% static 'images/ver.png' %}"> 
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v8" src=" {% static 'images/ver.png' %}"> 
+            </div>            
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group">
+            <img id="iimg" width="400" height="450" style='display:none;'/>
+            </div>            
+        </div> 
+    </div>
+</div>
+
+<div id="fp2" style='display:none;' class="panel panel-primary">
+      <div class="panel-heading"> 
+       <h4 class="panel-title">Fotos del paciente</h4>
+       <br>
+       <h4 class="panel-title">Control 2</h4>
+      </div>
+    
+     <div class="panel-body">
+    <br>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="{{form2.pfacial2.name}}">{{form2.pfacial2.label}}</label>
+                {{form2.pfacial2}} 
+                <br>
+                <label for="{{form2.pfrontal2.name}}">{{form2.pfrontal2.label}}</label> 
+                {{form2.pfrontal2}}
+                <br>
+                <label for="{{form2.psonrisa2.name}}">{{form2.psonrisa2.label}}</label>
+                {{form2.psonrisa2}}
+                <br>   
+            </div>            
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <br>
+                <img id="v21" src=" {% static 'images/ver.png' %}">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v22" src=" {% static 'images/ver.png' %}">  
+                <br>
+                <br>
+                <br>
+                <img id="v23" src=" {% static 'images/ver.png' %}"> 
+                <br>   
+            </div>            
+        </div> 
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group">
+            <img id="pimg2" width="400" height="450" style='display:none;'/>
+            </div>            
+        </div> 
+    </div>
+</div>
+
+<br>
+
+<div id="fi2" style='display:none;' class="panel panel-primary">
+      <div class="panel-heading"> 
+        <h4 class="panel-title">Fotografías intraorales</h4>
+        <br>
+        <h4 class="panel-title">Control 2</h4>
+      </div>
+    
+     <div class="panel-body">
+
+    <br>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="{{form2.osuperior2.name}}">{{form2.osuperior2.label}}</label>  
+                {{form2.osuperior2}}
+                <br>
+                <label for="{{form2.oinferior2.name}}">{{form2.oinferior2.label}}</label>   
+                {{form2.oinferior2}}
+                <br>
+                <label for="{{form2.lizquierdo2.name}}">{{form2.lizquierdo2.label}}</label>   
+                {{form2.lizquierdo2}}
+                <br>
+                <label for="{{form2.frontal2.name}}">{{form2.frontal2.label}}</label>
+                {{form2.frontal2}}
+                <br>
+                <label for="{{form2.lderecho2.name}}">{{form2.lderecho2.label}}</label>  
+                {{form2.lderecho2}}
+            </div> 
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <br>
+                <img id="v24" src=" {% static 'images/ver.png' %}">
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v25" src=" {% static 'images/ver.png' %}">  
+                <br>
+                <br>
+                <br>
+                <img id="v26" src=" {% static 'images/ver.png' %}"> 
+                <br>   
+                <br>
+                <br>
+                <img id="v27" src=" {% static 'images/ver.png' %}"> 
+                <br>
+                <br>
+                <br>
+                <br>
+                <img id="v28" src=" {% static 'images/ver.png' %}"> 
+            </div>            
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group">
+            <img id="iimg2" width="400" height="450" style='display:none;'/>
+            </div>            
+        </div> 
+    </div>
+</div>
+
+<br>
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-2">
+              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+            </div>
+            <div class="col-md-3 col-md-offset-2">
+              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+<!-- Barra de progreso -->
+        <br><br>
+        <div class="col-md-10 col-md-offset-1">
+        <div class="progress">
+            <div class="progress-bar" style="width: 36%;"></div>
+        </div>
+        </div>
+
+</form>
+{% endblock %}

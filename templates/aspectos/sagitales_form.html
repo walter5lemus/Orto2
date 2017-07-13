@@ -74,6 +74,29 @@
             }
     });
 
+$(document).ready(function(){
+
+    var codigo = $('#codigo').val();
+    var numero = $('#ficha').val();
+
+    $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/aspectos/mostrar/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var img = data[i].fields.imagen;
+                if (img == "")
+                {
+                }
+                else{
+                    document.getElementById("simg").style.display = 'inline';
+                    document.getElementById("simg").src= {{MEDIA_URL}}+img;
+                }
+            }
+        },
+    });
+});
 
 </script>
 
@@ -203,12 +226,15 @@
                 <br>
                 <label for="{{form3.imagen.name}}">{{form3.imagen.label}}</label>   
                 {{form3.imagen}}
-                <br>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <div class="form-group">
+                <img id="simg" width="300" height="300" style='display:none;' onclick="zoomToggle('300px','300px','100','100',this);"/>
             </div>
         </div>
     </div>
 </div>
-
 
 
     <div class="col-md-8 col-md-offset-2">

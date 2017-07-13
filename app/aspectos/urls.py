@@ -19,4 +19,5 @@ urlpatterns = [
 	url(r'^listar$', login_required(relacionsagital_list), name='relacion_sagital_listar'),
 	url(r'^sagitales/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(relacionsagital_edit), name='relacion_sagital_editar'),
 	url(r'^sagitales/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(relacionsagital_consultar), name='relacion_sagital_consultar'),
+ 	url(r'^mostrar/$', login_required(MostrarImg.as_view())),
 ]

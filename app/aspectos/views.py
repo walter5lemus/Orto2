@@ -367,6 +367,16 @@ def relacionsagital_crear(request,codi,num):
 		else:
 			return render(request, 'base/error_no_encontrado.html')	
 
+class MostrarImg(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				image = imagenes_afmp.objects.filter(fichas_id=ids.id)
+				data = serializers.serialize('json', image, fields=('imagen'))
+		return HttpResponse(data, content_type='application/json')
+
 def relacionsagital_list(request):
 	relacionsagital = relaciones_sagitales.objects.all().order_by('id')
 	contexto = {'relaciones':relacionsagital}
