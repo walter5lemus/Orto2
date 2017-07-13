@@ -27,8 +27,8 @@ def index(request):
 def denticion1_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
-		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
+		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
 			if ids:
 				if tipo_denticion.objects.filter(fichas_id=ids.id).exists():
 					max_num=5
@@ -147,6 +147,7 @@ def denticion1_editar(request,codi,num):
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	else:
 		return render(request, 'base/error_no_hay_acceso.html')
+
 class EliminarAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		ides = request.GET['ides']
@@ -163,43 +164,6 @@ def denticion1_consultar(request,codi,num):
 		anodonciaFormSet = modelformset_factory(registro, registroForm_consultar, extra=0)
 		mordidaFormSet = modelformset_factory(registro, registroForm_consultar, extra=0)
 		if ids:
-			incompletos =list()
-			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
-			for fi in ficha:
-				if not datos_generales.objects.filter(cod_expediente=codi).exists():
-					incompletos.append(0)
-				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-1)
-				if not estado_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-2)
-				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-3)
-				if not registro.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-4)
-				if not registro_mordidas.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-5)
-				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-6)
-				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-7)
-				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-8)
-				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-9)
-				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-10)
-				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-11)
-				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-12)
-				if not nance_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-13)
-				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-14)
-				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-15)
-				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-16)			
 			tipo = tipo_denticion.objects.get(fichas_id=ids.id)
 			denticiones = denticion.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
@@ -216,11 +180,11 @@ def denticion1_consultar(request,codi,num):
 				form2 = denticionForm(request.POST, instance=denticiones)
 			
 				return redirect('/denticion2/denticion2/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
+			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
-	
+
 def denticion2_view(request,codi,num):
 	str(codi)
 	#try:
@@ -243,6 +207,51 @@ def denticion2_view(request,codi,num):
 	return render(request, 'aspectos/dent2_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 	#except Exception, e:
 		#return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
+
+def denticion3_view(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
+			if ids:
+				if registro.objects.filter(fichas_id=ids.id, problema='4').exists():
+					max_num=5
+					numerarioFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+					if request.method == 'GET':
+						numerario_formset = numerarioFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='4'), prefix='numerarios')
+						form1 = tipo_denticionForm(instance=tipodenticion)
+					else:
+						numerario_formset = numerarioFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)
+						if (numerario_formset.is_valid()):
+
+							for form in numerario_formset:
+								form.save()
+
+						return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
+					return render(request, 'aspectos/dent3_form2.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+				else:
+					max_num=5
+					numerarioFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+					if request.method == 'POST':
+						numerario_formset = numerarioFormSet(request.POST, request.FILES, prefix='numerarios')		
+						if (numerario_formset.is_valid()):
+							for form in numerario_formset:
+								form.save()				
+
+						return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
+					else:
+						numerario_formset = numerarioFormSet(prefix='numerarios')
+						form1 = tipo_denticionForm(instance=tipodenticion)
+						return render(request, 'aspectos/dent3_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
+	except Exception, e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
 
 def mordidas_view(request,codi,num):
 	str(codi)
@@ -366,16 +375,6 @@ def relacionsagital_crear(request,codi,num):
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
 		else:
 			return render(request, 'base/error_no_encontrado.html')	
-
-class MostrarImg(TemplateView):
-	def get(self,request,*args,**kwargs):
-		cod = request.GET['codigo']
-		num = request.GET['numero']
-		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
-				ids= fichas.objects.get(cod_expediente=cod,numero=num)
-				image = imagenes_afmp.objects.filter(fichas_id=ids.id)
-				data = serializers.serialize('json', image, fields=('imagen'))
-		return HttpResponse(data, content_type='application/json')
 
 def relacionsagital_list(request):
 	relacionsagital = relaciones_sagitales.objects.all().order_by('id')

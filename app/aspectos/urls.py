@@ -11,6 +11,8 @@ urlpatterns = [
             
 	url(r'^denticion2/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', denticion2_view, name= 'denticion2_crear'),
 
+	url(r'^denticion3/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion3_view), name= 'denticion3_crear'),
+
     url(r'^mordidas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_view, name= 'mordidas_crear'),
     url(r'^mordidas/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_editar, name= 'mordidas_editar'),
     url(r'^mordidas/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_consultar, name= 'mordidas_consultar'),
