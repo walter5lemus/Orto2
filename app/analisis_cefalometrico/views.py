@@ -70,8 +70,49 @@ def cefalometrico_editar(request, codi, num):
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)
-				
 			if ids:
+				incompletos =list()
+				ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+				for fi in ficha:
+					if not datos_generales.objects.filter(cod_expediente=codi).exists():
+						incompletos.append(0)
+					if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-1)
+					if not estado_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-2)
+					if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-3)
+					if not registro.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-4)
+					if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-5)
+					if not registro.objects.filter(fichas_id=fi.id).exists():
+						if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+							incompletos.append(-6)
+					if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-7)	
+					if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-8)
+					if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-9)
+					if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-10)
+					if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-11)
+					if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-12)
+					if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-13)
+					if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-14)
+					if not nance_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-15)
+					if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-16)
+					if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-17)
+					if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-18)
 				if request.method == 'GET':
 					formset = cefalometricoFormSet(queryset=analisis_cefalometrico.objects.filter(fichas_id=ids.id))
 				else:
@@ -81,8 +122,8 @@ def cefalometrico_editar(request, codi, num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/diag_cefalo/editar/%s/%s' % (codi, num))
-					return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})
-				return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id})	
+					return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos})
+				return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos})	
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 		except Exception, e:
 			if int(num)>1:
@@ -149,7 +190,7 @@ def cefalometrico_consultar(request, codi, num):
 					formset.save()
 				
 				return redirect('/diag_cefalo/consultar/%s/%s' % (codi, num))			
-			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'completada':ids.completada,'incompletos':incompletos})		
+			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'completada':ids.completada,'incompletos':incompletos})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
