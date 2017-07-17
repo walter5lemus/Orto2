@@ -28,9 +28,9 @@ class registroForm(forms.ModelForm):
 			'id': forms.HiddenInput(attrs={'class':'form-control id'}),
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
 			'problema': forms.HiddenInput(attrs={'class':'form-control'}),
-			'cuadrante': forms.TextInput(attrs={'class':'form-control'}),
-			'pieza': forms.TextInput(attrs={'class':'form-control'}),
-			'detalle': forms.TextInput(attrs={'class':'form-control'}),
+			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'detalle': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 class registroForm_consultar(forms.ModelForm):
