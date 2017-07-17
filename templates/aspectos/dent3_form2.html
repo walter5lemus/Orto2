@@ -15,21 +15,22 @@ Aspectos de dentición - Parte 3
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
+
     del = 1;
         //Ocultar parte odontograma
         $(".tipo").change(function() {
             del = 0;
+            vacio = 1;
+            
             maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
 
-            for (var i = 0; i < maximo; i++) {
-                $('#id_numerarios-'+i+'-cuadrante').val('');
-                $('#id_numerarios-'+i+'-pieza').val('');
-                $('#id_numerarios-'+i+'-detalle').val('');
-            }
-
-            for (var i = 1; i < maximo; i++) {
+            for(var i = 1; i < maximo; i++){
                 document.getElementById("numerarios-"+i).click();
             }
+            $('#id_numerarios-0-id').val('');
+            $('#id_numerarios-0-cuadrante').val('');
+            $('#id_numerarios-0-pieza').val('');
+            $('#id_numerarios-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -240,9 +241,25 @@ Aspectos de dentición - Parte 3
             del = 1;
         });
 
-        //Tipo problema y color
+    //Pintar odontograma
+    $(function() {
+        n1 = document.getElementById("id_numerarios-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-numerarios");
+        for (i = 0; i < n1; i++) {
+            list[i].setAttribute("id", "numerarios-" + i);
+            c = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
+            p = document.getElementById("id_numerarios-"+i+"-pieza").value;
+            $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
+            $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
+        }  
+    });
+
+        //Tipo problema y color por pestaña
         nombre = 'numerarios';
-        color = '#f7ff70'; 
+        color = '#f7ff70';
 
         //Agrega código expediente y tipo problema a formset
         a = document.getElementById("id_numerarios-TOTAL_FORMS").value;
@@ -271,8 +288,48 @@ Aspectos de dentición - Parte 3
             }              
         }
 
+        //Guarda valor de id a borrar
+        $(document).ready(function(){
+            vacio = 1;
+            $(".delete-row-numerarios").hover(function() {
+                num = $(this).attr("id")
+                if (document.getElementById("id_numerarios-"+ num[11] +"-id").value) {
+                    ides = document.getElementById("id_numerarios-"+ num[11] +"-id").value;
+                    vacio = 0;   
+                }
+                else{
+                    vacio = 1;
+                }
+            });
+
+            $(".add-row-numerarios").hover(function() {
+                vacio = 1;
+            });                              
+        });
+
         //Función eliminar plugin formset
         eliminar = function(){
+
+            if(vacio == 0)
+            {
+                //Borrando tupla bd
+
+                $.ajax({
+                    data : {'ides':ides},
+                    url : '/aspectos/denticion3/eliminar/',
+                    type : 'get',
+                    success: function(data){
+                        valor = document.getElementById("id_"+nombre+"-INITIAL_FORMS").value;
+                        valor = valor - 1;
+                        $('#id_'+nombre+"-INITIAL_FORMS").val(valor);  
+                        alert("La pieza se ha eliminado.");
+                    }
+                });
+            }
+            else{
+
+            }
+
             //Borrado manual?
             if(del == 1)
             {
@@ -302,7 +359,7 @@ Aspectos de dentición - Parte 3
         }        
 
         //Declarando formsets
-        $('#super_numerarios tbody tr').formset({
+        $('#numerarios_prematuras tbody tr').formset({
             prefix: "{{ numerario_formset.prefix }}",
             addCssClass: 'add-row-numerarios',
             deleteCssClass: 'delete-row-numerarios',
@@ -441,15 +498,12 @@ Aspectos de dentición - Parte 3
         {% endif %}
         </div>
 
-
 <div class="row">
     <form method="POST" action="">
 
     <center><h1>Examen de Dentición</h1></center>
     <center><h2>Parte III</h2></center>
     {% csrf_token %} 
-
-<!-- Encabezado # Expediente y Ficha-->
 
     <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
@@ -469,10 +523,10 @@ Aspectos de dentición - Parte 3
         <br>
     </div>
 
-    <script>
-        $('#codigo').val("{{codi}}");
-        $('#ficha').val("{{num}}");  
-    </script>
+<script>
+    $('#codigo').val("{{codi}}");
+    $('#ficha').val("{{num}}");  
+</script>
 
 <!-- Tabla + Odontograma -->
 
@@ -500,7 +554,7 @@ Aspectos de dentición - Parte 3
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="super_numerarios" cellpadding="0" cellspacing="5">
+                    <table id="numerarios_prematuras" cellpadding="0" cellspacing="5">
                     <thead>
                         <center><h4>Supernumerarios</h4></center>
                         <tr>
@@ -523,14 +577,11 @@ Aspectos de dentición - Parte 3
                         {{ numerario_formset.management_form }}
                         </tbody>
                     </table>      
-
                 </div>
-
             </div><!-- /.content_holder -->
         </div><!-- /.tabs_holder -->
     </div>
-    
-    <!-- Odontograma -->
+
     <div class="col-md-7">
         <center>
             <br><br>
@@ -990,13 +1041,11 @@ Aspectos de dentición - Parte 3
                 </tbody>
             </table>
         </center>   
-        <br/><br/><br/>          
+        <br/><br/>       
     </div>
-
   </div>
 </div><!-- fin bootstrap -->
 
-    <!-- Botones -->
     <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">

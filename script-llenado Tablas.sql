@@ -1,4 +1,4 @@
-INSERT INTO `informacion_catalogo_enfermedades` (`id_enfermedad`, `nombre_enfermedad`) VALUES
+﻿INSERT INTO `informacion_catalogo_enfermedades` (`id_enfermedad`, `nombre_enfermedad`) VALUES
 (1, 'Alergias'),
 (2, 'Desmayos'),
 (3, 'Presión sanguínea alta'),
@@ -27,7 +27,8 @@ INSERT INTO `aspectos_tipo` (`id`, `nombre`) VALUES
 INSERT INTO `aspectos_problema` (`id`, `nombre_problemas`) VALUES
 (1, 'Pérdidas prematuras'),
 (2, 'Anodoncias'),
-(3, 'Mordida telescópica');
+(3, 'Mordida telescópica'),
+(4, 'Supernumerarios');
 
 
 INSERT INTO `analisisdenticionmixta_pos` (`id`) VALUES
