@@ -20,15 +20,15 @@
             del = 0;
             vacio = 1;
             
-            maximo = document.getElementById("id_perdidas-TOTAL_FORMS").value;
+            maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
 
             for(var i = 1; i < maximo; i++){
-                document.getElementById("perdidas-"+i).click();
+                document.getElementById("numerarios-"+i).click();
             }
 
-            $('#id_perdidas-0-cuadrante').val('');
-            $('#id_perdidas-0-pieza').val('');
-            $('#id_perdidas-0-detalle').val('');
+            $('#id_numerarios-0-cuadrante').val('');
+            $('#id_numerarios-0-pieza').val('');
+            $('#id_numerarios-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -241,11 +241,11 @@
 
     //Pintar odontograma
     $(function() {
-        n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
-        var list = document.getElementsByClassName("delete-row-perdidas");
+        n1 = document.getElementById("id_numerarios-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-numerarios");
         for (i = 0; i < n1; i++) {
-            c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
-            p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+            c = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
+            p = document.getElementById("id_numerarios-"+i+"-pieza").value;
             $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
@@ -255,7 +255,7 @@
     });
 
         //Tipo problema y color por pestaña
-        nombre = 'perdidas';
+        nombre = 'numerarios';
         color = '#f7ff70';  
 
         $('.tabs_holder').skinableTabs({
@@ -357,7 +357,7 @@
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="perdidas_prematuras" cellpadding="0" cellspacing="5">
+                    <table id="numerarios_prematuras" cellpadding="0" cellspacing="5">
                     <thead>
                         <center><h4>Supernumerarios</h4></center>
                         <tr>
@@ -368,7 +368,7 @@
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in perdida_formset.forms %}                                              
+                        {% for form in numerario_formset.forms %}                                              
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
@@ -377,7 +377,7 @@
                             <td></td>
                         </tr>
                         {% endfor %}
-                        {{ perdida_formset.management_form }}
+                        {{ numerario_formset.management_form }}
                         </tbody>
                     </table>      
 
