@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
+
 	<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
 	<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -13,6 +14,8 @@
 	<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src="{% static 'js/DjangoAjax.js' %}"></script>
 	<script src="{% static 'js/jquery.ui.datepicker-es.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  
 
   <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 
@@ -21,6 +24,9 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
   <link rel="stylesheet" type="text/css" href="/static/style/menu_social.css"/>
+
+
+
 
 	{% block extrastatic %}
 	{% endblock %}
@@ -39,7 +45,9 @@
 	<title>{% block title %} {% endblock %}</title>
 </head>
 
-<body>
+
+
+<body onload="nobackbutton();">
 
 <div class="container">
 
@@ -61,8 +69,10 @@
         <span class="icon-bar"></span>
       </button>
 
+
       <a class="navbar-brand" href="http://localhost:8000/"><span class="glyphicon glyphicon-home white"></span></a>
 
+    
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -72,76 +82,83 @@
           <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Información<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/informacion/datos_generales/nuevo2/{{codi}}/{{num}}/">Datos Generales</a></li>
+            <li><a href="/informacion/datos_generales/editar/{{codi}}/{{num}}/" id="datos_generales">Datos Generales</a></li>
 
-			<li><a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}/">Motivo de Consulta</a></li>
+			<li><a href="/informacion/motivo_consultas/editar/{{codi}}/{{num}}/" id="motivo_consultas">Motivo de Consulta</a></li>
 
-			<li><a href="/informacion/estado_general/nuevo/{{codi}}/{{num}}/">Estado General</a></li>
+			<li><a href="/informacion/estado_general/editar/{{codi}}/{{num}}/" id="estado_general">Estado General</a></li>
           </ul>
         </li>
 
-        <li><a href="/tipo_perfil/nuevo/{{codi}}/{{num}}/">Tipo de perfil</a></li>
+
+        <li><a href="/tipo_perfil/editar/{{codi}}/{{num}}/"  id="tipo_perfil">Tipo de perfil</a></li>
+
 
         <li class="dropdown">
-          <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Aspectos Dentición<span class="caret"></span></a>
+          <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Aspectos Dentinción<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/aspectos/denticion1/nuevo/{{codi}}/{{num}}/">Examen de Dentición - 1</a></li>
+            <li><a href="/aspectos/denticion1/editar/{{codi}}/{{num}}/" id="denticion1">Examen de Dentición - 1</a></li>
 
-			<li><a href="/aspectos/denticion2/nuevo/{{codi}}/{{num}}/">Examen de Dentición - 2</a></li>
+			<li><a href="/aspectos/denticion2/editar/{{codi}}/{{num}}/" id="denticion2">Examen de Dentición - 2</a></li>
 
-      <li><a href="/aspectos/denticion3/nuevo/{{codi}}/{{num}}/">Examen de Dentición - 3</a></li>
+      <li><a href="/aspectos/denticion3/editar/{{codi}}/{{num}}/" id="denticion3">Examen de Dentición - 3</a></li>
 
-			<li><a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}/">Mordidas</a></li>
+			<li><a href="/aspectos/mordidas/editar/{{codi}}/{{num}}/" id="mordidas">Mordidas</a></li>
 
-			<li><a href="/aspectos/sagitales/nuevo/{{codi}}/{{num}}/">Relaciones Sagitales</a></li>
+			<li><a href="/aspectos/sagitales/editar/{{codi}}/{{num}}/" id="sagitales">Relaciones Sagitales</a></li>
           </ul>
         </li>
+
 
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Análisis Radiográfico<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/{{codi}}/{{num}}/">Aspectos Articulares</a></li>
+            <li><a href="/analisis_radiograficos/aspectos_articulares/editar/{{codi}}/{{num}}/" id="aspectos_articulares">Aspectos Articulares</a></li>
 
-			<li><a href="/asp_mandibular1/nuevo/{{codi}}/{{num}}/">Aspectos Mandibulares</a></li>
+			<li><a href="/asp_mandibular1/editar/{{codi}}/{{num}}/" id="asp_mandibular">Aspectos Mandibulares</a></li>
 
-			<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/{{codi}}/{{num}}/ ">Otros Aspectos</a></li>
+			<li><a href="/analisis_radiograficos/otrosAspectos/editar/{{codi}}/{{num}}/" id="otros_aspectos">Otros Aspectos</a></li>
 
-			<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/{{codi}}/{{num}}/ ">Otros Hallazgos</a></li>
+			<li><a href="/analisis_radiograficos/otrosHallazgos/editar/{{codi}}/{{num}}/" id="otros_hallazgos">Otros Hallazgos</a></li>
           </ul>
         </li>
+
 
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Análisis Cefalométrico<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/analisis_cefalometrico/cefalometrico/nuevo/{{codi}}/{{num}}/ ">Análisis Cefalométrico</a></li>
+            <li><a href="/analisis_cefalometrico/cefalometrico/editar/{{codi}}/{{num}}/"  id="analisis_cefalometrico">Analisis Cefalométrico</a></li>
 
-			<li><a href="/diag_cefalo/nuevo/{{codi}}/{{num}}/">Diagnóstico</a></li>
+			<li><a href="/diag_cefalo/editar/{{codi}}/{{num}}/" id="diag_cefalo">Diagnóstico</a></li>
           </ul>
         </li>
+
 
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Análisis Dentinción<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/{{codi}}/{{num}}/">Análisis de Nance</a></li>
+            <li><a href="/analisis_denticion_mixta/analisis_nance/editar/{{codi}}/{{num}}/" id="analisis_nance">Análisis de Nance</a></li>
 
-			<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/{{codi}}/{{num}}/">Análisis de Moyers Inferior</a></li>
+			<li><a href="/analisis_denticion_mixta/moyersinferior/editar/{{codi}}/{{num}}/" id="moyers_inferior">Análisis de Moyers Inferior</a></li>
 			
-			<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/{{codi}}/{{num}}/ ">Análisis de Moyers Superior</a></li>
+			<li><a href="/analisis_denticion_mixta/moyerssuperior/editar/{{codi}}/{{num}}/" id="moyers_superior">Análisis de Moyers Superior</a></li>
           </ul>
         </li>
+
 
         <li class="dropdown">
           <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Diagnóstico Ortodóntico<span class="caret"></span></a>
 
           <ul class="dropdown-menu" role="menu">
-            <li><a href="/diag_general/nuevo/{{codi}}/{{num}}/">Diagnóstico General</a></li>
+            <li><a href="/diag_general/editar/{{codi}}/{{num}}/" id="diag_general">Diagnóstico General</a></li>
           </ul>
         </li>
       </ul>
+
 
       <ul class="nav navbar-nav navbar-right">
        	  <li class="active">
@@ -155,10 +172,14 @@
         </div>
       </ul>
 
+
     </div>
   </div>
  </nav>
 {% endblock %}
+
+
+
 
 {% block menu-social %}
   <!-- Menu Social -->
@@ -166,17 +187,18 @@
   <div class="social">
     <ul>
       <li>
-        <a href="/citas/nuevo/{{codi}}/{{num}}">
+        <a href="/citas/editar/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
       </li>
 
       <li>
-        <a href="/gestor_img/paciente/nuevo/{{codi}}/{{num}}"><img class="icon-imagen" src="/media/imagenes/Menu/camera.png"></a>
+        <a href="/gestor_img/paciente/editar/{{codi}}/{{num}}"><img class="icon-imagen" src="/media/imagenes/Menu/camera.png"></a>
       </li>
-
+      
     </ul>
   </div>
 {% endblock %}
+
 
 	{% block header %}
 	{% endblock %}
@@ -195,6 +217,8 @@
 
 	{% block extrajs %}
 	{% endblock %}
+
+
 
 	</div>
 	
