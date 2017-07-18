@@ -139,13 +139,13 @@ def busqueda2(request):
 		return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda_admin(request):
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if request.is_ajax():
 			resultado = datos_generales.objects.filter(nombre_completo__istartswith= request.GET['nombre'] ).values('nombre_completo', 'cod_expediente')
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
 
 def busqueda2_admin(request):
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if request.is_ajax():
 			resultado = fichas.objects.filter(cod_expediente_id__cod_expediente__startswith=request.GET['codigo']).values('cod_expediente').distinct()
 			return HttpResponse( json.dumps( list(resultado)), content_type='application/json')
@@ -300,7 +300,7 @@ def DatosGenerales_consultar2(request,codi):
 
 def DatosGenerales_edit(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		#try:
 		ids = datos_generales.objects.get(cod_expediente=codi)
 		if ids:
@@ -420,7 +420,7 @@ def Motivo_Consulta_crear(request,codi,num):
 	
 def Motivo_Consulta_editar2(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -540,7 +540,7 @@ def Motivo_Consulta_consultar(request,codi,num):
 
 def Motivo_Consulta_editar(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -715,7 +715,7 @@ def EstadoGeneral_consultar(request,codi,num):
 
 def EstadoGeneral_edit(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -781,7 +781,7 @@ def EstadoGeneral_edit(request,codi,num):
 
 def EstadoGeneral_edit2(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -806,7 +806,7 @@ def EstadoGeneral_edit2(request,codi,num):
 ################################################################################################
 
 def eliminar(request):
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if request.method == 'GET':
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/eliminar.html', {'form':form})
@@ -816,7 +816,7 @@ def eliminar(request):
 
 class ajax_eliminar(TemplateView):
 	def get(self,request,*args,**kwargs):
-		if request.user.is_superuser==1:
+		if request.user.rol==1:
 			codigo = request.GET['codigo']
 			if datos_generales.objects.filter(cod_expediente=codigo).exists():
 				datos_generales.objects.filter(cod_expediente=codigo).delete()
@@ -826,7 +826,7 @@ class ajax_eliminar(TemplateView):
 
 class ajax_eliminar_ficha(TemplateView):
 	def get(self,request,*args,**kwargs):
-		if request.user.is_superuser==1:
+		if request.user.rol==1:
 			codigo = request.GET['codigo']
 			numero = request.GET['numero']
 			if fichas.objects.filter(cod_expediente=codigo,numero=numero).exists():
@@ -839,7 +839,7 @@ class ajax_eliminar_ficha(TemplateView):
 ################################################################################################
 
 def retiro_voluntario(request):
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if request.method == 'GET':
 			form = DatosGeneralesForm()
 			return render(request, 'informacion/retiro_voluntario.html', {'form':form})	
@@ -850,7 +850,7 @@ def retiro_voluntario(request):
 
 class ajax_retiro_voluntario(TemplateView):
 	def get(self,request,*args,**kwargs):
-		if request.user.is_superuser==1:
+		if request.user.rol==1:
 			codigo = request.GET['codigo']
 			numero = request.GET['numero']
 			if  not fichas.objects.filter(cod_expediente_id=codigo,numero=numero,completada=0).exists():
@@ -863,7 +863,7 @@ class ajax_retiro_voluntario(TemplateView):
 ################################################################################################
 
 def caducada(request):
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if request.method == 'GET':
 			form = DatosGeneralesForm()
 			incompletas = fichas.objects.filter(completada=0)
@@ -873,7 +873,7 @@ def caducada(request):
 		return render(request, 'base/error_no_tiene_permiso_admin.html')
 class ajax_caducada(TemplateView):
 	def get(self,request,*args,**kwargs):
-		if request.user.is_superuser==1:
+		if request.user.rol==1:
 			if fichas.objects.filter(completada=0).exists():
 				fichas.objects.filter(completada=0).update(completada=3)
 				return render(request, 'base/error_no_tiene_permiso_admin.html')
