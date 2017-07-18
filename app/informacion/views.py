@@ -109,10 +109,22 @@ class BusquedaAjaxView2(TemplateView):
 class BusquedaAjaxView22(TemplateView):
 	def get(self,request,*args,**kwargs):
 		codigo = request.GET['codigo']
-		fi=fichas.objects.filter(cod_expediente=codigo)
-		for ficha in fi:
-			ids= fichas.objects.get(cod_expediente_id=ficha.cod_expediente_id,numero=ficha.numero)
 		fi=list(fichas.objects.filter(cod_expediente=codigo))
+		data = serializers.serialize('json', fi, fields=('numero','completada'))
+		return HttpResponse(data, content_type='application/json')
+
+class BusquedaAjaxView22_editar(TemplateView):
+	def get(self,request,*args,**kwargs):
+		codigo = request.GET['codigo']
+		fi=list(fichas.objects.filter(Q(cod_expediente=codigo),Q(completada=0)|Q(completada=1)))
+		data = serializers.serialize('json', fi, fields=('numero','completada'))
+		return HttpResponse(data, content_type='application/json')
+
+class BusquedaAjaxView22_retiro(TemplateView):
+	def get(self,request,*args,**kwargs):
+		codigo = request.GET['codigo']
+
+		fi=list(fichas.objects.filter(cod_expediente=codigo,completada=0))
 		data = serializers.serialize('json', fi, fields=('numero','completada'))
 		return HttpResponse(data, content_type='application/json')
 
