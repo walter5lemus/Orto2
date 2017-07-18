@@ -21,16 +21,6 @@ Aspectos de dentición - Parte 2
         $(".tipo").change(function() {
             del = 0;
             vacio = 1;
-            
-            maximo = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-
-            for(var i = 1; i < maximo; i++){
-                document.getElementById("diastemas-"+i).click();
-            }
-            $('#id_diastemas-0-id').val('');
-            $('#id_diastemas-0-cuadrante').val('');
-            $('#id_diastemas-0-pieza').val('');
-            $('#id_diastemas-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -241,21 +231,29 @@ Aspectos de dentición - Parte 2
             del = 1;
         });
 
-    //Pintar odontograma
-    $(function() {
-        n1 = document.getElementById("id_diastemas-TOTAL_FORMS").value;        
-        var list = document.getElementsByClassName("delete-row-diastemas");
-        for (i = 0; i < n1; i++) {
-            list[i].setAttribute("id", "diastemas-" + i);
-            c = document.getElementById("id_diastemas-"+i+"-cuadrante").value;
-            p = document.getElementById("id_diastemas-"+i+"-pieza").value;
-            $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
-            $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
-            $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
-            $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
-            $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
-        }  
-    });
+        //Pintar odontograma
+        $(function() {
+            n1 = document.getElementById("id_diastemas-TOTAL_FORMS").value;        
+            var list = document.getElementsByClassName("delete-row-diastemas");
+            for (i = 0; i < n1; i++) {
+                list[i].setAttribute("id", "diastemas-" + i);
+                c1 = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
+                p1 = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
+                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', '#f7ff70');
+
+                c2 = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
+                p2 = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
+                $('g#P'+ c2 + p2 + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#C').attr('fill', '#f7ff70');            
+            }  
+        });
 
         //Tipo problema y color por pestaña
         nombre = 'diastemas';
@@ -264,8 +262,7 @@ Aspectos de dentición - Parte 2
         //Agrega código expediente y tipo problema a formset
         a = document.getElementById("id_diastemas-TOTAL_FORMS").value;
         a1 = a - 1  
-        $('#id_diastemas-'+a1+'-fichas').val({{ids}});
-        $('#id_diastemas-'+a1+'-problema').val(4);         
+        $('#id_diastemas-'+a1+'-fichas').val({{ids}});     
 
         //Función añadir plugin formset
         adding = function(){
@@ -276,7 +273,7 @@ Aspectos de dentición - Parte 2
 
             numero = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             numero = numero - 2;
-            if(document.getElementById("id_"+nombre+"-"+numero+"-cuadrante").value)
+            if(document.getElementById("id_"+nombre+"-"+numero+"-cuad_dos").value)
             {
                 
             }
@@ -293,8 +290,8 @@ Aspectos de dentición - Parte 2
             vacio = 1;
             $(".delete-row-diastemas").hover(function() {
                 num = $(this).attr("id")
-                if (document.getElementById("id_diastemas-"+ num[11] +"-id").value) {
-                    ides = document.getElementById("id_diastemas-"+ num[11] +"-id").value;
+                if (document.getElementById("id_diastemas-"+ num[10] +"-id").value) {
+                    ides = document.getElementById("id_diastemas-"+ num[10] +"-id").value;
                     vacio = 0;   
                 }
                 else{
@@ -316,7 +313,7 @@ Aspectos de dentición - Parte 2
 
                 $.ajax({
                     data : {'ides':ides},
-                    url : '/aspectos/denticion3/eliminar/',
+                    url : '/aspectos/denticion2/eliminar/',
                     type : 'get',
                     success: function(data){
                         valor = document.getElementById("id_"+nombre+"-INITIAL_FORMS").value;
@@ -348,18 +345,26 @@ Aspectos de dentición - Parte 2
             n1 = document.getElementById("id_diastemas-TOTAL_FORMS").value;        
 
             for (i = 0; i < n1; i++) {
-                c = document.getElementById("id_diastemas-"+i+"-cuadrante").value;
-                p = document.getElementById("id_diastemas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
+                c1 = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
+                p1 = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
+                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', '#f7ff70');
+
+                c2 = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
+                p2 = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
+                $('g#P'+ c2 + p2 + ' polygon#T').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#B').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#R').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#L').attr('fill', '#f7ff70');
+                $('g#P'+ c2 + p2 + ' polygon#C').attr('fill', '#f7ff70');
             }  
         }        
 
         //Declarando formsets
-        $('#diastemas_prematuras tbody tr').formset({
+        $('#diastemas tbody tr').formset({
             prefix: "{{ diastema_formset.prefix }}",
             addCssClass: 'add-row-diastemas',
             deleteCssClass: 'delete-row-diastemas',
@@ -384,76 +389,7 @@ Aspectos de dentición - Parte 2
         });
 
         //Seleccion de pieza odontograma
-        $('g polygon').click(function (evt) {
-            var sector = $(evt.target); 
 
-            iden = sector.parent().attr('id')
-            cuadrante = iden[1] 
-            pieza = iden[2]
-
-            b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
-            b1 = b - 1
-
-            c = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-
-            for (i = 0; i < c; i++) {
-                cmp = document.getElementById("id_diastemas-"+i+"-cuadrante").value;
-                cmp1 = document.getElementById("id_diastemas-"+i+"-pieza").value;
-
-                comparar = cuadrante + pieza
-                comparar1 = cmp + cmp1
-
-                if(comparar == comparar1)
-                {
-                    i = c + 1
-                    mostrarc=0
-                }
-                else
-                {   
-                    i++
-                    if (i==c) {
-                        mostrarc=1                  
-                    }
-                    else{
-                        i--
-                    }
-                }
-            }
-
-            if (mostrarc==1) {
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuadrante").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza").value;        
-                diente = c + p
-
-                if(diente!='')   
-                {
-                    c = document.getElementById("id_"+nombre+"-"+b1+"-cuadrante").value;
-                    p = document.getElementById("id_"+nombre+"-"+b1+"-pieza").value;
-                    $('g#P'+ c + p + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c + p + ' polygon#C').attr('fill', "white");
-                } 
-
-                $("#id_"+nombre+"-"+b1+"-cuadrante").val( cuadrante );
-                $("#id_"+nombre+"-"+b1+"-pieza").val( pieza ); 
-                
-                mostrarc=0  
-
-                c = document.getElementById("id_"+nombre+"-"+b1+"-cuadrante").value;
-                p = document.getElementById("id_"+nombre+"-"+b1+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#B').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#R').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#L').attr('fill', color);
-                $('g#P'+ c + p + ' polygon#C').attr('fill', color);
-            }
-            else
-            {
-                alert("Esta pieza ya fue seleccionada.")
-            }
-        });   
     </script>
 
     <style type="text/css">
@@ -549,14 +485,14 @@ Aspectos de dentición - Parte 2
 
         <div class="tabs_holder">
             <ul>
-                <li><a href="#tab-id-1">Numerarios</a></li>
+                <li><a href="#tab-id-1">diastemas</a></li>
             </ul>
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="diastemas_prematuras" cellpadding="0" cellspacing="5">
+                    <table id="diastemas" cellpadding="0" cellspacing="5">
                     <thead>
-                        <center><h4>Numerarios</h4></center>
+                        <center><h4>Diastemas</h4></center>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Cuadrante 1</th>
@@ -1040,7 +976,7 @@ Aspectos de dentición - Parte 2
             <table border = "2">
                 <tbody>
                     <tr>
-                        <td bgcolor = "#f7ff70"><center><strong>Numerarios</strong></center></td>
+                        <td bgcolor = "#f7ff70"><center><strong>Diastemas</strong></center></td>
                     </tr>
                 </tbody>
             </table>

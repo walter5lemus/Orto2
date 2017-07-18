@@ -20,17 +20,6 @@ Aspectos de dentición - Parte 3
         //Ocultar parte odontograma
         $(".tipo").change(function() {
             del = 0;
-            maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-
-            for (var i = 0; i < maximo; i++) {
-                $('#id_numerarios-'+i+'-cuadrante').val('');
-                $('#id_numerarios-'+i+'-pieza').val('');
-                $('#id_numerarios-'+i+'-detalle').val('');
-            }
-
-            for (var i = 1; i < maximo; i++) {
-                document.getElementById("numerarios-"+i).click();
-            }
 
             switch ($(this).val()) {
                 case "1":

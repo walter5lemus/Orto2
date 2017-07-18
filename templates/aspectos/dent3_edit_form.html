@@ -21,16 +21,6 @@ Aspectos de dentición - Parte 3
         $(".tipo").change(function() {
             del = 0;
             vacio = 1;
-            
-            maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
-
-            for(var i = 1; i < maximo; i++){
-                document.getElementById("numerarios-"+i).click();
-            }
-            $('#id_numerarios-0-id').val('');
-            $('#id_numerarios-0-cuadrante').val('');
-            $('#id_numerarios-0-pieza').val('');
-            $('#id_numerarios-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -322,6 +312,7 @@ Aspectos de dentición - Parte 3
                         valor = document.getElementById("id_"+nombre+"-INITIAL_FORMS").value;
                         valor = valor - 1;
                         $('#id_'+nombre+"-INITIAL_FORMS").val(valor);  
+                        alert("La pieza se ha eliminado.");                        
                     }
                 });
             }
@@ -358,7 +349,7 @@ Aspectos de dentición - Parte 3
         }        
 
         //Declarando formsets
-        $('#numerarios_prematuras tbody tr').formset({
+        $('#supernumerarios tbody tr').formset({
             prefix: "{{ numerario_formset.prefix }}",
             addCssClass: 'add-row-numerarios',
             deleteCssClass: 'delete-row-numerarios',
@@ -554,7 +545,7 @@ Aspectos de dentición - Parte 3
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="numerarios_prematuras" cellpadding="0" cellspacing="5">
+                    <table id="supernumerarios" cellpadding="0" cellspacing="5">
                     <thead>
                         <center><h4>Supernumerarios</h4></center>
                         <tr>
@@ -1037,9 +1028,7 @@ Aspectos de dentición - Parte 3
             <table border = "2">
                 <tbody>
                     <tr>
-                        <td bgcolor = "#f7ff70"><center><strong>Pérdidas prematuras</strong></center></td>
-                        <td bgcolor = "#ff6666"><center><strong>Anodoncias</strong></center></td>
-                        <td bgcolor = "#666dff"><center><strong>Mordidas telescópica</strong></center></td>
+                        <td bgcolor = "#f7ff70"><center><strong>Diastemas</strong></center></td></td>
                     </tr>
                 </tbody>
             </table>

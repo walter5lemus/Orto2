@@ -315,6 +315,60 @@ def denticion2_view(request,codi,num):
 		else:
 			return render(request, 'base/error_no_encontrado.html')
 
+def denticion2_editar(request,codi,num):
+	str(codi)
+	if request.user.is_superuser==1:
+		try:
+			ids = fichas.objects.get(cod_expediente=codi, numero=num)
+			if ids:
+				max_num=5
+				diastemasFormSet = modelformset_factory(diastemas_denticion, diastemasForm, min_num=1, max_num=5, extra=0)
+				tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					diastema_formset = diastemasFormSet(queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas')
+					form1 = tipo_denticionForm2(instance=tipodenticion)
+				else:
+					diastema_formset = diastemasFormSet(request.POST, request.FILES, queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas',)		
+					if (diastema_formset.is_valid()):
+						for form in diastema_formset:
+							form.save()
+						
+					return redirect('/aspectos/denticion3/editar/%s/%s/' %(codi,num))
+				return render(request, 'aspectos/dent2_edit_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
+		except Exception, e:
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+	else:
+		return render(request, 'base/error_no_hay_acceso.html')
+
+class Eliminar2AjaxView(TemplateView):
+	def get(self,request,*args,**kwargs):
+		ides = request.GET['ides']
+		if diastemas_denticion.objects.filter(id=ides).exists():
+			diastemas_denticion.objects.filter(id=ides).delete()
+
+		return HttpResponse("Se elimino.")
+
+def denticion2_consultar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		diastemasFormSet = modelformset_factory(diastemas_denticion, diastemasForm_consultar, extra=0)
+		if ids:
+			tipo = tipo_denticion.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				diastema_formset = diastemasFormSet(queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas')
+				form1 = tipo_denticionForm_consultar(instance=tipo)
+			else:
+				diastema_formset = diastemasFormSet(request.POST, request.FILES, queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas',)		
+				form1 = denticionForm_consultar(request.POST, instance=tipo)
+			
+				return redirect('/aspectos/denticion1/consultar/%s/%s/' %(codi,num))
+			return render(request, 'aspectos/dent2_cons_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
+		return render(request, 'base/error_no_encontrado.html')			
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')
+
 def denticion3_view(request,codi,num):
 	str(codi)
 	try:
@@ -399,7 +453,7 @@ def denticion3_consultar(request,codi,num):
 				numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
-				return redirect('/denticion2/denticion2/consultar/%s/%s/' %(codi,num))
+				return redirect('/aspectos/denticion2/consultar/%s/%s/' %(codi,num))
 			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:

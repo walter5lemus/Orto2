@@ -30,7 +30,7 @@ class registroForm(forms.ModelForm):
 			'problema': forms.HiddenInput(attrs={'class':'form-control'}),
 			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'detalle': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'detalle': forms.TextInput(attrs={'class':'form-control'}),
 		}
 
 class registroForm_consultar(forms.ModelForm):
@@ -145,6 +145,36 @@ class diastemasForm(forms.ModelForm):
 			'pieza_uno': forms.TextInput(attrs={'class':'form-control'}),
 			'cuad_dos': forms.TextInput(attrs={'class':'form-control'}),
 			'pieza_dos': forms.TextInput(attrs={'class':'form-control'}),
+		}
+
+class diastemasForm_consultar(forms.ModelForm):
+
+	class Meta:
+		model = diastemas_denticion
+
+		fields = [
+			'id',
+			'fichas',
+			'cuad_uno',
+			'pieza_uno',
+			'cuad_dos',
+			'pieza_dos',
+		]
+		labels = {
+			'id': 'id',
+			'fichas': 'Ficha',
+			'cuad_uno': 'Cuadrante 1',
+			'pieza_uno': 'Pieza 1',
+			'cuad_dos': 'Cuadrante 2',
+			'pieza_dos': 'Pieza 2',
+		}
+		widgets = {
+			'id' : forms.TextInput(attrs={'class':'form-control id','readonly':True}),
+			'fichas': forms.TextInput(attrs={'class':'form-control ficha','readonly':True}),
+			'cuad_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'cuad_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 
