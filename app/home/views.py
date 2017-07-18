@@ -84,9 +84,9 @@ def index(request):
 		incompletos.append(-20)
 
 
-	if request.user.is_superuser == 1:
+	if request.user.rol == 1:
 		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
-	if request.user.is_superuser != 1:
+	if request.user.rol != 1:
 		return render(request,'index_usuarios.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
 
 			

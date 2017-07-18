@@ -206,9 +206,6 @@
 
 
 <!-- Pendientes -->
-<script type="text/javascript">
-	console.log({{incompletos}});
-</script>
 <div id="incompletas" class="hidden">
 	{% for elemento in incompletos %}
 			<script type="text/javascript">
@@ -221,7 +218,7 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}} N° Ficha: '+numero+'</h3>';
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}}     N° Ficha: '+numero+'</h3>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
@@ -250,13 +247,13 @@
 						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion1/nuevo/'+co+'/'+numero+'/">Examen Dentición 1</a></li>');
 						break;
 					case -5:
-						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Examen Dentición 2</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion2/nuevo/'+co+'/'+numero+'/">Examen Dentición 2</a></li>');
 						break;
 					case -6:
-						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Examen Dentición 3</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion3/nuevo/'+co+'/'+numero+'/">Examen Dentición 3</a></li>');
 						break;
 					case -7:
-						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Mordidas Cruzadas</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/mordidas/nuevo/'+co+'/'+numero+'/">Mordidas Cruzadas</a></li>');
 						break;
 					case -8:
 						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');

@@ -38,6 +38,7 @@ INSERT INTO `analisisdenticionmixta_pos` (`id`) VALUES
 
 INSERT INTO `analisis_cefalometrico_examen` (`id`) VALUES ('1'), ('2');
 ALTER TABLE `informacion_usuario` CHANGE `is_staff` `is_staff` TINYINT(1) NULL;
-ALTER TABLE `informacion_usuario` CHANGE `is_active` `is_active` TINYINT(1) NULL;  
+ALTER TABLE `informacion_usuario` CHANGE `is_active` `is_active` TINYINT(1) NULL;
+ALTER TABLE `informacion_usuario` CHANGE `rol` `rol` TINYINT(1) NULL;  
 ALTER TABLE `informacion_usuario` CHANGE `first_name` `first_name` VARCHAR(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL, CHANGE `last_name` `last_name` VARCHAR(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL, CHANGE `email` `email` VARCHAR(254) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
 ALTER TABLE `informacion_usuario` CHANGE `date_joined` `date_joined` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;

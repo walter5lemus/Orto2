@@ -1,4 +1,4 @@
-	{% extends 'base/base.html' %}
+{% extends 'base/base.html' %}
 {% load staticfiles %}
 {% block title %}
 Control de Citas
@@ -184,49 +184,47 @@ Control de Citas
 
 	<div class="row">
 	<br><br>
-		<div class="col-md-10 col-md-offset-1 divOcultar2">	
-			<div class="col-md-5">
-				<div class="form-group">
-					<div class="row">
-						<div class="col-md-12">
-								<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
-									{{form2.fecha_cita}}
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-						<br>
-									<label for="{{form4.observaciones.name}}">{{form4.observaciones.label}}</label>	
-								{{form4.observaciones}}
-						</div>
-					</div>
+		<div class="col-md-10 col-md-offset-1 divOcultar2">
+			<div class="row">
+				<div class="col-md-3 col-md-offset-4">
+					<label for="{{form2.tutor.name}}">{{form2.tutor.label}}</label>	
+						<select name="tutor" id="tutor" class="form-control" maxlength="250"></select>
 				</div>
 			</div>
-
-			<div class="col-md-5 col-md-offset-1">
-				<div class="col-md-12">
-							<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
-						{{form2.proxima_cita}}
-				</div>
-
-				<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12">
+									<label for="{{form2.fecha_cita.name}}">{{form2.fecha_cita.label}}</label>	
+										{{form2.fecha_cita}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
 							<br>
-							<label for="{{form4.resultados.name}}">{{form4.resultados.label}}</label>	
-						{{form4.resultados}}
+										<label for="{{form4.observaciones.name}}">{{form4.observaciones.label}}</label>	
+									{{form4.observaciones}}
+							</div>
+						</div>
+					</div>
 				</div>
+			
+				<div class="col-md-5 col-md-offset-1">
+					<div class="col-md-12">
+								<label for="{{form2.proxima_cita.name}}">{{form2.proxima_cita.label}}</label>	
+							{{form2.proxima_cita}}
+					</div>
 
-				<!--  <div class="col-md-1">
-				<div class="well well-sm">
-							<FONT SIZE=5 COLOR=FF8000>
-							  <label for="{{form2.autorizacion.name}}">{{form2.autorizacion.label}}</label>	
-							</FONT>
-						{{form2.autorizacion}}
+					<div class="col-md-12">
+								<br>
+								<label for="{{form4.resultados.name}}">{{form4.resultados.label}}</label>	
+							{{form4.resultados}}
+					</div>
+
 				</div>
-				</div> -->
-
+			
 			</div>
-			
-			
 			<div class="row">
 
 				<div class="col-md-3 col-md-offset-4">
@@ -254,11 +252,18 @@ Control de Citas
 		</div>
 	</div>
 
+	
 
-
-
+	{% for tutor in tutores %}
+		<script>
+			$('#tutor').append("<option value={{tutor.username}}>{{tutor.username}}</option>");
+		</script>
+	{% empty %}
+		<script>
+			$('#tutor').append("<option value='no hay'>No hay tutores</option>");
+		</script>	
+	{% endfor %}
 <script>
-
 	var fechaCita="";
 	$('#codigo').val("{{codi}}");
 	$('#ficha').val("{{num}}");
@@ -323,7 +328,7 @@ Control de Citas
 		var fecha2 = $("#id_proxima_cita").val();
 		var observaciones = $('#id_observaciones').val();
 		var resultados = $('#id_resultados').val();
-	
+		var tutor = $('#tutor').val();
 		var estudiante = $('#id_estudiante').val();
 
 		if (codigo!='') {
@@ -331,7 +336,7 @@ Control de Citas
 					if (observaciones!='') {
 						if (resultados!='') {
 							$.ajax({
-								data : {'fecha1':fecha1,'fecha2':fecha2,'observaciones':observaciones,'resultados':resultados,'codigo':codigo,'numero':numero},
+								data : {'fecha1':fecha1,'fecha2':fecha2,'observaciones':observaciones,'resultados':resultados,'codigo':codigo,'numero':numero,'tutor':tutor},
 								url : '/citas/post2/',
 								type : 'POST',
 								success: function(response){
@@ -405,63 +410,60 @@ Control de Citas
 										        day = "Boton de Nance";
 										        break;
 										    case 2:
-										        day = "Boton de Nance";
-										        break;
-										    case 3:
 										        day = "Arco Lingua";
 										        break;
-										    case 4:
+										    case 3:
 										        day = "Tornillo Hirax";
 										        break;
-										    case 5:
+										    case 4:
 										        day = "Barra Transpalatina";
 										        break;
-										    case 6:
+										    case 5:
 										        day = "Botones";
 										        break;
-										    case 7:
+										    case 6:
 										        day = "SN1";
 										        break;
-										    case 8:
+										    case 7:
 										        day = "SN2";
 										        break;
-										    case 9:
+										    case 8:
 										        day = "SN3";
 										        break;
-										    case 10:
+										    case 9:
 										        day = "SN4";
 										        break;
-										    case 11:
+										    case 10:
 										        day = "SN5";
 										        break;
-										    case 12:
+										    case 11:
 										        day = "SN6";
 										        break;
-										    case 13:
+										    case 12:
 										        day = "SN7";
 										        break;
-										    case 14:
+										    case 13:
 										        day = "SN8";
 										        break;
-										    case 15:
+										    case 14:
 										        day = "SN9";
 										        break;
-										    case 16:
+										    case 15:
 										        day = "SN10";
 										        break;
-										    case 17:
+										    case 16:
 										        day = "Pistas Planas Directas";
 										        break;
-										    case 18:
+										    case 17:
 										        day = "Pistas Planas Indirectas";
 										        break;
-										    case 19:
+										    case 18:
 										        day = "Aparato Bimler";
 										        break;
-										    case 20:
+										    case 19:
 										        day = "Bionator";
 										        break;
-										    case 21:
+										    case 20:
 										        day = "Otros";
 										        break;
 										}
@@ -493,17 +495,13 @@ Control de Citas
 						                    tr += '<tr>';
 						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
 						                    	if(data2[i].fields.autorizacion==true){
-						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
+						                    		tr += "<td style='color:green;'>Aprobada</td>";
 						                    	}else{
-
-						                    		if ({{usuario}}==true) {
-						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td>';
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td>';
 						                    		$("#aparato1").css("display", "none");
-						                    		}else{
-						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td>';
-						                    		$("#aparato1").css("display", "none");
-						                    		}
+						                    		
 						                    	}
+						                    tr += '<td>'+data2[i].fields.tutor+'</td>';	
 						                    
 						                    fechaCita= data2[i].fields.proxima_cita;
 						                      if((i+1)==data2.length){
@@ -542,7 +540,7 @@ Control de Citas
 
 	
 $(function() {
-
+		
 		var codigo = $('#codigo').val();
 		var num = $('#ficha').val();
 
@@ -588,69 +586,66 @@ $(function() {
 										        day = "Boton de Nance";
 										        break;
 										    case 2:
-										        day = "Boton de Nance";
-										        break;
-										    case 3:
 										        day = "Arco Lingua";
 										        break;
-										    case 4:
+										    case 3:
 										        day = "Tornillo Hirax";
 										        break;
-										    case 5:
+										    case 4:
 										        day = "Barra Transpalatina";
 										        break;
-										    case 6:
+										    case 5:
 										        day = "Botones";
 										        break;
-										    case 7:
+										    case 6:
 										        day = "SN1";
 										        break;
-										    case 8:
+										    case 7:
 										        day = "SN2";
 										        break;
-										    case 9:
+										    case 8:
 										        day = "SN3";
 										        break;
-										    case 10:
+										    case 9:
 										        day = "SN4";
 										        break;
-										    case 11:
+										    case 10:
 										        day = "SN5";
 										        break;
-										    case 12:
+										    case 11:
 										        day = "SN6";
 										        break;
-										    case 13:
+										    case 12:
 										        day = "SN7";
 										        break;
-										    case 14:
+										    case 13:
 										        day = "SN8";
 										        break;
-										    case 15:
+										    case 14:
 										        day = "SN9";
 										        break;
-										    case 16:
+										    case 15:
 										        day = "SN10";
 										        break;
-										    case 17:
+										    case 16:
 										        day = "Pistas Planas Directas";
 										        break;
-										    case 18:
+										    case 17:
 										        day = "Pistas Planas Indirectas";
 										        break;
-										    case 19:
+										    case 18:
 										        day = "Aparato Bimler";
 										        break;
-										    case 20:
+										    case 19:
 										        day = "Bionator";
 										        break;
-										    case 21:
+										    case 20:
 										        day = "Otros";
 										        break;
 										}
 											$('#id_aparato').val(day);
-												$("#aparato1").css("display", "block");
-												$("#aparato2").css("display", "none");
+											$("#aparato1").css("display", "block");
+											$("#aparato2").css("display", "none");
 										}
 									}
 								});
@@ -678,24 +673,18 @@ $(function() {
 						                    tr += '<tr>';
 						                    tr += '<td>'+(i+1)+'</td><td>'+data2[i].fields.fecha_cita+'</td><td>'+data2[i].fields.observaciones+'</td><td>'+data2[i].fields.proxima_cita+'</td><td>'+data2[i].fields.resultados+'</td>';
 						                    	if(data2[i].fields.autorizacion==true){
-						                    		tr += "<td style='color:green;'>Aprobada</td><td>"+data2[i].fields.tutor+"</td>";
+						                    		tr += "<td style='color:green;'>Aprobada</td>";
 						                    	}else{
-
-						                    		if ({{usuario}}==true) {
-						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td><td>No hay tutor</td>';
+						                    			tr += '<td><button class="btn btn-success btn-block" onclick="aprobar()" id="boton_aprobar">Aprobar Cita</button></td>';
 						                    		$("#aparato1").css("display", "none");
-						                    		}else{
-						                    			tr += '<td style="color:red;"> Necesita Aprobación</td><td>No hay tutor</td>';
-						                    		$("#aparato1").css("display", "none");
-						                    		}
+						                    		
 						                    	}
-						                    
+						                    tr += '<td>'+data2[i].fields.tutor+'</td>';						                    
 						                    fechaCita= data2[i].fields.proxima_cita;
-						                    if((i+1)==data2.length){
+						                      if((i+1)==data2.length){
 							                    	tr += '<td><button class="btn btn-danger btn-block btn-xs" onclick="eliminar('+(i+1)+')" id="boton_eliminar">Eliminar</button></td>';
 							                    }
 						                    tr +='</tr>';
-
 						                }
 						 
 						                tabla += tr;
