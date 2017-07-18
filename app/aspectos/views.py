@@ -265,7 +265,7 @@ def denticion1_consultar(request,codi,num):
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 				form2 = denticionForm(request.POST, instance=denticiones)
 			
-				return redirect('/denticion2/denticion2/consultar/%s/%s/' %(codi,num))
+				return redirect('/aspectos/denticion2/consultar/%s/%s/' %(codi,num))
 			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
@@ -363,7 +363,7 @@ def denticion2_consultar(request,codi,num):
 				diastema_formset = diastemasFormSet(request.POST, request.FILES, queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas',)		
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
-				return redirect('/aspectos/denticion1/consultar/%s/%s/' %(codi,num))
+				return redirect('/aspectos/denticion3/consultar/%s/%s/' %(codi,num))
 			return render(request, 'aspectos/dent2_cons_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
@@ -453,7 +453,7 @@ def denticion3_consultar(request,codi,num):
 				numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
-				return redirect('/aspectos/denticion2/consultar/%s/%s/' %(codi,num))
+				return redirect('/aspectos/mordidas/consultar/%s/%s/' %(codi,num))
 			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
