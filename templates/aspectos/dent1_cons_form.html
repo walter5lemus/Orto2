@@ -21,23 +21,6 @@
             vacio = 1;
             
             maximo = document.getElementById("id_perdidas-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_perdidas-"+ i +"-id").value) {
-                    ides = document.getElementById("id_perdidas-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
 
             for(var i = 1; i < maximo; i++){
                 document.getElementById("perdidas-"+i).click();
@@ -48,23 +31,6 @@
             $('#id_perdidas-0-detalle').val('');
 
             maximo = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_anodoncias-"+ i +"-id").value) {
-                    ides = document.getElementById("id_anodoncias-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
 
             for(var i = 1; i < maximo; i++){
                 document.getElementById("anodoncias-"+i).click();
@@ -75,23 +41,6 @@
             $('#id_anodoncias-0-detalle').val('');
 
             maximo = document.getElementById("id_mordidas-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_mordidas-"+ i +"-id").value) {
-                    ides = document.getElementById("id_mordidas-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
 
             for(var i = 1; i < maximo; i++){
                 document.getElementById("mordidas-"+i).click();

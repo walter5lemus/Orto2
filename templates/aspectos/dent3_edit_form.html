@@ -1,9 +1,9 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_editar.html' %}
 
 {% load staticfiles %}
 
 {% block title %}
-Aspectos de dentición - Parte 1
+Aspectos de dentición - Parte 3
 {% endblock %}
 
 {% block extrajs %}
@@ -22,101 +22,15 @@ Aspectos de dentición - Parte 1
             del = 0;
             vacio = 1;
             
-            maximo = document.getElementById("id_perdidas-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_perdidas-"+ i +"-id").value) {
-                    ides = document.getElementById("id_perdidas-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                        success: function(data){
-                            valor = document.getElementById("id_perdidas-INITIAL_FORMS").value;
-                            valor = valor - 1;
-                            $('#id_perdidas-INITIAL_FORMS').val(valor);  
-                        }                           
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
+            maximo = document.getElementById("id_numerarios-TOTAL_FORMS").value;
 
             for(var i = 1; i < maximo; i++){
-                document.getElementById("perdidas-"+i).click();
+                document.getElementById("numerarios-"+i).click();
             }
-            $('#id_perdidas-0-id').val('');
-            $('#id_perdidas-0-cuadrante').val('');
-            $('#id_perdidas-0-pieza').val('');
-            $('#id_perdidas-0-detalle').val('');
-
-            maximo = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_anodoncias-"+ i +"-id").value) {
-                    ides = document.getElementById("id_anodoncias-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                        success: function(data){
-                            valor = document.getElementById("id_anodoncias-INITIAL_FORMS").value;
-                            valor = valor - 1;
-                            $('#id_anodoncias-INITIAL_FORMS').val(valor);  
-                        }                           
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
-
-            for(var i = 1; i < maximo; i++){
-                document.getElementById("anodoncias-"+i).click();
-            }
-            $('#id_anodoncias-0-id').val('');
-            $('#id_anodoncias-0-cuadrante').val('');
-            $('#id_anodoncias-0-pieza').val('');
-            $('#id_anodoncias-0-detalle').val('');
-
-            maximo = document.getElementById("id_mordidas-TOTAL_FORMS").value;
-        
-            for (var i = 0; i < maximo; i++) {
-                if (document.getElementById("id_mordidas-"+ i +"-id").value) {
-                    ides = document.getElementById("id_mordidas-"+ i +"-id").value;
-                    //Borrando tupla bd
-
-                    $.ajax({
-                        data : {'ides':ides},
-                        url : '/aspectos/denticion1/eliminar/',
-                        type : 'get',
-                        success: function(data){
-                            valor = document.getElementById("id_mordidas-INITIAL_FORMS").value;
-                            valor = valor - 1;
-                            $('#id_mordidas-INITIAL_FORMS').val(valor);  
-                        }                           
-                    });                                         
-                }         
-                else
-                {
-                    
-                }       
-            }
-
-            for(var i = 1; i < maximo; i++){
-                document.getElementById("mordidas-"+i).click();
-            }
-            $('#id_mordidas-0-id').val('');
-            $('#id_mordidas-0-cuadrante').val('');
-            $('#id_mordidas-0-pieza').val('');
-            $('#id_mordidas-0-detalle').val('');
+            $('#id_numerarios-0-id').val('');
+            $('#id_numerarios-0-cuadrante').val('');
+            $('#id_numerarios-0-pieza').val('');
+            $('#id_numerarios-0-detalle').val('');
 
             switch ($(this).val()) {
                 case "1":
@@ -329,84 +243,29 @@ Aspectos de dentición - Parte 1
 
     //Pintar odontograma
     $(function() {
-        n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
-        var list = document.getElementsByClassName("delete-row-perdidas");
+        n1 = document.getElementById("id_numerarios-TOTAL_FORMS").value;        
+        var list = document.getElementsByClassName("delete-row-numerarios");
         for (i = 0; i < n1; i++) {
-            list[i].setAttribute("id", "perdidas-" + i);
-            c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
-            p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+            list[i].setAttribute("id", "numerarios-" + i);
+            c = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
+            p = document.getElementById("id_numerarios-"+i+"-pieza").value;
             $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
             $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
         }  
-
-        n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
-        var list = document.getElementsByClassName("delete-row-anodoncias");
-        for (i = 0; i < n2; i++) {
-            list[i].setAttribute("id", "anodoncias-" + i);            
-            c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
-            p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
-            $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
-            $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
-            $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
-            $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
-            $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
-        }  
-
-        n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
-        var list = document.getElementsByClassName("delete-row-mordidas");
-        for (i = 0; i < n3; i++) {
-            list[i].setAttribute("id", "mordidas-" + i);
-            c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
-            p = document.getElementById("id_mordidas-"+i+"-pieza").value;
-            $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
-            $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
-            $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
-            $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
-            $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
-        } 
     });
 
         //Tipo problema y color por pestaña
-        nombre = 'perdidas';
-        color = '#f7ff70';
-        $( "a" ).click(function() { 
-            if ( $( this ).hasClass( "tab-id-1-tab_header" ) ) {
-                nombre = 'perdidas'
-                color = '#f7ff70'
-                //amarillo
-            } 
-            else{
-                if( $( this ).hasClass( "tab-id-2-tab_header" ) ){
-                    nombre = 'anodoncias';
-                    color = '#ff6666'
-                    //rojo
-                }
-                else{
-                    nombre = 'mordidas';
-                    color = '#666dff'
-                    //azul
-                }
-            }  
-        });  
+        nombre = 'numerarios';
+        color = '#f7ff70'; 
 
         //Agrega código expediente y tipo problema a formset
-        a = document.getElementById("id_perdidas-TOTAL_FORMS").value;
+        a = document.getElementById("id_numerarios-TOTAL_FORMS").value;
         a1 = a - 1  
-        $('#id_perdidas-'+a1+'-fichas').val({{ids}});
-        $('#id_perdidas-'+a1+'-problema').val(1);         
-
-        a = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
-        a1 = a - 1  
-        $('#id_anodoncias-'+a1+'-fichas').val({{ids}});
-        $('#id_anodoncias-'+a1+'-problema').val(2);    
-
-        a = document.getElementById("id_mordidas-TOTAL_FORMS").value;
-        a1 = a - 1  
-        $('#id_mordidas-'+a1+'-fichas').val({{ids}});
-        $('#id_mordidas-'+a1+'-problema').val(3);   
+        $('#id_numerarios-'+a1+'-fichas').val({{ids}});
+        $('#id_numerarios-'+a1+'-problema').val(4);         
 
         //Función añadir plugin formset
         adding = function(){
@@ -432,10 +291,10 @@ Aspectos de dentición - Parte 1
         //Guarda valor de id a borrar
         $(document).ready(function(){
             vacio = 1;
-            $(".delete-row-perdidas").hover(function() {
+            $(".delete-row-numerarios").hover(function() {
                 num = $(this).attr("id")
-                if (document.getElementById("id_perdidas-"+ num[9] +"-id").value) {
-                    ides = document.getElementById("id_perdidas-"+ num[9] +"-id").value;
+                if (document.getElementById("id_numerarios-"+ num[9] +"-id").value) {
+                    ides = document.getElementById("id_numerarios-"+ num[9] +"-id").value;
                     vacio = 0;   
                 }
                 else{
@@ -443,39 +302,9 @@ Aspectos de dentición - Parte 1
                 }
             });
 
-            $(".add-row-perdidas").hover(function() {
+            $(".add-row-numerarios").hover(function() {
                 vacio = 1;
-            });            
-
-            $(".delete-row-anodoncias").hover(function() {
-                num = $(this).attr("id")
-                if (document.getElementById("id_anodoncias-"+ num[11] +"-id").value) {
-                    ides = document.getElementById("id_anodoncias-"+ num[11] +"-id").value;
-                    vacio = 0;   
-                }
-                else{
-                    vacio = 1;
-                }
-            });
-
-            $(".add-row-anodoncias").hover(function() {
-                vacio = 1;
-            });   
-
-            $(".delete-row-mordidas").hover(function() {
-                num = $(this).attr("id")
-                if (document.getElementById("id_mordidas-"+ num[9] +"-id").value) {
-                    ides = document.getElementById("id_mordidas-"+ num[9] +"-id").value;
-                    vacio = 0;   
-                }
-                else{
-                    vacio = 1;
-                }  
-            });  
-
-            $(".add-row-mordidas").hover(function() {
-                vacio = 1;
-            });                         
+            });                                    
         });
 
         //Función eliminar plugin formset
@@ -493,7 +322,6 @@ Aspectos de dentición - Parte 1
                         valor = document.getElementById("id_"+nombre+"-INITIAL_FORMS").value;
                         valor = valor - 1;
                         $('#id_'+nombre+"-INITIAL_FORMS").val(valor);  
-                        alert("La pieza se ha eliminado.");
                     }
                 });
             }
@@ -516,91 +344,35 @@ Aspectos de dentición - Parte 1
             $('polygon#L').attr('fill', "white");
             $('polygon#C').attr('fill', "white");
 
-            n1 = document.getElementById("id_perdidas-TOTAL_FORMS").value;        
+            n1 = document.getElementById("id_numerarios-TOTAL_FORMS").value;        
 
             for (i = 0; i < n1; i++) {
-                c = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
-                p = document.getElementById("id_perdidas-"+i+"-pieza").value;
+                c = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
+                p = document.getElementById("id_numerarios-"+i+"-pieza").value;
                 $('g#P'+ c + p + ' polygon#T').attr('fill', '#f7ff70');
                 $('g#P'+ c + p + ' polygon#B').attr('fill', '#f7ff70');
                 $('g#P'+ c + p + ' polygon#R').attr('fill', '#f7ff70');
                 $('g#P'+ c + p + ' polygon#L').attr('fill', '#f7ff70');
                 $('g#P'+ c + p + ' polygon#C').attr('fill', '#f7ff70');
             }  
-
-            n2 = document.getElementById("id_anodoncias-TOTAL_FORMS").value;        
-
-            for (i = 0; i < n2; i++) {
-                c = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
-                p = document.getElementById("id_anodoncias-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#ff6666');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#ff6666');
-            }  
-
-            n3 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
-
-            for (i = 0; i < n3; i++) {
-                c = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
-                p = document.getElementById("id_mordidas-"+i+"-pieza").value;
-                $('g#P'+ c + p + ' polygon#T').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#B').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#R').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#L').attr('fill', '#666dff');
-                $('g#P'+ c + p + ' polygon#C').attr('fill', '#666dff');
-            } 
         }        
 
         //Declarando formsets
-        $('#perdidas_prematuras tbody tr').formset({
-            prefix: "{{ perdida_formset.prefix }}",
-            addCssClass: 'add-row-perdidas',
-            deleteCssClass: 'delete-row-perdidas',
-            formCssClass: 'dynamic-perdida-form',
+        $('#numerarios_prematuras tbody tr').formset({
+            prefix: "{{ numerario_formset.prefix }}",
+            addCssClass: 'add-row-numerarios',
+            deleteCssClass: 'delete-row-numerarios',
+            formCssClass: 'dynamic-numerario-form',
             added: adding,
             removed: eliminar,
         });  
 
-        $('.add-row-perdidas').click(function(){
+        $('.add-row-numerarios').click(function(){
             for (i = 0; i < {{max}}; i++) {
-                $('#id_perdidas-'+i+'-fichas').val({{ids}});
-                $('#id_perdidas-'+i+'-problema').val(1);
+                $('#id_numerarios-'+i+'-fichas').val({{ids}});
+                $('#id_numerarios-'+i+'-problema').val(4);
             }         
         });  
-
-        $('#anodoncia tbody tr').formset({
-            prefix: "{{ anodoncia_formset.prefix }}",
-            addCssClass: 'add-row-anodoncias',
-            deleteCssClass: 'delete-row-anodoncias',
-            formCssClass: 'dynamic-anodoncia-form',
-            added: adding,
-            removed: eliminar,
-        });
-
-        $('.add-row-anodoncias').click(function(){
-            for (i = 0; i < {{max}}; i++) { 
-                $('#id_anodoncias-'+i+'-fichas').val({{ids}});
-                $('#id_anodoncias-'+i+'-problema').val(2);
-            }
-        });
-
-        $('#mordida_telescopica tbody tr').formset({
-            prefix: "{{ mordida_formset.prefix }}",
-            addCssClass: 'add-row-mordidas',
-            deleteCssClass: 'delete-row-mordidas',
-            formCssClass: 'dynamic-mordida-form',
-            added: adding,
-            removed: eliminar,          
-        });     
-
-        $('.add-row-mordidas').click(function(){
-            for (i = 0; i < {{max}}; i++) { 
-                $('#id_mordidas-'+i+'-fichas').val({{ids}});
-                $('#id_mordidas-'+i+'-problema').val(3);
-            }
-        });
 
         $('.tabs_holder').skinableTabs({
             effect: 'basic_display',
@@ -621,13 +393,11 @@ Aspectos de dentición - Parte 1
             b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             b1 = b - 1
 
-            c = document.getElementById("id_perdidas-TOTAL_FORMS").value;
-            d = document.getElementById("id_anodoncias-TOTAL_FORMS").value;
-            e = document.getElementById("id_mordidas-TOTAL_FORMS").value;
+            c = document.getElementById("id_numerarios-TOTAL_FORMS").value;
 
             for (i = 0; i < c; i++) {
-                cmp = document.getElementById("id_perdidas-"+i+"-cuadrante").value;
-                cmp1 = document.getElementById("id_perdidas-"+i+"-pieza").value;
+                cmp = document.getElementById("id_numerarios-"+i+"-cuadrante").value;
+                cmp1 = document.getElementById("id_numerarios-"+i+"-pieza").value;
 
                 comparar = cuadrante + pieza
                 comparar1 = cmp + cmp1
@@ -649,55 +419,7 @@ Aspectos de dentición - Parte 1
                 }
             }
 
-            for (i = 0; i < d; i++) {
-                cmp = document.getElementById("id_anodoncias-"+i+"-cuadrante").value;
-                cmp1 = document.getElementById("id_anodoncias-"+i+"-pieza").value;
-
-                comparar = cuadrante + pieza
-                comparar1 = cmp + cmp1
-
-                if(comparar == comparar1)
-                {
-                    i = d + 1
-                    mostrard=0
-                }
-                else
-                {   
-                    i++
-                    if (i==d) {
-                        mostrard=1                  
-                    }
-                    else{
-                        i--
-                    }
-                }
-            }
-
-            for (i = 0; i < e; i++) {
-                cmp = document.getElementById("id_mordidas-"+i+"-cuadrante").value;
-                cmp1 = document.getElementById("id_mordidas-"+i+"-pieza").value;
-
-                comparar = cuadrante + pieza
-                comparar1 = cmp + cmp1
-
-                if(comparar == comparar1)
-                {
-                    i = e + 1
-                    mostrare=0
-                }
-                else
-                {   
-                    i++
-                    if (i==e) {
-                        mostrare=1                  
-                    }
-                    else{
-                        i--
-                    }
-                }
-            }
-
-            if (mostrarc==1 && mostrard==1 && mostrare==1) {
+            if (mostrarc==1) {
                 c = document.getElementById("id_"+nombre+"-"+b1+"-cuadrante").value;
                 p = document.getElementById("id_"+nombre+"-"+b1+"-pieza").value;        
                 diente = c + p
@@ -717,8 +439,6 @@ Aspectos de dentición - Parte 1
                 $("#id_"+nombre+"-"+b1+"-pieza").val( pieza ); 
                 
                 mostrarc=0  
-                mostrard=0
-                mostrare=0
 
                 c = document.getElementById("id_"+nombre+"-"+b1+"-cuadrante").value;
                 p = document.getElementById("id_"+nombre+"-"+b1+"-pieza").value;
@@ -736,11 +456,11 @@ Aspectos de dentición - Parte 1
     </script>
 
     <style type="text/css">
-        .add-row-perdidas, .add-row-anodoncias, .add-row-mordidas {
+        .add-row-numerarios {
             padding-left:18px;
             background:url({% static 'images/add.png' %}) no-repeat left center;
         }
-        .delete-row-perdidas, .delete-row-anodoncias, .delete-row-mordidas {
+        .delete-row-numerarios {
             float:left;
             display:block;
             margin:5px 0 0 5px;
@@ -781,7 +501,7 @@ Aspectos de dentición - Parte 1
     <form method="POST" action="">
 
     <center><h1>Examen de Dentición</h1></center>
-    <center><h2>Parte I</h2></center>
+    <center><h2>Parte III</h2></center>
     {% csrf_token %} 
 
     <div class="col-md-12 col-md-offset-2">
@@ -829,16 +549,14 @@ Aspectos de dentición - Parte 1
 
         <div class="tabs_holder">
             <ul>
-                <li><a href="#tab-id-1">Pérdidas prematuras</a></li>
-                <li><a href="#tab-id-2">Anodoncia</a></li>
-                <li><a href="#tab-id-3">Mordida telescópica</a></li>
+                <li><a href="#tab-id-1">Supernumerarios</a></li>
             </ul>
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="perdidas_prematuras" cellpadding="0" cellspacing="5">
+                    <table id="numerarios_prematuras" cellpadding="0" cellspacing="5">
                     <thead>
-                        <center><h4>Pérdidas Prematuras</h4></center>
+                        <center><h4>Supernumerarios</h4></center>
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Cuadrante</th>
@@ -847,7 +565,7 @@ Aspectos de dentición - Parte 1
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in perdida_formset.forms %}                                              
+                        {% for form in numerario_formset.forms %}                                              
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
                             <td>{{ form.cuadrante }}</td>
@@ -856,63 +574,9 @@ Aspectos de dentición - Parte 1
                             <td></td>
                         </tr>
                         {% endfor %}
-                        {{ perdida_formset.management_form }}
+                        {{ numerario_formset.management_form }}
                         </tbody>
                     </table>      
-
-                </div>
-                <div id="tab-id-2">
-
-                    <table id="anodoncia" cellpadding="0" cellspacing="5">
-                    <thead>
-                        <center><h4>Anodoncia</h4></center>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cuadrante</th>
-                            <th scope="col">Pieza</th>
-                            <th scope="col">Detalle</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        {% for form in anodoncia_formset %}                                                                 
-                        <tr>
-                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
-                            <td>{{ form.cuadrante }}</td>
-                            <td>{{ form.pieza }}</td>
-                            <td style="width:300px">{{ form.detalle }}</td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                        {{ anodoncia_formset.management_form }}
-                        </tbody>
-                    </table>                
-
-                </div>
-                <div id="tab-id-3">
-
-                    <table id="mordida_telescopica" cellpadding="0" cellspacing="5">
-                    <thead>
-                        <center><h4>Mordida Telescópica</h4></center>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cuadrante</th>
-                            <th scope="col">Pieza</th>
-                            <th scope="col">Detalle</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        {% for form in mordida_formset %}                                              
-                        <tr>
-                            <td>{{ form.id }} {{ form.fichas }} {{ form.problema }}</td>
-                            <td>{{ form.cuadrante }}</td>
-                            <td>{{ form.pieza }}</td>
-                            <td style="width:300px">{{ form.detalle }}</td>
-                            <td></td>
-                        </tr>
-                        {% endfor %}
-                        {{ mordida_formset.management_form }}
-                        </tbody>
-                    </table>  
 
                 </div>
             </div><!-- /.content_holder -->
@@ -1382,40 +1046,6 @@ Aspectos de dentición - Parte 1
         </center>   
         <br/><br/><br/>          
     </div>
-
-    <div class="col-md-6">
-        {{form2.fichas}}
-        <center> 
-        <div class="form-group" style="width:400px">
-            <label for="{{form2.observaciones_generales.name}}">{{form2.observaciones_generales.label}}</label>  
-            {{form2.observaciones_generales}}
-        </div>
-
-        <div class="form-group" style="width:250px">
-            <label for="{{form2.mal_posiciones.name}}">{{form2.mal_posiciones.label}}</label>  
-            {{form2.mal_posiciones}}
-            <br/>
-            <label for="{{form2.tejido_intraorales.name}}">{{form2.tejido_intraorales.label}}</label>
-            {{form2.tejido_intraorales}}
-        </div> 
-        </center>         
-    </div>
-
-    <div class="col-md-6">         
-    <center>
-        <div class="form-group" style="width:250px">
-            <label for="{{form2.encias.name}}">{{form2.encias.label}}</label>  
-            {{form2.encias}}
-            <br/>
-            <label for="{{form2.frenillos.name}}">{{form2.frenillos.label}}</label>  
-            {{form2.frenillos}}
-            <br/>
-            <label for="{{form2.lengua.name}}">{{form2.lengua.label}}</label>  
-            {{form2.lengua}}
-        </div> 
-    </center>   
-    </div>
-
   </div>
 </div><!-- fin bootstrap -->
 
@@ -1424,7 +1054,7 @@ Aspectos de dentición - Parte 1
         <div class="form-group">
             
             <div class="col-md-3 col-md-offset-2">
-              <a href="/tipo_perfil/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+              <a href="/aspectos/denticion2/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
             </div> 
 
             <div class="col-md-3 col-md-offset-1">

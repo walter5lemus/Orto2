@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from app.aspectos.forms import *
 from app.aspectos.models import *
 from django.core import serializers
+from django.core.exceptions import ValidationError
 
 from app.analisis_cefalometrico.models import *
 from app.analisis_radiograficos.models import *
@@ -272,26 +273,47 @@ def denticion1_consultar(request,codi,num):
 
 def denticion2_view(request,codi,num):
 	str(codi)
-	#try:
-	ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
+			if ids:
+				if diastemas_denticion.objects.filter(fichas_id=ids.id).exists():
+					max_num=5					
+					diastemasFormSet = modelformset_factory(diastemas_denticion, diastemasForm, min_num=1, max_num=5, extra=0)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+					if request.method == 'GET':
+						diastema_formset = diastemasFormSet(queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas')
+						form1 = tipo_denticionForm2(instance=tipodenticion)
+					else:
+						diastema_formset = diastemasFormSet(request.POST, request.FILES, queryset=diastemas_denticion.objects.filter(fichas_id=ids.id), prefix='diastemas',)		
+						if (diastema_formset.is_valid()):
+							for form in diastema_formset:
+								form.save()
 
-	if ids:
-		max_num=5
-		diastemaFormSet = formset_factory(diastemasForm, min_num=1, max_num=5, extra=0)
-		tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
-		if request.method == 'POST':
-			diastema_formset = diastemaFormSet(request.POST, request.FILES, prefix='diatemas')		
-			if (diastema_formset.is_valid()):
-				for form in diastema_formset:
-					form.save()			
+						return redirect('/aspectos/denticion3/nuevo/%s/%s/' %(codi,num))
+					return render(request, 'aspectos/dent2_form2.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+				else:
+					max_num=5					
+					diastemasFormSet = formset_factory(diastemasForm, min_num=1, max_num=5, extra=0)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+					if request.method == 'POST':					
+						diastema_formset = diastemasFormSet(request.POST, request.FILES, prefix='diastemas')		
+						if (diastema_formset.is_valid()):
+							for form in diastema_formset:
+								form.save()		
 
-			return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
+						return redirect('/aspectos/denticion3/nuevo/%s/%s/' %(codi,num))
+					else:						
+						diastema_formset = diastemasFormSet(prefix='diastemas')
+						form1 = tipo_denticionForm2(instance=tipodenticion)
+						return render(request, 'aspectos/dent2_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 		else:
-			diastema_formset = diastemaFormSet(prefix='diastemas')
-			form1 = tipo_denticionForm(instance=tipodenticion)
-	return render(request, 'aspectos/dent2_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
-	#except Exception, e:
-		#return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
+			return render(request, 'base/error_no_tiene_permiso.html')
+	except Exception, e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
 
 def denticion3_view(request,codi,num):
 	str(codi)
@@ -300,35 +322,34 @@ def denticion3_view(request,codi,num):
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
 			if ids:
 				if registro.objects.filter(fichas_id=ids.id, problema='4').exists():
-					max_num=5
-					numerarioFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+					max_num=5					
+					numerariosFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
 					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
 					if request.method == 'GET':
-						numerario_formset = numerarioFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='4'), prefix='numerarios')
-						form1 = tipo_denticionForm(instance=tipodenticion)
+						numerario_formset = numerariosFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='4'), prefix='numerarios')
+						form1 = tipo_denticionForm2(instance=tipodenticion)
 					else:
-						numerario_formset = numerarioFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)
+						numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
 						if (numerario_formset.is_valid()):
-
 							for form in numerario_formset:
 								form.save()
 
 						return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
 					return render(request, 'aspectos/dent3_form2.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 				else:
-					max_num=5
-					numerarioFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
+					max_num=5					
+					numerariosFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
 					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
-					if request.method == 'POST':
-						numerario_formset = numerarioFormSet(request.POST, request.FILES, prefix='numerarios')		
+					if request.method == 'POST':					
+						numerario_formset = numerariosFormSet(request.POST, request.FILES, prefix='numerarios')		
 						if (numerario_formset.is_valid()):
 							for form in numerario_formset:
-								form.save()				
+								form.save()		
 
 						return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
-					else:
-						numerario_formset = numerarioFormSet(prefix='numerarios')
-						form1 = tipo_denticionForm(instance=tipodenticion)
+					else:						
+						numerario_formset = numerariosFormSet(prefix='numerarios')
+						form1 = tipo_denticionForm2(instance=tipodenticion)
 						return render(request, 'aspectos/dent3_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
@@ -337,6 +358,52 @@ def denticion3_view(request,codi,num):
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
 		else:
 			return render(request, 'base/error_no_encontrado.html')
+
+def denticion3_editar(request,codi,num):
+	str(codi)
+	if request.user.is_superuser==1:
+		try:
+			ids = fichas.objects.get(cod_expediente=codi, numero=num)
+			if ids:
+				max_num=5
+				numerariosFormSet = modelformset_factory(registro, registroForm, min_num=1, max_num=5, extra=0)
+				tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					numerario_formset = numerariosFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='4'), prefix='numerarios')
+					form1 = tipo_denticionForm2(instance=tipodenticion)
+				else:
+					numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
+					if (numerario_formset.is_valid()):
+						for form in numerario_formset:
+							form.save()
+						
+					return redirect('/aspectos/mordidas/editar/%s/%s/' %(codi,num))
+				return render(request, 'aspectos/dent3_edit_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
+		except Exception, e:
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+	else:
+		return render(request, 'base/error_no_hay_acceso.html')
+
+def denticion3_consultar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		numerariosFormSet = modelformset_factory(registro, registroForm_consultar, extra=0)
+		if ids:
+			tipo = tipo_denticion.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				numerario_formset = numerariosFormSet(queryset=registro.objects.filter(fichas_id=ids.id, problema='4'), prefix='numerarios')
+				form1 = tipo_denticionForm_consultar(instance=tipo)
+			else:
+				numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
+				form1 = denticionForm_consultar(request.POST, instance=tipo)
+			
+				return redirect('/denticion2/denticion2/consultar/%s/%s/' %(codi,num))
+			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
+		return render(request, 'base/error_no_encontrado.html')			
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')
 
 def mordidas_view(request,codi,num):
 	str(codi)

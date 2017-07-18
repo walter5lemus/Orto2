@@ -30,7 +30,7 @@ class registroForm(forms.ModelForm):
 			'problema': forms.HiddenInput(attrs={'class':'form-control'}),
 			'cuadrante': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'detalle': forms.TextInput(attrs={'class':'form-control'}),
+			'detalle': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 class registroForm_consultar(forms.ModelForm):
@@ -79,6 +79,24 @@ class tipo_denticionForm(forms.ModelForm):
 		widgets = {
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
 			'tipo': forms.Select(attrs={'class':'form-control tipo'}),
+		}
+
+class tipo_denticionForm2(forms.ModelForm):
+
+	class Meta:
+		model = tipo_denticion
+
+		fields = [
+			'fichas',
+			'tipo',
+		]
+		labels = {
+			'fichas': 'Ficha',
+			'tipo': 'Tipo de dentición',
+		}
+		widgets = {
+			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
+			'tipo': forms.Select(attrs={'class':'form-control tipo', 'disabled':True, 'readonly':True}),
 		}
 
 class tipo_denticionForm_consultar(forms.ModelForm):
