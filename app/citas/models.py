@@ -14,7 +14,7 @@ class citas(models.Model):
 	proxima_cita =  models.DateField() 	
 	resultados = models.CharField(max_length=250)
 	autorizacion = models.BooleanField()
-	tutor = models.CharField(null=True,blank=True,max_length=75)
+	tutor = models.CharField(max_length=250,null=False, blank=False)
 
 	def __unicode__(self):
 		return '{} {}'.format(self.codigo,self.num_cita)

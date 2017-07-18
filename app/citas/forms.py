@@ -37,7 +37,7 @@ class citasForm(forms.ModelForm):
 		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'resultados':forms.Textarea(attrs={'class':'form-control'}),
 		'autorizacion':forms.CheckboxInput(attrs={'class':''}),
-		'tutor':forms.TextInput(attrs={'class':'form-control'}),
+		'tutor':forms.Select(attrs={'class':'form-control'}),
 
 		}
 
@@ -75,7 +75,7 @@ class citasForm2(forms.ModelForm):
 		'proxima_cita':forms.DateInput(attrs={'class':'form-control'}),
 		'resultados':forms.Textarea(attrs={'class':'form-control'}),
 		'autorizacion':forms.CheckboxInput(attrs={'class':''}),
-		'tutor':forms.TextInput(attrs={'class':'form-control'}),
+		'tutor':forms.Select(attrs={'class':'form-control'}),
 
 		}
 

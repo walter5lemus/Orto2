@@ -39,20 +39,15 @@ from app.tipo_perfil.models import *
 # Create your views here.
 def citas_crear(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
-		user = request.user.id
-		usuario = request.user.is_superuser
-		usuario2=0
-		if usuario:
-			usuario2=1
-
 		try:
 			ids = fichas.objects.get(cod_expediente=codi,numero=num,completada=0)
 			if ids:
+				tutores = Usuario.objects.filter(rol=2)
 				form = citasGeneralesForm(initial={'estudiante':request.user.username})
-				form2 = citasForm(initial={})
+				form2 = citasForm()
 				form3 = citasGeneralesForm2()
 				form4 = citasForm2(initial={})
-				return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num})
+				return render(request, 'citas/citas_crear.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num,'tutores':tutores})
 		except Exception as e:
 				return render(request, 'base/error_no_tiene_permiso_cerrada.html')
 	else:
@@ -60,14 +55,8 @@ def citas_crear(request,codi,num):
 
 def citas_editar(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
-		user = request.user.id
-		usuario = request.user.is_superuser
-		usuario2=0
-		if usuario:
-			usuario2=1
-		ids = fichas.objects.get(cod_expediente=codi,numero=num)
-		if ids:
 			incompletos =list()
+			tutores = Usuario.objects.filter(rol=2)
 			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
 			for fi in ficha:
 				if not datos_generales.objects.filter(cod_expediente=codi).exists():
@@ -113,15 +102,16 @@ def citas_editar(request,codi,num):
 			form2 = citasForm(initial={})
 			form3 = citasGeneralesForm2()
 			form4 = citasForm2(initial={})
-			return render(request, 'citas/citas_editar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num,'incompletos':incompletos})
+			return render(request, 'citas/citas_editar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num,'incompletos':incompletos,'tutores':tutores})
 	else:
 		return render(request, 'base/error_no_encontrado.html')
 
 def citas_editar2(request,codi,num,numeroCita):
 
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 			ids = fichas.objects.get(cod_expediente=codi,numero=num)
+			tutores = Usuario.objects.filter(rol=2)
 			if ids:
 				datos_generale = datos_generales.objects.get(cod_expediente=codi)
 				datosCitas = citas.objects.get(fichas_id=ids.id,num_cita=numeroCita)
@@ -129,7 +119,7 @@ def citas_editar2(request,codi,num,numeroCita):
 				if request.method == 'GET':
 					form = citasGeneralesForm_editar(instance=datosCitasGenerales)
 					form2 = citasForm(instance=datosCitas)
-					return render(request, 'citas/citas_editar2.html', {'form':form,'form2':form2,'codi':codi,'num':num,'numeroCita':numeroCita,'nombre':datos_generale.nombre_completo})
+					return render(request, 'citas/citas_editar2.html', {'form':form,'form2':form2,'codi':codi,'num':num,'numeroCita':numeroCita,'nombre':datos_generale.nombre_completo,'tutores':tutores})
 				else:
 					form = citasGeneralesForm(request.POST,instance=datosCitasGenerales)
 					form2 = citasForm(request.POST,instance=datosCitas)
@@ -144,15 +134,10 @@ def citas_editar2(request,codi,num,numeroCita):
 		return render(request, 'base/error_no_hay_acceso.html')
 def citas_consultar(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
-		user = request.user.id
-		usuario = request.user.is_superuser
-		usuario2=0
-		if usuario:
-			usuario2=1
-
 		try:
 			ids = fichas.objects.get(cod_expediente=codi,numero=num)
 			if ids:
+				tutores = Usuario.objects.filter(rol=2)
 				incompletos =list()
 				ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
 			for fi in ficha:
@@ -199,7 +184,7 @@ def citas_consultar(request,codi,num):
 				form2 = citasForm(initial={})
 				form3 = citasGeneralesForm2()
 				form4 = citasForm2(initial={})
-				return render(request, 'citas/citas_consultar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'usuario':usuario2,'codi':codi,'num':num,'incompletos':incompletos})
+				return render(request, 'citas/citas_consultar.html', {'form':form,'form2':form2,'form3':form3,'form4':form4,'codi':codi,'num':num,'incompletos':incompletos,'tutores':tutores})
 		except Exception as e:
 				return render(request, 'base/error_no_encontrado.html')
 	else:
@@ -262,6 +247,7 @@ def post2(request):
 	observaciones = request.POST['observaciones']
 	fecha1 = request.POST['fecha1']
 	fecha2 = request.POST['fecha2']
+	tutor = request.POST['tutor']
 
 	num_cita=0
 	if fichas.objects.filter(cod_expediente_id=cod,numero=num).exists():
@@ -272,7 +258,7 @@ def post2(request):
 		except Exception as e:
 			raise e
 
-		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=0,fichas_id=ids.id)
+		citas.objects.create(num_cita=num_cita,fecha_cita=fecha1,observaciones=observaciones,proxima_cita=fecha2,resultados=resultados,autorizacion=0,fichas_id=ids.id,tutor=tutor)
 
 
 		return HttpResponse('<script>alert("cita creada con exito");</script>')
@@ -295,7 +281,7 @@ def autorizacion(request):
 				num_cita=numerocitas
 			except Exception as e:
 				raise e
-			citas.objects.filter(num_cita=numerocitas,fichas_id=ids.id).update(autorizacion=1,tutor=request.user.username)
+			citas.objects.filter(num_cita=numerocitas,fichas_id=ids.id).update(autorizacion=1)
 			return HttpResponse('<script>alert("Se autorizo");</script>')
 		else:
 			return HttpResponse('Error', status=401)

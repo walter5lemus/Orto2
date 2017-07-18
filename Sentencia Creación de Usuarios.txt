@@ -1,3 +1,15 @@
-﻿Crear usuarios normales is_superuser = 0 si es superusuario = 1.
+﻿Sentencia de creación de usuarios desde BD
 
-INSERT INTO `informacion_usuario`(`password`, `is_superuser`, `username`,`is_active`) VALUES (MD5('clave'),0,'username',1);
+
+Usuarios Admin = rol=1
+Usuario Doctores = rol=2
+Usuario Estudiante = rol=3
+
+Admin
+INSERT INTO `informacion_usuario`(`password`, `is_superuser`, `username`,`is_active`,`rol`) VALUES (MD5('clave'),1,'username',1,1);
+
+Doctores 
+INSERT INTO `informacion_usuario`(`password`, `is_superuser`, `username`,`is_active`,`rol`) VALUES (MD5('clave'),0,'username',1,2);
+
+Alumnos
+INSERT INTO `informacion_usuario`(`password`, `is_superuser`, `username`,`is_active`,`rol`) VALUES (MD5('clave'),0,'username',1,3);

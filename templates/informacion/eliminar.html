@@ -174,13 +174,14 @@ var nombre = $('#id_nombre_paciente').val();
 				$('#input_codigo').val(data[i].pk);
 				$('#id_codigo_expediente').val(data[i].pk);
 				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+
 			}
 		},
 		
 	});
 	$.ajax({
 		data : {'codigo':codigo},
-		url : '/informacion/busqueda_ajax2/',
+		url : '/informacion/busqueda_ajax22/',
 		type : 'get',
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
@@ -238,16 +239,17 @@ if(match.length > 0) {
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
 				$(".ocultar").css("display", "block");
-				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
 				$('#input_codigo').val(data[i].pk);
-				$('#id_cod_expediente').val(data[i].pk);
+				$('#id_codigo_expediente').val(data[i].pk);
+				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
+
 			}
 		},
 		
 	});
 	$.ajax({
 		data : {'codigo':codigo},
-		url : '/informacion/busqueda_ajax2/',
+		url : '/informacion/busqueda_ajax22/',
 		type : 'get',
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {

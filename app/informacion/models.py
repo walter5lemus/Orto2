@@ -10,6 +10,7 @@ from django.utils import timezone
 class Usuario(AbstractUser):
     dui = models.CharField(max_length=10,null=True, blank=True)
     carnet = models.CharField(max_length=7,null=True, blank=True)
+    rol = models.IntegerField(null=True, blank=True)
 
 
 ###################################################################################

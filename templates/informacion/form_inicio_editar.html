@@ -142,20 +142,21 @@ var nombre = $('#id_nombre_paciente').val();
 	});
 	$.ajax({
 		data : {'codigo':codigo},
-		url : '/informacion/busqueda_ajax2/',
+		url : '/informacion/busqueda_ajax22_editar/',
 		type : 'get',
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
-				$("#input_fichas").val(data.length);
+				$("#input_fichas").val(data[i].fields.numero);
 				$("#input_codigo").val(codigo);
-				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+				$('#select_fichas').append("<option value="+(i+1)+">"+data[i].fields.numero+"</option>");
 			}
 			if(data.length==0){
-				$("#input_fichas").val("No se encontraron fichas");
+				$("#select_fichas").append("<option value=0>No hay fichas</option>");
+				//$("#select_fichas").css("display", "none");
 			}
 
 		},
-		
+
 	});
     } else {
         limpiar();
@@ -195,37 +196,37 @@ var $input = $(this),
 var codigo = $('#id_codigo_expediente').val();
 
 if(match.length > 0) {	
-	$.ajax({
+		$.ajax({
 		data : {'codigo':codigo},
 		url : '/informacion/busqueda_ajax/',
 		type : 'get',
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
 				$(".ocultar").css("display", "block");
-				$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
 				$('#id_nombre_paciente').val(data[i].fields.nombre_completo);
 				$('#id_codigo_expediente').val(data[i].pk);
-					
 			}
-			$('#select_fichas').append("<option value="+(i+1)+">"+(i+1)+"</option>");
+			
+
 		},
 		
 	});
 	$.ajax({
 		data : {'codigo':codigo},
-		url : '/informacion/busqueda_ajax2/',
+		url : '/informacion/busqueda_ajax22_editar/',
 		type : 'get',
 		success: function(data){
 			for (var i = 0; i < data.length; i++) {
-				$("#input_fichas").val(data.length);
+				$("#input_fichas").val(data[i].fields.numero);
 				$("#input_codigo").val(codigo);
+				$('#select_fichas').append("<option value="+(i+1)+">"+data[i].fields.numero+"</option>");
 			}
 			if(data.length==0){
-				$("#input_fichas").val("No se encontraron fichas");
+				$("#select_fichas").append("<option value=0>No hay fichas</option>");
+				//$("#select_fichas").css("display", "none");
 			}
 
 		},
-		
 	});
     } else {
         limpiar();
@@ -283,7 +284,11 @@ function limpiar(){
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_codigo_expediente').val();
-	window.location="/informacion/motivo_consultas/editar/"+codigo+"/"+num;
+	if(num==0){
+		sweetAlert("Oops...", "¡Ficha no encontrada!", "error");	
+	}else{
+		window.location="/informacion/motivo_consultas/editar/"+codigo+"/"+num;
+	}
 }
 
 

@@ -166,7 +166,15 @@
 
 </form>
 
-
+	{% for tutor in tutores %}
+		<script>
+			$('#id_tutor').append("<option value={{tutor.username}}>{{tutor.username}}</option>");
+		</script>
+	{% empty %}
+		<script>
+			$('#id_tutor').append("<option value='no hay'>No hay tutores</option>");
+		</script>	
+	{% endfor %}
 <script type="text/javascript">
 
 	$('#id_aparato').prop("readonly", false);

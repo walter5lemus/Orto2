@@ -66,7 +66,7 @@ class DatosGeneralesForm(forms.ModelForm):
 		}
 
 		widgets={
-			'cod_expediente':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{4}[-]{1}[0-9]{2}','title':'Ejemplo: 0001-16','autocomplete':'off'}),
+			'cod_expediente':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{4}[-]{1}[0-9]{2}','title':'Ejemplo: 0001-16','autocomplete':'off','autofocus':'true'}),
 			'nombre_completo':forms.TextInput(attrs={'class':'form-control','title':'El nombre no puede incluir numeros o caracteres especiales','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,100}'}),
 			'edad':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'edad_registro':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
