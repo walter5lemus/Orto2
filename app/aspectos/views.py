@@ -453,8 +453,8 @@ def denticion3_consultar(request,codi,num):
 				numerario_formset = numerariosFormSet(request.POST, request.FILES, queryset=registro.objects.filter(fichas_id=ids.id), prefix='numerarios',)		
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
-				return redirect('/aspectos/mordidas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
+				return redirect('/denticion2/denticion2/consultar/%s/%s/' %(codi,num))
+			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
