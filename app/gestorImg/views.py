@@ -55,6 +55,7 @@ def img_paciente_crear(request,codi,num):
 			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
 		else:
 			return render(request, 'base/error_no_encontrado.html')
+
 def img_paciente_editar(request,codi,num):
 	str(codi)
 	try:
@@ -117,4 +118,235 @@ class MostrarPaciente2(TemplateView):
 				ids= fichas.objects.get(cod_expediente=cod,numero=num)
 				imagepx2 = img_paciente2.objects.filter(fichas_id=ids.id)
 				data = serializers.serialize('json', imagepx2, fields=('pfacial2','pfrontal2','psonrisa2','osuperior2','oinferior2','lizquierdo2','lderecho2','frontal2'))
+		return HttpResponse(data, content_type='application/json')
+
+def img_radiograficas_crear(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		if ids:
+			if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+				imagenes = img_radiograficas.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = RadiograficasForm(instance=imagenes)
+				else:
+					form = RadiograficasForm(request.POST, request.FILES, instance=imagenes)
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'gestorImg/radiograficas_crear.html', {'form':form,'codi':codi,'num':num})	
+			else:
+				if request.method == 'POST':
+					form = RadiograficasForm(request.POST, request.FILES,initial={'fichas':ids.id})
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+				else:
+					form = RadiograficasForm(initial={'fichas':ids.id})
+			return render(request, 'gestorImg/radiograficas_crear.html', {'form':form,'num':num,'codi':codi})
+	except Exception as e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
+
+def img_radiograficas_editar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_radiograficas.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = RadiograficasForm(instance=imagenes)
+			else:
+				form = RadiograficasForm(request.POST, request.FILES, instance=imagenes)
+				if form.is_valid():
+					form.save()
+				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/radiograficas_editar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')	
+
+def img_radiograficas_consultar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_radiograficas.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form= RadiograficasForm_consultar(instance=imagenes)
+			else: 
+				form= RadiograficasForm_consultar(request.POST, request.FILES, instance=imagenes)
+				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/radiograficas_consultar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+			if int(num)>1:
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			else:
+				return render(request, 'base/error_no_encontrado.html')	
+
+class MostrarRadiograficas(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				image = img_radiograficas.objects.filter(fichas_id=ids.id)
+				data = serializers.serialize('json', image, fields=('ipano','icefa','tpano','tcefa','spano','scefa'))
+		return HttpResponse(data, content_type='application/json')
+
+def img_modelo_crear(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		if ids:
+			if img_modelo.objects.filter(fichas_id=ids.id).exists():
+				imagenes = img_modelo.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = ModeloForm(instance=imagenes)
+				else:
+					form = ModeloForm(request.POST, request.FILES, instance=imagenes)
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'gestorImg/modelo_crear.html', {'form':form,'codi':codi,'num':num})	
+			else:
+				if request.method == 'POST':
+					form = ModeloForm(request.POST, request.FILES,initial={'fichas':ids.id})
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+				else:
+					form = ModeloForm(initial={'fichas':ids.id})
+			return render(request, 'gestorImg/modelo_crear.html', {'form':form,'num':num,'codi':codi})
+	except Exception as e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
+
+def img_modelo_editar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_modelo.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = ModeloForm(instance=imagenes)
+			else:
+				form = ModeloForm(request.POST, request.FILES, instance=imagenes)
+				if form.is_valid():
+					form.save()
+				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/modelo_editar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')	
+
+def img_modelo_consultar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_modelo.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form= ModeloForm_consultar(instance=imagenes)
+			else: 
+				form= ModeloForm_consultar(request.POST, request.FILES, instance=imagenes)
+				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/modelo_consultar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+			if int(num)>1:
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			else:
+				return render(request, 'base/error_no_encontrado.html')	
+
+class MostrarModelo(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				image = img_modelo.objects.filter(fichas_id=ids.id)
+				data = serializers.serialize('json', image, fields=('osupm','oinfm','lizqm','frontm','lderm'))
+		return HttpResponse(data, content_type='application/json')
+
+def img_aparato_crear(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi, numero=num)
+		if ids:
+			if img_aparato.objects.filter(fichas_id=ids.id).exists():
+				imagenes = img_aparato.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					form = AparatoForm(instance=imagenes)
+				else:
+					form = AparatoForm(request.POST, request.FILES, instance=imagenes)
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+				return render(request, 'gestorImg/aparato_crear.html', {'form':form,'codi':codi,'num':num})	
+			else:
+				if request.method == 'POST':
+					form = AparatoForm(request.POST, request.FILES,initial={'fichas':ids.id})
+					if form.is_valid():
+						form.save()
+					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+				else:
+					form = AparatoForm(initial={'fichas':ids.id})
+			return render(request, 'gestorImg/aparato_crear.html', {'form':form,'num':num,'codi':codi})
+	except Exception as e:
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
+
+def img_aparato_editar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_aparato.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form = AparatoForm(instance=imagenes)
+			else:
+				form = AparatoForm(request.POST, request.FILES, instance=imagenes)
+				if form.is_valid():
+					form.save()
+				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/aparato_editar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+		return render(request, 'base/error_no_encontrado.html')	
+
+def img_aparato_consultar(request,codi,num):
+	str(codi)
+	try:
+		ids = fichas.objects.get(cod_expediente=codi,numero=num)
+		if ids:
+			imagenes = img_aparato.objects.get(fichas_id=ids.id)
+			if request.method == 'GET':
+				form= AparatoForm_consultar(instance=imagenes)
+			else: 
+				form= AparatoForm_consultar(request.POST, request.FILES, instance=imagenes)
+				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+			return render(request, 'gestorImg/aparato_consultar.html', {'form':form,'codi':codi,'num':num})
+		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
+	except Exception, e:
+			if int(num)>1:
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			else:
+				return render(request, 'base/error_no_encontrado.html')	
+
+class MostrarAparato(TemplateView):
+	def get(self,request,*args,**kwargs):
+		cod = request.GET['codigo']
+		num = request.GET['numero']
+		if fichas.objects.filter(cod_expediente=cod,numero=num).exists():
+				ids= fichas.objects.get(cod_expediente=cod,numero=num)
+				image = img_aparato.objects.filter(fichas_id=ids.id)
+				data = serializers.serialize('json', image, fields=('aparatof','aparatol','aparato'))
 		return HttpResponse(data, content_type='application/json')

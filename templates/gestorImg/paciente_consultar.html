@@ -1,4 +1,4 @@
-{% extends 'base/base_consultar.html' %}
+{% extends 'base/base.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -14,12 +14,11 @@
 
   <div class="social">
     <ul>
-
       <li>
-        <a href="/citas/consultar/{{codi}}/{{num}}">
+        <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
       </li>
-
+      
     </ul>
   </div>
 {% endblock %}
@@ -35,15 +34,6 @@ $(document).ready(function(){
     var codigo = $('#codigo').val();
     var numero = $('#ficha').val();
 
-    img1 = 0;
-    img2 = 0;
-    img3 = 0;
-    img4 = 0;
-    img5 = 0;
-    img6 = 0;
-    img7 = 0;
-    img8 = 0;
-
     $.ajax({
         data : {'codigo':codigo,'numero':numero},
         url : '/gestor_img/paciente/mostrar/',
@@ -58,10 +48,36 @@ $(document).ready(function(){
                 img6 = data[i].fields.lizquierdo;
                 img7 = data[i].fields.frontal;
                 img8 = data[i].fields.lderecho;
+
+                if (img1 != "") {
+                document.getElementById("c11").style.display = 'inline';
+                }
+                if (img2 != "") {
+                document.getElementById("c12").style.display = 'inline';
+                }
+                if (img3 != "") {
+                document.getElementById("c13").style.display = 'inline';
+                }
+                if (img4 != "") {
+                document.getElementById("c14").style.display = 'inline';
+                }
+                if (img5 != "") {
+                document.getElementById("c15").style.display = 'inline';
+                }
+                if (img6 != "") {
+                document.getElementById("c16").style.display = 'inline';
+                }
+                if (img7 != "") {
+                document.getElementById("c17").style.display = 'inline';
+                }
+                if (img8 != "") {
+                document.getElementById("c18").style.display = 'inline';
+                }
             }
         },
     });
 });
+
 
 document.getElementById("v1").onclick = Asignar1;
 document.getElementById("v2").onclick = Asignar2;
@@ -131,15 +147,6 @@ $(document).ready(function(){
     var codigo = $('#codigo').val();
     var numero = $('#ficha').val();
 
-    img21 = 0;
-    img22 = 0;
-    img23 = 0;
-    img24 = 0;
-    img25 = 0;
-    img26 = 0;
-    img27 = 0;
-    img28 = 0;
-
     $.ajax({
         data : {'codigo':codigo,'numero':numero},
         url : '/gestor_img/paciente/mostrar2/',
@@ -154,6 +161,31 @@ $(document).ready(function(){
                 img26 = data[i].fields.lizquierdo2;
                 img27 = data[i].fields.frontal2;
                 img28 = data[i].fields.lderecho2;
+
+                if (img21 != "") {
+                document.getElementById("c21").style.display = 'inline';
+                }
+                if (img22 != "") {
+                document.getElementById("c22").style.display = 'inline';
+                }
+                if (img23 != "") {
+                document.getElementById("c23").style.display = 'inline';
+                }
+                if (img24 != "") {
+                document.getElementById("c24").style.display = 'inline';
+                }
+                if (img25 != "") {
+                document.getElementById("c25").style.display = 'inline';
+                }
+                if (img26 != "") {
+                document.getElementById("c26").style.display = 'inline';
+                }
+                if (img27 != "") {
+                document.getElementById("c27").style.display = 'inline';
+                }
+                if (img28 != "") {
+                document.getElementById("c28").style.display = 'inline';
+                }
             }
         },
     });
@@ -203,6 +235,169 @@ function Asignar28() {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img28;
 }
+
+$(document).ready(function() {
+
+$("#id_pfacial").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_pfrontal").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_psonrisa").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_osuperior").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_oinferior").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_lizquierdo").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_frontal").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_lderecho").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_pfacial2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_pfrontal2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_psonrisa2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_osuperior2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_oinferior2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_lizquierdo2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_frontal2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+
+$("#id_lderecho2").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+});
 </script>
 
 {% endblock %}
@@ -240,7 +435,7 @@ function Asignar28() {
 
 <br><br><br><br><br><br><br><br>
 
-<div id="fp1" class="panel panel-success">
+<div id="fp1" class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
@@ -253,12 +448,15 @@ function Asignar28() {
             <div class="form-group">
                 <label for="{{form.pfacial.name}}">{{form.pfacial.label}}</label>
                 {{form.pfacial}} 
+                <p id="c11" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.pfrontal.name}}">{{form.pfrontal.label}}</label> 
                 {{form.pfrontal}}
+                <p id="c12" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.psonrisa.name}}">{{form.psonrisa.label}}</label>
                 {{form.psonrisa}}
+                <p id="c13" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>   
             </div>            
         </div>
@@ -288,7 +486,7 @@ function Asignar28() {
 
 <br>
 
-<div id="fi1" class="panel panel-success">
+<div id="fi1" class="panel panel-primary">
       <div class="panel-heading"> 
         <h4 class="panel-title">Fotografías intraorales</h4>
         <br>
@@ -302,18 +500,23 @@ function Asignar28() {
             <div class="form-group">
                 <label for="{{form.osuperior.name}}">{{form.osuperior.label}}</label>  
                 {{form.osuperior}}
+                <p id="c14" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.oinferior.name}}">{{form.oinferior.label}}</label>   
                 {{form.oinferior}}
+                <p id="c15" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.lizquierdo.name}}">{{form.lizquierdo.label}}</label>   
                 {{form.lizquierdo}}
+                <p id="c16" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.frontal.name}}">{{form.frontal.label}}</label>
                 {{form.frontal}}
+                <p id="c17" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.lderecho.name}}">{{form.lderecho.label}}</label>  
                 {{form.lderecho}}
+                <p id="c18" style="display:none;color:green;">Este campo ya posee una imagen</p>
             </div> 
         </div>
         <div class="col-md-1">
@@ -348,7 +551,7 @@ function Asignar28() {
     </div>
 </div>
 
-<div id="fp2" style='display:none;' class="panel panel-success">
+<div id="fp2" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
@@ -361,12 +564,15 @@ function Asignar28() {
             <div class="form-group">
                 <label for="{{form2.pfacial2.name}}">{{form2.pfacial2.label}}</label>
                 {{form2.pfacial2}} 
+                <p id="c21" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.pfrontal2.name}}">{{form2.pfrontal2.label}}</label> 
                 {{form2.pfrontal2}}
+                <p id="c22" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.psonrisa2.name}}">{{form2.psonrisa2.label}}</label>
                 {{form2.psonrisa2}}
+                <p id="c23" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>   
             </div>            
         </div>
@@ -410,18 +616,23 @@ function Asignar28() {
             <div class="form-group">
                 <label for="{{form2.osuperior2.name}}">{{form2.osuperior2.label}}</label>  
                 {{form2.osuperior2}}
+                <p id="c24" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.oinferior2.name}}">{{form2.oinferior2.label}}</label>   
                 {{form2.oinferior2}}
+                <p id="c25" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.lizquierdo2.name}}">{{form2.lizquierdo2.label}}</label>   
                 {{form2.lizquierdo2}}
+                <p id="c26" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.frontal2.name}}">{{form2.frontal2.label}}</label>
                 {{form2.frontal2}}
+                <p id="c27" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form2.lderecho2.name}}">{{form2.lderecho2.label}}</label>  
                 {{form2.lderecho2}}
+                <p id="c28" style="display:none;color:green;">Este campo ya posee una imagen</p>
             </div> 
         </div>
         <div class="col-md-1">

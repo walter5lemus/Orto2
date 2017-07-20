@@ -38,4 +38,36 @@ class img_paciente2(models.Model):
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
-		
+class img_radiograficas(models.Model):
+	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
+	ipano = models.ImageField(upload_to='radiograficas/inicial/',blank=True,null=True)
+	icefa = models.ImageField(upload_to='radiograficas/inicial/',blank=True,null=True)
+	tpano = models.ImageField(upload_to='radiograficas/trazados/',blank=True,null=True)
+	tcefa = models.ImageField(upload_to='radiograficas/trazados/',blank=True,null=True)
+	spano = models.ImageField(upload_to='radiograficas/seguimiento/',blank=True,null=True)
+	scefa = models.ImageField(upload_to='radiograficas/seguimiento/',blank=True,null=True)
+	
+	def __str__(self):
+		return '{}'.format(self.fichas)
+
+class img_modelo(models.Model):
+	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
+	osupm = models.ImageField(upload_to='modelo/osuperior/',blank=True,null=True)
+	oinfm = models.ImageField(upload_to='modelo/oinferior/',blank=True,null=True)
+	lizqm = models.ImageField(upload_to='modelo/lizquierdo/',blank=True,null=True)
+	frontm = models.ImageField(upload_to='modelo/frontal/',blank=True,null=True)
+	lderm = models.ImageField(upload_to='modelo/lderecho/',blank=True,null=True)
+	
+	def __str__(self):
+		return '{}'.format(self.fichas)
+
+class img_aparato(models.Model):
+	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
+	aparatof = models.ImageField(upload_to='aparato/frontal/',blank=True,null=True)
+	aparatol= models.ImageField(upload_to='aparato/lateral/',blank=True,null=True)
+	aparato = models.ImageField(upload_to='aparato/arriba/',blank=True,null=True)
+
+	def __str__(self):
+		return '{}'.format(self.fichas)
+
+
