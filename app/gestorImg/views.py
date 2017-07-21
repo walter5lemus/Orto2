@@ -36,7 +36,7 @@ def img_paciente_crear(request,codi,num):
 					if form.is_valid() and form2.is_valid():
 						form.save()
 						form2.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/gestor_img/radiograficas/nuevo/%s/%s/' %(codi,num))
 				return render(request, 'gestorImg/paciente_crear.html', {'form':form,'form2':form2,'codi':codi,'num':num})	
 			else:
 				if request.method == 'POST':
@@ -45,7 +45,7 @@ def img_paciente_crear(request,codi,num):
 					if form.is_valid() and form2.is_valid():
 						form.save()
 						form2.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+					return HttpResponseRedirect('/gestor_img/radiograficas/nuevo/%s/%s/'%(codi,num))
 				else:
 					form = PacienteForm(initial={'fichas':ids.id})
 					form2 = PacienteForm2(initial={'fichas':ids.id})
@@ -72,7 +72,7 @@ def img_paciente_editar(request,codi,num):
 				if form.is_valid() and form2.is_valid():
 					form.save()
 					form2.save()
-				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/radiograficas/editar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/paciente_editar.html', {'form':form,'form2':form2,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -91,7 +91,7 @@ def img_paciente_consultar(request,codi,num):
 			else: 
 				form= PacienteForm_consultar(request.POST, request.FILES, instance=imagenes)
 				form2= PacienteForm_consultar2(request.POST, request.FILES, instance=imagenes2)
-				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/radiograficas/consultar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/paciente_consultar.html', {'form':form,'form2':form2,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -133,14 +133,14 @@ def img_radiograficas_crear(request,codi,num):
 					form = RadiograficasForm(request.POST, request.FILES, instance=imagenes)
 					if form.is_valid():
 						form.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/gestor_img/modelo/nuevo/%s/%s/' %(codi,num))
 				return render(request, 'gestorImg/radiograficas_crear.html', {'form':form,'codi':codi,'num':num})	
 			else:
 				if request.method == 'POST':
 					form = RadiograficasForm(request.POST, request.FILES,initial={'fichas':ids.id})
 					if form.is_valid():
 						form.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+					return HttpResponseRedirect('/gestor_img/modelo/nuevo/%s/%s/'%(codi,num))
 				else:
 					form = RadiograficasForm(initial={'fichas':ids.id})
 			return render(request, 'gestorImg/radiograficas_crear.html', {'form':form,'num':num,'codi':codi})
@@ -162,7 +162,7 @@ def img_radiograficas_editar(request,codi,num):
 				form = RadiograficasForm(request.POST, request.FILES, instance=imagenes)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/modelo/editar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/radiograficas_editar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -178,7 +178,7 @@ def img_radiograficas_consultar(request,codi,num):
 				form= RadiograficasForm_consultar(instance=imagenes)
 			else: 
 				form= RadiograficasForm_consultar(request.POST, request.FILES, instance=imagenes)
-				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/modelo/consultar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/radiograficas_consultar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -210,14 +210,14 @@ def img_modelo_crear(request,codi,num):
 					form = ModeloForm(request.POST, request.FILES, instance=imagenes)
 					if form.is_valid():
 						form.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/gestor_img/aparato/nuevo/%s/%s/' %(codi,num))
 				return render(request, 'gestorImg/modelo_crear.html', {'form':form,'codi':codi,'num':num})	
 			else:
 				if request.method == 'POST':
 					form = ModeloForm(request.POST, request.FILES,initial={'fichas':ids.id})
 					if form.is_valid():
 						form.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/'%(codi,num))
+					return HttpResponseRedirect('/gestor_img/aparato/nuevo/%s/%s/'%(codi,num))
 				else:
 					form = ModeloForm(initial={'fichas':ids.id})
 			return render(request, 'gestorImg/modelo_crear.html', {'form':form,'num':num,'codi':codi})
@@ -239,7 +239,7 @@ def img_modelo_editar(request,codi,num):
 				form = ModeloForm(request.POST, request.FILES, instance=imagenes)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/aparato/editar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/modelo_editar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -255,7 +255,7 @@ def img_modelo_consultar(request,codi,num):
 				form= ModeloForm_consultar(instance=imagenes)
 			else: 
 				form= ModeloForm_consultar(request.POST, request.FILES, instance=imagenes)
-				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/gestor_img/aparato/consultar/%s/%s/' %(codi,num))
 			return render(request, 'gestorImg/modelo_consultar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -287,7 +287,7 @@ def img_aparato_crear(request,codi,num):
 					form = AparatoForm(request.POST, request.FILES, instance=imagenes)
 					if form.is_valid():
 						form.save()
-					return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s/' %(codi,num))
+					return HttpResponseRedirect('/home/')
 				return render(request, 'gestorImg/aparato_crear.html', {'form':form,'codi':codi,'num':num})	
 			else:
 				if request.method == 'POST':
@@ -316,7 +316,7 @@ def img_aparato_editar(request,codi,num):
 				form = AparatoForm(request.POST, request.FILES, instance=imagenes)
 				if form.is_valid():
 					form.save()
-				return HttpResponseRedirect('/informacion/motivo_consultas/editar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/home/')
 			return render(request, 'gestorImg/aparato_editar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
@@ -332,7 +332,7 @@ def img_aparato_consultar(request,codi,num):
 				form= AparatoForm_consultar(instance=imagenes)
 			else: 
 				form= AparatoForm_consultar(request.POST, request.FILES, instance=imagenes)
-				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+				return HttpResponseRedirect('/home/')
 			return render(request, 'gestorImg/aparato_consultar.html', {'form':form,'codi':codi,'num':num})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
