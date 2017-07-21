@@ -159,3 +159,177 @@ class PacienteForm_consultar2(forms.ModelForm):
 			'lderecho2':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'frontal2':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}
+
+class RadiograficasForm(forms.ModelForm):
+	class Meta:
+		model = img_radiograficas
+
+		fields = ['fichas', 
+		'ipano', 
+		'icefa',
+		'tpano',
+		'tcefa',
+		'spano',
+		'scefa',
+		]
+
+		labels = {
+		'fichas': 'Número de Ficha', 
+		'ipano': 'Radiografía Panorámica',
+		'icefa': 'Radiografía Cefalométrica',
+		'tpano': 'Radiografía Panorámica',
+		'tcefa': 'Radiografía Cefalométrica',
+		'spano': 'Radiografía Panorámica',
+		'scefa': 'Radiografía Cefalométrica',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
+			'ipano':forms.FileInput(attrs={'class':'form-control'}),
+			'icefa':forms.FileInput(attrs={'class':'form-control'}),
+			'tpano':forms.FileInput(attrs={'class':'form-control'}),
+			'tcefa':forms.FileInput(attrs={'class':'form-control'}),
+			'spano':forms.FileInput(attrs={'class':'form-control'}),
+			'scefa':forms.FileInput(attrs={'class':'form-control'}),
+		}
+
+class RadiograficasForm_consultar(forms.ModelForm):
+	class Meta:
+		model = img_radiograficas
+
+		fields = ['fichas', 
+		'ipano', 
+		'icefa',
+		'tpano',
+		'tcefa',
+		'spano',
+		'scefa',
+		]
+
+		labels = {
+		'fichas': 'Número de Ficha', 
+		'ipano': 'Radiografía Panorámica',
+		'icefa': 'Radiografía Cefalométrica',
+		'tpano': 'Radiografía Panorámica',
+		'tcefa': 'Radiografía Cefalométrica',
+		'spano': 'Radiografía Panorámica',
+		'scefa': 'Radiografía Cefalométrica',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'ipano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'icefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'tpano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'tcefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'spano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'scefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+		}
+
+class ModeloForm(forms.ModelForm):
+	class Meta:
+		model = img_modelo
+
+		fields = ['fichas', 
+		'osupm',
+		'oinfm',
+		'lizqm',
+		'frontm',
+		'lderm',
+		]
+
+		labels = {
+		'fichas': 'Numero de Ficha', 
+		'osupm': 'Oclusal Superior',
+		'oinfm': 'Oclusal Inferior',
+		'lizqm': 'Lateral Izquierdo',
+		'frontm': 'Frontal',
+		'lderm': 'Lateral Derecho',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
+			'osupm':forms.FileInput(attrs={'class':'form-control'}),
+			'oinfm':forms.FileInput(attrs={'class':'form-control'}),
+			'lizqm':forms.FileInput(attrs={'class':'form-control'}),
+			'frontm':forms.FileInput(attrs={'class':'form-control'}),
+			'lderm':forms.FileInput(attrs={'class':'form-control'}),
+		}
+
+class ModeloForm_consultar(forms.ModelForm):
+	class Meta:
+		model = img_modelo
+
+		fields = ['fichas', 
+		'osupm',
+		'oinfm',
+		'lizqm',
+		'frontm',
+		'lderm',
+		]
+
+		labels = {
+		'fichas': 'Numero de Ficha', 
+		'osupm': 'Oclusal Superior',
+		'oinfm': 'Oclusal Inferior',
+		'lizqm': 'Lateral Izquierdo',
+		'frontm': 'Frontal',
+		'lderm': 'Lateral Derecho',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'osupm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'oinfm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'lizqm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'frontm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'lderm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+		}
+
+class AparatoForm(forms.ModelForm):
+	class Meta:
+		model = img_aparato
+
+		fields = ['fichas', 
+		'aparatof',
+		'aparatol',
+		'aparato',
+		]
+
+		labels = {
+		'fichas': 'Numero de Ficha', 
+		'aparatof': 'Aparato Frontal',
+		'aparatol': 'Aparato Lateral',
+		'aparato': 'Aparato',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
+			'aparatof':forms.FileInput(attrs={'class':'form-control'}),
+			'aparatol':forms.FileInput(attrs={'class':'form-control'}),
+			'aparato':forms.FileInput(attrs={'class':'form-control'}),
+		}
+
+class AparatoForm_consultar(forms.ModelForm):
+	class Meta:
+		model = img_aparato
+
+		fields = ['fichas', 
+		'aparatof',
+		'aparatol',
+		'aparato',
+		]
+
+		labels = {
+		'fichas': 'Numero de Ficha', 
+		'aparatof': 'Aparato Frontal',
+		'aparatol': 'Aparato Lateral',
+		'aparato': 'Aparato',
+		}
+
+		widgets = {
+			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
+			'aparatof':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'aparatol':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'aparato':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+		}
