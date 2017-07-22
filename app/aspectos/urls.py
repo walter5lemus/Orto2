@@ -19,7 +19,9 @@ urlpatterns = [
 	url(r'^denticion3/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion3_consultar), name= 'denticion3_consultar'),
     url(r'^denticion3/eliminar/', login_required(EliminarAjaxView.as_view()), name='eliminar_registro3'),
 
-    url(r'^mordidas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_view, name= 'mordidas_crear'),
+	url(r'^mordidas/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(mordidas_view), name= 'mordidas_crear'),
+    url(r'^mordidas/eliminar/', login_required(EliminarMordidasAjaxView.as_view()), name='eliminar_mordidas_registro'),
+
     url(r'^mordidas/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_editar, name= 'mordidas_editar'),
     url(r'^mordidas/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', mordidas_consultar, name= 'mordidas_consultar'),
     

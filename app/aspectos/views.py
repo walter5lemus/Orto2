@@ -546,29 +546,65 @@ def denticion3_consultar(request,codi,num):
 def mordidas_view(request,codi,num):
 	str(codi)
 	try:
-		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
-		if ids:
-			max_num=5
-			registro_mordidasFormSet = formset_factory(registro_mordidasForm, extra=1, max_num=5)
-			if request.method == 'POST':
-				form1 = linea_media_facialForm(request.POST,initial={'fichas':ids.id})
-				form2 = sobremordidasForm(request.POST,initial={'fichas':ids.id})
-				formset = registro_mordidasFormSet(request.POST, request.FILES)		
-				if (form1.is_valid() and form2.is_valid() and formset.is_valid()):
-					form1.save()
-					form2.save()
-					
-					for form in formset:
-						form.save()
+		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
+		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
+			if ids:
+				if linea_media_facial.objects.filter(fichas_id=ids.id).exists():
+					max_num=5
+					mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, min_num=1, max_num=5, extra=0)
+					lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
+					sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+					if request.method == 'GET':
+						mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
+						form1 = linea_media_facialForm(instance=lineamediafacial)
+						form2 = sobremordidasForm(instance=sobremordida)
+					else:
+						mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
+						form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
+						form2 = sobremordidasForm(request.POST, instance=sobremordida)
+						if (mordidas_formset.is_valid() and form1.is_valid() and form2.is_valid()):
+							form1.save()
+							form2.save()
 
-				return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
-			else:
-				form1 = linea_media_facialForm(initial={'fichas':ids.id})
-				form2 = sobremordidasForm(initial={'fichas':ids.id})
-				formset = registro_mordidasFormSet()
-		return render(request, 'aspectos/denticion_form.html', {'form1':form1, 'form2':form2, 'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})
+							for form in mordidas_formset:
+								form.save()						
+
+						return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
+					return render(request, 'aspectos/mordidas_form2.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+				else:
+					max_num=5
+					mordidasFormSet = formset_factory(registro_mordidasForm, min_num=1, max_num=5, extra=0)
+					if request.method == 'POST':
+						mordidas_formset = mordidasFormSet(request.POST, request.FILES, prefix='mordidas')		
+						form1 = linea_media_facialForm(request.POST,initial={'fichas':ids.id})
+						form2 = sobremordidasForm(request.POST,initial={'fichas':ids.id})
+						if (mordidas_formset.is_valid() and form1.is_valid() and form2.is_valid()):
+							form1.save()
+							form2.save()
+							for form in mordidas_formset:
+								form.save()					
+
+						return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
+					else:
+						mordidas_formset = mordidasFormSet(prefix='mordidas')
+						form1 = linea_media_facialForm(initial={'fichas':ids.id})
+						form2 = sobremordidasForm(initial={'fichas':ids.id})
+						return render(request, 'aspectos/mordidas_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
+		else:
+			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")	
+		if int(num)>1:
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+		else:
+			return render(request, 'base/error_no_encontrado.html')
+
+class EliminarMordidasAjaxView(TemplateView):
+	def get(self,request,*args,**kwargs):
+		ides = request.GET['ides']
+		if registro_mordidas.objects.filter(id=ides).exists():
+			registro_mordidas.objects.filter(id=ides).delete()
+
+		return HttpResponse("Se elimino.")
 
 def mordidas_editar(request,codi,num):
 	str(codi)

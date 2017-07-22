@@ -139,8 +139,8 @@ class diastemasForm(forms.ModelForm):
 			'pieza_dos': 'Pieza 2',
 		}
 		widgets = {
-			'id' : forms.TextInput(attrs={'class':'form-control id'}),
-			'fichas': forms.TextInput(attrs={'class':'form-control ficha'}),
+			'id' : forms.HiddenInput(attrs={'class':'form-control id'}),
+			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
 			'cuad_uno': forms.TextInput(attrs={'class':'form-control'}),
 			'pieza_uno': forms.TextInput(attrs={'class':'form-control'}),
 			'cuad_dos': forms.TextInput(attrs={'class':'form-control'}),
@@ -169,8 +169,8 @@ class diastemasForm_consultar(forms.ModelForm):
 			'pieza_dos': 'Pieza 2',
 		}
 		widgets = {
-			'id' : forms.TextInput(attrs={'class':'form-control id','readonly':True}),
-			'fichas': forms.TextInput(attrs={'class':'form-control ficha','readonly':True}),
+			'id' : forms.HiddenInput(attrs={'class':'form-control id','readonly':True}),
+			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha','readonly':True}),
 			'cuad_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'pieza_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'cuad_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
@@ -364,10 +364,10 @@ class registro_mordidasForm(forms.ModelForm):
 		widgets = {
 			'id' : forms.HiddenInput(attrs={'class':'form-control id'}),
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
-			'cuad_superior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'pieza_superior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'cuad_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'pieza_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'cuad_superior': forms.TextInput(attrs={'class':'form-control'}),
+			'pieza_superior': forms.TextInput(attrs={'class':'form-control'}),
+			'cuad_inferior': forms.TextInput(attrs={'class':'form-control'}),
+			'pieza_inferior': forms.TextInput(attrs={'class':'form-control'}),
 		}
 
 class registro_mordidasForm_consultar(forms.ModelForm):

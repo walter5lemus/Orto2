@@ -231,13 +231,13 @@ Aspectos de dentición - Parte 2
         });
 
         //Tipo problema y color por pestaña
-        nombre = 'diastemas';
+        nombre = 'mordidas';
         color = '#f7ff70';
 
         //Agrega código expediente y tipo problema a formset
-        a = document.getElementById("id_diastemas-TOTAL_FORMS").value;
+        a = document.getElementById("id_mordidas-TOTAL_FORMS").value;
         a1 = a - 1  
-        $('#id_diastemas-'+a1+'-fichas').val({{ids}});       
+        $('#id_mordidas-'+a1+'-fichas').val({{ids}});       
 
         //Función añadir plugin formset
         adding = function(){
@@ -248,7 +248,7 @@ Aspectos de dentición - Parte 2
 
             numero = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             numero = numero - 2;
-            if(document.getElementById("id_"+nombre+"-"+numero+"-cuad_dos").value)
+            if(document.getElementById("id_"+nombre+"-"+numero+"-cuad_inferior").value)
             {
                 
             }
@@ -277,19 +277,19 @@ Aspectos de dentición - Parte 2
             $('polygon#L').attr('fill', "white");
             $('polygon#C').attr('fill', "white");
 
-            n1 = document.getElementById("id_diastemas-TOTAL_FORMS").value;        
+            n1 = document.getElementById("id_mordidas-TOTAL_FORMS").value;        
 
             for (i = 0; i < n1; i++) {
-                c1 = document.getElementById("id_diastemas-"+i+"-cuad_uno").value;
-                p1 = document.getElementById("id_diastemas-"+i+"-pieza_uno").value;
+                c1 = document.getElementById("id_mordidas-"+i+"-cuad_superior").value;
+                p1 = document.getElementById("id_mordidas-"+i+"-pieza_superior").value;
                 $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', '#f7ff70');
                 $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', '#f7ff70');
                 $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', '#f7ff70');
                 $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', '#f7ff70');
                 $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', '#f7ff70');
 
-                c2 = document.getElementById("id_diastemas-"+i+"-cuad_dos").value;
-                p2 = document.getElementById("id_diastemas-"+i+"-pieza_dos").value;
+                c2 = document.getElementById("id_mordidas-"+i+"-cuad_inferior").value;
+                p2 = document.getElementById("id_mordidas-"+i+"-pieza_inferior").value;
                 $('g#P'+ c2 + p2 + ' polygon#T').attr('fill', '#f7ff70');
                 $('g#P'+ c2 + p2 + ' polygon#B').attr('fill', '#f7ff70');
                 $('g#P'+ c2 + p2 + ' polygon#R').attr('fill', '#f7ff70');
@@ -299,18 +299,18 @@ Aspectos de dentición - Parte 2
         }        
 
         //Declarando formsets
-        $('#diastemas tbody tr').formset({
-            prefix: "{{ diastema_formset.prefix }}",
-            addCssClass: 'add-row-diastemas',
-            deleteCssClass: 'delete-row-diastemas',
-            formCssClass: 'dynamic-diastema-form',
+        $('#mordidas tbody tr').formset({
+            prefix: "{{ mordidas_formset.prefix }}",
+            addCssClass: 'add-row-mordidas',
+            deleteCssClass: 'delete-row-mordidas',
+            formCssClass: 'dynamic-mordidas-form',
             added: adding,
             removed: eliminar,
         });  
 
-        $('.add-row-diastemas').click(function(){
+        $('.add-row-mordidas').click(function(){
             for (i = 0; i < {{max}}; i++) {
-                $('#id_diastemas-'+i+'-fichas').val({{ids}});
+                $('#id_mordidas-'+i+'-fichas').val({{ids}});
             }         
         });  
 
@@ -327,11 +327,11 @@ Aspectos de dentición - Parte 2
     </script>
 
     <style type="text/css">
-        .add-row-diastemas {
+        .add-row-mordidas {
             padding-left:18px;
             background:url({% static 'images/add.png' %}) no-repeat left center;
         }
-        .delete-row-diastemas {
+        .delete-row-mordidas {
             float:left;
             display:block;
             margin:5px 0 0 5px;
@@ -368,12 +368,10 @@ Aspectos de dentición - Parte 2
         {% endif %}
         </div>
 
-
 <div class="row">
     <form method="POST" action="">
 
-    <center><h1>Examen de Dentición</h1></center>
-    <center><h2>Parte II</h2></center>
+    <center><h1>Mordidas Cruzadas</h1></center>
     {% csrf_token %} 
 
 <!-- Encabezado # Expediente y Ficha-->
@@ -389,7 +387,7 @@ Aspectos de dentición - Parte 2
             <div class="col-md-4">
             <label for="ficha">N° de Ficha</label>  
             <input id="ficha" class="form-control" type="text" disabled="True">
-            <br><br><br>
+            <br><br>
             </div>
             
         </div>
@@ -401,57 +399,118 @@ Aspectos de dentición - Parte 2
         $('#ficha').val("{{num}}");  
     </script>
 
+<!-- Linea media dentales a facial + Sobremordidas -->
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Lineas Medias Dentales a Facial</h3>
+          </div>    
+          <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <div class="form-group" style="width:100px">
+                        {{form1.fichas}}
+                        <label for="{{form1.mx.name}}">{{form1.mx.label}}</label>  
+                        {{form1.mx}}
+                        <br>
+                        <label for="{{form1.md.name}}">{{form1.md.label}}</label>  
+                        {{form1.md}}
+                    </div>                    
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" style="width:200px">
+                        {{form1.fichas}}
+                        <label for="{{form1.mx_desviacion.name}}">{{form1.mx_desviacion.label}}</label>  
+                        {{form1.mx_desviacion}}
+                        <br>
+                        <label for="{{form1.md_desviacion.name}}">{{form1.md_desviacion.label}}</label>  
+                        {{form1.md_desviacion}}
+                    </div>                      
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+          </div>
+        </div>    
+    </div>
+
+    <div class="col-sm-6"></br></br>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sobremordidas</h3>
+          </div>    
+          <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5">
+                    <div class="form-group" style="width:100px">
+                        {{form2.fichas}}
+                        <label for="{{form2.horizontal.name}}">{{form2.horizontal.label}}</label>  
+                        {{form2.horizontal}}
+                    </div>                     
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group" style="width:100px">
+                        <label for="{{form2.vertical.name}}">{{form2.vertical.label}}</label>  
+                        {{form2.vertical}}
+                    </div>                          
+                </div>
+                <div class="col-sm-2"></div>
+            </div>          
+          </div>
+        </div>           
+    </div>
+</div>
+
 <!-- Tabla + Odontograma -->
 
-<br><br><br><br><br><br>
+<br>
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"></h3>
+    <h3 class="panel-title">Mordidas Cruzadas</h3>
   </div>
 
   <div class="panel-body">
     <div class="col-md-5">
         <br>
         <center>
-        <div class="form-group" style="width:200px">
-            {{form1.fichas}}
-            <label for="{{form1.tipo.name}}">{{form1.tipo.label}}</label>  
-            {{form1.tipo}}
-        </div>
+
         </center>       
 
         <div class="tabs_holder">
             <ul>
-                <li><a href="#tab-id-1">Diastemas</a></li>
+                <li><a href="#tab-id-1">Registro mordidas</a></li>
             </ul>
             <div class="content_holder">
                 <div id="tab-id-1">
                     
-                    <table id="diastemas" cellpadding="0" cellspacing="5">
+                    <table id="mordidas" cellpadding="0" cellspacing="5">
                     <thead>
-                        <center><h4>Diastemas</h4></center>
+                        <center><h4>Registro mordidas</h4></center>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Cuadrante 1</th>
-                            <th scope="col">Pieza 1</th>
+                            <th scope="col">Cuadrante superior</th>
+                            <th scope="col">Pieza superior</th>
                             <th scope="col"></th>
-                            <th scope="col">Cuadrante 2</th>
-                            <th scope="col">Pieza 2</th>
+                            <th scope="col">Cuadrante inferior</th>
+                            <th scope="col">Pieza inferior</th>
                         </tr>
                     </thead>
                         <tbody>
-                        {% for form in diastema_formset.forms %}                                              
+                        {% for form in mordidas_formset.forms %}                                              
                         <tr>
                             <td>{{ form.id }} {{ form.fichas }}</td>
-                            <td>{{ form.cuad_uno }}</td>
-                            <td>{{ form.pieza_uno }}</td>
+                            <td>{{ form.cuad_superior }}</td>
+                            <td>{{ form.pieza_superior }}</td>
                             <td></td>
-                            <td>{{ form.cuad_dos }}</td>
-                            <td>{{ form.pieza_dos }}</td> 
-                            <td></td> 
+                            <td>{{ form.cuad_inferior }}</td>
+                            <td>{{ form.pieza_inferior }}</td>
+                            <td></td>  
                         </tr>
                         {% endfor %}
-                        {{ diastema_formset.management_form }}
+                        {{ mordidas_formset.management_form }}
                         </tbody>
                     </table>      
 
@@ -916,7 +975,7 @@ Aspectos de dentición - Parte 2
             <table border = "2">
                 <tbody>
                     <tr>
-                        <td bgcolor = "#f7ff70"><center><strong>Diastemas</strong></center></td>
+                        <td bgcolor = "#f7ff70"><center><strong>Mordidas cruzadas</strong></center></td>
                     </tr>
                 </tbody>
             </table>
@@ -932,7 +991,7 @@ Aspectos de dentición - Parte 2
         <div class="form-group">
             
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/denticion1/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+              <a href="/aspectos/denticion3/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
             </div> 
 
             <div class="col-md-3 col-md-offset-1">
