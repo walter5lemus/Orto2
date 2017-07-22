@@ -598,6 +598,81 @@ def mordidas_view(request,codi,num):
 		else:
 			return render(request, 'base/error_no_encontrado.html')
 
+def mordidas_editar(request,codi,num):
+	str(codi)
+	if request.user.is_superuser==1:
+		try:
+			ids = fichas.objects.get(cod_expediente=codi, numero=num)
+			if ids:
+				incompletos =list()
+				ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+				for fi in ficha:
+					if not datos_generales.objects.filter(cod_expediente=codi).exists():
+						incompletos.append(0)
+					if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-1)
+					if not estado_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-2)
+					if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-3)
+					if not registro.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-4)
+					if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-5)
+					if not registro.objects.filter(fichas_id=fi.id).exists():
+						if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+							incompletos.append(-6)
+					if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-7)	
+					if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-8)
+					if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-9)
+					if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-10)
+					if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-11)
+					if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-12)
+					if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-13)
+					if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-14)
+					if not nance_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-15)
+					if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-16)
+					if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-17)
+					if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+						incompletos.append(-18)
+				max_num=5
+				mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, min_num=1, max_num=5, extra=0)
+				lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
+				sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+				if request.method == 'GET':
+					mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
+					form1 = linea_media_facialForm(instance=lineamediafacial)
+					form2 = sobremordidasForm(instance=sobremordida)
+				else:
+					mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
+					form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
+					form2 = sobremordidasForm(request.POST, instance=sobremordida)
+					if (mordidas_formset.is_valid() and form1.is_valid() and form2.is_valid()):
+						form1.save()
+						form2.save()
+
+						for form in mordidas_formset:
+							form.save()
+
+					return redirect('/aspectos/sagitales/editar/%s/%s/' %(codi,num))
+				return render(request, 'aspectos/mordidas_edit_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
+		except Exception, e:
+			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+	else:
+		return render(request, 'base/error_no_hay_acceso.html')
+
 class EliminarMordidasAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
 		ides = request.GET['ides']
@@ -606,52 +681,68 @@ class EliminarMordidasAjaxView(TemplateView):
 
 		return HttpResponse("Se elimino.")
 
-def mordidas_editar(request,codi,num):
-	str(codi)
-	ids = fichas.objects.get(cod_expediente=codi,numero=num)
-	registro_mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, extra=1, max_num=5)
-	if ids:
-		max_num=5
-		lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
-		sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
-		if request.method == 'GET':
-			form1 = linea_media_facialForm(instance=lineamediafacial)
-			form2 = sobremordidasForm(instance=sobremordida)
-			formset = registro_mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id))
-		else:
-			form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
-			form2 = sobremordidasForm(request.POST, instance=sobremordida)
-			formset = registro_mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id),)
-			if form1.is_valid() and form2.is_valid() and formset.is_valid():
-				form1.save()
-				form2.save()
-					
-				for form in formset:
-					form.save()
-			return redirect('/aspectos/sagitales/editar/%s/%s/'%(codi,num))		
-		return render(request, 'aspectos/denticion_edit_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,'ids':ids.id,'max':max_num})	
-	return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
-
-def mordidas_consultar(request, codi, num):
+def mordidas_consultar(request,codi,num):
 	str(codi)
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
-		registro_mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm_consultar, extra=0)
+		mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm_consultar, extra=0)
 		if ids:
+			incompletos =list()
+			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+			for fi in ficha:
+				if not datos_generales.objects.filter(cod_expediente=codi).exists():
+					incompletos.append(0)
+				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-1)
+				if not estado_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-2)
+				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-3)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-4)
+				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-5)
+				if not registro.objects.filter(fichas_id=fi.id).exists():
+					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+						incompletos.append(-6)
+				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-7)	
+				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-8)
+				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-9)
+				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-10)
+				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-11)
+				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-12)
+				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-13)
+				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-14)
+				if not nance_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-15)
+				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-16)
+				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-17)
+				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+					incompletos.append(-18)
 			lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
 			sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
+				mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
 				form1 = linea_media_facialForm_consultar(instance=lineamediafacial)
-				form2 = sobremordidasForm_consultar(instance=sobremordida)
-				formset = registro_mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id))
+				form2 = sobremordidasForm(instance=sobremordida)
 			else:
+				mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
 				form1 = linea_media_facialForm_consultar(request.POST, instance=lineamediafacial)
-				form2 = sobremordidasForm_consultar(request.POST, instance=sobremordida)
-				formset = registro_mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id),)
-				
-				return redirect('/aspectos/sagitales/consultar/%s/%s/'%(codi,num))			
-			return render(request, 'aspectos/denticion_cons_form.html', {'form1':form1,'form2':form2,'formset':formset, 'codi':codi,'num':num,'completada':ids.completada})	
-		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
+				form2 = sobremordidasForm(request.POST, instance=sobremordida)
+			
+				return redirect('/aspectos/sagitales/consultar/%s/%s/' %(codi,num))
+			return render(request, 'aspectos/mordidas_cons_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
+		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
 
