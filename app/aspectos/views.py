@@ -554,10 +554,12 @@ def mordidas_view(request,codi,num):
 					mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, min_num=1, max_num=5, extra=0)
 					lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
 					sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
 					if request.method == 'GET':
 						mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
 						form1 = linea_media_facialForm(instance=lineamediafacial)
 						form2 = sobremordidasForm(instance=sobremordida)
+						form3 = tipo_denticionForm2(instance=tipodenticion)
 					else:
 						mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
 						form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
@@ -570,10 +572,11 @@ def mordidas_view(request,codi,num):
 								form.save()						
 
 						return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/mordidas_form2.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
+					return render(request, 'aspectos/mordidas_form2.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num})
 				else:
 					max_num=5
 					mordidasFormSet = formset_factory(registro_mordidasForm, min_num=1, max_num=5, extra=0)
+					tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
 					if request.method == 'POST':
 						mordidas_formset = mordidasFormSet(request.POST, request.FILES, prefix='mordidas')		
 						form1 = linea_media_facialForm(request.POST,initial={'fichas':ids.id})
@@ -589,7 +592,8 @@ def mordidas_view(request,codi,num):
 						mordidas_formset = mordidasFormSet(prefix='mordidas')
 						form1 = linea_media_facialForm(initial={'fichas':ids.id})
 						form2 = sobremordidasForm(initial={'fichas':ids.id})
-						return render(request, 'aspectos/mordidas_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
+						form3 = tipo_denticionForm2(instance=tipodenticion)
+						return render(request, 'aspectos/mordidas_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num})
 		else:
 			return render(request, 'base/error_no_tiene_permiso.html')
 	except Exception, e:
@@ -650,10 +654,12 @@ def mordidas_editar(request,codi,num):
 				mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm, min_num=1, max_num=5, extra=0)
 				lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
 				sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+				tipodenticion = tipo_denticion.objects.get(fichas_id=ids.id)
 				if request.method == 'GET':
 					mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
 					form1 = linea_media_facialForm(instance=lineamediafacial)
 					form2 = sobremordidasForm(instance=sobremordida)
+					form3 = tipo_denticionForm2(instance=tipodenticion)
 				else:
 					mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
 					form1 = linea_media_facialForm(request.POST, instance=lineamediafacial)
@@ -666,7 +672,7 @@ def mordidas_editar(request,codi,num):
 							form.save()
 
 					return redirect('/aspectos/sagitales/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/mordidas_edit_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+				return render(request, 'aspectos/mordidas_edit_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 		except Exception, e:
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
@@ -731,17 +737,19 @@ def mordidas_consultar(request,codi,num):
 					incompletos.append(-18)
 			lineamediafacial = linea_media_facial.objects.get(fichas_id=ids.id)
 			sobremordida = sobremordidas.objects.get(fichas_id=ids.id)
+			tipo = tipo_denticion.objects.get(fichas_id=ids.id)
 			if request.method == 'GET':
 				mordidas_formset = mordidasFormSet(queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas')
 				form1 = linea_media_facialForm_consultar(instance=lineamediafacial)
 				form2 = sobremordidasForm(instance=sobremordida)
+				form3 = tipo_denticionForm_consultar(instance=tipo)
 			else:
 				mordidas_formset = mordidasFormSet(request.POST, request.FILES, queryset=registro_mordidas.objects.filter(fichas_id=ids.id), prefix='mordidas',)		
 				form1 = linea_media_facialForm_consultar(request.POST, instance=lineamediafacial)
 				form2 = sobremordidasForm(request.POST, instance=sobremordida)
-			
+				form3 = denticionForm_consultar(request.POST, instance=tipo)
 				return redirect('/aspectos/sagitales/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/mordidas_cons_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
+			return render(request, 'aspectos/mordidas_cons_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
 		return render(request, 'base/error_no_encontrado.html')			
 	except Exception, e:
 		return render(request, 'base/error_no_encontrado.html')
