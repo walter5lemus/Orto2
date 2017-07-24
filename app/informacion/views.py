@@ -190,10 +190,10 @@ def DatosGeneral_crear(request):
 			 	form.save()
 				return HttpResponseRedirect('/informacion/motivo_consultas/nuevo/%s/%s' %(codi,num))
 			else:
-				return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num,'incompletos':incompletos})
+				return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num})
 	else:
 			form = DatosGeneralesForm(initial={'usuario_creador':request.user.id})
-	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num,'incompletos':incompletos})
+	return render(request, 'informacion/form_datosGenerales.html', {'form':form,'num':num})
 
 def DatosGeneral_crear2(request,codi,num):
 	str(codi)
