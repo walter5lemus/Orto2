@@ -14,6 +14,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="/static/style/home_style.css"/>
 
+	<link rel="stylesheet" type="text/css" href="/static/style/modal.css"/>
+
 
 {% block navbar %}
 
@@ -121,14 +123,15 @@
 
 <!-- Expedientes Pendientes -->
 <!-- Modal -->
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  	  <div class="modal-dialog" role="document">
+  	  <div class="modal-dialog modal-sm" role="document">
     	<div class="modal-content">
 
       	  <!-- Header del Expedientes Pendientes -->
       	  <div class="modal-header">
           	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        	<h3 class="modal-title" id="myModalLabel"><p style="color:dodgerblue;">Fichas Pendientes</h3>
+        	<h4 class="modal-title" id="myModalLabel"><p style="color:white; background-color: #FE642E" align="center">Fichas Pendientes</h4>
       	  </div>
 
       	  <!-- Contenido de Expedientes Pendientes -->
@@ -142,13 +145,13 @@
 	<!-- Expedientes Completos -->
 	<!-- Modal2 -->
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-sm" role="document">
     	<div class="modal-content">
 
       	  <!-- Header del Expedientes Pendientes -->
       	  <div class="modal-header">
         	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        	<h3 class="modal-title" id="myModalLabel"><p style="color:dodgerblue;">Fichas Completas</h3>
+        	<h4 class="modal-title" id="myModalLabel"><p style="color:white; background-color: #01A9DB" align="center">Fichas Completas</h4>
       	  </div>
      
       	  <!-- Contenido de Expedientes Pendientes -->
@@ -182,7 +185,7 @@
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
 				
-				completas = '<ul id="{{elemento}}_'+numero+'"><h3>Código: {{elemento}} N° Ficha: '+numero+'</h3>';
+				completas = '<ul id="{{elemento}}_'+numero+'"><h5 align="center" style="color:#2E2E2E">Código: {{elemento}} N° Ficha: '+numero+'</h5>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
@@ -204,7 +207,6 @@
 
 
 
-
 <!-- Pendientes -->
 <div id="incompletas" class="hidden">
 	{% for elemento in incompletos %}
@@ -217,11 +219,11 @@
 			if ($.isNumeric("{{elemento}}") == false) {
 				//crea una lista y le asigna el codigo y el numero de la ficha como id
 				
-				
-				incompletas = '<ul id="{{elemento}}_'+numero+'"><h3>Codigo: {{elemento}}     N° Ficha: '+numero+'</h3>';
+				incompletas = '<ul id="{{elemento}}_'+numero+'"><h4 style="color:#2E2E2E">Codigo: {{elemento}}     N° Ficha: '+numero+'</h4>';
 				codigo = {{elemento}};
 				co = "{{elemento}}";
 				textoCodigo = {{elemento}};
+
 				if(codigo != {{elemento}}){
 					incompletas += '</ul>';
 					incompletas = '';
@@ -231,72 +233,74 @@
 				
 				$('#incompletas').append( incompletas );
 				incompletas = '';
+				
 			}else{
 				//entra si es un numero
 				switch({{elemento}}){
 					case -1:
-						$('#'+co+'_'+numero).append('<li><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/">Motivo de Consulta</a></li>');
+						$('#'+co+'_'+numero).append('<li"><a href="/informacion/motivo_consultas/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Motivo de Consulta</font></a></li>');
 						break;
 					case -2:
-						$('#'+co+'_'+numero).append('<li><a href="/informacion/estado_general/nuevo/'+co+'/'+numero+'/">Estado General</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/informacion/estado_general/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Estado General</font></a></li>');
 						break;
 					case -3:
-						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/">Tipo de perfil</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/tipo_perfil/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Tipo de perfil</font></a></li>');
 						break;
 					case -4:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion1/nuevo/'+co+'/'+numero+'/">Examen Dentición 1</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion1/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Examen Dentición 1</font></a></li>');
 						break;
 					case -5:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion2/nuevo/'+co+'/'+numero+'/">Examen Dentición 2</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion2/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Examen Dentición 2</font></a></li>');
 						break;
 					case -6:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion3/nuevo/'+co+'/'+numero+'/">Examen Dentición 3</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/denticion3/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Examen Dentición 3</font></a></li>');
 						break;
 					case -7:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/mordidas/nuevo/'+co+'/'+numero+'/">Mordidas Cruzadas</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/mordidas/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Mordidas Cruzadas</font></a></li>');
 						break;
 					case -8:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">Relaciones Sagitales</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Relaciones Sagitales</font></a></li>');
 						break;
 					case -9:
-						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/">No se encontró imagen AFMP</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/aspectos/sagitales/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>No se encontró imagen AFMP</a></li>');
 						break;						
 					case -10:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/">Aspectos Articulares</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/aspectos_articulares/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Aspectos Articulares</font></a></li>');
 						break;
 					case -11:
-						$('#'+co+'_'+numero).append('<li><a href="/asp_mandibular1/nuevo/'+co+'/'+numero+'/">Aspectos Mandibulares</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/asp_mandibular1/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Aspectos Mandibulares</font></a></li>');
 						break;
 					case -12:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/'+co+'/'+numero+'/">Otros Aspectos</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosAspectos/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Otros Aspectos</font></a></li>');
 						break;
 					case -13:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/'+co+'/'+numero+'/">Otros Hallazgos</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_radiograficos/otrosHallazgos/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Otros Hallazgos</font></a></li>');
 						break;
 					case -14:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_cefalometrico/cefalometrico/nuevo/'+co+'/'+numero+'/">Análisis Cefalómetricos</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_cefalometrico/cefalometrico/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Análisis Cefalómetricos</a></li>');
 						break;
 					case -15:
-						$('#'+co+'_'+numero).append('<li><a href="/diag_cefalo/nuevo/'+co+'/'+numero+'/">Diagnostico Cefalómetrico</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/diag_cefalo/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Diagnostico Cefalómetrico</font></a></li>');
 						break;
 					case -16:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/'+co+'/'+numero+'/">Análisis de Nance</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/analisis_nance/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Análisis de Nance</font></a></li>');
 						break;
 					case -17:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/'+co+'/'+numero+'/">Moyers inferior</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyersinferior/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Moyers inferior</font></a></li>');
 						break;
 					case -18:
-						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/'+co+'/'+numero+'/">Moyers Superior</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/analisis_denticion_mixta/moyerssuperior/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Moyers Superior</font></a></li>');
 						break;
 					case -19:
-						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/">Diagnostico General</a></li>');
+						$('#'+co+'_'+numero).append('<li><a href="/diag_general/nuevo/'+co+'/'+numero+'/"><font color=#FA8258 size=2>Diagnostico General</font></a></li>');
 						break;
 					case -20:
-						$('#'+co+'_'+numero).append('<li><a href="/citas/nuevo/'+co+'/'+numero+'/">No ha finalizado el control</a></li>');
+						$('#'+co+'_'+numero).append('<li style="background-color:#FA8258"><a href="/citas/nuevo/'+co+'/'+numero+'/"><font color=#FFFFFF size=2>No ha finalizado el control</font></a></li><br>');
 					}
 				incompletas = '';
 			}
 			</script>
+
 	{% empty %}
 		<h3>Expedientes Pendientes</h3>
 	{% endfor %}
