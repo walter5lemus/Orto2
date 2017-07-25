@@ -967,5 +967,25 @@ $( "#finalizar_control" ).click(function() {
 
 </script>
 
+{% for elemento in incompletos %}
+			<script type="text/javascript">
+				//entra si es un numero
+				switch({{elemento}}){
+					case -1:
+						$('#denticion2').bind('click', false);
+ 						$('#denticion2').css({'color':'#D3D3D3'});
+						break;
+					case -2:
+						$('#denticion3').bind('click', false);
+ 						$('#denticion3').css({'color':'#D3D3D3'});
+						break;
+					case -3:
+						$('#mordidas').bind('click', false);
+ 						$('#mordidas').css({'color':'#D3D3D3'});
+						break;
+				}
 
+			</script>
+	{% endfor %}
+	
 {% endblock %}

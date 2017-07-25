@@ -10,7 +10,7 @@ from django.forms.formsets import formset_factory
 from collections import OrderedDict
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect    
-
+from reportlab.lib.pagesizes import letter, landscape
 from django.core import serializers
 from reportlab.platypus import *
 from reportlab.lib.units import cm
@@ -298,3 +298,79 @@ def generar_pdf_Caducar(request):
     response.write(buff.getvalue())
     buff.close()
     return response
+
+
+class ReporteImagenes(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        ids = fichas.objects.get(cod_expediente=codigo, numero=numero)   
+        #Indicamos el tipo de contenido a devolver, en este caso un pdf
+        response = HttpResponse(content_type='application/pdf')
+        
+        #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+        buffer = BytesIO()
+        #Canvas nos permite hacer el reporte con coordenadas X y Y
+        pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+        pdf.setTitle("Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf")
+        pdf.pdf_name = "Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf"
+        #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+        #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+        self.cuerpo(pdf,codigo,numero)
+        #Con show page hacemos un corte de página para pasar a la siguiente
+        pdf.showPage()
+        pdf.save()
+        pdf = buffer.getvalue()
+        buffer.close()
+        response.write(pdf)
+        return response
+
+
+    def cuerpo(self,pdf,codigo,numero):
+        #Primera parte del cuerpo
+        archivo_imagen = settings.MEDIA_ROOT+'/imagenes/logo.png'
+        pdf.drawImage(archivo_imagen, 0, 600, 50, 50,preserveAspectRatio=True) 
+        """pdf.drawString(250, 680,codigo)
+        p = datos_generales.objects.get(cod_expediente=codigo)
+        pdf.drawString(50, 650, "Nombre:")
+        pdf.drawString(250, 650,p.nombre_completo)
+        pdf.drawString(50, 620, "Fecha de Nacimiento:")
+        pdf.drawString(250, 620, "{:%d- %B- %Y}".format(p.fecha_nac))
+
+        #Segunda parte del cuerpo
+        ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+        diagCefalo =  diagnostico_cefalometrico.objects.get(fichas_id=ids.id)   
+        diagGen =  diagnostico_general.objects.get(fichas_id=ids.id)
+       
+        pdf.drawString(50, 560, "Radiográficamente presenta:")
+        pdf.drawString(80, 520, "Patrón Esqueletal")
+        pdf.drawString(250, 520, diagCefalo.get_patron_esqueletal_display())
+        pdf.drawString(80, 480, "Tipo de Crecimiento")
+        pdf.drawString(250, 480, diagCefalo.get_tipo_de_crecimiento_display())
+        pdf.drawString(80, 440, "Medidas Dentales")
+        pdf.drawString(250, 440, diagCefalo.get_medidas_dentales_display())
+        pdf.drawString(80, 400, "Medidas Estéticas")
+        pdf.drawString(250, 400, diagCefalo.medidas_esteticas)
+
+        pdf.drawString(50, 340, "Clínicamente se Observa:")
+        pdf.drawString(80, 300, "Diagnóstico Ortodóntico General")
+        
+        styles = getSampleStyleSheet()
+
+        ParaStyle = copy.deepcopy(styles["Normal"])
+        ParaStyle.spaceBefore = 0.2 * cm
+        ParaStyle.alignment = TA_JUSTIFY
+        ParaStyle.fontName = 'Helvetica'
+        ParaStyle.fontSize = 14
+        ParaStyle.leading = 15
+        #ParaStyle.setFont("Helvetica", 14)
+        p=Paragraph(diagGen.diagnostico_ortodontico_general, ParaStyle)
+        p.wrapOn(pdf,460,500)
+        p.drawOn(pdf, 2.85* cm, 7.6 * cm)
+
+        pdf.drawString(50,150, "Se recomienda Tratamiento de:")
+        #pdf.drawString(250, 150, dict(Tratamiento).get(diagGen.tratamiento))
+        pdf.drawString(280, 150, diagGen.get_tratamiento_display())"""

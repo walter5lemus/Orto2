@@ -130,8 +130,8 @@
             {{form1.total}}
             {{form1.total2}}   
               <div class="row">
-                <div class="col-md-8 col-md-offset-0">
-                    <h4 style="color: red">Si el diente está permanente, ingresar el dato en Valor x</h4>
+                <div class="col-md-12 col-md-offset-0">
+                    <h4 style="color: red">Si el diente <b>NO</b> es permanente, seleccione y active la pieza. Sino, ingrese el valor en el Valor x</h4>
                 </div>
             </div>
     			<table id="1" cellpadding="0" cellspacing="5">
@@ -354,4 +354,26 @@
         })
     });
     </script>
+
+    {% for elemento in incompletos %}
+            <script type="text/javascript">
+                //entra si es un numero
+                switch({{elemento}}){
+                    case -1:
+                        $('#denticion2').bind('click', false);
+                        $('#denticion2').css({'color':'#D3D3D3'});
+                        break;
+                    case -2:
+                        $('#denticion3').bind('click', false);
+                        $('#denticion3').css({'color':'#D3D3D3'});
+                        break;
+                    case -3:
+                        $('#mordidas').bind('click', false);
+                        $('#mordidas').css({'color':'#D3D3D3'});
+                        break;
+                }
+
+            </script>
+    {% endfor %}
+    
     {% endblock %}

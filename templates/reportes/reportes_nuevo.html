@@ -343,15 +343,9 @@ $(".ocultar222").css("display", "none");
 function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
-	window.open("/reportes/reportes/"+codigo+"/"+num);
+	window.open("/reportes/reportes_diagnostico_general/"+codigo+"/"+num);
 }
 
-
-function redireccionar2(){
-	var num = parseInt($("#input_fichas").val(), 10);
-	var codigo = $('#id_cod_expediente').val();
-	window.open("/informacion/motivo_consultas/nuevo/"+codigo+"/"+num);
-}
 
 function limpiar(){
 	$(".ocultar").css("display", "none");
