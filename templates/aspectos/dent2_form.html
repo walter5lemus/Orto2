@@ -323,6 +323,49 @@ Aspectos de dentición - Parte 2
         });
 
         //Seleccion de pieza odontograma
+        $('g polygon').click(function (evt) {
+            var sector = $(evt.target); 
+
+            iden = sector.parent().attr('id')
+            cuadrante = iden[1] 
+            pieza = iden[2]
+
+            b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
+            b1 = b - 1
+
+            c = document.getElementById("id_diastemas-TOTAL_FORMS").value;
+
+            c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+            p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;            
+
+            diente1 = c + p;
+
+            if(diente1!='')
+            {
+                c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+            }
+
+                $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
+                $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );  
+
+                c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);                
+
+
+        });   
+   
+    </script>
 
     </script>
 
