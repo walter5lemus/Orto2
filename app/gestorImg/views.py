@@ -14,6 +14,7 @@ from django.core import serializers
 
 from app.informacion.models import *
 
+
 codi="0000-00"
 
 def index(request):

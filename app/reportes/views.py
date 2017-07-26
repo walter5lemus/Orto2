@@ -30,7 +30,7 @@ from reportlab.platypus import (
 from app.aspMandibular.choices import *
 from app.informacion.models import *
 from app.informacion.forms import *
-
+from app.gestorImg.models import *
 
 from app.diagCefalo.models import *
 from app.diagGeneral.models import *
@@ -43,7 +43,7 @@ from reportlab.pdfgen import canvas
 from django.views.generic import View
 import time
 import locale
-
+from reportlab.lib import utils
 # Establecemos el locale de nuestro sistema
 locale.setlocale(locale.LC_ALL, "")
  
@@ -66,6 +66,16 @@ def reporte_error(request):
     
     form = DatosGeneralesForm()
     return render(request, 'base/error_no_encontrado_reporte.html', {'form':form})
+
+def reporte_error_imagenes(request):
+    
+    form = DatosGeneralesForm()
+    return render(request, 'base/error_no_encontrado_imagenes.html', {'form':form})
+
+def reporte_error_no_existe(request):
+    
+    form = DatosGeneralesForm()
+    return render(request, 'base/error_no_encontrado.html', {'form':form})
 
 class BusquedaAjaxView(TemplateView):
     def get(self,request,*args,**kwargs):
@@ -90,35 +100,35 @@ class ReportePersonasPDF(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
-        if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
-            if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
-                
-                #Indicamos el tipo de contenido a devolver, en este caso un pdf
-                response = HttpResponse(content_type='application/pdf')
-                
-                #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
-                buffer = BytesIO()
-                #Canvas nos permite hacer el reporte con coordenadas X y Y
-                pdf = canvas.Canvas(buffer)
-                pdf.setTitle("Reporte Diagnostico_"+codigo+"_ficha="+numero+".pdf")
-                pdf.pdf_name = "Reporte Diagnostico_"+codigo+"_ficha="+numero+".pdf"
-                #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+        if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+            if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
+                if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
+                    ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+                    
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer)
+                    pdf.setTitle("Reporte Diagnostico_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Diagnostico_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
 
 
-                #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.
-                self.cabecera(pdf)
-                self.cuerpo(pdf,codigo,numero)
-                self.pie(pdf)
-                #Con show page hacemos un corte de página para pasar a la siguiente
-                pdf.showPage()
-                pdf.save()
-                pdf = buffer.getvalue()
-                buffer.close()
-                response.write(pdf)
-                return response
-        return HttpResponseRedirect('/reportes/error/')
-
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.
+                    self.cabecera(pdf)
+                    self.cuerpo(pdf,codigo,numero)
+                    self.pie(pdf)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+            return HttpResponseRedirect('/reportes/error/')
+        return HttpResponseRedirect('/reportes/error_no_encontrado/')
 
 
 
@@ -305,72 +315,80 @@ class ReporteImagenes(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        ids = fichas.objects.get(cod_expediente=codigo, numero=numero)   
-        #Indicamos el tipo de contenido a devolver, en este caso un pdf
-        response = HttpResponse(content_type='application/pdf')
-        
-        #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
-        buffer = BytesIO()
-        #Canvas nos permite hacer el reporte con coordenadas X y Y
-        pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
-        pdf.setTitle("Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf")
-        pdf.pdf_name = "Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf"
-        #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_paciente.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+                    
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
 
 
-        #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
-        self.cuerpo(pdf,codigo,numero)
-        #Con show page hacemos un corte de página para pasar a la siguiente
-        pdf.showPage()
-        pdf.save()
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
-        return response
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    nombre_usuario = request.user.last_name+', '+request.user.first_name
+                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+            
+
+    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_paciente.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        pfacial =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.pfacial)
+        pdf.drawImage(pfacial, 50, 400, 175, 175)
+
+        pfrontal =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.pfrontal)
+        pdf.drawImage(pfrontal, 312, 400, 175, 175)
+
+        psonrisa =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.psonrisa)
+        pdf.drawImage(psonrisa, 575, 400, 175, 175)
 
 
-    def cuerpo(self,pdf,codigo,numero):
-        #Primera parte del cuerpo
-        archivo_imagen = settings.MEDIA_ROOT+'/imagenes/logo.png'
-        pdf.drawImage(archivo_imagen, 0, 600, 50, 50,preserveAspectRatio=True) 
-        """pdf.drawString(250, 680,codigo)
-        p = datos_generales.objects.get(cod_expediente=codigo)
-        pdf.drawString(50, 650, "Nombre:")
-        pdf.drawString(250, 650,p.nombre_completo)
-        pdf.drawString(50, 620, "Fecha de Nacimiento:")
-        pdf.drawString(250, 620, "{:%d- %B- %Y}".format(p.fecha_nac))
+#****************************** SEGUNDA FILA *******************************
 
-        #Segunda parte del cuerpo
-        ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
-        diagCefalo =  diagnostico_cefalometrico.objects.get(fichas_id=ids.id)   
-        diagGen =  diagnostico_general.objects.get(fichas_id=ids.id)
-       
-        pdf.drawString(50, 560, "Radiográficamente presenta:")
-        pdf.drawString(80, 520, "Patrón Esqueletal")
-        pdf.drawString(250, 520, diagCefalo.get_patron_esqueletal_display())
-        pdf.drawString(80, 480, "Tipo de Crecimiento")
-        pdf.drawString(250, 480, diagCefalo.get_tipo_de_crecimiento_display())
-        pdf.drawString(80, 440, "Medidas Dentales")
-        pdf.drawString(250, 440, diagCefalo.get_medidas_dentales_display())
-        pdf.drawString(80, 400, "Medidas Estéticas")
-        pdf.drawString(250, 400, diagCefalo.medidas_esteticas)
+        osuperior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.osuperior)
+        pdf.drawImage(osuperior, 25, 215, 225, 150)
 
-        pdf.drawString(50, 340, "Clínicamente se Observa:")
-        pdf.drawString(80, 300, "Diagnóstico Ortodóntico General")
-        
-        styles = getSampleStyleSheet()
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 460, 310, 60, 60)
 
-        ParaStyle = copy.deepcopy(styles["Normal"])
-        ParaStyle.spaceBefore = 0.2 * cm
-        ParaStyle.alignment = TA_JUSTIFY
-        ParaStyle.fontName = 'Helvetica'
-        ParaStyle.fontSize = 14
-        ParaStyle.leading = 15
-        #ParaStyle.setFont("Helvetica", 14)
-        p=Paragraph(diagGen.diagnostico_ortodontico_general, ParaStyle)
-        p.wrapOn(pdf,460,500)
-        p.drawOn(pdf, 2.85* cm, 7.6 * cm)
+        pdf.drawString(275, 310, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(275, 290, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(275, 270, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(275, 250, 'FECHA DE NACIMIENTO: '+"{:%d-%B-%Y}".format(datos.fecha_nac))
+        pdf.drawString(275, 230, 'ESTUDIANTE: '+nombre_usuario)
 
-        pdf.drawString(50,150, "Se recomienda Tratamiento de:")
-        #pdf.drawString(250, 150, dict(Tratamiento).get(diagGen.tratamiento))
-        pdf.drawString(280, 150, diagGen.get_tratamiento_display())"""
+        oinferior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinferior)
+        pdf.drawImage(oinferior, 550, 215, 225, 150)
+
+
+#****************************** TERCERA FILA *******************************
+
+        lizquierdo =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lizquierdo)
+        pdf.drawImage(lizquierdo, 25, 25, 225, 150)
+
+        frontal =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.frontal)
+        pdf.drawImage(frontal, 290, 25, 225, 150)
+
+        lderecho =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lderecho)
+        pdf.drawImage(lderecho, 550, 25, 225, 150)
+

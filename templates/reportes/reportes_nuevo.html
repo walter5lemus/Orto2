@@ -137,7 +137,9 @@
        		<button class="btn btn-primary" style="margin-top: 25px;" onclick="redireccionar()"><span class="glyphicon glyphicon-list-alt"></span> Reporte Diagnostico</button>
 		</ul>
 
-
+	  	<ul class="pager">
+       		<button class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2()"><span class="glyphicon glyphicon-camera"></span> Reporte Fotografías</button>
+		</ul>
   </div>
 </div> <!-- Final Panel -->
 
@@ -344,6 +346,12 @@ function redireccionar(){
 	var num = parseInt($("#select_fichas").val(), 10);
 	var codigo = $('#id_cod_expediente').val();
 	window.open("/reportes/reportes_diagnostico_general/"+codigo+"/"+num);
+}
+
+function redireccionar2(){
+	var num = parseInt($("#select_fichas").val(), 10);
+	var codigo = $('#id_cod_expediente').val();
+	window.open("/reportes/reportes_imagenes/"+codigo+"/"+num);
 }
 
 

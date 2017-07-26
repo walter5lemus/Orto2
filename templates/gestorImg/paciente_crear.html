@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block header %}
-
+<style type="text/css">
+    .divOcultar{
+    display: none;
+}
+</style>
 {% endblock %}
 
 {% block menu-social %}
@@ -28,9 +32,8 @@
 <script type="text/javascript">
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");  
-
 $(document).ready(function(){
-
+    
     var codigo = $('#codigo').val();
     var numero = $('#ficha').val();
 
@@ -48,6 +51,25 @@ $(document).ready(function(){
                 img6 = data[i].fields.lizquierdo;
                 img7 = data[i].fields.frontal;
                 img8 = data[i].fields.lderecho;
+
+                if (img1 != '') {
+                    if (img2 != '') {
+                        if (img3 != '') {
+                            if (img4 != '') {
+                                if (img5 != '') {
+                                    if (img6 != '') {
+                                        if (img7 != '') {
+                                            if (img8 != '') {
+                                                $(".divOcultar").css("display", "block");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
 
                 if (img1 != "") {
                 document.getElementById("c11").style.display = 'inline';
@@ -243,7 +265,7 @@ $("#id_pfacial").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -253,7 +275,7 @@ $("#id_pfrontal").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -263,7 +285,7 @@ $("#id_psonrisa").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -273,7 +295,7 @@ $("#id_osuperior").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -283,7 +305,7 @@ $("#id_oinferior").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -293,7 +315,7 @@ $("#id_lizquierdo").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -303,7 +325,7 @@ $("#id_frontal").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -313,7 +335,7 @@ $("#id_lderecho").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -323,7 +345,7 @@ $("#id_pfacial2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -333,7 +355,7 @@ $("#id_pfrontal2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -343,7 +365,7 @@ $("#id_psonrisa2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -353,7 +375,7 @@ $("#id_osuperior2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -363,7 +385,7 @@ $("#id_oinferior2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -373,7 +395,7 @@ $("#id_lizquierdo2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -383,7 +405,7 @@ $("#id_frontal2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -393,7 +415,7 @@ $("#id_lderecho2").bind('change', function(){
 if (this.files[0].size >= 2097152) {
 var tamanio = this.files[0].size/1048576;
 tamanio = tamanio.toFixed(2);
-alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permitido de 2.0 Mb.');
 $(this).val('');
 }
 });
@@ -431,6 +453,14 @@ $(this).val('');
     <option value = "1">Inicial</option>
     <option value = "2">2</option>
   </select>
+
+</div>
+
+
+<div class="col-md-3" class="form-group">
+    <div class="divOcultar">
+        <button type="button" class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2();"><span class="glyphicon glyphicon-camera" id="boton_reporte"></span> Reporte Fotografías</button>
+    </div>
 </div>
 
 <br><br><br><br><br><br><br><br>
@@ -690,4 +720,14 @@ $(this).val('');
         </div>
 
 </form>
+
+<script type="text/javascript">
+
+
+function redireccionar2(){
+    var num = $('#ficha').val();
+    var codigo = $('#codigo').val();
+    window.open("/reportes/reportes_imagenes/"+codigo+"/"+num);
+}
+</script>
 {% endblock %}
