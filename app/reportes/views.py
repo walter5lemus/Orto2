@@ -375,7 +375,7 @@ class ReporteImagenes(View):
         pdf.drawString(275, 290, 'PACIENTE: '+datos.nombre_completo)
         pdf.drawString(275, 270, 'EDAD: '+str(datos.edad)+' años')
         pdf.drawString(275, 250, 'FECHA DE NACIMIENTO: '+"{:%d-%B-%Y}".format(datos.fecha_nac))
-        pdf.drawString(275, 230, 'ESTUDIANTE: '+nombre_usuario)
+        pdf.drawString(275, 230, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
 
         oinferior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinferior)
         pdf.drawImage(oinferior, 550, 215, 225, 150)
@@ -390,5 +390,89 @@ class ReporteImagenes(View):
         pdf.drawImage(frontal, 290, 25, 225, 150)
 
         lderecho =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lderecho)
+        pdf.drawImage(lderecho, 550, 25, 225, 150)
+
+
+
+class ReporteImagenes2(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_paciente.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+                    
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    nombre_usuario = request.user.last_name+', '+request.user.first_name
+                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+            
+
+    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_paciente2.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        pfacial =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.pfacial2)
+        pdf.drawImage(pfacial, 50, 400, 175, 175)
+
+        pfrontal =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.pfrontal2)
+        pdf.drawImage(pfrontal, 312, 400, 175, 175)
+
+        psonrisa =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.psonrisa2)
+        pdf.drawImage(psonrisa, 575, 400, 175, 175)
+
+
+#****************************** SEGUNDA FILA *******************************
+
+        osuperior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.osuperior2)
+        pdf.drawImage(osuperior, 25, 215, 225, 150)
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 460, 310, 60, 60)
+
+        pdf.drawString(275, 310, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(275, 290, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(275, 270, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(275, 250, 'FECHA DE NACIMIENTO: '+"{:%d-%B-%Y}".format(datos.fecha_nac))
+        pdf.drawString(275, 230, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        oinferior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinferior2)
+        pdf.drawImage(oinferior, 550, 215, 225, 150)
+
+
+#****************************** TERCERA FILA *******************************
+
+        lizquierdo =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lizquierdo2)
+        pdf.drawImage(lizquierdo, 25, 25, 225, 150)
+
+        frontal =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.frontal2)
+        pdf.drawImage(frontal, 290, 25, 225, 150)
+
+        lderecho =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lderecho2)
         pdf.drawImage(lderecho, 550, 25, 225, 150)
 

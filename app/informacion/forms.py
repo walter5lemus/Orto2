@@ -67,7 +67,7 @@ class DatosGeneralesForm(forms.ModelForm):
 
 		widgets={
 			'cod_expediente':forms.TextInput(attrs={'class':'form-control', 'pattern':'[0-9]{4}[-]{1}[0-9]{2}','title':'Ejemplo: 0001-16','autocomplete':'off','autofocus':'true'}),
-			'nombre_completo':forms.TextInput(attrs={'class':'form-control','title':'El nombre no puede incluir numeros o caracteres especiales','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,100}'}),
+			'nombre_completo':forms.TextInput(attrs={'class':'form-control'}),
 			'edad':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'edad_registro':forms.NumberInput(attrs={'class':'form-control','readonly':True}),
 			'fecha_nac':forms.SelectDateWidget(years=range(1950,this_year,1),attrs={'class':'form-control fecha','style': 'width: 243px; display: inline-block;'}),
@@ -75,7 +75,7 @@ class DatosGeneralesForm(forms.ModelForm):
 			'genero':forms.Select(attrs={'class':'form-control'}),
 			'direccion':forms.TextInput(attrs={'class':'form-control'}),
 			'departamento':forms.Select(attrs={'class':'form-control'}),
-			'nombre_resp':forms.TextInput(attrs={'class':'form-control','pattern':'[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.-]{2,100}'}),
+			'nombre_resp':forms.TextInput(attrs={'class':'form-control'}),
 			'usuario_creador':forms.HiddenInput(attrs={'class':'form-control'}),
 			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control','readonly':'true'}),
 		

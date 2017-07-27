@@ -14,7 +14,8 @@ urlpatterns = [
 
 	url(r'^reporte_caducada/$', login_required(generar_pdf_Caducar), name='generar_pdf_caducada'),
 
-	url(r'^reportes_imagenes/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes.as_view()), name='generar_pdf'),
+	url(r'^reportes_imagenes/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes.as_view()), name='generar_pdf_imagenes'),
+	url(r'^reportes_imagenes2/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes2.as_view()), name='generar_pdf_imagenes2'),
 
 	
 ]
