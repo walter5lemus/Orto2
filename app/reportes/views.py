@@ -476,3 +476,410 @@ class ReporteImagenes2(View):
         lderecho =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lderecho2)
         pdf.drawImage(lderecho, 550, 25, 225, 150)
 
+
+class ReporteImagenes_Modelo(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_modelo.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+                    
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_Modelo_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Modelo_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    nombre_usuario = request.user.last_name+', '+request.user.first_name
+                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+            
+
+    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_modelo.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        osupm =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.osupm)
+        pdf.drawImage(osupm, 280, 410, 235, 175)
+
+        oinfm =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinfm)
+        pdf.drawImage(oinfm, 280, 30, 235, 175)
+
+        lizqm =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lizqm)
+        pdf.drawImage(lizqm, 25, 220, 235, 175)
+
+        frontm =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.frontm)
+        pdf.drawImage(frontm, 280, 220, 235, 175)
+
+        lderm =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.lderm)
+        pdf.drawImage(lderm, 535, 220, 235, 175)
+
+
+#****************************** Datos Generales *******************************
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 700, 140, 60, 60)
+
+        pdf.drawString(535, 140, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(535, 120, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(535, 100, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(535, 80, 'FECHA DE REGISTRO: '+"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(535, 60, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+class ReporteImagenes_Radiograficas_panoramica_inicial(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        ipano =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.ipano)
+        pdf.drawImage(ipano, 25, 25, 745, 470)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
+
+
+class ReporteImagenes_Radiograficas_panoramica_trazados(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        tpano =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.tpano)
+        pdf.drawImage(tpano, 25, 25, 745, 470)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
+
+class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer,pagesize=landscape(letter))
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        spano =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.spano)
+        pdf.drawImage(spano, 25, 25, 745, 470)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
+
+class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer)
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        icefa =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.icefa)
+        pdf.drawImage(icefa, 25, 25, 545, 650)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 790, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
+
+        pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        
+        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 500, 730, 75, 75)
+
+class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer)
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        tcefa =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.tcefa)
+        pdf.drawImage(tcefa, 25, 25, 545, 650)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 790, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
+
+        pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        
+        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 500, 730, 75, 75)
+
+class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
+
+    def get(self,request, *args, **kwargs):
+        codigo = self.kwargs['codigo']
+        numero = self.kwargs['num']
+        try:
+            if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+                ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
+                if img_radiograficas.objects.filter(fichas_id=ids.id).exists():
+                    #Indicamos el tipo de contenido a devolver, en este caso un pdf
+                    response = HttpResponse(content_type='application/pdf')
+        
+                    #La clase io.BytesIO permite tratar un array de bytes como un fichero binario, se utiliza como almacenamiento temporal
+                    buffer = BytesIO()
+                    #Canvas nos permite hacer el reporte con coordenadas X y Y
+                    pdf = canvas.Canvas(buffer)
+                    pdf.setTitle("Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf")
+                    pdf.pdf_name = "Reporte Imagenes_Radiograficas_"+codigo+"_ficha="+numero+".pdf"
+                    #response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+
+
+                    #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
+                    self.cuerpo(pdf,codigo,numero)
+                    #Con show page hacemos un corte de página para pasar a la siguiente
+                    pdf.showPage()
+                    pdf.save()
+                    pdf = buffer.getvalue()
+                    buffer.close()
+                    response.write(pdf)
+                    return response
+                return HttpResponseRedirect('/reportes/error_imagenes/')
+            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        except Exception as e:
+            return HttpResponseRedirect('/reportes/error_imagenes/')
+
+    def cuerpo(self,pdf,codigo,numero):
+        datos =datos_generales.objects.get(cod_expediente=codigo)
+        ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
+        imagen_paciente = img_radiograficas.objects.get(fichas_id=ids.id)
+        pdf.setFont("Helvetica", 8)
+#****************************** PRIMERA FILA *******************************
+        scefa =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.scefa)
+        pdf.drawImage(scefa, 25, 25, 545, 650)
+
+#****************************** Datos Generales *******************************
+
+        pdf.drawString(25, 790, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
+        pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
+
+        pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        
+        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+
+        logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
+        pdf.drawImage(logo_odontologia, 500, 730, 75, 75)

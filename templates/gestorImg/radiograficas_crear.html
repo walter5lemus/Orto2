@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block header %}
-
+<style type="text/css">
+    .botonprint{
+    display: none;
+    }
+</style>
 {% endblock %}
 
 {% block menu-social %}
@@ -68,6 +72,30 @@ $(document).ready(function(){
                 trc = data[i].fields.tcefa;
                 srp = data[i].fields.spano;
                 src = data[i].fields.scefa;
+
+                if (irp!='') {
+                    $("#print_ipano").removeClass('botonprint');
+                }
+
+                if (irc!='') {
+                    $("#print_icefa").removeClass('botonprint');
+                }
+
+                if (trp!='') {
+                    $("#print_tpano").removeClass('botonprint');
+                }
+
+                if (trc!='') {
+                    $("#print_tcefa").removeClass('botonprint');
+                }
+
+                if (srp!='') {
+                    $("#print_spano").removeClass('botonprint');
+                }
+
+                if (src!='') {
+                    $("#print_scefa").removeClass('botonprint');
+                }
 
                 if (irp != "") {
                 document.getElementById("c1").style.display = 'inline';
@@ -250,19 +278,20 @@ $(this).val('');
                 <br>   
             </div>            
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             <div class="form-group">
                 <br>
                 <img id="ip" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_ipano" src=" {% static 'images/print.png' %}" onclick="redireccionar_ipano();">
                 <br>
                 <br>
                 <br>
-                <br>
-                <img id="ic" src=" {% static 'images/ver.png' %}">  
+                <img id="ic" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_icefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_icefa();">  
                 <br>   
             </div>            
         </div> 
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-5">
             <div class="form-group">
             <img id="iimg" width="400" height="450" style='display:none;'/>
             </div>            
@@ -291,19 +320,20 @@ $(this).val('');
                 <br>   
             </div>            
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             <div class="form-group">
                 <br>
                 <img id="tp" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_tpano" src=" {% static 'images/print.png' %}" onclick="redireccionar_tpano();">
                 <br>
                 <br>
                 <br>
-                <br>
-                <img id="tc" src=" {% static 'images/ver.png' %}">  
+                <img id="tc" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_tcefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_tcefa();"> 
                 <br>   
             </div>            
         </div> 
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-5">
             <div class="form-group">
             <img id="timg" width="400" height="450" style='display:none;'/>
             </div>            
@@ -332,19 +362,20 @@ $(this).val('');
                 <br>   
             </div>            
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             <div class="form-group">
                 <br>
                 <img id="sp" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_spano" src=" {% static 'images/print.png' %}" onclick="redireccionar_spano();">
                 <br>
                 <br>
                 <br>
-                <br>
-                <img id="sc" src=" {% static 'images/ver.png' %}">  
+                <img id="sc" src=" {% static 'images/ver.png' %}">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_scefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_scefa();">
                 <br>   
             </div>            
         </div> 
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-5">
             <div class="form-group">
             <img id="simg" width="400" height="450" style='display:none;'/>
             </div>            
@@ -375,4 +406,42 @@ $(this).val('');
         </div>
 
 </form>
+
+<script>
+    function redireccionar_ipano(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_panoramica_inicial/"+codigo+"/"+num);
+    }
+
+    function redireccionar_tpano(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_panoramica_trazados/"+codigo+"/"+num);
+    }
+
+    function redireccionar_spano(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_panoramica_seguimiento/"+codigo+"/"+num);
+    }
+
+    function redireccionar_icefa(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_cefalometrica_inicial/"+codigo+"/"+num);
+    }
+
+    function redireccionar_tcefa(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_cefalometrica_trazados/"+codigo+"/"+num);
+    }
+
+    function redireccionar_scefa(){
+        var num = $('#ficha').val();
+        var codigo = $('#codigo').val();
+        window.open("/reportes/reportes_imagenes_radiograficas_cefalometrica_seguimiento/"+codigo+"/"+num);
+    }
+</script>
 {% endblock %}

@@ -93,7 +93,7 @@ def img_paciente_consultar(request,codi,num):
 				form= PacienteForm_consultar(request.POST, request.FILES, instance=imagenes)
 				form2= PacienteForm_consultar2(request.POST, request.FILES, instance=imagenes2)
 				return HttpResponseRedirect('/gestor_img/radiograficas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'gestorImg/paciente_consultar.html', {'form':form,'form2':form2,'codi':codi,'num':num})
+			return render(request, 'gestorImg/paciente_consultar.html', {'form':form,'form2':form2,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 			if int(num)>1:
@@ -180,7 +180,7 @@ def img_radiograficas_consultar(request,codi,num):
 			else: 
 				form= RadiograficasForm_consultar(request.POST, request.FILES, instance=imagenes)
 				return HttpResponseRedirect('/gestor_img/modelo/consultar/%s/%s/' %(codi,num))
-			return render(request, 'gestorImg/radiograficas_consultar.html', {'form':form,'codi':codi,'num':num})
+			return render(request, 'gestorImg/radiograficas_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 			if int(num)>1:
@@ -257,7 +257,7 @@ def img_modelo_consultar(request,codi,num):
 			else: 
 				form= ModeloForm_consultar(request.POST, request.FILES, instance=imagenes)
 				return HttpResponseRedirect('/gestor_img/aparato/consultar/%s/%s/' %(codi,num))
-			return render(request, 'gestorImg/modelo_consultar.html', {'form':form,'codi':codi,'num':num})
+			return render(request, 'gestorImg/modelo_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 			if int(num)>1:
@@ -334,7 +334,7 @@ def img_aparato_consultar(request,codi,num):
 			else: 
 				form= AparatoForm_consultar(request.POST, request.FILES, instance=imagenes)
 				return HttpResponseRedirect('/home/')
-			return render(request, 'gestorImg/aparato_consultar.html', {'form':form,'codi':codi,'num':num})
+			return render(request, 'gestorImg/aparato_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
 			if int(num)>1:

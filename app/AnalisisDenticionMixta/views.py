@@ -175,7 +175,7 @@ def nance_consultar(request, codi, num):
 
 def nance_editar(request, codi, num):
     str(codi)
-    if request.user.is_superuser==1:
+    if request.user.rol==1:
         try:
             ids = fichas.objects.get(cod_expediente=codi, numero=num)
             nanceFormSet = modelformset_factory(nance_tablas, nance_tabla, extra=0)
@@ -316,7 +316,7 @@ def moyerssup_view(request,codi,num):
 
 def moyerssup_editar(request, codi, num):
     str(codi)
-    if request.user.is_superuser==1:
+    if request.user.rol==1:
         try:
             ids = fichas.objects.get(cod_expediente=codi, numero=num)
             genero = datos_generales.objects.get(cod_expediente=codi)
@@ -512,7 +512,7 @@ def moyersinf_view(request, codi, num):
 
 def moyersinf_editar(request, codi, num):
     str(codi)
-    if request.user.is_superuser==1:
+    if request.user.rol==1:
         try:
             genero = datos_generales.objects.get(cod_expediente=codi)
             ids = fichas.objects.get(cod_expediente=codi, numero=num)

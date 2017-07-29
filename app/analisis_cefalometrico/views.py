@@ -74,7 +74,7 @@ def cefalometrico_view(request,codi,num):
 
 def cefalometrico_editar(request, codi, num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm, extra=0)

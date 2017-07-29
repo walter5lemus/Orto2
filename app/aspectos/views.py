@@ -114,7 +114,7 @@ def denticion1_view(request,codi,num):
 
 def denticion1_editar(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -335,7 +335,7 @@ def denticion2_view(request,codi,num):
 
 def denticion2_editar(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -486,7 +486,7 @@ def denticion3_view(request,codi,num):
 
 def denticion3_editar(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:
@@ -686,7 +686,7 @@ def mordidas_view(request,codi,num):
 
 def mordidas_editar(request,codi,num):
 	str(codi)
-	if request.user.is_superuser==1:
+	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
 			if ids:

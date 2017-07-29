@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_consultar.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -6,7 +6,12 @@
 {% endblock %}
 
 {% block header %}
+<style type="text/css">
+    .divOcultar{
+    display: none;
+    }
 
+</style>
 {% endblock %}
 
 {% block menu-social %}
@@ -45,6 +50,20 @@ $(document).ready(function(){
                 var lim = data[i].fields.lizqm;
                 var fm = data[i].fields.frontm;
                 var ldm = data[i].fields.lderm;
+
+                if (osm != '') {
+                    if (oim != '') {
+                        if (lim != '') {
+                            if (fm != '') {
+                                if (ldm != '') {
+                                    if ("{{user}}"=="{{usuario_creador}}") {
+                                        $(".divOcultar").css("display", "block");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }                
 
                 document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
                 document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
@@ -85,7 +104,7 @@ $(document).ready(function(){
 
 <br><br><br><br><br><br><br><br>
 
-<div class="panel panel-primary">
+<div class="panel panel-success">
       <div class="panel-heading"> 
        <h4 class="panel-title">Imágenes del modelo</h4>
       </div>
@@ -111,6 +130,13 @@ $(document).ready(function(){
                 <br>  
             </div>            
         </div>
+
+            <div class="col-sm-2 col-md-offset-5" class="form-group">
+                <div class="divOcultar">
+                    <button type="button" class="btn btn-success  btn-md" style="margin-top: 25px;" onclick="redireccionar2();"><span class="glyphicon glyphicon-camera" id="boton_reporte"></span> Generar Reporte</button>
+                </div>
+            </div>  
+
             <div class="form-group" class="col-md-6 col-md-offset-1">
             <br>
             <table border="0">
@@ -167,4 +193,12 @@ $(document).ready(function(){
         </div>
 
 </form>
+
+<script>
+    function redireccionar2(){
+    var num = $('#ficha').val();
+    var codigo = $('#codigo').val();
+    window.open("/reportes/reportes_imagenes_modelo/"+codigo+"/"+num);
+}
+</script>
 {% endblock %}

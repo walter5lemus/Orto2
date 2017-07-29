@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_consultar.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -6,7 +6,15 @@
 {% endblock %}
 
 {% block header %}
+<style type="text/css">
+    .divOcultar{
+    display: none;
+    }
 
+    .divOcultar2{
+    display: none;
+}
+</style>
 {% endblock %}
 
 {% block menu-social %}
@@ -48,6 +56,29 @@ $(document).ready(function(){
                 img6 = data[i].fields.lizquierdo;
                 img7 = data[i].fields.frontal;
                 img8 = data[i].fields.lderecho;
+               
+                if ($("#control").val() == 1) {
+                    if (img1 != '') {
+                        if (img2 != '') {
+                            if (img3 != '') {
+                                if (img4 != '') {
+                                    if (img5 != '') {
+                                        if (img6 != '') {
+                                            if (img7 != '') {
+                                                if (img8 != '') {
+                                                    if ("{{user}}"=="{{usuario_creador}}") {
+                                                        $(".divOcultar2").css("display", "none");
+                                                        $(".divOcultar").css("display", "block");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 if (img1 != "") {
                 document.getElementById("c11").style.display = 'inline';
@@ -140,6 +171,96 @@ function ocultar(){
     document.getElementById("fp1").style.display = "none";
     document.getElementById("fi1").style.display = "none";
     }
+
+        var codigo = $('#codigo').val();
+    var numero = $('#ficha').val();
+
+    $(".divOcultar").css("display", "none");
+    $(".divOcultar2").css("display", "none");
+    
+    $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/gestor_img/paciente/mostrar2/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                img21 = data[i].fields.pfacial2;
+                img22 = data[i].fields.pfrontal2; 
+                img23 = data[i].fields.psonrisa2;
+                img24 = data[i].fields.osuperior2;
+                img25 = data[i].fields.oinferior2;
+                img26 = data[i].fields.lizquierdo2;
+                img27 = data[i].fields.frontal2;
+                img28 = data[i].fields.lderecho2;
+
+                if ($("#control").val() == 2) {
+                    if (img21 != '') {
+                        if (img22 != '') {
+                            if (img23 != '') {
+                                if (img24 != '') {
+                                    if (img25 != '') {
+                                        if (img26 != '') {
+                                            if (img27 != '') {
+                                                if (img28 != '') {
+                                                    if ("{{user}}"=="{{usuario_creador}}") {
+                                                        $(".divOcultar").css("display", "none");
+                                                        $(".divOcultar2").css("display", "block");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+    });
+
+        $.ajax({
+        data : {'codigo':codigo,'numero':numero},
+        url : '/gestor_img/paciente/mostrar/',
+        type : 'get',
+        success : function(data) {
+            for (var i = 0; i < data.length; i++) {
+                img1 = data[i].fields.pfacial;
+                img2 = data[i].fields.pfrontal; 
+                img3 = data[i].fields.psonrisa;
+                img4 = data[i].fields.osuperior;
+                img5 = data[i].fields.oinferior;
+                img6 = data[i].fields.lizquierdo;
+                img7 = data[i].fields.frontal;
+                img8 = data[i].fields.lderecho;
+
+                if ($("#control").val() == 1) {
+                    if (img1 != '') {
+                        if (img2 != '') {
+                            if (img3 != '') {
+                                if (img4 != '') {
+                                    if (img5 != '') {
+                                        if (img6 != '') {
+                                            if (img7 != '') {
+                                                if (img8 != '') {
+                                                    if ("{{user}}"=="{{usuario_creador}}") {
+                                                        $(".divOcultar2").css("display", "none");
+                                                        $(".divOcultar").css("display", "block");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        },
+    });
 }
 
 $(document).ready(function(){
@@ -161,6 +282,29 @@ $(document).ready(function(){
                 img26 = data[i].fields.lizquierdo2;
                 img27 = data[i].fields.frontal2;
                 img28 = data[i].fields.lderecho2;
+
+                if ($("#control").val() == 2) {
+                    if (img21 != '') {
+                        if (img22 != '') {
+                            if (img23 != '') {
+                                if (img24 != '') {
+                                    if (img25 != '') {
+                                        if (img26 != '') {
+                                            if (img27 != '') {
+                                                if (img28 != '') {
+                                                    if ("{{user}}"=="{{usuario_creador}}") {
+                                                        $(".divOcultar").css("display", "none");
+                                                        $(".divOcultar2").css("display", "block");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 if (img21 != "") {
                 document.getElementById("c21").style.display = 'inline';
@@ -433,10 +577,23 @@ $(this).val('');
   </select>
 </div>
 
+<div class="col-md-3" class="form-group">
+    <div class="divOcultar">
+        <button type="button" class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar2();"><span class="glyphicon glyphicon-camera" id="boton_reporte"></span> Reporte Fotografías</button>
+    </div>
+</div>
+
+<div class="col-md-3" class="form-group">
+    <div class="divOcultar2">
+        <button type="button" class="btn btn-success" style="margin-top: 25px;" onclick="redireccionar22();"><span class="glyphicon glyphicon-camera" id="boton_reporte2"></span> Reporte Fotografías</button>
+    </div>
+</div>
+
 <br><br><br><br><br><br><br><br>
 
-<div id="fp1" class="panel panel-primary">
-      <div class="panel-heading"> 
+
+<div id="fp1" class="panel panel-success">
+      <div class="panel-heading panel-success"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
        <h4 class="panel-title">Control inicial</h4>
@@ -486,7 +643,7 @@ $(this).val('');
 
 <br>
 
-<div id="fi1" class="panel panel-primary">
+<div id="fi1" class="panel panel-success">
       <div class="panel-heading"> 
         <h4 class="panel-title">Fotografías intraorales</h4>
         <br>
@@ -551,7 +708,7 @@ $(this).val('');
     </div>
 </div>
 
-<div id="fp2" style='display:none;' class="panel panel-primary">
+<div id="fp2" style='display:none;' class="panel panel-success">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
        <br>
@@ -602,7 +759,7 @@ $(this).val('');
 
 <br>
 
-<div id="fi2" style='display:none;' class="panel panel-primary">
+<div id="fi2" style='display:none;' class="panel panel-success">
       <div class="panel-heading"> 
         <h4 class="panel-title">Fotografías intraorales</h4>
         <br>
@@ -690,4 +847,20 @@ $(this).val('');
         </div>
 
 </form>
+
+<script type="text/javascript">
+
+
+function redireccionar2(){
+    var num = $('#ficha').val();
+    var codigo = $('#codigo').val();
+    window.open("/reportes/reportes_imagenes/"+codigo+"/"+num);
+}
+
+function redireccionar22(){
+    var num = $('#ficha').val();
+    var codigo = $('#codigo').val();
+    window.open("/reportes/reportes_imagenes2/"+codigo+"/"+num);
+}
+</script>
 {% endblock %}

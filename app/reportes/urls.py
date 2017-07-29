@@ -16,6 +16,15 @@ urlpatterns = [
 
 	url(r'^reportes_imagenes/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes.as_view()), name='generar_pdf_imagenes'),
 	url(r'^reportes_imagenes2/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes2.as_view()), name='generar_pdf_imagenes2'),
+	url(r'^reportes_imagenes_modelo/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Modelo.as_view()), name='reportes_imagenes_modelo'),
+	url(r'^reportes_imagenes_radiograficas_panoramica_inicial/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_panoramica_inicial.as_view()), name='ReporteImagenes_Radiograficas_panoramica_inicial'),
+	url(r'^reportes_imagenes_radiograficas_panoramica_trazados/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_panoramica_trazados.as_view()), name='ReporteImagenes_Radiograficas_panoramica_trazados'),
+	url(r'^reportes_imagenes_radiograficas_panoramica_seguimiento/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_panoramica_seguimiento.as_view()), name='ReporteImagenes_Radiograficas_panoramica_seguimiento'),
+
+
+	url(r'^reportes_imagenes_radiograficas_cefalometrica_inicial/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_cefalometrica_inicial.as_view()), name='ReporteImagenes_Radiograficas_cefalometrica_inicial'),
+	url(r'^reportes_imagenes_radiograficas_cefalometrica_trazados/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_cefalometrica_trazados.as_view()), name='ReporteImagenes_Radiograficas_cefalometrica_trazados'),
+	url(r'^reportes_imagenes_radiograficas_cefalometrica_seguimiento/(?P<codigo>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(ReporteImagenes_Radiograficas_cefalometrica_seguimiento.as_view()), name='ReporteImagenes_Radiograficas_cefalometrica_seguimiento'),
 
 	
 ]
