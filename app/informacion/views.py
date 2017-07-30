@@ -370,6 +370,7 @@ def DatosGenerales_edit(request,codi,num):
 		#	return HttpResponse("No se encontro el Codigo de Expediente")
 	else:
 		return render(request, 'base/error_no_hay_acceso.html')
+
 ################################################################################################
 
 def Motivo_Consulta_crear(request,codi,num):
@@ -502,6 +503,7 @@ def Motivo_Consulta_editar2(request,codi,num):
 	else:
 		return render(request, 'base/error_no_hay_acceso.html')
 
+
 def Motivo_Consulta_consultar(request,codi,num):
 	str(codi)
 	try:
@@ -629,7 +631,7 @@ def Motivo_Consulta_editar(request,codi,num):
 				return render(request, 'base/error_no_encontrado.html')	
 	else:
 		return render(request, 'base/error_no_hay_acceso.html')
-	
+
 
 ##################################################################################################
 

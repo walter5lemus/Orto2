@@ -128,7 +128,7 @@ class ReportePersonasPDF(View):
                     response.write(pdf)
                     return response
             return HttpResponseRedirect('/reportes/error/')
-        return HttpResponseRedirect('/reportes/error_no_encontrado/')
+        return render(request, 'base/error_no_encontrado.html')
 
 
 
@@ -332,8 +332,7 @@ class ReporteImagenes(View):
 
 
                     #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
-                    nombre_usuario = request.user.last_name+', '+request.user.first_name
-                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    self.cuerpo(pdf,codigo,numero)
                     #Con show page hacemos un corte de página para pasar a la siguiente
                     pdf.showPage()
                     pdf.save()
@@ -341,13 +340,13 @@ class ReporteImagenes(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
             
 
-    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+    def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
         ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
         imagen_paciente = img_paciente.objects.get(fichas_id=ids.id)
@@ -416,8 +415,7 @@ class ReporteImagenes2(View):
 
 
                     #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
-                    nombre_usuario = request.user.last_name+', '+request.user.first_name
-                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    self.cuerpo(pdf,codigo,numero)
                     #Con show page hacemos un corte de página para pasar a la siguiente
                     pdf.showPage()
                     pdf.save()
@@ -425,10 +423,10 @@ class ReporteImagenes2(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
             
 
     def cuerpo(self,pdf,codigo,numero,nombre_usuario):
@@ -499,8 +497,7 @@ class ReporteImagenes_Modelo(View):
 
 
                     #Llamo al método cabecera donde están definidos los datos que aparecen en la cabecera del reporte.s
-                    nombre_usuario = request.user.last_name+', '+request.user.first_name
-                    self.cuerpo(pdf,codigo,numero,nombre_usuario)
+                    self.cuerpo(pdf,codigo,numero)
                     #Con show page hacemos un corte de página para pasar a la siguiente
                     pdf.showPage()
                     pdf.save()
@@ -508,13 +505,12 @@ class ReporteImagenes_Modelo(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
-            
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
-    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+    def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
         ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
         imagen_paciente = img_modelo.objects.get(fichas_id=ids.id)
@@ -577,10 +573,10 @@ class ReporteImagenes_Radiograficas_panoramica_inicial(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -633,10 +629,10 @@ class ReporteImagenes_Radiograficas_panoramica_trazados(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -688,10 +684,10 @@ class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -743,10 +739,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -800,10 +796,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -857,10 +853,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return HttpResponseRedirect('/reportes/error_imagenes/')
-            return HttpResponseRedirect('/reportes/error_no_encontrado/')
+                return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return HttpResponseRedirect('/reportes/error_imagenes/')
+            return render(request, 'base/error_no_encontrado_imagenes.html')
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
