@@ -100,7 +100,8 @@ class ReportePersonasPDF(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
+        if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists():
+            ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
             if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
                 if diagnostico_general.objects.filter(fichas_id=ids.id).exists():
                     ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -127,7 +128,7 @@ class ReportePersonasPDF(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-            return HttpResponseRedirect('/reportes/error/')
+            return render(request, 'base/error_no_encontrado_reporte.html')
         return render(request, 'base/error_no_encontrado.html')
 
 
