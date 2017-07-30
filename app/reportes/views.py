@@ -128,7 +128,7 @@ class ReportePersonasPDF(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-            return render(request, 'base/error_no_encontrado_reporte.html')
+            return render(request, 'base/error_no_encontrado_reporte_diagnostico.html')
         return render(request, 'base/error_no_encontrado.html')
 
 
