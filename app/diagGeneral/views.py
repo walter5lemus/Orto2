@@ -23,6 +23,8 @@ def diag_general(request):
 
 def diag_general_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
@@ -44,7 +46,7 @@ def diag_general_view(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/citas/nuevo/%s/%s/' %(codi,num))
-				return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos})
+				return render(request, 'diag_general/form_diag_general.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos, 'nombreUser':nombreUser})
 
 			else:
 				if ids:	
@@ -57,19 +59,21 @@ def diag_general_view(request,codi,num):
 							return HttpResponseRedirect('/citas/nuevo/%s/%s/' %(codi,num))
 					else: 
 						form = diagGeneralForm(initial={'fichas':ids.id})
-			return render(request,'diag_general/form_diag_general.html', {'form':form,'codi':codi,'num':num,'incompletos':incompletos})
+			return render(request,'diag_general/form_diag_general.html', {'form':form,'codi':codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 
 def diag_general_edit(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -130,19 +134,21 @@ def diag_general_edit(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/citas/editar/%s/%s/' %(codi,num))
-				return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos})
+				return render(request, 'diag_general/form_diag_general_editar.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 
 def diag_general_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
@@ -196,7 +202,7 @@ def diag_general_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return redirect('/citas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
-		return render(request, 'base/error_no_existe.html')
+			return render(request, 'diag_general/form_diag_general_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
+		return render(request, 'base/error_no_existe.html', {'nombreUser':nombreUser})
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})

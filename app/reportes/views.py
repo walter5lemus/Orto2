@@ -52,6 +52,8 @@ locale.setlocale(locale.LC_ALL, "")
 def reporte_crear(request):
     
     #user = request.user.id
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     if request.method == 'POST':
         form = reportesForms(request.POST,initial={})
         if form.is_valid():
@@ -60,22 +62,30 @@ def reporte_crear(request):
     else:
 
         form = DatosGeneralesForm()
-    return render(request, 'reportes/reportes_nuevo.html', {'form':form})
+    return render(request, 'reportes/reportes_nuevo.html', {'form':form, 'nombreUser':nombreUser})
+
+
 
 def reporte_error(request):
-    
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
     form = DatosGeneralesForm()
-    return render(request, 'base/error_no_encontrado_reporte.html', {'form':form})
+    return render(request, 'base/error_no_encontrado_reporte.html', {'form':form, 'nombreUser':nombreUser})
+
+
 
 def reporte_error_imagenes(request):
-    
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
     form = DatosGeneralesForm()
-    return render(request, 'base/error_no_encontrado_imagenes.html', {'form':form})
+    return render(request, 'base/error_no_encontrado_imagenes.html', {'form':form, 'nombreUser':nombreUser})
+
+
 
 def reporte_error_no_existe(request):
-    
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
     form = DatosGeneralesForm()
-    return render(request, 'base/error_no_encontrado.html', {'form':form})
+    return render(request, 'base/error_no_encontrado.html', {'form':form, 'nombreUser':nombreUser})
+
+
 
 class BusquedaAjaxView(TemplateView):
     def get(self,request,*args,**kwargs):
@@ -83,6 +93,8 @@ class BusquedaAjaxView(TemplateView):
         cod = list(datos_generales.objects.filter(cod_expediente=codigo))
         data = serializers.serialize('json', cod)
         return HttpResponse(data, content_type='application/json')
+
+
 
 class BusquedaAjaxView2(TemplateView):
     def get(self,request,*args,**kwargs):
@@ -95,11 +107,14 @@ class BusquedaAjaxView2(TemplateView):
             return HttpResponse('Error', status=401)
 
 
+
 class ReportePersonasPDF(View):
 
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        
         if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists():
             ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
             if diagnostico_cefalometrico.objects.filter(fichas_id=ids.id).exists():
@@ -128,8 +143,8 @@ class ReportePersonasPDF(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-            return render(request, 'base/error_no_encontrado_reporte_diagnostico.html')
-        return render(request, 'base/error_no_encontrado.html')
+            return render(request, 'base/error_no_encontrado_reporte_diagnostico.html', {'nombreUser':nombreUser})
+        return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 
@@ -316,6 +331,8 @@ class ReporteImagenes(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -341,10 +358,10 @@ class ReporteImagenes(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
             
 
     def cuerpo(self,pdf,codigo,numero):
@@ -399,6 +416,8 @@ class ReporteImagenes2(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -424,10 +443,10 @@ class ReporteImagenes2(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
             
 
     def cuerpo(self,pdf,codigo,numero,nombre_usuario):
@@ -481,6 +500,8 @@ class ReporteImagenes_Modelo(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -506,10 +527,10 @@ class ReporteImagenes_Modelo(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -549,6 +570,8 @@ class ReporteImagenes_Radiograficas_panoramica_inicial(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -574,10 +597,10 @@ class ReporteImagenes_Radiograficas_panoramica_inicial(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
             return render(request, 'base/error_no_encontrado.html')
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -605,6 +628,8 @@ class ReporteImagenes_Radiograficas_panoramica_trazados(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -630,10 +655,10 @@ class ReporteImagenes_Radiograficas_panoramica_trazados(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -660,6 +685,8 @@ class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -685,10 +712,10 @@ class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -715,6 +742,8 @@ class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -740,10 +769,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -772,6 +801,8 @@ class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -797,10 +828,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
@@ -829,6 +860,8 @@ class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
+        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
                 ids = fichas.objects.get(cod_expediente=codigo, numero=numero)
@@ -854,10 +887,10 @@ class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
                     buffer.close()
                     response.write(pdf)
                     return response
-                return render(request, 'base/error_no_encontrado_imagenes.html')
-            return render(request, 'base/error_no_encontrado.html')
+                return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
         except Exception as e:
-            return render(request, 'base/error_no_encontrado_imagenes.html')
+            return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
 
     def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)

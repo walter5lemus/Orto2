@@ -28,6 +28,7 @@ def index(request):
 
 def denticion1_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
@@ -72,7 +73,7 @@ def denticion1_view(request,codi,num):
 								form.save()
 
 						return redirect('/aspectos/denticion2/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/dent1_form2.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+					return render(request, 'aspectos/dent1_form2.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					max_num=5
 					perdidaFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
@@ -103,17 +104,21 @@ def denticion1_view(request,codi,num):
 						mordida_formset = mordidaFormSet(prefix='mordidas')
 						form1 = tipo_denticionForm(initial={'fichas':ids.id})
 						form2 = denticionForm(initial={'fichas':ids.id})
-						return render(request, 'aspectos/dent1_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+						return render(request, 'aspectos/dent1_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def denticion1_editar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -196,12 +201,12 @@ def denticion1_editar(request,codi,num):
 							form.save()
 
 					return redirect('/aspectos/denticion2/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+				return render(request, 'aspectos/dent1_edit_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 		except Exception, e:
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 class EliminarAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -211,8 +216,11 @@ class EliminarAjaxView(TemplateView):
 
 		return HttpResponse("Se elimino.")
 		
+
 def denticion1_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		perdidaFormSet = modelformset_factory(registro, registroForm_consultar, extra=0)
@@ -277,13 +285,17 @@ def denticion1_consultar(request,codi,num):
 				form2 = denticionForm(request.POST, instance=denticiones)
 			
 				return redirect('/aspectos/denticion2/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
-		return render(request, 'base/error_no_encontrado.html')			
+			return render(request, 'aspectos/dent1_cons_form.html', {'perdida_formset':perdida_formset, 'anodoncia_formset':anodoncia_formset, 'mordida_formset':mordida_formset, 'form1':form1, 'form2':form2, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})			
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def denticion2_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
@@ -309,7 +321,7 @@ def denticion2_view(request,codi,num):
 								form.save()
 
 						return redirect('/aspectos/denticion3/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/dent2_form2.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+					return render(request, 'aspectos/dent2_form2.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					max_num=5					
 					diastemasFormSet = formset_factory(diastemasForm, min_num=1, max_num=5, extra=0)
@@ -324,17 +336,21 @@ def denticion2_view(request,codi,num):
 					else:						
 						diastema_formset = diastemasFormSet(prefix='diastemas')
 						form1 = tipo_denticionForm2(instance=tipodenticion)
-						return render(request, 'aspectos/dent2_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+						return render(request, 'aspectos/dent2_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def denticion2_editar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -398,12 +414,12 @@ def denticion2_editar(request,codi,num):
 							form.save()
 						
 					return redirect('/aspectos/denticion3/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/dent2_edit_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+				return render(request, 'aspectos/dent2_edit_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 		except Exception, e:
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 class Eliminar2AjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -413,8 +429,11 @@ class Eliminar2AjaxView(TemplateView):
 
 		return HttpResponse("Se elimino.")
 
+
 def denticion2_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		diastemasFormSet = modelformset_factory(diastemas_denticion, diastemasForm_consultar, extra=0)
@@ -428,13 +447,17 @@ def denticion2_consultar(request,codi,num):
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
 				return redirect('/aspectos/denticion3/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent2_cons_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada})
-		return render(request, 'base/error_no_encontrado.html')			
+			return render(request, 'aspectos/dent2_cons_form.html', {'diastema_formset':diastema_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada, 'nombreUser':nombreUser})
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})			
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def denticion3_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
@@ -460,7 +483,7 @@ def denticion3_view(request,codi,num):
 								form.save()
 
 						return redirect('/aspectos/mordidas/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/dent3_form2.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+					return render(request, 'aspectos/dent3_form2.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					max_num=5					
 					numerariosFormSet = formset_factory(registroForm, min_num=1, max_num=5, extra=0)
@@ -475,17 +498,21 @@ def denticion3_view(request,codi,num):
 					else:						
 						numerario_formset = numerariosFormSet(prefix='numerarios')
 						form1 = tipo_denticionForm2(instance=tipodenticion)
-						return render(request, 'aspectos/dent3_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+						return render(request, 'aspectos/dent3_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def denticion3_editar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -549,15 +576,19 @@ def denticion3_editar(request,codi,num):
 							form.save()
 						
 					return redirect('/aspectos/mordidas/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/dent3_edit_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+				return render(request, 'aspectos/dent3_edit_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 		except Exception, e:
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
+
+
 
 def denticion3_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		numerariosFormSet = modelformset_factory(registro, registroForm_consultar, extra=0)
@@ -613,13 +644,16 @@ def denticion3_consultar(request,codi,num):
 				form1 = denticionForm_consultar(request.POST, instance=tipo)
 			
 				return redirect('/aspectos/mordidas/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
-		return render(request, 'base/error_no_encontrado.html')			
+			return render(request, 'aspectos/dent3_cons_form.html', {'numerario_formset':numerario_formset, 'form1':form1, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})			
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
 
 def mordidas_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
@@ -654,7 +688,7 @@ def mordidas_view(request,codi,num):
 								form.save()						
 
 						return redirect('/aspectos/sagitales/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/mordidas_form2.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+					return render(request, 'aspectos/mordidas_form2.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					max_num=5
 					mordidasFormSet = formset_factory(registro_mordidasForm, min_num=1, max_num=5, extra=0)
@@ -675,17 +709,20 @@ def mordidas_view(request,codi,num):
 						form1 = linea_media_facialForm(initial={'fichas':ids.id})
 						form2 = sobremordidasForm(initial={'fichas':ids.id})
 						form3 = tipo_denticionForm2(instance=tipodenticion)
-						return render(request, 'aspectos/mordidas_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+						return render(request, 'aspectos/mordidas_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, "num":num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
 
 def mordidas_editar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -758,12 +795,12 @@ def mordidas_editar(request,codi,num):
 							form.save()
 
 					return redirect('/aspectos/sagitales/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/mordidas_edit_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos})
+				return render(request, 'aspectos/mordidas_edit_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi, 'num':num, 'ids':ids.id, 'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")		
 		except Exception, e:
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 class EliminarMordidasAjaxView(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -773,8 +810,12 @@ class EliminarMordidasAjaxView(TemplateView):
 
 		return HttpResponse("Se elimino.")
 
+
+
 def mordidas_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		mordidasFormSet = modelformset_factory(registro_mordidas, registro_mordidasForm_consultar, extra=0)
@@ -835,13 +876,17 @@ def mordidas_consultar(request,codi,num):
 				form2 = sobremordidasForm(request.POST, instance=sobremordida)
 				form3 = denticionForm_consultar(request.POST, instance=tipo)
 				return redirect('/aspectos/sagitales/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/mordidas_cons_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
-		return render(request, 'base/error_no_encontrado.html')			
+			return render(request, 'aspectos/mordidas_cons_form.html', {'mordidas_formset':mordidas_formset, 'form1':form1, 'form2':form2, 'form3':form3, 'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})			
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
+
 
 def relacionsagital_crear(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
@@ -870,7 +915,7 @@ def relacionsagital_crear(request,codi,num):
 							form2.save()
 							form3.save()
 						return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/nuevo/%s/%s/' %(codi,num))
-					return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'incompletos':incompletos})	
+					return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})	
 				else:
 					if request.method == 'POST':
 						form = RelacionSagitalForm(request.POST,initial={'fichas':ids.id})
@@ -885,14 +930,16 @@ def relacionsagital_crear(request,codi,num):
 						form = RelacionSagitalForm(initial={'fichas':ids.id})
 						form2 = FuncionMandibularForm(initial={'fichas':ids.id})
 						form3 = ImagenForm(initial={'fichas':ids.id})
-				return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi,'incompletos':incompletos})
+				return render(request, 'aspectos/sagitales_form.html', {'form':form,'form2':form2,'form3':form3,'num':num,'codi':codi,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception as e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
+
+
 
 class MostrarImg(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -904,13 +951,18 @@ class MostrarImg(TemplateView):
 				data = serializers.serialize('json', image, fields=('imagen'))
 		return HttpResponse(data, content_type='application/json')
 
+
+
 def relacionsagital_list(request):
 	relacionsagital = relaciones_sagitales.objects.all().order_by('id')
 	contexto = {'relaciones':relacionsagital}
 	return render(request, 'aspectos/sagitales_list.html', contexto)
 
+
 def relacionsagital_edit(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi,numero=num)
@@ -977,18 +1029,23 @@ def relacionsagital_edit(request,codi,num):
 						form2.save()
 						form3.save()
 					return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/editar/%s/%s/' %(codi,num))
-				return render(request, 'aspectos/sagitales_editar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'incompletos':incompletos})
+				return render(request, 'aspectos/sagitales_editar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
+
+
+
 
 def relacionsagital_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)
 		if ids:
@@ -1047,8 +1104,8 @@ def relacionsagital_consultar(request,codi,num):
 				form3 = ImagenForm_consultar(request.POST, request.FILES, instance=imagenes)
 
 				return HttpResponseRedirect('/analisis_radiograficos/aspectos_articulares/consultar/%s/%s/' %(codi,num))
-			return render(request, 'aspectos/sagitales_consultar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
+			return render(request, 'aspectos/sagitales_consultar_form.html', {'form':form,'form2':form2,'form3':form3,'codi':codi,'num':num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 

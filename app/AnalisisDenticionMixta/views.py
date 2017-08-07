@@ -26,6 +26,8 @@ codi="0000-00"
 
 def nance_crear(request,codi,num):  
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
         max_numero=10
@@ -66,8 +68,8 @@ def nance_crear(request,codi,num):
                                 return redirect('/analisis_denticion_mixta/moyersinferior/nuevo/%s/%s/' %(codi,num)) 
                             else:
                                 
-                                return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos})   
-                        return render(request, 'AnalisisDenticionMixta/analisis_nance2.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos})   
+                                return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})   
+                        return render(request, 'AnalisisDenticionMixta/analisis_nance2.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})   
                     return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
             else:
                 nanceFormSet = formset_factory(nance_tabla, extra=max_numero, max_num=max_numero)
@@ -98,18 +100,20 @@ def nance_crear(request,codi,num):
                         form1 = nance_generalForm(initial={'fichas':ids.id})
                         formset = nanceFormSet(prefix='1tablas')
                         formset2 = nanceFormSet2(prefix='2tablas')
-                return render(request, 'AnalisisDenticionMixta/analisis_nance.html', {'form1':form1, 'formset':formset, 'num':num,'formset2':formset2,'codi':codi,'ids':ids.id,'max':max_numero,'incompletos':incompletos})       
+                return render(request, 'AnalisisDenticionMixta/analisis_nance.html', {'form1':form1, 'formset':formset, 'num':num,'formset2':formset2,'codi':codi,'ids':ids.id,'max':max_numero,'incompletos':incompletos, 'nombreUser':nombreUser})       
         else:
-            return render(request, 'base/error_no_tiene_permiso.html')
+            return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
     except Exception, e:
         if int(num)>1:
-            return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
         else:
-            return render(request, 'base/error_no_encontrado.html') 
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
 
 
 def nance_consultar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num)
         nanceFormSet = modelformset_factory(nance_tablas, nance_tabla_consultar, extra=0)
@@ -168,13 +172,16 @@ def nance_consultar(request, codi, num):
                 formset = nanceFormSet(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id,tabla=1),prefix='1tablas')
                 formset2 = nanceFormSet2(request.POST, request.FILES, queryset=nance_tablas.objects.filter(fichas_id=ids.id, tabla=2),prefix='2tablas')
                 return redirect('/analisis_denticion_mixta/moyersinferior/consultar/%s/%s/' %(codi,num))            
-            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada,'incompletos':incompletos})    
+            return render(request, 'AnalisisDenticionMixta/analisis_nance_consultar.html', {'form1':form1,'num':num,'formset':formset,'codi':codi,'formset2':formset2,'max':max_numero,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return render(request, 'base/error_no_encontrado.html')
+        return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+
 
 def nance_editar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     if request.user.rol==1:
         try:
             ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -247,21 +254,23 @@ def nance_editar(request, codi, num):
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                         return redirect('/analisis_denticion_mixta/moyersinferior/editar/%s/%s/' %(codi,num))
                     else: 
-                        return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos})   
-                return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos})   
+                        return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})   
+                return render(request, 'AnalisisDenticionMixta/analisis_nance_editar.html', {'form1':form1,'formset':formset,'formset2':formset2,'codi':codi,'num':num,'max':max_numero,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})   
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
             if int(num)>1:
-                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
             else:
-                return render(request, 'base/error_no_encontrado.html') 
+                return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
     else:
-        return render(request, 'base/error_no_hay_acceso.html')
+        return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 ################################################################################################################
 
 
 def moyerssup_view(request,codi,num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
         incompletos =list()
@@ -287,7 +296,7 @@ def moyerssup_view(request,codi,num):
                     fecha =  timezone.now()
                     ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                     return redirect('/diag_general/nuevo/%s/%s' % (codi, num))
-            return render(request, 'AnalisisDenticionMixta/moyerssuperior2.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'incompletos':incompletos})
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior2.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'incompletos':incompletos, 'nombreUser':nombreUser})
         else:
             if ids:
                 max_num=4
@@ -302,20 +311,24 @@ def moyerssup_view(request,codi,num):
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                         return redirect('/diag_general/nuevo/%s/%s' % (codi, num))
-                    return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1, 'formset':formset, 'num':num,'codi':codi,'ids':ids.id,'max':max_num,'genero':genero.genero,'incompletos':incompletos})
+                    return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1, 'formset':formset, 'num':num,'codi':codi,'ids':ids.id,'max':max_num,'genero':genero.genero,'incompletos':incompletos, 'nombreUser':nombreUser})
                 else:
                     form1 = moyersSupForm(initial={'fichas':ids.id})
                     formset = moyerssupFormSet()
                     genero = datos_generales.objects.get(cod_expediente=codi)
-                    return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1, 'formset':formset, 'num':num,'codi':codi,'ids':ids.id,'max':max_num,'genero':genero.genero,'incompletos':incompletos})
+                    return render(request, 'AnalisisDenticionMixta/moyerssuperior.html', {'form1':form1, 'formset':formset, 'num':num,'codi':codi,'ids':ids.id,'max':max_num,'genero':genero.genero,'incompletos':incompletos, 'nombreUser':nombreUser})
     except Exception, e:
         if int(num)>1:
-            return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
         else:
-            return render(request, 'base/error_no_encontrado.html') 
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
+
+
 
 def moyerssup_editar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     if request.user.rol==1:
         try:
             ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -381,18 +394,22 @@ def moyerssup_editar(request, codi, num):
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                         return redirect('/diag_general/editar/%s/%s' % (codi, num))
-                return render(request, 'AnalisisDenticionMixta/moyerssuperior_editar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero})  
+                return render(request, 'AnalisisDenticionMixta/moyerssuperior_editar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero, 'nombreUser':nombreUser})  
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
             if int(num)>1:
-                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
             else:
-                return render(request, 'base/error_no_encontrado.html') 
+                return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
     else:
-        return render(request, 'base/error_no_hay_acceso.html')
+        return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
+
+
 
 def moyerssup_consultar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num)
         genero = datos_generales.objects.get(cod_expediente=codi)
@@ -449,14 +466,16 @@ def moyerssup_consultar(request, codi, num):
                 formset = moyerssupFormSet(request.POST, request.FILES, queryset=moyers_superior_ancho.objects.filter(fichas_id=ids.id))
                     
                 return redirect('/diag_general/consultar/%s/%s' % (codi, num))
-            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos})    
+            return render(request, 'AnalisisDenticionMixta/moyerssuperior_consultar.html', {'form1':form1,'formset':formset,'num':num,'codi':codi,'ids':ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})    
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return render(request, 'base/error_no_encontrado.html')
+        return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 def moyersinf_view(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
         genero = datos_generales.objects.get(cod_expediente=codi)
@@ -484,7 +503,7 @@ def moyersinf_view(request, codi, num):
                     fecha =  timezone.now()
                     ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                     return redirect('/analisis_denticion_mixta/moyerssuperior/nuevo/%s/%s/' %(codi,num))
-            return render(request, 'AnalisisDenticionMixta/moyersinferior2.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'incompletos':incompletos})
+            return render(request, 'AnalisisDenticionMixta/moyersinferior2.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'incompletos':incompletos, 'nombreUser':nombreUser})
         else:
             if ids:
                 max_num = 4
@@ -502,16 +521,19 @@ def moyersinf_view(request, codi, num):
                 else:
                     form1 = moyersInfForm(initial={'fichas': ids.id})
                     formset = moyersinfFormSet()
-            return render(request, 'AnalisisDenticionMixta/moyersinferior.html',{'form1': form1, 'formset': formset, 'codi': codi, 'ids': ids.id, 'num':num,'max': max_num,'genero':genero.genero,'incompletos':incompletos})
+            return render(request, 'AnalisisDenticionMixta/moyersinferior.html',{'form1': form1, 'formset': formset, 'codi': codi, 'ids': ids.id, 'num':num,'max': max_num,'genero':genero.genero,'incompletos':incompletos, 'nombreUser':nombreUser})
     except Exception, e:
         if int(num)>1:
-            return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+            return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
         else:
-            return render(request, 'base/error_no_encontrado.html') 
+            return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
+
 
 
 def moyersinf_editar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     if request.user.rol==1:
         try:
             genero = datos_generales.objects.get(cod_expediente=codi)
@@ -579,18 +601,22 @@ def moyersinf_editar(request, codi, num):
                         fecha =  timezone.now()
                         ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
                         return redirect('/analisis_denticion_mixta/moyerssuperior/editar/%s/%s/' %(codi,num))
-                return render(request, 'AnalisisDenticionMixta/moyersinferior_editar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero})
+                return render(request, 'AnalisisDenticionMixta/moyersinferior_editar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero, 'nombreUser':nombreUser})
             return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
         except Exception, e:
             if int(num)>1:
-                return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+                return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
             else:
-                return render(request, 'base/error_no_encontrado.html') 
+                return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser}) 
     else:
-        return render(request, 'base/error_no_hay_acceso.html')
+        return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
+
+
 
 def moyersinf_consultar(request, codi, num):
     str(codi)
+    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
     try:
         genero = datos_generales.objects.get(cod_expediente=codi)
         ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -650,7 +676,7 @@ def moyersinf_consultar(request, codi, num):
                     form1.save()
                     formset.save()
                     return redirect('/analisis_denticion_mixta/moyerssuperior/consultar/%s/%s/' %(codi,num))
-            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos})
+            return render(request, 'AnalisisDenticionMixta/moyersinferior_consultar.html',{'form1': form1, 'formset': formset, 'codi': codi,'num':num, 'ids': ids.id,'genero':genero.genero,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
         return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
     except Exception, e:
-        return render(request, 'base/error_no_encontrado.html')
+        return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})

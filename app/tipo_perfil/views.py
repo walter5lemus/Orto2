@@ -18,6 +18,8 @@ def tipo_perfil(request):
 
 def tipo_perfil_view(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
 		ultima = ultima_modificacion.objects.get(fichas_id=ids.id)
@@ -53,20 +55,22 @@ def tipo_perfil_view(request,codi,num):
 					else: 
 						form = Tipo_perfilForm(initial={'fichas':ids.id})
 						
-				return render(request,'tipo_perfil/form_tipo_perfil.html', {'form':form,'codi':codi,'num':num,'fecha':ultima.fecha,'incompletos':incompletos})
+				return render(request,'tipo_perfil/form_tipo_perfil.html', {'form':form,'codi':codi,'num':num,'fecha':ultima.fecha,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 
 def tipo_perfil_list(request):
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	tipo_perfil = TipoPerfil.objects.all().order_by('fichas')
-	contexto = {'tipo_perfiles': tipo_perfil}
+	contexto = {'tipo_perfiles': tipo_perfil, 'nombreUser':nombreUser}
 	return render(request,'tipo_perfil/tipo_perfil_list.html', contexto)
 
 
@@ -74,6 +78,8 @@ def tipo_perfil_list(request):
 
 def tipo_perfil_edit(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -134,19 +140,21 @@ def tipo_perfil_edit(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/aspectos/denticion1/editar/%s/%s' %(codi,num))
-				return render(request, 'tipo_perfil/form_tipo_perfil_editar.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos})
+				return render(request, 'tipo_perfil/form_tipo_perfil_editar.html',{'form':form,'num':num,'codi':codi,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 
 def tipo_perfil_consultar(request,codi,num):
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
@@ -200,9 +208,9 @@ def tipo_perfil_consultar(request,codi,num):
 				if form.is_valid():
 					form.save()
 				return HttpResponseRedirect('/aspectos/denticion1/consultar/%s/%s/' %(codi,num))
-			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos})
+			return render(request, 'tipo_perfil/form_tipo_perfil_consultar.html',{'form':form,'num':num,'codi':codi,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 

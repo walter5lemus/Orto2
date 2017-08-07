@@ -21,8 +21,13 @@ from app.informacion.models import *
 from app.tipo_perfil.models import *
 codi="0000-00"
 
+
+
 def cefalometrico_view(request,codi,num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
@@ -46,7 +51,7 @@ def cefalometrico_view(request,codi,num):
 							fecha =timezone.now()
 							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
-					return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos})
+					return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})
 			else:
 				if ids:
 					max_num=2
@@ -62,18 +67,21 @@ def cefalometrico_view(request,codi,num):
 						return redirect('/diag_cefalo/nuevo/%s/%s' % (codi, num))
 					else:
 						formset = cefalometricoFormSet()
-				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset, 'codi':codi, 'num':num,'ids':ids.id,'max':max_num,'incompletos':incompletos})
+				return render(request, 'analisis_cefalometrico/analisis_cefalometrico.html', {'formset':formset, 'codi':codi, 'num':num,'ids':ids.id,'max':max_num,'incompletos':incompletos, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html',{'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 
 def cefalometrico_editar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -134,20 +142,23 @@ def cefalometrico_editar(request, codi, num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/diag_cefalo/editar/%s/%s' % (codi, num))
-					return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos})
-				return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos})	
+					return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})
+				return render(request, 'analisis_cefalometrico/analisis_cefalometrico_editar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'incompletos':incompletos, 'nombreUser':nombreUser})	
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 
 def cefalometrico_consultar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		cefalometricoFormSet = modelformset_factory(analisis_cefalometrico, analisis_cefalometricoForm_consultar, extra=0)
@@ -202,9 +213,9 @@ def cefalometrico_consultar(request, codi, num):
 					formset.save()
 				
 				return redirect('/diag_cefalo/consultar/%s/%s' % (codi, num))			
-			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'completada':ids.completada,'incompletos':incompletos})
+			return render(request, 'analisis_cefalometrico/analisis_cefalometrico_consultar.html', {'formset':formset,'codi':codi,'num':num,'ids':ids.id,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha.")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 		

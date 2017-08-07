@@ -25,7 +25,10 @@ codi=""
 # Create your views here.
 
 def AspectosArticulares_Crear(request,codi,num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0):
@@ -47,7 +50,7 @@ def AspectosArticulares_Crear(request,codi,num):
 						fecha =  timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
-				return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos})
+				return render(request,'analisis_radiograficos/analisis_articulares.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			else:
 				if ids:
 					if request.method == 'POST':
@@ -57,22 +60,25 @@ def AspectosArticulares_Crear(request,codi,num):
 							fecha =  timezone.now()
 							ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 							return HttpResponseRedirect('/asp_mandibular1/nuevo/%s/%s/' %(codi,num))
-						return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num,'incompletos':incompletos})
+						return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 					else:
 						ids = fichas.objects.get(cod_expediente=codi, numero=num)
 						form = AspectosArticularesForm(initial={'fichas':ids.id})
-					return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num,'incompletos':incompletos})
+					return render(request, 'analisis_radiograficos/analisis_articulares.html', {'form':form,'codi': codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		else:
-			return render(request, 'base/error_no_tiene_permiso.html')
+			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 def AspectosArticulares_consultar(request,codi,num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
@@ -125,14 +131,17 @@ def AspectosArticulares_consultar(request,codi,num):
 				form = AspectosArticularesForm_consultar(request.POST, instance=estado)
 
 				return HttpResponseRedirect('/asp_mandibular1/consultar/%s/%s/' %(codi,num))
-			return render(request,'analisis_radiograficos/analisis_articulares_consultar.html', {'form':form,'codi': codi,'num':num,'completada':ids.completada,'incompletos':incompletos})
+			return render(request,'analisis_radiograficos/analisis_articulares_consultar.html', {'form':form,'codi': codi,'num':num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 def AspectosArticulares_edit(request,codi,num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -193,22 +202,25 @@ def AspectosArticulares_edit(request,codi,num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/asp_mandibular1/editar/%s/%s/' %(codi,num))
-					return render(request,'analisis_radiograficos/analisis_articulares_editar.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos})
-				return render(request,'analisis_radiograficos/analisis_articulares_editar.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos})
+					return render(request,'analisis_radiograficos/analisis_articulares_editar.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
+				return render(request,'analisis_radiograficos/analisis_articulares_editar.html',{'form':form,'codi': codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 
 # Otros Aspectos
 
 def otrosAspectos_crear(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
 		incompletos =list()
@@ -229,7 +241,7 @@ def otrosAspectos_crear(request, codi, num):
 					fecha=timezone.now()
 					ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 					return redirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
-			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos})
+			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 
 		else:
 			if ids:
@@ -240,19 +252,22 @@ def otrosAspectos_crear(request, codi, num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return HttpResponseRedirect('/analisis_radiograficos/otrosHallazgos/nuevo/%s/%s/' % (codi, num))
-					return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos})
+					return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					form = aspectos_mandibulares2Form(initial={'fichas': ids.id})
-			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos})
+			return render(request, 'analisis_radiograficos/otrosAspectosForm.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 
 def otrosAspectos_consultar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
@@ -306,14 +321,17 @@ def otrosAspectos_consultar(request, codi, num):
 				if form.is_valid():
 					form.save()
 				return redirect('/analisis_radiograficos/otrosHallazgos/consultar/%s/%s' % (codi, num))
-		return render(request, 'analisis_radiograficos/otrosAspectosForm_consultar.html', {'form': form, 'codi': codi, 'num': num,'completada':ids.completada,'incompletos':incompletos})
+		return render(request, 'analisis_radiograficos/otrosAspectosForm_consultar.html', {'form': form, 'codi': codi, 'num': num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 def otrosAspectos_editar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -374,21 +392,24 @@ def otrosAspectos_editar(request, codi, num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/analisis_radiograficos/otrosHallazgos/editar/%s/%s/' % (codi, num))
-					return render(request, 'analisis_radiograficos/otrosAspectosForm_editar.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos})
-				return render(request, 'analisis_radiograficos/otrosAspectosForm_editar.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos})
+					return render(request, 'analisis_radiograficos/otrosAspectosForm_editar.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
+				return render(request, 'analisis_radiograficos/otrosAspectosForm_editar.html', {'form': form, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')	
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})
 
 # Otros Hallazgos
 
 def otrosHallazgos_crear(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		incompletos =list()
 		ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
@@ -414,7 +435,7 @@ def otrosHallazgos_crear(request, codi, num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
-				return render(request, 'analisis_radiograficos/otrosHallazgosForm.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos})            
+				return render(request, 'analisis_radiograficos/otrosHallazgosForm.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})            
 
 		else:
 			if ids:
@@ -428,21 +449,24 @@ def otrosHallazgos_crear(request, codi, num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/analisis_cefalometrico/cefalometrico/nuevo/%s/%s' % (codi, num))
-					return render(request, 'analisis_radiograficos/otrosHallazgosForm.html',{'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos})
+					return render(request, 'analisis_radiograficos/otrosHallazgosForm.html',{'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 				else:
 					form1 = estadios_de_nollaForm(initial={'fichas': ids.id})
 					form2 = secuencia_y_cronologiaForm(initial={'fichas': ids.id})
 
-			return render(request, 'analisis_radiograficos/otrosHallazgosForm.html',{'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos})
+			return render(request, 'analisis_radiograficos/otrosHallazgosForm.html',{'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 		else:
-			return render(request, 'base/error_no_encontrado.html')	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 
 def otrosHallazgos_consultar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
 		if ids:
@@ -500,14 +524,17 @@ def otrosHallazgos_consultar(request, codi, num):
 					form1.save()
 					form2.save()
 				return redirect('/analisis_cefalometrico/cefalometrico/consultar/%s/%s' % (codi, num))
-		return render(request, 'analisis_radiograficos/otrosHallazgosForm_consultar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'completada':ids.completada,'incompletos':incompletos})
+		return render(request, 'analisis_radiograficos/otrosHallazgosForm_consultar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'completada':ids.completada,'incompletos':incompletos, 'nombreUser':nombreUser})
 		return HttpResponsze("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html')
+		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 def otrosHallazgos_editar(request, codi, num):
+
 	str(codi)
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+
 	if request.user.rol==1:
 		try:
 			ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -572,13 +599,13 @@ def otrosHallazgos_editar(request, codi, num):
 						fecha=timezone.now()
 						ultima_modificacion.objects.filter(fichas_id=ids.id).update(fecha=fecha)
 						return redirect('/analisis_cefalometrico/cefalometrico/editar/%s/%s' % (codi, num))
-					return render(request, 'analisis_radiograficos/otrosHallazgosForm_editar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos})
-				return render(request, 'analisis_radiograficos/otrosHallazgosForm_editar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos})
+					return render(request, 'analisis_radiograficos/otrosHallazgosForm_editar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
+				return render(request, 'analisis_radiograficos/otrosHallazgosForm_editar.html', {'form1': form1,'form2': form2, 'codi': codi, 'num': num,'incompletos':incompletos, 'nombreUser':nombreUser})
 			return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 		except Exception, e:
 			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1})
+				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
 			else:
-				return render(request, 'base/error_no_encontrado.html')
+				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 	else:
-		return render(request, 'base/error_no_hay_acceso.html')
+		return render(request, 'base/error_no_hay_acceso.html', {'nombreUser':nombreUser})

@@ -26,6 +26,7 @@ from app.tipo_perfil.models import *
 
 def index(request):
 	user = request.user.id
+	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
 	
 	completos = list()
 	expedientes = fichas.objects.filter(usuario_creador=user,completada=1)
@@ -85,9 +86,9 @@ def index(request):
 
 
 	if request.user.rol == 1:
-		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+		return render(request,'index.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos, 'nombreUser':nombreUser})
 	if request.user.rol != 1:
-		return render(request,'index_usuarios.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos})
+		return render(request,'index_usuarios.html',{'incompletos':incompletos,'ficha':ficha,'completos':completos, 'nombreUser':nombreUser})
 
 			
 
