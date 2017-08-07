@@ -23,6 +23,7 @@ CREATE TRIGGER `aspectos_tipo_denticion_after_update` AFTER UPDATE ON `aspectos_
 	if (new.tipo_id != old.tipo_id) then
 		delete from aspectos_registro where new.fichas_id = aspectos_registro.fichas_id;
 		delete from aspectos_diastemas_denticion where new.fichas_id = aspectos_diastemas_denticion.fichas_id;
+		delete from aspectos_registro_mordidas where new.fichas_id = aspectos_registro_mordidas.fichas_id;
 	end if;
 END//
 DELIMITER ;
