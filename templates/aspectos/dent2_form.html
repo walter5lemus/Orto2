@@ -15,7 +15,7 @@ Aspectos de dentición - Parte 2
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
-    
+    cuadran = 1;
     del = 1;
         //Ocultar parte odontograma
         $(".tipo").change(function() {
@@ -333,35 +333,68 @@ Aspectos de dentición - Parte 2
             b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             b1 = b - 1
 
-            c = document.getElementById("id_diastemas-TOTAL_FORMS").value;
-
             c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
             p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;            
 
             diente1 = c + p;
 
-            if(diente1!='')
+            c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+            p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value; 
+            
+            diente2 = c + p;
+
+            if(cuadran == 1)
             {
-                c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
-                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
-                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
-                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
-                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
-                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                cuadran = 2
+                
+                if(diente1!='')
+                {
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                }
+
+                    $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
+                    $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );  
+
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);  
             }
+            else
+            {
+                cuadran = 1
 
-                $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
-                $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );  
+                if(diente2!='')
+                {
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                }
 
-                c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
-                $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
-                $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
-                $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
-                $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
-                $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);                
+                    $("#id_"+nombre+"-"+b1+"-cuad_dos").val( cuadrante );
+                    $("#id_"+nombre+"-"+b1+"-pieza_dos").val( pieza );  
 
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);
+            }              
 
         });   
    

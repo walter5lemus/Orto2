@@ -15,7 +15,7 @@ Mordidas Cruzadas
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
-
+    cuadran = 1;
     del = 1;
         //Ocultar parte odontograma
         $(".tipo").change(function() {
@@ -290,8 +290,8 @@ Mordidas Cruzadas
             vacio = 1;
             $(".delete-row-mordidas").hover(function() {
                 num = $(this).attr("id")
-                if (document.getElementById("id_mordidas-"+ num[10] +"-id").value) {
-                    ides = document.getElementById("id_mordidas-"+ num[10] +"-id").value;
+                if (document.getElementById("id_mordidas-"+ num[9] +"-id").value) {
+                    ides = document.getElementById("id_mordidas-"+ num[9] +"-id").value;
                     vacio = 0;   
                 }
                 else{
@@ -388,6 +388,80 @@ Mordidas Cruzadas
         });
 
         //Seleccion de pieza odontograma
+        $('g polygon').click(function (evt) {
+            var sector = $(evt.target); 
+
+            iden = sector.parent().attr('id')
+            cuadrante = iden[1] 
+            pieza = iden[2]
+
+            b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
+            b1 = b - 1
+
+            c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_superior").value;
+            p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_superior").value;            
+
+            diente1 = c + p;
+
+            c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_inferior").value;
+            p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_inferior").value; 
+            
+            diente2 = c + p;
+
+            if(cuadran == 1)
+            {
+                cuadran = 2
+                
+                if(diente1!='')
+                {
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_superior").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_superior").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                }
+
+                    $("#id_"+nombre+"-"+b1+"-cuad_superior").val( cuadrante );
+                    $("#id_"+nombre+"-"+b1+"-pieza_superior").val( pieza );  
+
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_superior").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_superior").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);  
+            }
+            else
+            {
+                cuadran = 1
+
+                if(diente2!='')
+                {
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_inferior").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_inferior").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                }
+
+                    $("#id_"+nombre+"-"+b1+"-cuad_inferior").val( cuadrante );
+                    $("#id_"+nombre+"-"+b1+"-pieza_inferior").val( pieza );  
+
+                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_inferior").value;
+                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_inferior").value;
+                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);
+            }              
+
+        });
   
     </script>
 
@@ -436,8 +510,7 @@ Mordidas Cruzadas
 <div class="row">
     <form method="POST" action="">
 
-    <center><h1>Examen de Dentición</h1></center>
-    <center><h2>Parte II</h2></center>
+    <center><h1>Mordidas Cruzadas</h1></center>
     {% csrf_token %} 
 
     <div class="col-md-12 col-md-offset-2">

@@ -141,10 +141,10 @@ class diastemasForm(forms.ModelForm):
 		widgets = {
 			'id' : forms.HiddenInput(attrs={'class':'form-control id'}),
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
-			'cuad_uno': forms.TextInput(attrs={'class':'form-control'}),
-			'pieza_uno': forms.TextInput(attrs={'class':'form-control'}),
-			'cuad_dos': forms.TextInput(attrs={'class':'form-control'}),
-			'pieza_dos': forms.TextInput(attrs={'class':'form-control'}),
+			'cuad_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_uno': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'cuad_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_dos': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 class diastemasForm_consultar(forms.ModelForm):
@@ -364,10 +364,10 @@ class registro_mordidasForm(forms.ModelForm):
 		widgets = {
 			'id' : forms.HiddenInput(attrs={'class':'form-control id'}),
 			'fichas': forms.HiddenInput(attrs={'class':'form-control ficha'}),
-			'cuad_superior': forms.TextInput(attrs={'class':'form-control'}),
-			'pieza_superior': forms.TextInput(attrs={'class':'form-control'}),
-			'cuad_inferior': forms.TextInput(attrs={'class':'form-control'}),
-			'pieza_inferior': forms.TextInput(attrs={'class':'form-control'}),
+			'cuad_superior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_superior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'cuad_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
+			'pieza_inferior': forms.TextInput(attrs={'class':'form-control','readonly':True}),
 		}
 
 class registro_mordidasForm_consultar(forms.ModelForm):
