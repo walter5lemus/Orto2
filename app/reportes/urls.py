@@ -9,8 +9,6 @@ urlpatterns = [
 	url(r'^busqueda_ajax/$', login_required(BusquedaAjaxView.as_view())),
 	url(r'^busqueda_ajax2/$', login_required(BusquedaAjaxView2.as_view())),
 	url(r'^error/$', login_required(reporte_error), name='reporte_error'),
-	url(r'^error_imagenes/$', login_required(reporte_error_imagenes), name='reporte_error_imagenes'),
-	url(r'^error_no_encontrado/$', login_required(reporte_error_no_existe), name='reporte_error_no_existe'),
 
 	url(r'^reporte_caducada/$', login_required(generar_pdf_Caducar), name='generar_pdf_caducada'),
 
