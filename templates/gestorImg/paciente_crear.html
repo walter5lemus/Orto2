@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_img.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -78,28 +78,60 @@ $(document).ready(function(){
                 }
 
                 if (img1 != "") {
-                document.getElementById("c11").style.display = 'inline';
+                    document.getElementById("c11").style.display = 'inline';
+                    document.getElementById("v1").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v1").src="{% static 'images/nover.png' %}";
                 }
                 if (img2 != "") {
-                document.getElementById("c12").style.display = 'inline';
+                    document.getElementById("c12").style.display = 'inline';
+                    document.getElementById("v2").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v2").src="{% static 'images/nover.png' %}";
                 }
                 if (img3 != "") {
-                document.getElementById("c13").style.display = 'inline';
+                    document.getElementById("c13").style.display = 'inline';
+                    document.getElementById("v3").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v3").src="{% static 'images/nover.png' %}";
                 }
                 if (img4 != "") {
-                document.getElementById("c14").style.display = 'inline';
+                    document.getElementById("c14").style.display = 'inline';
+                    document.getElementById("v4").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v4").src="{% static 'images/nover.png' %}";
                 }
                 if (img5 != "") {
-                document.getElementById("c15").style.display = 'inline';
+                    document.getElementById("c15").style.display = 'inline';
+                    document.getElementById("v5").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v5").src="{% static 'images/nover.png' %}";
                 }
                 if (img6 != "") {
-                document.getElementById("c16").style.display = 'inline';
+                    document.getElementById("c16").style.display = 'inline';
+                    document.getElementById("v6").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v6").src="{% static 'images/nover.png' %}";
                 }
                 if (img7 != "") {
-                document.getElementById("c17").style.display = 'inline';
+                    document.getElementById("c17").style.display = 'inline';
+                    document.getElementById("v7").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v7").src="{% static 'images/nover.png' %}";
                 }
                 if (img8 != "") {
-                document.getElementById("c18").style.display = 'inline';
+                    document.getElementById("c18").style.display = 'inline';
+                    document.getElementById("v8").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v8").src="{% static 'images/nover.png' %}";
                 }
             }
         },
@@ -117,41 +149,56 @@ document.getElementById("v7").onclick = Asignar7;
 document.getElementById("v8").onclick = Asignar8;
 
 function Asignar1() {
+    if (img1 != "") {
     document.getElementById("pimg").style.display = 'inline';
     document.getElementById("pimg").src= {{MEDIA_URL}}+img1;
+    }
 }
 
 function Asignar2() {
+    if (img2 != "") {
     document.getElementById("pimg").style.display = 'inline';
     document.getElementById("pimg").src= {{MEDIA_URL}}+img2;
+    }
 }
 
 function Asignar3() {
+    if (img3 != "") {
     document.getElementById("pimg").style.display = 'inline';
     document.getElementById("pimg").src= {{MEDIA_URL}}+img3;
+    }
 }
 
 function Asignar4() {
+    if (img4 != "") {
     document.getElementById("iimg").style.display = 'inline';
     document.getElementById("iimg").src= {{MEDIA_URL}}+img4;
+    }
 }
 function Asignar5() {
+    if (img5 != "") {
     document.getElementById("iimg").style.display = 'inline';
     document.getElementById("iimg").src= {{MEDIA_URL}}+img5;
+    }
 }
 function Asignar6() {
+    if (img6 != "") {
     document.getElementById("iimg").style.display = 'inline';
     document.getElementById("iimg").src= {{MEDIA_URL}}+img6;
+    }
 }
 function Asignar7() {
+    if (img7 != "") {
     document.getElementById("iimg").style.display = 'inline';
     document.getElementById("iimg").src= {{MEDIA_URL}}+img7;
+    }
 }
 function Asignar8() {
+    if (img8 != "") {
     document.getElementById("iimg").style.display = 'inline';
     document.getElementById("iimg").src= {{MEDIA_URL}}+img8;
+    }
 }
-
 function ocultar(){
   var myselect = document.getElementById("control");
 
@@ -299,28 +346,60 @@ $(document).ready(function(){
                     }
                 }
                 if (img21 != "") {
-                document.getElementById("c21").style.display = 'inline';
+                    document.getElementById("c21").style.display = 'inline';
+                    document.getElementById("v21").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v21").src="{% static 'images/nover.png' %}";
                 }
                 if (img22 != "") {
-                document.getElementById("c22").style.display = 'inline';
+                    document.getElementById("c22").style.display = 'inline';
+                    document.getElementById("v22").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v22").src="{% static 'images/nover.png' %}";
                 }
                 if (img23 != "") {
-                document.getElementById("c23").style.display = 'inline';
+                    document.getElementById("c23").style.display = 'inline';
+                    document.getElementById("v23").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v23").src="{% static 'images/nover.png' %}";
                 }
                 if (img24 != "") {
-                document.getElementById("c24").style.display = 'inline';
+                    document.getElementById("c24").style.display = 'inline';
+                    document.getElementById("v24").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v24").src="{% static 'images/nover.png' %}";
                 }
                 if (img25 != "") {
-                document.getElementById("c25").style.display = 'inline';
+                    document.getElementById("c25").style.display = 'inline';
+                    document.getElementById("v25").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v25").src="{% static 'images/nover.png' %}";
                 }
                 if (img26 != "") {
-                document.getElementById("c26").style.display = 'inline';
+                    document.getElementById("c26").style.display = 'inline';
+                    document.getElementById("v26").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v26").src="{% static 'images/nover.png' %}";
                 }
                 if (img27 != "") {
-                document.getElementById("c27").style.display = 'inline';
+                    document.getElementById("c27").style.display = 'inline';
+                    document.getElementById("v27").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v27").src="{% static 'images/nover.png' %}";
                 }
                 if (img28 != "") {
-                document.getElementById("c28").style.display = 'inline';
+                    document.getElementById("c28").style.display = 'inline';
+                    document.getElementById("v28").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("v28").src="{% static 'images/nover.png' %}";
                 }
             }
         },
@@ -337,39 +416,55 @@ document.getElementById("v27").onclick = Asignar27;
 document.getElementById("v28").onclick = Asignar28;
 
 function Asignar21() {
+    if (img21 != "") {
     document.getElementById("pimg2").style.display = 'inline';
     document.getElementById("pimg2").src= {{MEDIA_URL}}+img21;
+    }
 }
 
 function Asignar22() {
+    if (img22 != "") {
     document.getElementById("pimg2").style.display = 'inline';
     document.getElementById("pimg2").src= {{MEDIA_URL}}+img22;
+    }
 }
 
 function Asignar23() {
+    if (img23 != "") {
     document.getElementById("pimg2").style.display = 'inline';
     document.getElementById("pimg2").src= {{MEDIA_URL}}+img23;
+    }
 }
 
 function Asignar24() {
+    if (img24 != "") {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img24;
+    }
 }
 function Asignar25() {
+    if (img25 != "") {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img25;
+    }
 }
 function Asignar26() {
+    if (img26 != "") {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img26;
+    }
 }
 function Asignar27() {
+    if (img27 != "") {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img27;
+    }
 }
 function Asignar28() {
+    if (img28 != "") {
     document.getElementById("iimg2").style.display = 'inline';
     document.getElementById("iimg2").src= {{MEDIA_URL}}+img28;
+    }
 }
 
 $(document).ready(function() {
@@ -534,6 +629,12 @@ $(this).val('');
 }
 });
 });
+
+usernameone = "{{ request.user.username }}";
+$("#id_userone").val( usernameone );
+
+usernametwo = "{{ request.user.username }}";
+$("#id_usertwo").val( usernametwo );
 </script>
 
 {% endblock %}
@@ -585,6 +686,9 @@ $(this).val('');
 
 <br><br><br><br><br><br><br><br>
 
+{{form.userone}}
+{{form2.usertwo}}
+
 <div id="fp1" class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos del paciente</h4>
@@ -613,16 +717,16 @@ $(this).val('');
         <div class="col-md-1">
             <div class="form-group">
                 <br>
-                <img id="v1" src=" {% static 'images/ver.png' %}">
+                <img id="v1">
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v2" src=" {% static 'images/ver.png' %}">  
+                <img id="v2">  
                 <br>
                 <br>
                 <br>
-                <img id="v3" src=" {% static 'images/ver.png' %}"> 
+                <img id="v3"> 
                 <br>   
             </div>            
         </div> 
@@ -672,25 +776,25 @@ $(this).val('');
         <div class="col-md-1">
             <div class="form-group">
                 <br>
-                <img id="v4" src=" {% static 'images/ver.png' %}">
+                <img id="v4">
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v5" src=" {% static 'images/ver.png' %}">  
+                <img id="v5">  
                 <br>
                 <br>
                 <br>
-                <img id="v6" src=" {% static 'images/ver.png' %}"> 
+                <img id="v6"> 
                 <br>   
                 <br>
                 <br>
-                <img id="v7" src=" {% static 'images/ver.png' %}"> 
+                <img id="v7"> 
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v8" src=" {% static 'images/ver.png' %}"> 
+                <img id="v8"> 
             </div>            
         </div>
         <div class="col-md-5 col-md-offset-1">
@@ -729,16 +833,16 @@ $(this).val('');
         <div class="col-md-1">
             <div class="form-group">
                 <br>
-                <img id="v21" src=" {% static 'images/ver.png' %}">
+                <img id="v21">
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v22" src=" {% static 'images/ver.png' %}">  
+                <img id="v22">  
                 <br>
                 <br>
                 <br>
-                <img id="v23" src=" {% static 'images/ver.png' %}"> 
+                <img id="v23"> 
                 <br>   
             </div>            
         </div> 
@@ -788,25 +892,25 @@ $(this).val('');
         <div class="col-md-1">
             <div class="form-group">
                 <br>
-                <img id="v24" src=" {% static 'images/ver.png' %}">
+                <img id="v24">
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v25" src=" {% static 'images/ver.png' %}">  
+                <img id="v25">  
                 <br>
                 <br>
                 <br>
-                <img id="v26" src=" {% static 'images/ver.png' %}"> 
+                <img id="v26"> 
                 <br>   
                 <br>
                 <br>
-                <img id="v27" src=" {% static 'images/ver.png' %}"> 
+                <img id="v27"> 
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="v28" src=" {% static 'images/ver.png' %}"> 
+                <img id="v28"> 
             </div>            
         </div>
         <div class="col-md-5 col-md-offset-1">
@@ -822,7 +926,7 @@ $(this).val('');
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/home/" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>

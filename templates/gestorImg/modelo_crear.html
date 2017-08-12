@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_img.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -10,7 +10,6 @@
     .divOcultar{
     display: none;
     }
-
 </style>
 {% endblock %}
 
@@ -33,12 +32,9 @@
 <script type="text/javascript">
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");  
-
 $(document).ready(function(){
-
     var codigo = $('#codigo').val();
     var numero = $('#ficha').val();
-
     $.ajax({
         data : {'codigo':codigo,'numero':numero},
         url : '/gestor_img/modelo/mostrarm/',
@@ -50,7 +46,6 @@ $(document).ready(function(){
                 var lim = data[i].fields.lizqm;
                 var fm = data[i].fields.frontm;
                 var ldm = data[i].fields.lderm;
-
                 if (osm != '') {
                     if (oim != '') {
                         if (lim != '') {
@@ -62,7 +57,6 @@ $(document).ready(function(){
                         }
                     }
                 }
-
                 document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
                 document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
                 document.getElementById("imgli").src = {{MEDIA_URL}} + lim;
@@ -72,9 +66,7 @@ $(document).ready(function(){
         },
     });
 });
-
 $(document).ready(function() {
-
 $("#id_osupm").bind('change', function(){
 //Tamañoen bytes (2.0 Mb)
 if (this.files[0].size >= 2097152) {
@@ -84,7 +76,6 @@ alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permit
 $(this).val('');
 }
 });
-
 $("#id_oinfm").bind('change', function(){
 //Tamañoen bytes (2.0 Mb)
 if (this.files[0].size >= 2097152) {
@@ -94,7 +85,6 @@ alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permit
 $(this).val('');
 }
 });
-
 $("#id_lizqm").bind('change', function(){
 //Tamañoen bytes (2.0 Mb)
 if (this.files[0].size >= 2097152) {
@@ -104,7 +94,6 @@ alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permit
 $(this).val('');
 }
 });
-
 $("#id_frontm").bind('change', function(){
 //Tamañoen bytes (2.0 Mb)
 if (this.files[0].size >= 2097152) {
@@ -114,7 +103,6 @@ alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permit
 $(this).val('');
 }
 });
-
 $("#id_lderm").bind('change', function(){
 //Tamañoen bytes (2.0 Mb)
 if (this.files[0].size >= 2097152) {
@@ -126,6 +114,8 @@ $(this).val('');
 });
 });
 
+username = "{{ request.user.username }}";
+$("#id_userm").val( username );
 </script>
 
 {% endblock %}
@@ -154,6 +144,8 @@ $(this).val('');
     </div>
 
 <br><br><br><br><br><br><br><br>
+
+{{form.userm}}
 
 <div class="panel panel-primary">
       <div class="panel-heading"> 
@@ -226,7 +218,7 @@ $(this).val('');
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/radiograficas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>

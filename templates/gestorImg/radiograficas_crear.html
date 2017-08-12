@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_img.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -73,47 +73,47 @@ $(document).ready(function(){
                 srp = data[i].fields.spano;
                 src = data[i].fields.scefa;
 
-                if (irp!='') {
-                    $("#print_ipano").removeClass('botonprint');
-                }
-
-                if (irc!='') {
-                    $("#print_icefa").removeClass('botonprint');
-                }
-
-                if (trp!='') {
-                    $("#print_tpano").removeClass('botonprint');
-                }
-
-                if (trc!='') {
-                    $("#print_tcefa").removeClass('botonprint');
-                }
-
-                if (srp!='') {
-                    $("#print_spano").removeClass('botonprint');
-                }
-
-                if (src!='') {
-                    $("#print_scefa").removeClass('botonprint');
-                }
-
                 if (irp != "") {
-                document.getElementById("c1").style.display = 'inline';
+                    document.getElementById("c1").style.display = 'inline';
+                    document.getElementById("ip").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("ip").src="{% static 'images/nover.png' %}";
                 }
                 if (irc != "") {
-                document.getElementById("c2").style.display = 'inline';
+                    document.getElementById("c2").style.display = 'inline';
+                    document.getElementById("ic").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("ic").src="{% static 'images/nover.png' %}";
                 }
                 if (trp != "") {
-                document.getElementById("c3").style.display = 'inline';
+                    document.getElementById("c3").style.display = 'inline';
+                    document.getElementById("tp").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("tp").src="{% static 'images/nover.png' %}";
                 }
                 if (trc != "") {
-                document.getElementById("c4").style.display = 'inline';
+                    document.getElementById("c4").style.display = 'inline';
+                    document.getElementById("tc").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("tc").src="{% static 'images/nover.png' %}";
                 }
                 if (srp != "") {
-                document.getElementById("c5").style.display = 'inline';
+                    document.getElementById("c5").style.display = 'inline';
+                    document.getElementById("sp").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("sp").src="{% static 'images/nover.png' %}";
                 }
                 if (src != "") {
-                document.getElementById("c6").style.display = 'inline';
+                    document.getElementById("c6").style.display = 'inline';
+                    document.getElementById("sc").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("sc").src="{% static 'images/nover.png' %}";
                 }
             }
         },
@@ -129,31 +129,43 @@ document.getElementById("sc").onclick = Asignarsc;
 
 
 function Asignarip() {
-    document.getElementById("iimg").style.display = 'inline';
-    document.getElementById("iimg").src= {{MEDIA_URL}}+irp;
+    if (irp != "") {
+        document.getElementById("iimg").style.display = 'inline';
+        document.getElementById("iimg").src= {{MEDIA_URL}}+irp;
+    }
 }
 
 function Asignaric() {
-    document.getElementById("iimg").style.display = 'inline';
-    document.getElementById("iimg").src= {{MEDIA_URL}}+irc;
+    if (irc != "") {
+        document.getElementById("iimg").style.display = 'inline';
+        document.getElementById("iimg").src= {{MEDIA_URL}}+irc;
+    }
 }
 
 function Asignartp() {
+    if (trp != "") {
     document.getElementById("timg").style.display = 'inline';
     document.getElementById("timg").src= {{MEDIA_URL}}+trp;
+    }
 }
 
 function Asignartc() {
-    document.getElementById("timg").style.display = 'inline';
-    document.getElementById("timg").src= {{MEDIA_URL}}+trc;
+    if (trc != "") {
+        document.getElementById("timg").style.display = 'inline';
+        document.getElementById("timg").src= {{MEDIA_URL}}+trc;
+    }
 }
 function Asignarsp() {
-    document.getElementById("simg").style.display = 'inline';
-    document.getElementById("simg").src= {{MEDIA_URL}}+srp;
+    if (srp != "") {
+        document.getElementById("simg").style.display = 'inline';
+        document.getElementById("simg").src= {{MEDIA_URL}}+srp;
+    }
 }
 function Asignarsc() {
-    document.getElementById("simg").style.display = 'inline';
-    document.getElementById("simg").src= {{MEDIA_URL}}+src;
+    if (src != "") {
+        document.getElementById("simg").style.display = 'inline';
+        document.getElementById("simg").src= {{MEDIA_URL}}+src;
+    }
 }
 
 $(document).ready(function() {
@@ -219,6 +231,51 @@ $(this).val('');
 });
 });
 
+$(function() {
+        $( "#id_ifecha" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onSelect: function( selected) {
+            var fechaParse = new Date($("id_ifecha").val())
+            fechaParse.setDate(fechaParse.getDate() + 2);
+        }
+        });
+
+    });
+
+  $(function() {
+        $( "#id_tfecha" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onSelect: function( selected) {
+            var fechaParse = new Date($("id_tfecha").val())
+            fechaParse.setDate(fechaParse.getDate() + 2);
+        }
+        });
+
+    });
+
+  $(function() {
+        $( "#id_sfecha" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onSelect: function( selected) {
+            var fechaParse = new Date($("id_sfecha").val())
+            fechaParse.setDate(fechaParse.getDate() + 2);
+        }
+        });
+
+    });
+
+username = "{{ request.user.username }}";
+$("#id_user").val( username );
+
 </script>
 
 {% endblock %}
@@ -257,6 +314,8 @@ $(this).val('');
 
 <br><br><br><br><br><br><br><br>
 
+{{form.user}}
+
 <div id="ir" class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">Fotos Radiográficas</h4>
@@ -281,12 +340,12 @@ $(this).val('');
         <div class="col-md-2">
             <div class="form-group">
                 <br>
-                <img id="ip" src=" {% static 'images/ver.png' %}">
+                <img id="ip">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_ipano" src=" {% static 'images/print.png' %}" onclick="redireccionar_ipano();">
                 <br>
                 <br>
                 <br>
-                <img id="ic" src=" {% static 'images/ver.png' %}">
+                <img id="ic">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_icefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_icefa();">  
                 <br>   
             </div>
@@ -323,12 +382,12 @@ $(this).val('');
         <div class="col-md-2">
             <div class="form-group">
                 <br>
-                <img id="tp" src=" {% static 'images/ver.png' %}">
+                <img id="tp">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_tpano" src=" {% static 'images/print.png' %}" onclick="redireccionar_tpano();">
                 <br>
                 <br>
                 <br>
-                <img id="tc" src=" {% static 'images/ver.png' %}">
+                <img id= "tc">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_tcefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_tcefa();"> 
                 <br>   
             </div>            
@@ -365,12 +424,12 @@ $(this).val('');
         <div class="col-md-2">
             <div class="form-group">
                 <br>
-                <img id="sp" src=" {% static 'images/ver.png' %}">
+                <img id="sp">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_spano" src=" {% static 'images/print.png' %}" onclick="redireccionar_spano();">
                 <br>
                 <br>
                 <br>
-                <img id="sc" src=" {% static 'images/ver.png' %}">
+                <img id="sc">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_scefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_scefa();">
                 <br>   
             </div>            
@@ -388,7 +447,7 @@ $(this).val('');
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/paciente/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>

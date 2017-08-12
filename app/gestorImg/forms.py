@@ -3,6 +3,7 @@
 from django import forms
 from app.gestorImg.models import *
 from django.forms.widgets import FileInput
+from datetime import datetime
 
 class PacienteForm(forms.ModelForm):
 	class Meta:
@@ -17,6 +18,7 @@ class PacienteForm(forms.ModelForm):
 		'lizquierdo',
 		'lderecho',
 		'frontal',
+		'userone',
 		]
 
 		labels = {
@@ -29,6 +31,7 @@ class PacienteForm(forms.ModelForm):
 		'lizquierdo': 'Lateral Izquierdo',
 		'lderecho': 'Lateral Derecho',
 		'frontal': 'Frontal',
+		'userone': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -41,6 +44,7 @@ class PacienteForm(forms.ModelForm):
 			'lizquierdo':forms.FileInput(attrs={'class':'form-control'}),
 			'lderecho':forms.FileInput(attrs={'class':'form-control'}),
 			'frontal':forms.FileInput(attrs={'class':'form-control'}),
+			'userone':forms.HiddenInput(attrs={'class':'form-control'}),
 		}
 
 class PacienteForm_consultar(forms.ModelForm):
@@ -56,6 +60,7 @@ class PacienteForm_consultar(forms.ModelForm):
 		'lizquierdo',
 		'lderecho',
 		'frontal',
+		'userone',
 		]
 
 		labels = {
@@ -68,6 +73,7 @@ class PacienteForm_consultar(forms.ModelForm):
 		'lizquierdo': 'Lateral Izquierdo',
 		'lderecho': 'Lateral Derecho',
 		'frontal': 'Frontal',
+		'userone': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -80,6 +86,7 @@ class PacienteForm_consultar(forms.ModelForm):
 			'lizquierdo':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'lderecho':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'frontal':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'userone':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}
 
 class PacienteForm2(forms.ModelForm):
@@ -95,6 +102,7 @@ class PacienteForm2(forms.ModelForm):
 		'lizquierdo2',
 		'lderecho2',
 		'frontal2',
+		'usertwo',
 		]
 
 		labels = {
@@ -107,6 +115,7 @@ class PacienteForm2(forms.ModelForm):
 		'lizquierdo2': 'Lateral Izquierdo',
 		'lderecho2': 'Lateral Derecho',
 		'frontal2': 'Frontal',
+		'usertwo': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -119,6 +128,7 @@ class PacienteForm2(forms.ModelForm):
 			'lizquierdo2':forms.FileInput(attrs={'class':'form-control'}),
 			'lderecho2':forms.FileInput(attrs={'class':'form-control'}),
 			'frontal2':forms.FileInput(attrs={'class':'form-control'}),
+			'usertwo':forms.HiddenInput(attrs={'class':'form-control'}),
 		}
 
 class PacienteForm_consultar2(forms.ModelForm):
@@ -134,6 +144,7 @@ class PacienteForm_consultar2(forms.ModelForm):
 		'lizquierdo2',
 		'lderecho2',
 		'frontal2',
+		'usertwo',
 		]
 
 		labels = {
@@ -146,6 +157,7 @@ class PacienteForm_consultar2(forms.ModelForm):
 		'lizquierdo2': 'Lateral Izquierdo',
 		'lderecho2': 'Lateral Derecho',
 		'frontal2': 'Frontal',
+		'usertwo': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -158,6 +170,7 @@ class PacienteForm_consultar2(forms.ModelForm):
 			'lizquierdo2':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'lderecho2':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'frontal2':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'usertwo':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}
 
 class RadiograficasForm(forms.ModelForm):
@@ -167,30 +180,42 @@ class RadiograficasForm(forms.ModelForm):
 		fields = ['fichas', 
 		'ipano', 
 		'icefa',
+		'ifecha',
 		'tpano',
 		'tcefa',
+		'tfecha',
 		'spano',
 		'scefa',
+		'sfecha',
+		'user',
 		]
 
 		labels = {
 		'fichas': 'Número de Ficha', 
 		'ipano': 'Radiografía Panorámica',
 		'icefa': 'Radiografía Cefalométrica',
+		'ifecha': 'Fecha de Radiografía',
 		'tpano': 'Radiografía Panorámica',
 		'tcefa': 'Radiografía Cefalométrica',
+		'tfecha': 'Fecha de Radiografía',
 		'spano': 'Radiografía Panorámica',
 		'scefa': 'Radiografía Cefalométrica',
+		'sfecha': 'Fecha de Radiografía',
+		'user': 'Nombre de usuario',
 		}
 
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control'}),
 			'ipano':forms.FileInput(attrs={'class':'form-control'}),
 			'icefa':forms.FileInput(attrs={'class':'form-control'}),
+			'ifecha':forms.DateInput(format='%d/%m/%Y', attrs={'class':'form-control','readonly':True}),
 			'tpano':forms.FileInput(attrs={'class':'form-control'}),
 			'tcefa':forms.FileInput(attrs={'class':'form-control'}),
+			'tfecha':forms.DateInput(format='%d/%m/%Y', attrs={'class':'form-control','readonly':True}),
 			'spano':forms.FileInput(attrs={'class':'form-control'}),
 			'scefa':forms.FileInput(attrs={'class':'form-control'}),
+			'sfecha':forms.DateInput(format='%d/%m/%Y', attrs={'class':'form-control','readonly':True}),
+			'user':forms.HiddenInput(attrs={'class':'form-control'}),
 		}
 
 class RadiograficasForm_consultar(forms.ModelForm):
@@ -200,30 +225,42 @@ class RadiograficasForm_consultar(forms.ModelForm):
 		fields = ['fichas', 
 		'ipano', 
 		'icefa',
+		'ifecha',
 		'tpano',
 		'tcefa',
+		'tfecha',
 		'spano',
 		'scefa',
+		'sfecha',
+		'user',
 		]
 
 		labels = {
 		'fichas': 'Número de Ficha', 
 		'ipano': 'Radiografía Panorámica',
 		'icefa': 'Radiografía Cefalométrica',
+		'ifecha': 'Fecha de Radiografía',
 		'tpano': 'Radiografía Panorámica',
 		'tcefa': 'Radiografía Cefalométrica',
+		'tfecha': 'Fecha de Radiografía',
 		'spano': 'Radiografía Panorámica',
 		'scefa': 'Radiografía Cefalométrica',
+		'sfecha': 'Fecha de Radiografía',
+		'user': 'Nombre de usuario',
 		}
 
 		widgets = {
 			'fichas':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'ipano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'icefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'ifecha':forms.DateInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'tpano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'tcefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'tfecha':forms.DateInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'spano':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'scefa':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'sfecha':forms.DateInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'user':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}
 
 class ModeloForm(forms.ModelForm):
@@ -236,6 +273,7 @@ class ModeloForm(forms.ModelForm):
 		'lizqm',
 		'frontm',
 		'lderm',
+		'userm',
 		]
 
 		labels = {
@@ -245,6 +283,7 @@ class ModeloForm(forms.ModelForm):
 		'lizqm': 'Lateral Izquierdo',
 		'frontm': 'Frontal',
 		'lderm': 'Lateral Derecho',
+		'userm': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -254,6 +293,7 @@ class ModeloForm(forms.ModelForm):
 			'lizqm':forms.FileInput(attrs={'class':'form-control'}),
 			'frontm':forms.FileInput(attrs={'class':'form-control'}),
 			'lderm':forms.FileInput(attrs={'class':'form-control'}),
+			'userm':forms.HiddenInput(attrs={'class':'form-control'}),
 		}
 
 class ModeloForm_consultar(forms.ModelForm):
@@ -266,6 +306,7 @@ class ModeloForm_consultar(forms.ModelForm):
 		'lizqm',
 		'frontm',
 		'lderm',
+		'userm',
 		]
 
 		labels = {
@@ -275,6 +316,7 @@ class ModeloForm_consultar(forms.ModelForm):
 		'lizqm': 'Lateral Izquierdo',
 		'frontm': 'Frontal',
 		'lderm': 'Lateral Derecho',
+		'userm': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -284,6 +326,7 @@ class ModeloForm_consultar(forms.ModelForm):
 			'lizqm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'frontm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'lderm':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'userm':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}
 
 class AparatoForm(forms.ModelForm):
@@ -294,6 +337,7 @@ class AparatoForm(forms.ModelForm):
 		'aparatof',
 		'aparatol',
 		'aparato',
+		'usera',
 		]
 
 		labels = {
@@ -301,6 +345,7 @@ class AparatoForm(forms.ModelForm):
 		'aparatof': 'Aparato Frontal',
 		'aparatol': 'Aparato Lateral',
 		'aparato': 'Aparato',
+		'usera': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -308,6 +353,7 @@ class AparatoForm(forms.ModelForm):
 			'aparatof':forms.FileInput(attrs={'class':'form-control'}),
 			'aparatol':forms.FileInput(attrs={'class':'form-control'}),
 			'aparato':forms.FileInput(attrs={'class':'form-control'}),
+			'usera':forms.HiddenInput(attrs={'class':'form-control'}),
 		}
 
 class AparatoForm_consultar(forms.ModelForm):
@@ -318,6 +364,7 @@ class AparatoForm_consultar(forms.ModelForm):
 		'aparatof',
 		'aparatol',
 		'aparato',
+		'usera',
 		]
 
 		labels = {
@@ -325,6 +372,7 @@ class AparatoForm_consultar(forms.ModelForm):
 		'aparatof': 'Aparato Frontal',
 		'aparatol': 'Aparato Lateral',
 		'aparato': 'Aparato',
+		'usera': 'Nombre de usuario',
 		}
 
 		widgets = {
@@ -332,4 +380,5 @@ class AparatoForm_consultar(forms.ModelForm):
 			'aparatof':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'aparatol':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 			'aparato':forms.FileInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
+			'usera':forms.HiddenInput(attrs={'class':'form-control','disabled':True,'readonly':True}),
 		}

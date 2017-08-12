@@ -1,4 +1,4 @@
-{% extends 'base/base_editar.html' %}
+{% extends 'base/base_img_editar.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -45,13 +45,25 @@ $(document).ready(function(){
                 img = data[i].fields.aparato;
                 
                 if (imgf != "") {
-                document.getElementById("c1").style.display = 'inline';
+                    document.getElementById("c1").style.display = 'inline';
+                    document.getElementById("a1").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("a1").src="{% static 'images/nover.png' %}";
                 }
                 if (imgl != "") {
-                document.getElementById("c2").style.display = 'inline';
+                    document.getElementById("c2").style.display = 'inline';
+                    document.getElementById("a2").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("a2").src="{% static 'images/nover.png' %}";
                 }
                 if (img != "") {
-                document.getElementById("c3").style.display = 'inline';
+                    document.getElementById("c3").style.display = 'inline';
+                    document.getElementById("a3").src="{% static 'images/ver.png' %}";
+                }
+                else{
+                    document.getElementById("a3").src="{% static 'images/nover.png' %}";
                 }
             }
         },
@@ -64,18 +76,24 @@ document.getElementById("a2").onclick = Asignarl;
 document.getElementById("a3").onclick = Asignar;
 
 function Asignarf() {
+    if (imgf != "") {
     document.getElementById("aimg").style.display = 'inline';
     document.getElementById("aimg").src= {{MEDIA_URL}}+imgf;
+    }
 }
 
 function Asignarl() {
+    if (imgl != "") {
     document.getElementById("aimg").style.display = 'inline';
     document.getElementById("aimg").src= {{MEDIA_URL}}+imgl;
+    }
 }
 
 function Asignar() {
+    if (img != "") {
     document.getElementById("aimg").style.display = 'inline';
     document.getElementById("aimg").src= {{MEDIA_URL}}+img;
+    }
 }
 
 $(document).ready(function() {
@@ -110,6 +128,9 @@ $(this).val('');
 }
 });
 });
+
+username = "{{ request.user.username }}";
+$("#id_usera").val( username );
 </script>
 
 {% endblock %}
@@ -139,6 +160,8 @@ $(this).val('');
 
 <br><br><br><br><br><br><br><br>
 
+{{form.usera}}
+
 <div id="fp1" class="panel panel-primary">
       <div class="panel-heading"> 
       <h4 class="panel-title">Imágenes de aparato</h4>
@@ -165,18 +188,18 @@ $(this).val('');
         <div class="col-md-1">
             <div class="form-group">
                 <br>
-                <img id="a1" src=" {% static 'images/ver.png' %}">
+                <img id="a1">
                 <br>
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="a2" src=" {% static 'images/ver.png' %}">  
+                <img id="a2">  
                 <br>
                 <br>
                 <br>
                 <br>
-                <img id="a3" src=" {% static 'images/ver.png' %}"> 
+                <img id="a3"> 
                 <br>   
             </div>            
         </div> 
@@ -193,7 +216,7 @@ $(this).val('');
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/modelo/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>

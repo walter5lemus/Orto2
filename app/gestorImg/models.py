@@ -9,6 +9,11 @@ from PIL import Image
 from cStringIO import StringIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 import os
+from django.utils import timezone
+import datetime
+from django.contrib.auth.models import AbstractUser
+
+
 
 class img_paciente(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
@@ -20,6 +25,7 @@ class img_paciente(models.Model):
 	lizquierdo = models.ImageField(upload_to='paciente/lizquierdo/',blank=True,null=True)
 	lderecho = models.ImageField(upload_to='paciente/lderecho/',blank=True,null=True)
 	frontal = models.ImageField(upload_to='paciente/frontal/',blank=True,null=True)
+	userone = models.CharField(max_length=100, default='Nombre')
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -34,6 +40,7 @@ class img_paciente2(models.Model):
 	lizquierdo2 = models.ImageField(upload_to='paciente/lizquierdo/',blank=True,null=True)
 	lderecho2 = models.ImageField(upload_to='paciente/lderecho/',blank=True,null=True)
 	frontal2 = models.ImageField(upload_to='paciente/frontal/',blank=True,null=True)
+	usertwo = models.CharField(max_length=100, default='Nombre')
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -42,10 +49,15 @@ class img_radiograficas(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
 	ipano = models.ImageField(upload_to='radiograficas/inicial/',blank=True,null=True)
 	icefa = models.ImageField(upload_to='radiograficas/inicial/',blank=True,null=True)
+	ifecha = models.DateField(blank=True,null=True)
 	tpano = models.ImageField(upload_to='radiograficas/trazados/',blank=True,null=True)
 	tcefa = models.ImageField(upload_to='radiograficas/trazados/',blank=True,null=True)
+	tfecha = models.DateField(blank=True,null=True)
 	spano = models.ImageField(upload_to='radiograficas/seguimiento/',blank=True,null=True)
 	scefa = models.ImageField(upload_to='radiograficas/seguimiento/',blank=True,null=True)
+	sfecha = models.DateField(blank=True,null=True)
+	user = models.CharField(max_length=100, default='Nombre')
+
 	
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -57,6 +69,7 @@ class img_modelo(models.Model):
 	lizqm = models.ImageField(upload_to='modelo/lizquierdo/',blank=True,null=True)
 	frontm = models.ImageField(upload_to='modelo/frontal/',blank=True,null=True)
 	lderm = models.ImageField(upload_to='modelo/lderecho/',blank=True,null=True)
+	userm = models.CharField(max_length=100, default='Nombre')
 	
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -66,6 +79,7 @@ class img_aparato(models.Model):
 	aparatof = models.ImageField(upload_to='aparato/frontal/',blank=True,null=True)
 	aparatol= models.ImageField(upload_to='aparato/lateral/',blank=True,null=True)
 	aparato = models.ImageField(upload_to='aparato/arriba/',blank=True,null=True)
+	usera = models.CharField(max_length=100, default='Nombre')
 
 	def __str__(self):
 		return '{}'.format(self.fichas)

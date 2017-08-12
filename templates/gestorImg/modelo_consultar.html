@@ -1,4 +1,4 @@
-{% extends 'base/base_consultar.html' %}
+{% extends 'base/base_img_consultar.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -10,7 +10,6 @@
     .divOcultar{
     display: none;
     }
-
 </style>
 {% endblock %}
 
@@ -33,12 +32,9 @@
 <script type="text/javascript">
     $('#codigo').val("{{codi}}");
     $('#ficha').val("{{num}}");  
-
 $(document).ready(function(){
-
     var codigo = $('#codigo').val();
     var numero = $('#ficha').val();
-
     $.ajax({
         data : {'codigo':codigo,'numero':numero},
         url : '/gestor_img/modelo/mostrarm/',
@@ -50,7 +46,6 @@ $(document).ready(function(){
                 var lim = data[i].fields.lizqm;
                 var fm = data[i].fields.frontm;
                 var ldm = data[i].fields.lderm;
-
                 if (osm != '') {
                     if (oim != '') {
                         if (lim != '') {
@@ -64,7 +59,6 @@ $(document).ready(function(){
                         }
                     }
                 }                
-
                 document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
                 document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
                 document.getElementById("imgli").src = {{MEDIA_URL}} + lim;
@@ -75,6 +69,8 @@ $(document).ready(function(){
     });
 });
 
+username = "{{ request.user.username }}";
+$("#id_userm").val( username );
 </script>
 
 {% endblock %}
@@ -103,6 +99,8 @@ $(document).ready(function(){
     </div>
 
 <br><br><br><br><br><br><br><br>
+
+{{form.userm}}
 
 <div class="panel panel-success">
       <div class="panel-heading"> 
@@ -175,7 +173,7 @@ $(document).ready(function(){
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-3 col-md-offset-2">
-              <a href="/aspectos/mordidas/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/radiograficas/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
             </div>
             <div class="col-md-3 col-md-offset-2">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
