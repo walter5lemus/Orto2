@@ -15,6 +15,7 @@ Aspectos de dentición - Parte 2
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
+    var guardar;
     cuadran = 1;
     del = 1;
         //Ocultar parte odontograma
@@ -396,33 +397,37 @@ Aspectos de dentición - Parte 2
             cuadrante = iden[1] 
             pieza = iden[2]
 
+            diente = cuadrante + pieza;
+
             b = document.getElementById("id_"+nombre+"-TOTAL_FORMS").value;
             b1 = b - 1
 
-            c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-            p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;            
+            cuadrante1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+            pieza1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;            
 
-            diente1 = c + p;
+            diente1 = cuadrante1 + pieza1;
 
             c = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
             p = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value; 
             
-            diente2 = c + p;
+            diente2 = c + p;           
 
-            if(cuadran == 1)
+            if(diente != diente1 && diente != diente2)
             {
-                cuadran = 2
-                
-                if(diente1!='')
+                if(cuadran == 1)
                 {
-                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
-                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
-                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
-                }
+                    cuadran = 2
+                    
+                    if(diente1!='')
+                    {
+                        c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_uno").value;
+                        p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_uno").value;
+                        $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                        $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                        $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                        $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                        $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                    }
 
                     $("#id_"+nombre+"-"+b1+"-cuad_uno").val( cuadrante );
                     $("#id_"+nombre+"-"+b1+"-pieza_uno").val( pieza );  
@@ -433,33 +438,114 @@ Aspectos de dentición - Parte 2
                     $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
                     $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
                     $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
-                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);  
+                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color); 
+
+                    //Despitando pieza 2 al seleccionar de nuevo la pieza 1
+                    c2 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                    p2 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                    $('g#P'+ c2 + p2 + ' polygon#T').attr('fill', 'white');
+                    $('g#P'+ c2 + p2 + ' polygon#B').attr('fill', 'white');
+                    $('g#P'+ c2 + p2 + ' polygon#R').attr('fill', 'white');
+                    $('g#P'+ c2 + p2 + ' polygon#L').attr('fill', 'white');
+                    $('g#P'+ c2 + p2 + ' polygon#C').attr('fill', 'white');       
+
+                    $("#id_"+nombre+"-"+b1+"-cuad_dos").val( '' );
+                    $("#id_"+nombre+"-"+b1+"-pieza_dos").val( '' );                
+                }
+                else
+                {
+                    switch (cuadrante1)
+                    {
+                       case '1': 
+                            if(cuadrante == 1 || cuadrante == 2)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break;
+                    
+                       case '2': 
+                            if(cuadrante == 1 || cuadrante == 2)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break;
+
+                       case '3': 
+                            if(cuadrante == 3 || cuadrante == 4)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break; 
+
+                       case '4': 
+                            if(cuadrante == 3 || cuadrante == 4)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break;   
+
+                       case '5': 
+                            if(cuadrante == 5 || cuadrante == 6)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break; 
+
+                       case '6': 
+                            if(cuadrante == 5 || cuadrante == 6)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break;   
+
+                       case '7': 
+                            if(cuadrante == 7 || cuadrante == 8)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break; 
+
+                       case '8': 
+                            if(cuadrante == 7 || cuadrante == 8)
+                                guardar = 1;
+                            else 
+                                guardar = 0;
+                       break;                                                                      
+                    } 
+
+                    if(guardar == 1)
+                    {
+                        cuadran = 1
+
+                        if(diente2!='')
+                        {
+                            c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                            p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                            $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
+                            $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
+                            $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
+                            $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
+                            $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
+                        }
+
+                        $("#id_"+nombre+"-"+b1+"-cuad_dos").val( cuadrante );
+                        $("#id_"+nombre+"-"+b1+"-pieza_dos").val( pieza );  
+
+                        c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
+                        p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
+                        $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
+                        $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
+                        $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
+                        $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
+                        $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);                        
+                    }
+                    else
+                        alert("Cuadrante invalido seleccione otra pieza.");
+                }        
             }
             else
             {
-                cuadran = 1
-
-                if(diente2!='')
-                {
-                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
-                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
-                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', "white");
-                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', "white");      
-                }
-
-                    $("#id_"+nombre+"-"+b1+"-cuad_dos").val( cuadrante );
-                    $("#id_"+nombre+"-"+b1+"-pieza_dos").val( pieza );  
-
-                    c1 = document.getElementById("id_"+nombre+"-"+b1+"-cuad_dos").value;
-                    p1 = document.getElementById("id_"+nombre+"-"+b1+"-pieza_dos").value;
-                    $('g#P'+ c1 + p1 + ' polygon#T').attr('fill', color);
-                    $('g#P'+ c1 + p1 + ' polygon#B').attr('fill', color);
-                    $('g#P'+ c1 + p1 + ' polygon#R').attr('fill', color);
-                    $('g#P'+ c1 + p1 + ' polygon#L').attr('fill', color);
-                    $('g#P'+ c1 + p1 + ' polygon#C').attr('fill', color);
+                alert("Esta pieza ya se ha seleccionada en esta fila.");
             }              
 
         });
