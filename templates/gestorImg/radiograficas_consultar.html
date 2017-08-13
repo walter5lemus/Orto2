@@ -73,6 +73,34 @@ $(document).ready(function(){
                 srp = data[i].fields.spano;
                 src = data[i].fields.scefa;
 
+
+                if ("{{user}}"=="{{usuario_creador}}") {
+                    if (irp!='') {
+                        $("#print_ipano").removeClass('botonprint');
+                    }
+
+                    if (irc!='') {
+                        $("#print_icefa").removeClass('botonprint');
+                    }
+
+                    if (trp!='') {
+                        $("#print_tpano").removeClass('botonprint');
+                    }
+
+                    if (trc!='') {
+                        $("#print_tcefa").removeClass('botonprint');
+                    }
+
+                    if (srp!='') {
+                        $("#print_spano").removeClass('botonprint');
+                    }
+
+                    if (src!='') {
+                        $("#print_scefa").removeClass('botonprint');
+                    }
+                }
+
+
                 if (irp != "") {
                     document.getElementById("c1").style.display = 'inline';
                     document.getElementById("ip").src="{% static 'images/ver.png' %}";

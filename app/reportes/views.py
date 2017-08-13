@@ -369,7 +369,7 @@ class ReporteImagenes(View):
         pdf.drawString(275, 290, 'PACIENTE: '+datos.nombre_completo)
         pdf.drawString(275, 270, 'EDAD: '+str(datos.edad)+' años')
         pdf.drawString(275, 250, 'FECHA DE NACIMIENTO: '+"{:%d-%B-%Y}".format(datos.fecha_nac))
-        pdf.drawString(275, 230, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(275, 230, 'ESTUDIANTE: '+imagen_paciente.userone)
 
         oinferior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinferior)
         pdf.drawImage(oinferior, 550, 215, 225, 150)
@@ -426,7 +426,7 @@ class ReporteImagenes2(View):
             return render(request, 'base/error_no_encontrado_imagenes.html', {'nombreUser':nombreUser})
             
 
-    def cuerpo(self,pdf,codigo,numero,nombre_usuario):
+    def cuerpo(self,pdf,codigo,numero):
         datos =datos_generales.objects.get(cod_expediente=codigo)
         ids = fichas.objects.get(cod_expediente_id=codigo,numero=numero)
         imagen_paciente = img_paciente2.objects.get(fichas_id=ids.id)
@@ -454,7 +454,7 @@ class ReporteImagenes2(View):
         pdf.drawString(275, 290, 'PACIENTE: '+datos.nombre_completo)
         pdf.drawString(275, 270, 'EDAD: '+str(datos.edad)+' años')
         pdf.drawString(275, 250, 'FECHA DE NACIMIENTO: '+"{:%d-%B-%Y}".format(datos.fecha_nac))
-        pdf.drawString(275, 230, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(275, 230, 'ESTUDIANTE: '+imagen_paciente.usertwo)
 
         oinferior =  settings.MEDIA_ROOT+'/'+str(imagen_paciente.oinferior2)
         pdf.drawImage(oinferior, 550, 215, 225, 150)
@@ -540,7 +540,7 @@ class ReporteImagenes_Modelo(View):
         pdf.drawString(535, 120, 'PACIENTE: '+datos.nombre_completo)
         pdf.drawString(535, 100, 'EDAD: '+str(datos.edad)+' años')
         pdf.drawString(535, 80, 'FECHA DE REGISTRO: '+"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
-        pdf.drawString(535, 60, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(535, 60, 'ESTUDIANTE: '+imagen_paciente.userm)
 
 class ReporteImagenes_Radiograficas_panoramica_inicial(View):
 
@@ -592,9 +592,9 @@ class ReporteImagenes_Radiograficas_panoramica_inicial(View):
 
         pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
         pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
-        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: '+str(imagen_paciente.ifecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(225, 530, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
@@ -650,9 +650,9 @@ class ReporteImagenes_Radiograficas_panoramica_trazados(View):
 
         pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
         pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
-        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: '+str(imagen_paciente.tfecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(225, 530, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
@@ -707,9 +707,9 @@ class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
 
         pdf.drawString(25, 570, 'EXPEDIENTE: '+datos.cod_expediente+'  FICHA: '+numero)
         pdf.drawString(225, 570, 'PACIENTE: '+datos.nombre_completo)
-        pdf.drawString(500, 570, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(500, 570, 'FECHA DE REGISTRO: '+str(imagen_paciente.sfecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         pdf.drawString(25, 530, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 530, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(225, 530, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 715, 520, 60, 60)
@@ -766,9 +766,9 @@ class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
         pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
 
         pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: '+str(imagen_paciente.ifecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         
-        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(25, 710, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 500, 730, 75, 75)
@@ -825,9 +825,9 @@ class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
         pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
 
         pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: '+str(imagen_paciente.tfecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         
-        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(25, 710, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 500, 730, 75, 75)
@@ -884,9 +884,9 @@ class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
         pdf.drawString(225, 790, 'PACIENTE: '+datos.nombre_completo)
 
         pdf.drawString(25, 750, 'EDAD: '+str(datos.edad)+' años')
-        pdf.drawString(225, 750, 'FECHA DE REGISTRO: SE ARREGLARA DESPUES')#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
+        pdf.drawString(225, 750, 'FECHA DE REGISTRO: '+str(imagen_paciente.sfecha))#"{:%d-%B-%Y}".format(datos.fecha_hora_creacion))
         
-        pdf.drawString(25, 710, 'ESTUDIANTE: AGREGAR NOMBRE DE QUIEN LA SUBIO')
+        pdf.drawString(25, 710, 'ESTUDIANTE: '+imagen_paciente.user)
 
         logo_odontologia = settings.MEDIA_ROOT+'/imagenes/logo3.jpg'
         pdf.drawImage(logo_odontologia, 500, 730, 75, 75)
