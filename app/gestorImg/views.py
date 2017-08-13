@@ -108,10 +108,7 @@ def img_paciente_consultar(request,codi,num):
 			return render(request, 'gestorImg/paciente_consultar.html', {'form':form,'form2':form2,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
-			else:
-				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 
 class MostrarPaciente(TemplateView):
@@ -210,10 +207,7 @@ def img_radiograficas_consultar(request,codi,num):
 			return render(request, 'gestorImg/radiograficas_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
-			else:
-				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 class MostrarRadiograficas(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -296,10 +290,7 @@ def img_modelo_consultar(request,codi,num):
 			return render(request, 'gestorImg/modelo_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
-			else:
-				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 class MostrarModelo(TemplateView):
 	def get(self,request,*args,**kwargs):
@@ -382,10 +373,7 @@ def img_aparato_consultar(request,codi,num):
 			return render(request, 'gestorImg/aparato_consultar.html', {'form':form,'codi':codi,'num':num,'usuario_creador':ids.usuario_creador.username, 'nombreUser':nombreUser})
 		return HttpResponse("No se encontro el Codigo de Expediente y el numero de la ficha")
 	except Exception, e:
-			if int(num)>1:
-				return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
-			else:
-				return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
+			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})	
 
 class MostrarAparato(TemplateView):
 	def get(self,request,*args,**kwargs):
