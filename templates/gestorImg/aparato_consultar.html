@@ -129,7 +129,7 @@ $(this).val('');
 });
 });
 
-username = "{{ request.user.username }}";
+username = "{{ request.user.first_name }} {{ request.user.last_name }}";
 $("#id_usera").val( username );
 </script>
 

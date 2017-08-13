@@ -57,11 +57,36 @@ $(document).ready(function(){
                         }
                     }
                 }
-                document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
-                document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
-                document.getElementById("imgli").src = {{MEDIA_URL}} + lim;
-                document.getElementById("imgf").src = {{MEDIA_URL}} + fm;
-                document.getElementById("imgld").src = {{MEDIA_URL}} + ldm;
+                if (osm != "") {
+                    document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
+                }
+                else{
+                    document.getElementById("imgos").src="{% static 'images/noimg.png' %}";
+                }
+                if (oim != "") {
+                    document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
+                }
+                else{
+                    document.getElementById("imgoi").src="{% static 'images/noimg.png' %}";
+                }
+                if (lim != "") {
+                    document.getElementById("imgli").src = {{MEDIA_URL}} + lim;
+                }
+                else{
+                    document.getElementById("imgli").src="{% static 'images/noimg.png' %}";
+                }
+                if (fm != "") {
+                    document.getElementById("imgf").src = {{MEDIA_URL}} + fm;
+                }
+                else{
+                    document.getElementById("imgf").src="{% static 'images/noimg.png' %}";
+                }
+                if (ldm != "") {
+                    document.getElementById("imgld").src = {{MEDIA_URL}} + ldm;
+                }
+                else{
+                    document.getElementById("imgld").src="{% static 'images/noimg.png' %}";
+                }
             }
         },
     });
@@ -114,7 +139,7 @@ $(this).val('');
 });
 });
 
-username = "{{ request.user.username }}";
+username = "{{ request.user.first_name }} {{ request.user.last_name }}";
 $("#id_userm").val( username );
 </script>
 

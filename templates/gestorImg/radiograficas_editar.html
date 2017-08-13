@@ -298,7 +298,7 @@ $(this).val('');
 
     });
 
-username = "{{ request.user.username }}";
+username = "{{ request.user.first_name }} {{ request.user.last_name }}";
 $("#id_user").val( username );
 
 </script>
@@ -360,7 +360,9 @@ $("#id_user").val( username );
                 <label for="{{form.icefa.name}}">{{form.icefa.label}}</label> 
                 {{form.icefa}}
                 <p id="c2" style="display:none;color:green;">Este campo ya posee una imagen</p>
-                <br>   
+                <br> 
+                <label for="{{form.ifecha.name}}">{{form.ifecha.label}}</label> 
+                {{form.ifecha}}
             </div>            
         </div>
         <div class="col-md-2">
@@ -401,7 +403,9 @@ $("#id_user").val( username );
                 <label for="{{form.tcefa.name}}">{{form.tcefa.label}}</label> 
                 {{form.tcefa}}
                 <p id="c4" style="display:none;color:green;">Este campo ya posee una imagen</p>
-                <br>   
+                <br>
+                <label for="{{form.tfecha.name}}">{{form.tfecha.label}}</label> 
+                {{form.tfecha}}  
             </div>            
         </div>
         <div class="col-md-2">
@@ -443,7 +447,9 @@ $("#id_user").val( username );
                 <label for="{{form.scefa.name}}">{{form.scefa.label}}</label> 
                 {{form.scefa}}
                 <p id="c6" style="display:none;color:green;">Este campo ya posee una imagen</p>
-                <br>   
+                <br>
+                <label for="{{form.sfecha.name}}">{{form.sfecha.label}}</label> 
+                {{form.sfecha}}
             </div>            
         </div>
         <div class="col-md-2">

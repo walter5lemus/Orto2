@@ -38,16 +38,18 @@ $(document).ready(function(){
     });
 });
 
-var nW,nH,oH,oW;
-  function zoomToggle(iWideSmall,iHighSmall,iWideLarge,iHighLarge,whichImage){
-    oW=whichImage.style.width;oH=whichImage.style.height;
-    if((oW==iWideLarge)||(oH==iHighLarge)){
-      nW=iWideSmall;nH=iHighSmall;
-    }else{
-      nW=iWideLarge;nH=iHighLarge;
-    }
-    whichImage.style.width=nW;whichImage.style.height=nH;
-  }
+$(document).ready(function() {
+
+$("#id_imagen").bind('change', function(){
+//Tamañoen bytes (2.0 Mb)
+if (this.files[0].size >= 2097152) {
+var tamanio = this.files[0].size/1048576;
+tamanio = tamanio.toFixed(2);
+alert('ATENCIÓN:\n\nSu archivo pesa '+(tamanio)+' Mb y supera el límite permito de 2.0 Mb.');
+$(this).val('');
+}
+});
+});
 </script>
 
 {% endblock %}
@@ -165,13 +167,13 @@ var nW,nH,oH,oW;
 
 <br>
 
-<div class="panel panel-success">
+<div class="panel panel-primary">
       <div class="panel-heading"> 
        <h4 class="panel-title">AFMP</h4>
       </div>
     
      <div class="panel-body">
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
                 <label for="{{form3.nombreimagen.name}}">{{form3.nombreimagen.label}}</label>   
                 {{form3.nombreimagen}}
@@ -180,14 +182,13 @@ var nW,nH,oH,oW;
                 {{form3.imagen}}
             </div>
         </div>
-        <div class="col-md-4 col-md-offset-1">
+        <div class="col-md-5 col-md-offset-1">
             <div class="form-group">
-                <img id="simg" width="300" height="300" style='display:none;' onclick="zoomToggle('300px','300px','100%','100%',this);"/>
+                <img id="simg" width="350" height="400" style='display:none;'/>
             </div>
         </div>
     </div>
 </div>
-
 
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">

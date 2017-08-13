@@ -630,10 +630,10 @@ $(this).val('');
 });
 });
 
-usernameone = "{{ request.user.username }}";
+usernameone = "{{ request.user.first_name }} {{ request.user.last_name }}";
 $("#id_userone").val( usernameone );
 
-usernametwo = "{{ request.user.username }}";
+usernametwo = "{{ request.user.first_name }} {{ request.user.last_name }}";
 $("#id_usertwo").val( usernametwo );
 </script>
 
