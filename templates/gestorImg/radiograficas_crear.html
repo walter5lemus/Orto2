@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Fotos radiográficas
+    Imágenes Radiográficas
 {% endblock %}
 
 {% block header %}
@@ -18,6 +18,12 @@
 
   <div class="social">
     <ul>
+
+      <li>
+        <a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}">
+        <img class="icon-expediente" src="/media/imagenes/Menu/windows.png"></a>
+      </li>
+
       <li>
         <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
@@ -310,7 +316,8 @@ $("#id_user").val( username );
 
     {{form.fichas}}
 
-    <h1> <center> Fotos radiográficas </center></h1>
+    <br>
+    <h1><center> Imagenes Radiográficas </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
@@ -342,9 +349,7 @@ $("#id_user").val( username );
 
 <div id="ir" class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control inicial</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control inicial</b></h4>
       </div>
     
      <div class="panel-body">
@@ -386,9 +391,7 @@ $("#id_user").val( username );
 
 <div id="tr" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control trazados</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control Trazados</b></h4>
       </div>
     
      <div class="panel-body">
@@ -430,9 +433,7 @@ $("#id_user").val( username );
 
 <div id="sr" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control seguimiento</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control Seguimiento</b></h4>
       </div>
     
      <div class="panel-body">
@@ -472,25 +473,30 @@ $("#id_user").val( username );
     </div>
 </div>
 
-<br>
 
+
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/gestor_img/paciente/nuevo/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/paciente/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
     </div>
+
 
 <!-- Barra de progreso -->
         <br><br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 36%;"></div>
+            <div class="progress-bar" style="width: 50%;"></div>
         </div>
         </div>
 

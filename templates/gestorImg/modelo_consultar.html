@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Fotos del modelo
+    Imágenes del modelo
 {% endblock %}
 
 {% block header %}
@@ -18,6 +18,12 @@
 
   <div class="social">
     <ul>
+
+      <li>
+        <a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}">
+        <img class="icon-expediente" src="/media/imagenes/Menu/windows.png"></a>
+      </li>
+
       <li>
         <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
@@ -63,31 +69,31 @@ $(document).ready(function(){
                     document.getElementById("imgos").src = {{MEDIA_URL}} + osm;
                 }
                 else{
-                    document.getElementById("imgos").src="{% static 'images/noimg.png' %}";
+                    document.getElementById("imgos").src="{% static 'images/imagen.png' %}";
                 }
                 if (oim != "") {
                     document.getElementById("imgoi").src = {{MEDIA_URL}} + oim;
                 }
                 else{
-                    document.getElementById("imgoi").src="{% static 'images/noimg.png' %}";
+                    document.getElementById("imgoi").src="{% static 'images/imagen.png' %}";
                 }
                 if (lim != "") {
                     document.getElementById("imgli").src = {{MEDIA_URL}} + lim;
                 }
                 else{
-                    document.getElementById("imgli").src="{% static 'images/noimg.png' %}";
+                    document.getElementById("imgli").src="{% static 'images/imagen.png' %}";
                 }
                 if (fm != "") {
                     document.getElementById("imgf").src = {{MEDIA_URL}} + fm;
                 }
                 else{
-                    document.getElementById("imgf").src="{% static 'images/noimg.png' %}";
+                    document.getElementById("imgf").src="{% static 'images/imagen.png' %}";
                 }
                 if (ldm != "") {
                     document.getElementById("imgld").src = {{MEDIA_URL}} + ldm;
                 }
                 else{
-                    document.getElementById("imgld").src="{% static 'images/noimg.png' %}";
+                    document.getElementById("imgld").src="{% static 'images/imagen.png' %}";
                 }
             }
         },
@@ -106,7 +112,8 @@ $("#id_userm").val( username );
 
     {{form.fichas}}
 
-    <h1> <center> Imagenes modelo de aparato </center></h1>
+    <br>
+    <h1><center> Imágenes Modelo de Aparato </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
@@ -120,10 +127,9 @@ $("#id_userm").val( username );
             <br>
             </div>
         </div>
-        <br>
     </div>
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 
 {{form.userm}}
 
@@ -193,27 +199,33 @@ $("#id_userm").val( username );
         </div> 
     </div>
 
-<br>
 
+
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/gestor_img/radiograficas/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
-            </div>
-            <div class="col-md-3 col-md-offset-2">
+              <a href="/gestor_img/radiograficas/consultar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
               <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
             </div>
+        
         </div>
         <br><br>
     </div>
+
 
 <!-- Barra de progreso -->
         <br><br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 36%;"></div>
+            <div class="progress-bar progress-bar-success" style="width: 75%;"></div>
         </div>
         </div>
+
 
 </form>
 

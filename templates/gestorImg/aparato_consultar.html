@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Fotos del modelo
+    Imágenes de Aparato
 {% endblock %}
 
 {% block header %}
@@ -14,6 +14,12 @@
 
   <div class="social">
     <ul>
+
+      <li>
+        <a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}">
+        <img class="icon-expediente" src="/media/imagenes/Menu/windows.png"></a>
+      </li>
+
       <li>
         <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
@@ -141,7 +147,8 @@ $("#id_usera").val( username );
 
     {{form.fichas}}
 
-    <h1> <center> Imágenes de aparato </center></h1>
+    <br>
+    <h1><center> Imágenes de Aparato </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
@@ -155,14 +162,13 @@ $("#id_usera").val( username );
             <br>
             </div>
         </div>
-        <br>
     </div>
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 
 {{form.usera}}
 
-<div id="fp1" class="panel panel-primary">
+<div id="fp1" class="panel panel-success">
       <div class="panel-heading"> 
       <h4 class="panel-title">Imágenes de aparato</h4>
       </div>
@@ -211,16 +217,19 @@ $("#id_usera").val( username );
     </div>
 </div>
 
-<br>
 
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/gestor_img/modelo/consultar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/modelo/consultar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-success btn-block">Inicio</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
     </div>
@@ -229,9 +238,8 @@ $("#id_usera").val( username );
         <br><br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 36%;"></div>
+            <div class="progress-bar progress-bar-success" style="width: 95%;"></div>
         </div>
         </div>
-
 </form>
 {% endblock %}

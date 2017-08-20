@@ -50,9 +50,8 @@ def index(request):
 			incompletos.append(-4)
 		if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-5)
-		if  registro.objects.filter(fichas_id=fi.id).exists():
-			if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
-				incompletos.append(-6)
+		if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+			incompletos.append(-6)
 		if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
 			incompletos.append(-7)				
 		if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():

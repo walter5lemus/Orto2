@@ -9,7 +9,7 @@ urlpatterns = [
 	url(r'^denticion1/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion1_consultar), name= 'denticion1_consultar'),
     url(r'^denticion1/eliminar/', login_required(EliminarAjaxView.as_view()), name='eliminar_registro'),
             
-	url(r'^denticion2/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', denticion2_view, name= 'denticion2_crear'),
+	url(r'^denticion2/nuevo/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion2_view), name= 'denticion2_crear'),
 	url(r'^denticion2/editar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion2_editar), name= 'denticion2_editar'),
 	url(r'^denticion2/consultar/(?P<codi>[0-9]{4}(.).*?((?:[a-z][a-z0-9_]*)?))/(?P<num>\d+)/$', login_required(denticion2_consultar), name= 'denticion2_consultar'),
     url(r'^denticion2/eliminar/', login_required(Eliminar2AjaxView.as_view()), name='eliminar2_registro'),

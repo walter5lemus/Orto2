@@ -62,31 +62,29 @@
     <h1><center>Análisis de Espacio de la Dentición Mixta</center></h1>
     <h2><center>Análisis de Nance</center></h2>
 
-<div class="col-md-10 col-md-offset-3">
+    <div class="col-md-10 col-md-offset-2">
         <div class="form-group">
-            <div class="col-md-4">
-            <label for="codigo">N° de Expediente </label>   
-            <input id="codigo" class="form-control" type="text" disabled="True">
-            <br>
+        <br>
+            <div class="col-md-4 col-md-offset-1">
+                <label for="codigo">N° de Expediente </label>   
+                <input id="codigo" class="form-control" type="text" disabled="True">
+                <br>
             </div>
-            <div class="col-md-4">
-            <label for="ficha">N° de Ficha</label>  
-            <input id="ficha" class="form-control" type="text" disabled="True">
-            <br>
+            
+            <div class="col-md-5">
+                <label for="ficha">N° de Ficha</label>  
+                <input id="ficha" class="form-control" type="text" disabled="True">
             </div>
             <br>
         </div>
         <br>
-</div>
-    
+    </div>
+
+
+
 
 <div class="analisis_nance">
-
-
-
-    <div class="col-md-10 col-md-offset-1">
-    <!-- <h5>Nance</h5> -->
-
+            
             <form method="POST" action="">
                 {% csrf_token %}
                  {{ formset.management_form }}      
@@ -94,7 +92,7 @@
 
 
     <br><br><br>
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-8 col-md-offset-2">
                 
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -125,20 +123,33 @@
         </div>
         <br><br>
     </div>
+    {{form1.total}}
+    {{form1.total2}}  
+ 
 
 
-    
 
-            {{form1.total}}
-            {{form1.total2}}   
-              
-    			<table id="1" cellpadding="0" cellspacing="5">
-                <div class="col-md-12 col-md-offset-0">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-1">
                     <h4 style="color: red">Si el diente <b>NO</b> es permanente, seleccione y active la pieza. Sino, ingrese el valor en el Valor x</h4>
                 </div>
+            </div>
+
+
+            <br>
+            <div class="col-md-12">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                    <h3 class="panel-title">Bloque Dental 1</h3>
+               </div>
+              <div class="panel-body">
+
+
+            <div align="center">
+                <table class="table table-striped table-hover" id="1" cellpadding="0" cellspacing="5">
                     <thead>
-                        <tr>
-                        	<th scope="col"></th>
+                        <tr class="info">
+                            <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
@@ -150,43 +161,53 @@
                     </thead>
                     <tbody>
                         {% for form in formset %}
-    			                <tr>
-    			                	<td>{{ form.id }}</td>
+                                <tr>
                                     <td>{{ form.seleccion }}</td>
-    			                    <td>{{ form.posicion }}</td>
-    			                    <td>{{ form.mdm }}</td>
-    			                    <td>{{ form.mprx }}</td>
-    			                    <td>{{ form.multiplicacion }}</td>
-    			                    <td>{{ form.mdrx }}</td>
-    			                    <td>{{ form.valor_x }}</td>
-                                    <td>{{ form.fichas }}</td> 
-                                    <td>{{ form.tabla }}</td> 
-    			                </tr>
+                                    <td>{{ form.id }}</td>
+                                    <td>{{ form.posicion }}</td>
+                                    <td>{{ form.mdm }}</td>
+                                    <td>{{ form.mprx }}</td>
+                                    <td>{{ form.multiplicacion }}</td>
+                                    <td>{{ form.mdrx }}</td>
+                                    <td>{{ form.valor_x }}</td>
+                                </tr>
                         {% endfor %}
                     </tbody>
+
                     <tfoot>
-                    <tr>
-    	                <td></td>
-    	                <td></td>
-                        <td><label style="">   TOTAL</label></td>  
-    	                <td></td>
-    	                <td></td>
+                    <tr class="info">
                         <td></td>
-                        <td><td><input id="total1" type="Number" step="0.01" class="form-control">
-                        </td>
-    	                <td></td>
+                        <td></td>
+                        <td></td>  
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><h5 align="right"><b>Total</b></h5><td>
+                        <input id="total1" type="Number" step="0.00000001" class="form-control">
                     </tr>
                     </tfoot>
-    			</table>
-                 
+                </table>
+            </div>
+            </div>
+            </div>
+
+
             
-            <br><br>     
+            <br>
+            <div class="col-md-14">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                    <h3 class="panel-title">Bloque Dental 2</h3>
+               </div>
+              <div class="panel-body">
+
             {{ formset2.management_form }}
-            <table id="2" cellpadding="0" cellspacing="5">
+            <div align="center">
+                <table class="table table-striped table-hover" id="2" cellpadding="0" cellspacing="5">
                     <thead>
-                        <tr>
+                        <tr class="info">
                             <th scope="col"></th>
-                            <th scope="col"></th>          
+                            <th scope="col"></th>
                             <th scope="col">Pieza</th>
                             <th scope="col">MdM</th>
                             <th scope="col">MpRx</th>
@@ -198,39 +219,45 @@
                     <tbody>
                         {% for form in formset2 %}
                                 <tr>
-                                    <td>{{ form.id }}</td>
                                     <td>{{ form.seleccion }}</td>
+                                    <td>{{ form.id }}</td>
                                     <td>{{ form.posicion }}</td>
                                     <td>{{ form.mdm }}</td>
                                     <td>{{ form.mprx }}</td>
                                     <td>{{ form.multiplicacion }}</td>
                                     <td>{{ form.mdrx }}</td>
                                     <td>{{ form.valor_x }}</td>
-                                    <td>{{ form.fichas }}</td> 
-                                    <td>{{ form.tabla }}</td> 
                                 </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
-                    <tr>
+                    <tr class="info">
                         <td></td>
                         <td></td>
-                        <td><label style="">TOTAL</label></td>
-                        <td></td>
-                        <td></td>
+                        <td></td>  
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><input id="total2" type="Number" step="0.01" class="form-control">
-                        </td>
-                        <td></td>
+                        <td><h5 align="right"><b>Total</b></h5><td>
+                        <input id="total2" type="Number" step="0.01" class="form-control">
                     </tr>
                     </tfoot>
                 </table> 
+            </div>
+            </div>
+            </div>
 
 
-            <br>    
+
             <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+               </div>
+              <div class="panel-body">
+
+
+            <div align="center">
                 <table id="3" cellpadding="0" cellspacing="3">
                     <thead>
                         <tr>
@@ -243,27 +270,31 @@
                             <tr>
                                 <td><input id="maxilar" type="Texto" class="form-control"></td>
                                 <td><input id="maxilareden" type="Texto" class="form-control"></td>
-                                <td><input id="maxilartotal" type="Number" step="0.01" class="form-control"></td>
+                                <td><input id="maxilartotal" type="Number" step="0.001" class="form-control"></td>
                             </tr>
                             <tr>
                                 <td><input id="mandibular" type="Texto" class="form-control"></td>
                                 <td><input id="mandibulareden" type="Texto" class="form-control"></td>
-                                <td><input id="mandibulartotal" type="Number" step="0.01" class="form-control"></td>
+                                <td><input id="mandibulartotal" type="Number" step="0.001" class="form-control"></td>
                             </tr>
                     </tbody>
                   
                 </table>  
             </div>
+            </div>
+            </div>
+            </div>
 
 
 
-    <br>
+
+
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
             
             <br><br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/diag_cefalo/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+              <a href="/diag_cefalo/nuevo/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
             </div> 
 
             <div class="col-md-3 col-md-offset-1">
@@ -273,6 +304,9 @@
         </div>
         <br><br>
     </div>
+
+
+
 
      <!-- Barra de progreso -->
         <br>

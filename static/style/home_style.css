@@ -1,4 +1,10 @@
 
+body {
+   overflow-x: hidden;  /* Oculpa o elimina scroll o barra de desplazamiento horizontal*/
+}
+
+
+
 * {
   padding: 0;
   margin: 0;

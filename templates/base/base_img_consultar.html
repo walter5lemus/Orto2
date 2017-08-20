@@ -45,13 +45,10 @@
 
 {% block navbar %}
 
- <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="sr-only">Toggle navigation</span>
-        <span class="sr-only">Toggle navigation</span>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="sr-only">Toggle navigation</span>
         <span class="sr-only">Toggle navigation</span>
@@ -65,16 +62,16 @@
 
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-        <li><a href="/gestor_img/paciente/consultar/{{codi}}/{{num}}/">Imágenes <br>Paciente</a></li>
+        <li><a href="/gestor_img/paciente/nuevo/{{codi}}/{{num}}/">Imágenes <br>Paciente</a></li>
 
-        <li><a href="/gestor_img/radiograficas/consultar/{{codi}}/{{num}}/">Fotos <br>Radiográficas</a></li>
+        <li><a href="/gestor_img/radiograficas/nuevo/{{codi}}/{{num}}/">Imágenes <br>Radiográficas</a></li>
 
-        <li><a href="/gestor_img/modelo/consultar/{{codi}}/{{num}}/">Imágenes Modelo <br>De Aparato</a></li>
+        <li><a href="/gestor_img/modelo/nuevo/{{codi}}/{{num}}/">Imágenes <br>Modelo de Aparato</a></li>
 
-        <li><a href="/gestor_img/aparato/consultar/{{codi}}/{{num}}/">Imágenes De <br>Aparato</a></li>
+        <li><a href="/gestor_img/aparato/nuevo/{{codi}}/{{num}}/">Imágenes <br>de Aparato</a></li>
 
         <li><a >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,13 +83,13 @@
 
       <ul class="nav navbar-nav navbar-right">
           <li class="active">
-            <a href="{%url 'logout' %}">Cerrar Sesión</a>
+            <a style="background-color: green" href="{%url 'logout' %}">Cerrar Sesión</a>
           </li> 
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <div class="col-md-3">
-          <h6 style="color:white">Hola, <B>{{user}}</B></h6>
+          <h6 style="color:white">Hola, <p><B>{{nombreUser}}</B></p></h6>
         </div>
       </ul>
 

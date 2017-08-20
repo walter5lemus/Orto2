@@ -1,8 +1,8 @@
-{% extends 'base/base_img_editar.html' %}
+{% extends 'base/base_img.html' %}
 {% load staticfiles %}
 
 {% block title %}
-    Fotos del paciente
+    Imágenes de Paciente
 {% endblock %}
 
 {% block header %}
@@ -22,10 +22,16 @@
 
   <div class="social">
     <ul>
+
+     <li>
+        <a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}">
+        <img class="icon-expediente" src="/media/imagenes/Menu/windows.png"></a>
+      </li>
+
       <li>
         <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
-      </li>
+      </li>     
       
     </ul>
   </div>
@@ -645,7 +651,8 @@ $("#id_usertwo").val( usernametwo );
 
     {{form.fichas}}
 
-    <h1> <center> Fotos del paciente </center></h1>
+    <br>
+    <h1><center> Imágenes del Paciente </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
@@ -666,7 +673,7 @@ $("#id_usertwo").val( usernametwo );
   <label for="control">Control:</label>
   <select class="form-control" id="control" onChange="ocultar();">
     <option value = "1">Inicial</option>
-    <option value = "2">2</option>
+    <option value = "2">Control 2</option>
   </select>
 
 </div>
@@ -691,13 +698,10 @@ $("#id_usertwo").val( usernametwo );
 
 <div id="fp1" class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos del paciente</h4>
-       <br>
-       <h4 class="panel-title">Control inicial</h4>
+       <h4 class="panel-title">Imágenes del Paciente: <b>Control Inicial</b></h4>
       </div>
     
-     <div class="panel-body">
-    <br>
+     <div class="panel-body"><br>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="{{form.pfacial.name}}">{{form.pfacial.label}}</label>
@@ -742,14 +746,10 @@ $("#id_usertwo").val( usernametwo );
 
 <div id="fi1" class="panel panel-primary">
       <div class="panel-heading"> 
-        <h4 class="panel-title">Fotografías intraorales</h4>
-        <br>
-        <h4 class="panel-title">Control inicial</h4>
+        <h4 class="panel-title">Fotografías intraorales: <b>Control Inicial</b></h4>
       </div>
     
-     <div class="panel-body">
-
-    <br>
+     <div class="panel-body"><br>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="{{form.osuperior.name}}">{{form.osuperior.label}}</label>  
@@ -805,15 +805,15 @@ $("#id_usertwo").val( usernametwo );
     </div>
 </div>
 
+
+
+
 <div id="fp2" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos del paciente</h4>
-       <br>
-       <h4 class="panel-title">Control 2</h4>
+       <h4 class="panel-title">Imágenes del Paciente: <b>Control 2</b></h4>
       </div>
     
-     <div class="panel-body">
-    <br>
+     <div class="panel-body"><br>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="{{form2.pfacial2.name}}">{{form2.pfacial2.label}}</label>
@@ -858,14 +858,10 @@ $("#id_usertwo").val( usernametwo );
 
 <div id="fi2" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-        <h4 class="panel-title">Fotografías intraorales</h4>
-        <br>
-        <h4 class="panel-title">Control 2</h4>
+        <h4 class="panel-title">Fotografías intraorales: <b>Control 2</b></h4>
       </div>
     
-     <div class="panel-body">
-
-    <br>
+     <div class="panel-body"><br>
         <div class="col-md-5">
             <div class="form-group">
                 <label for="{{form2.osuperior2.name}}">{{form2.osuperior2.label}}</label>  
@@ -925,22 +921,27 @@ $("#id_usertwo").val( usernametwo );
 
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/home/" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/home/" class="btn btn-default btn-block">Inicio</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
     </div>
-<!-- Barra de progreso -->
+
+    <!-- Barra de progreso -->
         <br><br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 36%;"></div>
+            <div class="progress-bar" style="width: 25%;"></div>
         </div>
         </div>
+
 
 </form>
 

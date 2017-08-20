@@ -35,18 +35,18 @@ class tipo(models.Model):
 		return '{}'.format(self.nombre)
 
 class tipo_denticion(models.Model):
-	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	tipo = models.OneToOneField(tipo, null=False, blank=False, on_delete=models.CASCADE, default=2)
+	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
+	tipo = models.ForeignKey(tipo, null=False, blank=False, on_delete=models.CASCADE, default=2)
 
 	def __unicode__(self):
 		return '{}'.format(self.fichas)
 
 class diastemas_denticion(models.Model):
 	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	cuad_uno = models.IntegerField()
-	pieza_uno = models.IntegerField()
-	cuad_dos = models.IntegerField()
-	pieza_dos = models.IntegerField()
+	cuad_uno = models.IntegerField(null=True, blank=True)
+	pieza_uno = models.IntegerField(null=True, blank=True)
+	cuad_dos = models.IntegerField(null=True, blank=True)
+	pieza_dos = models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
@@ -65,28 +65,28 @@ class denticion(models.Model):
 
 class linea_media_facial(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	mx = models.IntegerField(choices=mx_md_choices)
-	mx_desviacion = models.IntegerField(choices=desviaciones_choices)
-	md = models.IntegerField(choices=mx_md_choices)
-	md_desviacion = models.IntegerField(choices=desviaciones_choices)
+	mx = models.IntegerField(choices=mx_md_choices, default=0)
+	mx_desviacion = models.IntegerField(choices=desviaciones_choices, default=2)
+	md = models.IntegerField(choices=mx_md_choices, default=0)
+	md_desviacion = models.IntegerField(choices=desviaciones_choices, default=2)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class sobremordidas(models.Model):
 	fichas = models.OneToOneField(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	horizontal = models.IntegerField(choices=sobremordidas_choices)
-	vertical = models.IntegerField(choices=sobremordidas_choices)
+	horizontal = models.IntegerField(choices=sobremordidas_choices, default=0)
+	vertical = models.IntegerField(choices=sobremordidas_choices, default=0)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)
 
 class registro_mordidas(models.Model):
 	fichas = models.ForeignKey(fichas, null=False, blank=False, on_delete=models.CASCADE)
-	cuad_superior = models.IntegerField()
-	pieza_superior = models.IntegerField()
-	cuad_inferior = models.IntegerField()
-	pieza_inferior = models.IntegerField()
+	cuad_superior = models.IntegerField(null=True, blank=True)
+	pieza_superior = models.IntegerField(null=True, blank=True)
+	cuad_inferior = models.IntegerField(null=True, blank=True)
+	pieza_inferior = models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.fichas)

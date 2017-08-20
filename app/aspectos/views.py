@@ -341,7 +341,7 @@ def denticion2_view(request,codi,num):
 			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
+			return render(request, 'base/error_no_tipo_denticion.html', {'num':int(num), 'nombreUser':nombreUser, 'codi':codi})
 		else:
 			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
@@ -503,7 +503,7 @@ def denticion3_view(request,codi,num):
 			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
+			return render(request, 'base/error_no_tipo_denticion.html', {'num':int(num), 'nombreUser':nombreUser, 'codi':codi})
 		else:
 			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
@@ -714,7 +714,7 @@ def mordidas_view(request,codi,num):
 			return render(request, 'base/error_no_tiene_permiso.html', {'nombreUser':nombreUser})
 	except Exception, e:
 		if int(num)>1:
-			return render(request, 'base/error_no_existe.html', {'num':int(num)-1, 'nombreUser':nombreUser})
+			return render(request, 'base/error_no_tipo_denticion.html', {'num':int(num), 'nombreUser':nombreUser, 'codi':codi})
 		else:
 			return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 

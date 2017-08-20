@@ -1,8 +1,8 @@
-{% extends 'base/base_img_editar.html' %}
+{% extends 'base/base_img.html' %}
 {% load staticfiles %}
 
 {% block title %}
-    Fotos radiográficas
+    Imágenes Radiográficas
 {% endblock %}
 
 {% block header %}
@@ -18,6 +18,12 @@
 
   <div class="social">
     <ul>
+
+      <li>
+        <a href="/informacion/motivo_consultas/nuevo/{{codi}}/{{num}}">
+        <img class="icon-expediente" src="/media/imagenes/Menu/windows.png"></a>
+      </li>
+
       <li>
         <a href="/citas/nuevo/{{codi}}/{{num}}">
         <img class="icon-cita" src="/media/imagenes/Menu/calendar.png"></a>
@@ -73,7 +79,6 @@ $(document).ready(function(){
                 srp = data[i].fields.spano;
                 src = data[i].fields.scefa;
 
-
                 if (irp!='') {
                     $("#print_ipano").removeClass('botonprint');
                 }
@@ -97,7 +102,6 @@ $(document).ready(function(){
                 if (src!='') {
                     $("#print_scefa").removeClass('botonprint');
                 }
-
 
                 if (irp != "") {
                     document.getElementById("c1").style.display = 'inline';
@@ -145,6 +149,7 @@ $(document).ready(function(){
         },
     });
 });
+
 document.getElementById("ip").onclick = Asignarip;
 document.getElementById("ic").onclick = Asignaric;
 document.getElementById("tp").onclick = Asignartp;
@@ -256,7 +261,7 @@ $(this).val('');
 });
 });
 
-  $(function() {
+$(function() {
         $( "#id_ifecha" ).datepicker({
         dateFormat: "dd/mm/yy",
         defaultDate: "+1w",
@@ -311,7 +316,8 @@ $("#id_user").val( username );
 
     {{form.fichas}}
 
-    <h1> <center> Fotos radiográficas </center></h1>
+    <br>
+    <h1><center> Imagenes Radiográficas </center></h1>
         <div class="col-md-12 col-md-offset-2">
         <div class="form-group">
             <div class="col-md-4">
@@ -339,14 +345,11 @@ $("#id_user").val( username );
 
 <br><br><br><br><br><br><br><br>
 
- {{form.user}}
-
+{{form.user}}
 
 <div id="ir" class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control inicial</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control inicial</b></h4>
       </div>
     
      <div class="panel-body">
@@ -373,9 +376,10 @@ $("#id_user").val( username );
                 <br>
                 <br>
                 <br>
-                <img id="ic">  
-                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_icefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_icefa();"><br>   
-            </div>            
+                <img id="ic">
+                <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_icefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_icefa();">  
+                <br>   
+            </div>
         </div> 
         <div class="col-md-5">
             <div class="form-group">
@@ -387,9 +391,7 @@ $("#id_user").val( username );
 
 <div id="tr" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control trazados</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control Trazados</b></h4>
       </div>
     
      <div class="panel-body">
@@ -405,7 +407,7 @@ $("#id_user").val( username );
                 <p id="c4" style="display:none;color:green;">Este campo ya posee una imagen</p>
                 <br>
                 <label for="{{form.tfecha.name}}">{{form.tfecha.label}}</label> 
-                {{form.tfecha}}  
+                {{form.tfecha}}
             </div>            
         </div>
         <div class="col-md-2">
@@ -416,7 +418,7 @@ $("#id_user").val( username );
                 <br>
                 <br>
                 <br>
-                <img id="tc">
+                <img id= "tc">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_tcefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_tcefa();"> 
                 <br>   
             </div>            
@@ -431,9 +433,7 @@ $("#id_user").val( username );
 
 <div id="sr" style='display:none;' class="panel panel-primary">
       <div class="panel-heading"> 
-       <h4 class="panel-title">Fotos Radiográficas</h4>
-       <br>
-       <h4 class="panel-title">Control seguimiento</h4>
+       <h4 class="panel-title">Imágenes Radiográficas: <b>Control Seguimiento</b></h4>
       </div>
     
      <div class="panel-body">
@@ -460,9 +460,9 @@ $("#id_user").val( username );
                 <br>
                 <br>
                 <br>
-                <img id="sc">  
+                <img id="sc">
                 <img class="col-md-offset-2 botonprint" width="40" height="45" id="print_scefa" src=" {% static 'images/print.png' %}" onclick="redireccionar_scefa();">
-            <br>   
+                <br>   
             </div>            
         </div> 
         <div class="col-md-5">
@@ -473,30 +473,34 @@ $("#id_user").val( username );
     </div>
 </div>
 
-<br>
 
+
+    <br>
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
+            <br>
             <div class="col-md-3 col-md-offset-2">
-              <a href="/gestor_img/paciente/editar/{{codi}}/{{num}}" class="btn btn-warning btn-block">Regresar</a>
+              <a href="/gestor_img/paciente/editar/{{codi}}/{{num}}" class="btn btn-default btn-block">Regresar</a>
+            </div> 
+
+            <div class="col-md-3 col-md-offset-1">
+              <center><button type="submit" class="btn btn-primary btn-block">Siguiente</button></center>
             </div>
-            <div class="col-md-3 col-md-offset-2">
-              <center><button type="submit" class="btn btn-success btn-block">Siguiente</button></center>
-            </div>
+        
         </div>
         <br><br>
     </div>
+
 
 <!-- Barra de progreso -->
         <br><br>
         <div class="col-md-10 col-md-offset-1">
         <div class="progress">
-            <div class="progress-bar" style="width: 36%;"></div>
+            <div class="progress-bar" style="width: 50%;"></div>
         </div>
         </div>
 
 </form>
-
 
 <script>
     function redireccionar_ipano(){

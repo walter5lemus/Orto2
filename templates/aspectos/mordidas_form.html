@@ -15,6 +15,65 @@ Aspectos de dentición - Parte 2
     <script type="text/javascript" src="{% static 'js/denticion.js' %}"></script>
 
     <script type="text/javascript">
+
+    ocacionesmx = 0;
+    ocacionesmd = 0;
+
+    $(document).ready(function(){
+
+        if(document.getElementById("id_mx").value == 0)
+        {
+            $("#id_mx_desviacion option[value='1']").remove();
+            $("#id_mx_desviacion option[value='3']").remove();
+        }
+
+        if(document.getElementById("id_md").value == 0)
+        {
+            $("#id_md_desviacion option[value='1']").remove();
+            $("#id_md_desviacion option[value='3']").remove();
+        }       
+    });
+
+    $('#id_mx').change(function() {
+        if(document.getElementById("id_mx").value == 0)
+        {
+            $("#id_mx_desviacion option[value='1']").remove();
+            $("#id_mx_desviacion option[value='3']").remove();
+            $("#id_mx_desviacion").append('<option value="2">Centrado</option>');
+            ocacionesmx = 0;
+        }
+        else
+        {   
+            if(ocacionesmx == 0)
+            {
+                $("#id_mx_desviacion").append('<option value="1">Derecha</option>');            
+                $("#id_mx_desviacion").append('<option value="3">Izquierda</option>');
+                $("#id_mx_desviacion option[value='2']").remove();
+                ocacionesmx = 1;
+            }
+        }       
+    });
+    
+    $('#id_md').change(function() {
+        if(document.getElementById("id_md").value == 0)
+        {
+            $("#id_md_desviacion option[value='1']").remove();
+            $("#id_md_desviacion option[value='3']").remove();
+            $("#id_md_desviacion").append('<option value="2">Centrado</option>');
+            ocacionesmd = 0;
+        }
+        else
+        {   
+            if(ocacionesmd == 0)
+            {
+                $("#id_md_desviacion").append('<option value="1">Derecha</option>');            
+                $("#id_md_desviacion").append('<option value="3">Izquierda</option>');
+                $("#id_md_desviacion option[value='2']").remove();
+                ocacionesmd = 1;
+            }
+        }       
+    });
+
     var guardar;
     cuadran = 1;
     del = 1;
