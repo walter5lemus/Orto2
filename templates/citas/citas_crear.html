@@ -946,10 +946,11 @@ $( "#finalizar_control" ).click(function() {
 					  location.href = "/";
 					});
 				},
-				error: function(response){				
+				error: function(data){
+					errors = $.parseJSON(data.responseText);
 					swal({
-					  title: "ERROR!",
-					  text: "¡Complete todas las partes de la ficha o puede que la cita no este aprobada!",
+					  title: "¡ERROR!",
+					  text: "¡ "+errors.reason+" !",
 					  type: "error",
 					  showCancelButton: true,
 					  confirmButtonColor: "#DD6B55",

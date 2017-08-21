@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse_lazy
@@ -43,6 +44,7 @@ def citas_crear(request,codi,num):
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		try:
 			incompletos =list()
+
 			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
 			for fi in ficha:
 				if not registro.objects.filter(fichas_id=fi.id).exists():
@@ -177,8 +179,7 @@ def citas_consultar(request,codi,num):
 					incompletos.append(-4)
 				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-5)
-				if not registro.objects.filter(fichas_id=fi.id).exists():
-					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+				if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
 						incompletos.append(-6)
 				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
 					incompletos.append(-7)	
@@ -301,8 +302,6 @@ def autorizacion(request):
 	cod = request.POST['codigo']
 	num = request.POST['numero']
 
-	print "entra"
-
 	if request.method == 'POST':
 		num_cita=1
 		if fichas.objects.filter(cod_expediente_id=cod,numero=num).exists():
@@ -331,51 +330,118 @@ class finalizar(TemplateView):
 						if estado_general.objects.filter(fichas_id=fi.id).exists():
 							if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
 								if registro.objects.filter(fichas_id=fi.id).exists():
-									#if registro_mordidas.objects.filter(fichas_id=fi.id).exists():
-										#if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-									if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-										if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-											if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-												if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-													if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-														if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-															if nance_general.objects.filter(fichas_id=fi.id).exists():
-																if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-																	if moyers_superior.objects.filter(fichas_id=fi.id).exists():
-																		if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-																			if imagenes_afmp.objects.filter(fichas_id=fi.id).exists():
-																				fichas.objects.filter(id=fi.id).update(completada=1)
-																				return HttpResponse('<script>alert("Se autorizo");</script>')
+									if diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+										if registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+											if sobremordidas.objects.filter(fichas_id=fi.id).exists():
+												if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+													if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+														if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+															if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+																if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+																	if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+																		if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+																			if nance_general.objects.filter(fichas_id=fi.id).exists():
+																				if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+																					if moyers_superior.objects.filter(fichas_id=fi.id).exists():
+																						if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+																							if imagenes_afmp.objects.filter(fichas_id=fi.id).exists():
+																								fichas.objects.filter(id=fi.id).update(completada=1)
+																								return HttpResponse('<script>alert("Se autorizo");</script>')
+																							else:
+																								data = {
+																								    'status': '401', 'reason': 'No se encontró la imagen AFMP en Relaciones Sagitales'  
+																								}
+																								return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																						else:
+																							data = {
+																							    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico General"'  
+																							}
+																							return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
+																					else:
+																						data = {
+																						    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Superior"'  
+																						}
+																						return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																				else:
+																					data = {
+																					    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Inferior"'  
+																					}
+																					return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																			else:
-																				return HttpResponse('Sin imagen AFMP', status=401)
+																				data = {
+																				    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Nance"'  
+																				}
+																				return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																		else:
-																			return HttpResponse('16', status=401)
+																			data = {
+																			    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico Cefalométrico"'  
+																			}
+																			return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																	else:
-																		return HttpResponse('15', status=401)
+																		data = {
+																		    'status': '401', 'reason': 'No se encontraron datos en "Análisis Cefalométrico"'  
+																		}
+																		return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																else:
-																	return HttpResponse('14', status=401)
+																	data = {
+																	    'status': '401', 'reason': 'No se encontraron datos en "Otros Hallazgos"'  
+																	}
+																	return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 															else:
-																return HttpResponse('13', status=401)
+																data = {
+																    'status': '401', 'reason': 'No se encontraron datos en "Otros Aspectos"'  
+																}
+																return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 														else:
-															return HttpResponse('12', status=401)
+															data = {
+															    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Mandibulares"'  
+															}
+															return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 													else:
-														return HttpResponse('11', status=401)
+														data = {
+														    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Articulares"'  
+														}
+														return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 												else:
-													return HttpResponse('10', status=401)
+													data = {
+													    'status': '401', 'reason': 'No se encontraron datos en "Relaciones Sagitales"'  
+													}
+													return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 											else:
-												return HttpResponse('9', status=401)
+												data = {
+												    'status': '401', 'reason': 'No se encontraron datos en "Mordidas Cruzadas"'  
+												}
+												return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 										else:
-											return HttpResponse('8', status=401)
+											data = {
+											    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 3"'  
+											}
+											return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 									else:
-										return HttpResponse('7', status=401)	
-								#else:
-								#	return HttpResponse('4', status=401)
+										data = {
+										    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 2"'  
+										}
+										return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
+								else:
+									data = {
+									    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 1"'  
+									}
+									return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
 							else:
-								return HttpResponse('3', status=401)
+								data = {
+								    'status': '401', 'reason': 'No se encontraron datos en "Tipo de Perfil"'  
+								}
+								return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 						else:
-							return HttpResponse('2', status=401)
+							data = {
+							    'status': '401', 'reason': 'No se encontraron datos en "Estado General"'  
+							}
+							return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 					else:
-						return HttpResponse('1', status=401)
+						data = {
+							    'status': '401', 'reason': 'No se encontraron datos en "Motivo de Consulta"'  
+							}
+						return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 
 
 class BusquedaAjaxView(TemplateView):
