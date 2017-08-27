@@ -26,6 +26,7 @@ from django.core import serializers
 from django.http import HttpResponse
 import json
 import time	
+from app.gestorImg.models import img_paciente, img_paciente2, img_radiograficas, img_modelo, img_aparato 
 
 from app.analisis_cefalometrico.models import *
 from app.analisis_radiograficos.models import *
@@ -323,125 +324,280 @@ class finalizar(TemplateView):
 	def get(self,request,*args,**kwargs):
 		cod = request.GET['codigo']
 		num = request.GET['numero']
+
 		if request.method == 'GET':
-				codigos = fichas.objects.filter(cod_expediente=cod,numero=num)
-				for fi in codigos:
-					if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-						if estado_general.objects.filter(fichas_id=fi.id).exists():
-							if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-								if registro.objects.filter(fichas_id=fi.id).exists():
-									if diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
-										if registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
-											if sobremordidas.objects.filter(fichas_id=fi.id).exists():
-												if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-													if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-														if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-															if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-																if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-																	if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-																		if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-																			if nance_general.objects.filter(fichas_id=fi.id).exists():
-																				if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-																					if moyers_superior.objects.filter(fichas_id=fi.id).exists():
-																						if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-																							if imagenes_afmp.objects.filter(fichas_id=fi.id).exists():
-																								fichas.objects.filter(id=fi.id).update(completada=1)
-																								return HttpResponse('<script>alert("Se autorizo");</script>')
+			codigos = fichas.objects.filter(cod_expediente=cod,numero=num)
+			for fi in codigos:
+				if img_paciente.objects.filter(fichas_id=fi.id).exists():
+					imagen1 = img_paciente.objects.get(fichas_id=fi.id)
+				if img_radiograficas.objects.filter(fichas_id=fi.id).exists():
+					imagen2 = img_radiograficas.objects.get(fichas_id=fi.id)
+				if img_modelo.objects.filter(fichas_id=fi.id).exists():
+					imagen3 = img_modelo.objects.get(fichas_id=fi.id)
+				if img_aparato.objects.filter(fichas_id=fi.id).exists():
+					imagen4 = img_aparato.objects.get(fichas_id=fi.id)
+				
+				if motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+					if estado_general.objects.filter(fichas_id=fi.id).exists():
+						if TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+							if registro.objects.filter(fichas_id=fi.id).exists():
+								if diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+									if registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+										if sobremordidas.objects.filter(fichas_id=fi.id).exists():
+											if relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+												if aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+													if aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+														if aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+															if estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+																if analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+																	if diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+																		if nance_general.objects.filter(fichas_id=fi.id).exists():
+																			if moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+																				if moyers_superior.objects.filter(fichas_id=fi.id).exists():
+																					if diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+																						if imagenes_afmp.objects.filter(fichas_id=fi.id).exists():
+																							if img_paciente.objects.filter(fichas_id=fi.id).exists():
+																								if imagen1.pfacial != "":
+																									if imagen1.pfrontal  != "":
+																										if imagen1.psonrisa  != "":
+																											if imagen1.osuperior != "":
+																												if imagen1.oinferior != "":
+																													if imagen1.lizquierdo   !="":
+																														if imagen1.lderecho   != "":
+																															if imagen1.frontal   != "":
+																																if img_radiograficas.objects.filter(fichas_id=fi.id).exists():
+																																	if imagen2.ipano != "":
+																																		if imagen2.icefa   != "":
+																																			if imagen2.tpano  != "":
+																																				if imagen2.tcefa != "":
+																																					if img_modelo.objects.filter(fichas_id=fi.id).exists():
+																																						if imagen3.osupm   != "":
+																																							if imagen3.oinfm   !="":
+																																								if imagen3.lizqm   != "":
+																																									if imagen3.frontm   != "":
+																																										if imagen3.lderm   != "":
+																																											if img_aparato.objects.filter(fichas_id=fi.id).exists():
+																																												if imagen4.aparatof   != "":
+																																													if imagen4.aparatol   != "":
+																																														if imagen4.aparato   != "":
+																																															fichas.objects.filter(id=fi.id).update(completada=1)
+																																															return HttpResponse('<script>alert("Se autorizo");</script>')
+																																														else:
+																																															data = {
+																																															    'status': '401', 'reason': 'No se encontró la imagen Aparato en el gestor de imagenes'  
+																																															}
+																																															return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																													else:
+																																														data = {
+																																														    'status': '401', 'reason': 'No se encontró la imagen Aparato Lateral en el gestor de imagenes'  
+																																														}
+																																														return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																												else:
+																																													data = {
+																																													    'status': '401', 'reason': 'No se encontró la imagen Aparato Frontal en el gestor de imagenes'  
+																																													}
+																																													return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																											else:
+																																													data = {
+																																													    'status': '401', 'reason': 'No se encontró ninguna imagen en imágenes de Aparato'  
+																																													}
+																																													return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
+																																										else:
+																																											data = {
+																																											    'status': '401', 'reason': 'No se encontró la imagen Lateral Derecho en el gestor de imagenes'  
+																																											}
+																																											return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																									else:
+																																										data = {
+																																										    'status': '401', 'reason': 'No se encontró la imagen Frontal en el gestor de imagenes'  
+																																										}
+																																										return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																								else:
+																																									data = {
+																																									    'status': '401', 'reason': 'No se encontró la imagen Lateral Izquierdo en el gestor de imagenes'  
+																																									}
+																																									return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																							else:
+																																								data = {
+																																								    'status': '401', 'reason': 'No se encontró la imagen Oclusal Inferior en el gestor de imagenes'  
+																																								}
+																																								return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																						else:
+																																							data = {
+																																							    'status': '401', 'reason': 'No se encontró la imagen Oclusal Superior en el gestor de imagenes'  
+																																							}
+																																							return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																					else:
+																																							data = {
+																																							    'status': '401', 'reason': 'No se encontró ninguna imagen en Imágenes Modelo de Aparato'  
+																																							}
+																																							return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
+																																				else:
+																																					data = {
+																																					    'status': '401', 'reason': 'No se encontró la Radiografía Cefalométrica del Control Trazados en el gestor de imagenes'  
+																																					}
+																																					return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																			else:
+																																				data = {
+																																				    'status': '401', 'reason': 'No se encontró la Radiografía Panorámica del Control Trazados en el gestor de imagenes'  
+																																				}
+																																				return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																		else:
+																																			data = {
+																																			    'status': '401', 'reason': 'No se encontró la Radiografía Cefalométrica del Control Inicial en el gestor de imagenes'  
+																																			}
+																																			return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																	else:
+																																		data = {
+																																		    'status': '401', 'reason': 'No se encontró la Radiografía Panorámica del Control inicial en el gestor de imagenes'  
+																																		}
+																																		return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																																else:
+																																	data = {
+																																	    'status': '401', 'reason': 'No se encontró ninguna imagen en Imágenes Radiográficas'  
+																																	}
+																																	return HttpResponse( json.dumps( data), content_type='application/json', status=401)					
+																															else:
+																																data = {
+																																    'status': '401', 'reason': 'No se encontró la imagen Frontal en el gestor de imagenes'  
+																																}
+																																return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																														else:
+																															data = {
+																															    'status': '401', 'reason': 'No se encontró la imagen Lateral Derecho en el gestor de imagenes'  
+																															}
+																															return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																													else:
+																														data = {
+																														    'status': '401', 'reason': 'No se encontró la imagen Lateral Izquierdo en el gestor de imagenes'  
+																														}
+																														return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																												else:
+																													data = {
+																													    'status': '401', 'reason': 'No se encontró la imagen Inferior Superior en el gestor de imagenes'  
+																													}
+																													return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																											else:
+																												data = {
+																												    'status': '401', 'reason': 'No se encontró la imagen Oclusal Superior en el gestor de imagenes'  
+																												}
+																												return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																										else:
+																											data = {
+																											    'status': '401', 'reason': 'No se encontró la imagen Perfil Sonrisa en el gestor de imagenes'  
+																											}
+																											return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																									else:
+																										data = {
+																										    'status': '401', 'reason': 'No se encontró la imagen Perfil Frontal en el gestor de imagenes'  
+																										}
+																										return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
+																								else:
+																									data = {
+																									    'status': '401', 'reason': 'No se encontró la imagen Perfil Facial en el gestor de imagenes'  
+																									}
+																									return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																							else:
 																								data = {
-																								    'status': '401', 'reason': 'No se encontró la imagen AFMP en Relaciones Sagitales'  
+																								    'status': '401', 'reason': 'No se encontró ninguna imagen en Imágenes de Paciente'  
 																								}
-																								return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																								return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
 																						else:
 																							data = {
-																							    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico General"'  
+																							    'status': '401', 'reason': 'No se encontró la imagen AFMP en Relaciones Sagitales'  
 																							}
-																							return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
+																							return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																					else:
 																						data = {
-																						    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Superior"'  
+																						    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico General"'  
 																						}
-																						return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+																						return HttpResponse( json.dumps( data), content_type='application/json', status=401)		
 																				else:
 																					data = {
-																					    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Inferior"'  
+																					    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Superior"'  
 																					}
 																					return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																			else:
 																				data = {
-																				    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Nance"'  
+																				    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Moyers Inferior"'  
 																				}
 																				return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																		else:
 																			data = {
-																			    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico Cefalométrico"'  
+																			    'status': '401', 'reason': 'No se encontraron datos en "Análisis de Nance"'  
 																			}
 																			return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																	else:
 																		data = {
-																		    'status': '401', 'reason': 'No se encontraron datos en "Análisis Cefalométrico"'  
+																		    'status': '401', 'reason': 'No se encontraron datos en "Diagnóstico Cefalométrico"'  
 																		}
 																		return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 																else:
 																	data = {
-																	    'status': '401', 'reason': 'No se encontraron datos en "Otros Hallazgos"'  
+																	    'status': '401', 'reason': 'No se encontraron datos en "Análisis Cefalométrico"'  
 																	}
 																	return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 															else:
 																data = {
-																    'status': '401', 'reason': 'No se encontraron datos en "Otros Aspectos"'  
+																    'status': '401', 'reason': 'No se encontraron datos en "Otros Hallazgos"'  
 																}
 																return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 														else:
 															data = {
-															    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Mandibulares"'  
+															    'status': '401', 'reason': 'No se encontraron datos en "Otros Aspectos"'  
 															}
 															return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 													else:
 														data = {
-														    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Articulares"'  
+														    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Mandibulares"'  
 														}
 														return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 												else:
 													data = {
-													    'status': '401', 'reason': 'No se encontraron datos en "Relaciones Sagitales"'  
+													    'status': '401', 'reason': 'No se encontraron datos en "Aspectos Articulares"'  
 													}
 													return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 											else:
 												data = {
-												    'status': '401', 'reason': 'No se encontraron datos en "Mordidas Cruzadas"'  
+												    'status': '401', 'reason': 'No se encontraron datos en "Relaciones Sagitales"'  
 												}
 												return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 										else:
 											data = {
-											    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 3"'  
+											    'status': '401', 'reason': 'No se encontraron datos en "Mordidas Cruzadas"'  
 											}
 											return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 									else:
 										data = {
-										    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 2"'  
+										    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 3"'  
 										}
-										return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
+										return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 								else:
 									data = {
-									    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 1"'  
+									    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 2"'  
 									}
 									return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
 							else:
 								data = {
-								    'status': '401', 'reason': 'No se encontraron datos en "Tipo de Perfil"'  
+								    'status': '401', 'reason': 'No se encontraron datos en "Examen de Dentición 1"'  
 								}
-								return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+								return HttpResponse( json.dumps( data), content_type='application/json', status=401)	
 						else:
 							data = {
-							    'status': '401', 'reason': 'No se encontraron datos en "Estado General"'  
+							    'status': '401', 'reason': 'No se encontraron datos en "Tipo de Perfil"'  
 							}
 							return HttpResponse( json.dumps( data), content_type='application/json', status=401)
 					else:
 						data = {
-							    'status': '401', 'reason': 'No se encontraron datos en "Motivo de Consulta"'  
-							}
+						    'status': '401', 'reason': 'No se encontraron datos en "Estado General"'  
+						}
 						return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+				else:
+					data = {
+						    'status': '401', 'reason': 'No se encontraron datos en "Motivo de Consulta"'  
+						}
+					return HttpResponse( json.dumps( data), content_type='application/json', status=401)
+
 
 
 class BusquedaAjaxView(TemplateView):

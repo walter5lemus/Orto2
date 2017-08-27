@@ -250,65 +250,65 @@ def DatosGenerales_consultar(request,codi,num):
 	str(codi)
 	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
 
-	try:
-		ids = datos_generales.objects.get(cod_expediente=codi)
-		if ids:
-			incompletos =list()
-			ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
-			for fi in ficha:
-				if not datos_generales.objects.filter(cod_expediente=codi).exists():
-					incompletos.append(0)
-				if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-1)
-				if not estado_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-2)
-				if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-3)
-				if not registro.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-4)
-				if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-5)
-				if not registro.objects.filter(fichas_id=fi.id).exists():
-					if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
-						incompletos.append(-6)
-				if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-7)	
-				if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-8)
-				if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-9)
-				if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-10)
-				if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-11)
-				if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-12)
-				if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-13)
-				if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-14)
-				if not nance_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-15)
-				if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-16)
-				if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-17)
-				if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
-					incompletos.append(-18)
+	#try:
+	ids = datos_generales.objects.get(cod_expediente=codi)
+	if ids:
+		incompletos =list()
+		ficha = fichas.objects.filter(cod_expediente=codi,numero=num)
+		for fi in ficha:
+			if not datos_generales.objects.filter(cod_expediente=codi).exists():
+				incompletos.append(0)
+			if not motivo_consulta.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-1)
+			if not estado_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-2)
+			if not TipoPerfil.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-3)
+			if not registro.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-4)
+			if not diastemas_denticion.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-5)
+			if not registro.objects.filter(fichas_id=fi.id).exists():
+				if not registro.objects.filter(fichas_id=fi.id,problema_id=4).exists():
+					incompletos.append(-6)
+			if not sobremordidas.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-7)	
+			if not relaciones_sagitales.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-8)
+			if not aspectos_articulares.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-9)
+			if not aspectos_mandibulares1.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-10)
+			if not aspectos_mandibulares2.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-11)
+			if not estadios_de_nolla.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-12)
+			if not analisis_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-13)
+			if not diagnostico_cefalometrico.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-14)
+			if not nance_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-15)
+			if not moyers_inferior.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-16)
+			if not moyers_superior.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-17)
+			if not diagnostico_general.objects.filter(fichas_id=fi.id).exists():
+				incompletos.append(-18)
 
-			datos = datos_generales.objects.get(cod_expediente=codi)
-			if request.method == 'GET':
-				form = DatosGeneralesForm_consultar(instance=datos)
-			else: 
-				form = DatosGeneralesForm_consultar(request.POST, instance=datos)
-				if form.is_valid():
-					form.save()
-				return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
+		datos = datos_generales.objects.get(cod_expediente=codi)
+		if request.method == 'GET':
+			form = DatosGeneralesForm_consultar(instance=datos,initial={'usuario_creador':str(datos.usuario_creador)})
+		else: 
+			form = DatosGeneralesForm_consultar(request.POST, instance=datos)
+			if form.is_valid():
+				form.save()
+			return HttpResponseRedirect('/informacion/motivo_consultas/consultar/%s/%s/' %(codi,num))
 
-			return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
-		return HttpResponse("No se encontro el Codigo de Expediente")
-	except Exception, e:
-		return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
+		return render(request,'informacion/form_datosGenerales_consultar.html',{'form':form,'codi':codi,'num':num,'incompletos':incompletos, 'nombreUser':nombreUser})
+	return HttpResponse("No se encontro el Codigo de Expediente")
+	#except Exception, e:
+	#	return render(request, 'base/error_no_encontrado.html', {'nombreUser':nombreUser})
 
 
 

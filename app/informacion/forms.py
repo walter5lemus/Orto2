@@ -113,7 +113,7 @@ class DatosGeneralesForm_consultar(forms.ModelForm):
 			'direccion':'Dirección',
 			'departamento':'Departamento',
 			'nombre_resp':'Nombre del Padre o Encargado',
-			'usuario_creador':'Nombre y Carne del creador',
+			'usuario_creador':'Usuario creador',
 			'fecha_hora_creacion':'Fecha y hora de creación',
 		}
 
@@ -128,7 +128,7 @@ class DatosGeneralesForm_consultar(forms.ModelForm):
 			'direccion':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'departamento':forms.Select(attrs={'class':'form-control','readonly':True,'disabled':True}),
 			'nombre_resp':forms.TextInput(attrs={'class':'form-control','readonly':True}),
-			'usuario_creador':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
+			'usuario_creador':forms.TextInput(attrs={'class':'form-control','readonly':True}),
 			'fecha_hora_creacion':forms.DateTimeInput(attrs={'class':'form-control','readonly':True}),
 		
 		}
