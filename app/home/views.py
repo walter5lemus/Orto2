@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView,UpdateView
@@ -26,7 +28,7 @@ from app.tipo_perfil.models import *
 
 def index(request):
 	user = request.user.id
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 	
 	completos = list()
 	expedientes = fichas.objects.filter(usuario_creador=user,completada=1)

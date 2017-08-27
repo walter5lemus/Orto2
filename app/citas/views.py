@@ -40,7 +40,7 @@ from app.tipo_perfil.models import *
 
 # Create your views here.
 def citas_crear(request,codi,num):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		try:
@@ -68,7 +68,7 @@ def citas_crear(request,codi,num):
 
 
 def citas_editar(request,codi,num):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		incompletos =list()
@@ -128,7 +128,7 @@ def citas_editar(request,codi,num):
 
 
 def citas_editar2(request,codi,num,numeroCita):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
@@ -158,7 +158,7 @@ def citas_editar2(request,codi,num,numeroCita):
 
 
 def citas_consultar(request,codi,num):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if fichas.objects.filter(cod_expediente=codi, numero=num).exists():
 		try:
@@ -220,7 +220,7 @@ def citas_consultar(request,codi,num):
 
 def citas_crear2(request):
 	user = request.user.id
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.method == 'POST':
 		form2 = citasForm(request.POST,initial={})
@@ -661,7 +661,7 @@ class BusquedaCitasListar(TemplateView):
 def registrocita(request,codi):
 	str(codi)
 	user = request.user.id
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 	
 	entro = 0;
 	num=0 

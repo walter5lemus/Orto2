@@ -26,7 +26,7 @@ codi="0000-00"
 def cefalometrico_view(request,codi,num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -80,7 +80,7 @@ def cefalometrico_view(request,codi,num):
 def cefalometrico_editar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -157,7 +157,7 @@ def cefalometrico_editar(request, codi, num):
 def cefalometrico_consultar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)

@@ -27,7 +27,7 @@ codi=""
 def AspectosArticulares_Crear(request,codi,num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -77,7 +77,7 @@ def AspectosArticulares_Crear(request,codi,num):
 def AspectosArticulares_consultar(request,codi,num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -140,7 +140,7 @@ def AspectosArticulares_consultar(request,codi,num):
 def AspectosArticulares_edit(request,codi,num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -219,7 +219,7 @@ def AspectosArticulares_edit(request,codi,num):
 def otrosAspectos_crear(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
@@ -266,7 +266,7 @@ def otrosAspectos_crear(request, codi, num):
 def otrosAspectos_consultar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -330,7 +330,7 @@ def otrosAspectos_consultar(request, codi, num):
 def otrosAspectos_editar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -408,7 +408,7 @@ def otrosAspectos_editar(request, codi, num):
 def otrosHallazgos_crear(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		incompletos =list()
@@ -465,7 +465,7 @@ def otrosHallazgos_crear(request, codi, num):
 def otrosHallazgos_consultar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -533,7 +533,7 @@ def otrosHallazgos_consultar(request, codi, num):
 def otrosHallazgos_editar(request, codi, num):
 
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:

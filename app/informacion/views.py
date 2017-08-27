@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import CreateView,UpdateView
@@ -31,7 +33,7 @@ codi=""
 
 def CodExpediente_crear(request):
 	user = request.user.id
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.method == 'POST':
 		form = DatosGeneralesForm(request.POST)
@@ -172,7 +174,7 @@ class busquedaCodigo(TemplateView):
 
 
 def CodExpediente_consular(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	form = DatosGeneralesForm()
 	return render(request, 'informacion/form_inicio_consultar.html', {'form':form, 'nombreUser':nombreUser})
@@ -180,7 +182,7 @@ def CodExpediente_consular(request):
 
 
 def CodExpediente_editar(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.method == 'POST':
 		form = DatosGeneralesForm(request.POST)
@@ -199,7 +201,7 @@ def CodExpediente_editar(request):
 
 def DatosGeneral_crear(request):
 	user = request.user.id
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	num = 1
 	if request.method == 'POST':
@@ -217,7 +219,7 @@ def DatosGeneral_crear(request):
 
 def DatosGeneral_crear2(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = datos_generales.objects.get(cod_expediente=codi)
@@ -248,7 +250,7 @@ def DatosGeneral_crear2(request,codi,num):
 
 def DatosGenerales_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	#try:
 	ids = datos_generales.objects.get(cod_expediente=codi)
@@ -313,7 +315,7 @@ def DatosGenerales_consultar(request,codi,num):
 
 
 def DatosGenerales_consultar2(request,codi):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = datos_generales.objects.get(cod_expediente=codi)
@@ -334,7 +336,7 @@ def DatosGenerales_consultar2(request,codi):
 
 def DatosGenerales_edit(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		#try:
@@ -405,7 +407,7 @@ def DatosGenerales_edit(request,codi,num):
 ################################################################################################
 
 def Motivo_Consulta_crear(request,codi,num):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if int(num)==1:
 		if not fichas.objects.filter(cod_expediente_id=codi,numero=1).exists():
@@ -473,7 +475,7 @@ def Motivo_Consulta_crear(request,codi,num):
 
 def Motivo_Consulta_editar2(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -543,7 +545,7 @@ def Motivo_Consulta_editar2(request,codi,num):
 
 def Motivo_Consulta_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -603,7 +605,7 @@ def Motivo_Consulta_consultar(request,codi,num):
 
 def Motivo_Consulta_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -679,7 +681,7 @@ def Motivo_Consulta_editar(request,codi,num):
 
 def EstadoGeneral_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -737,7 +739,7 @@ def EstadoGeneral_crear(request,codi,num):
 
 def EstadoGeneral_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -799,7 +801,7 @@ def EstadoGeneral_consultar(request,codi,num):
 
 def EstadoGeneral_edit(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -872,7 +874,7 @@ def EstadoGeneral_edit(request,codi,num):
 
 def EstadoGeneral_edit2(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -899,7 +901,7 @@ def EstadoGeneral_edit2(request,codi,num):
 ################################################################################################
 
 def eliminar(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		if request.method == 'GET':
@@ -936,7 +938,7 @@ class ajax_eliminar_ficha(TemplateView):
 
 
 def retiro_voluntario(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		if request.method == 'GET':
@@ -950,7 +952,7 @@ def retiro_voluntario(request):
 
 class ajax_retiro_voluntario(TemplateView):
 	def get(self,request,*args,**kwargs):
-		nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+		nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 		if request.user.rol==1:
 			codigo = request.GET['codigo']
@@ -965,7 +967,7 @@ class ajax_retiro_voluntario(TemplateView):
 ################################################################################################
 
 def caducada(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		if request.method == 'GET':
@@ -979,7 +981,7 @@ def caducada(request):
 
 class ajax_caducada(TemplateView):
 	def get(self,request,*args,**kwargs):
-		nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+		nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 		if request.user.rol==1:
 			if fichas.objects.filter(completada=0).exists():

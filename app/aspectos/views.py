@@ -28,7 +28,7 @@ def index(request):
 
 def denticion1_view(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
 		if fichas.objects.filter(cod_expediente=codi, numero=num, usuario_creador=request.user.id, completada=0):
@@ -117,7 +117,7 @@ def denticion1_view(request,codi,num):
 
 def denticion1_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -219,7 +219,7 @@ class EliminarAjaxView(TemplateView):
 
 def denticion1_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -294,7 +294,7 @@ def denticion1_consultar(request,codi,num):
 
 def denticion2_view(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
@@ -349,7 +349,7 @@ def denticion2_view(request,codi,num):
 
 def denticion2_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -432,7 +432,7 @@ class Eliminar2AjaxView(TemplateView):
 
 def denticion2_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -456,7 +456,7 @@ def denticion2_consultar(request,codi,num):
 
 def denticion3_view(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
@@ -511,7 +511,7 @@ def denticion3_view(request,codi,num):
 
 def denticion3_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -587,7 +587,7 @@ def denticion3_editar(request,codi,num):
 
 def denticion3_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -652,7 +652,7 @@ def denticion3_consultar(request,codi,num):
 
 def mordidas_view(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num, completada=0)
@@ -721,7 +721,7 @@ def mordidas_view(request,codi,num):
 
 def mordidas_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -814,7 +814,7 @@ class EliminarMordidasAjaxView(TemplateView):
 
 def mordidas_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -885,7 +885,7 @@ def mordidas_consultar(request,codi,num):
 
 def relacionsagital_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -961,7 +961,7 @@ def relacionsagital_list(request):
 
 def relacionsagital_edit(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -1044,7 +1044,7 @@ def relacionsagital_edit(request,codi,num):
 
 def relacionsagital_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)

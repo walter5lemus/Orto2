@@ -26,7 +26,7 @@ codi="0000-00"
 
 def nance_crear(request,codi,num):  
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -112,7 +112,7 @@ def nance_crear(request,codi,num):
 
 def nance_consultar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -180,7 +180,7 @@ def nance_consultar(request, codi, num):
 
 def nance_editar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     if request.user.rol==1:
         try:
@@ -269,7 +269,7 @@ def nance_editar(request, codi, num):
 
 def moyerssup_view(request,codi,num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
@@ -327,7 +327,7 @@ def moyerssup_view(request,codi,num):
 
 def moyerssup_editar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     if request.user.rol==1:
         try:
@@ -408,7 +408,8 @@ def moyerssup_editar(request, codi, num):
 
 def moyerssup_consultar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
+
 
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -474,7 +475,7 @@ def moyerssup_consultar(request, codi, num):
 
 def moyersinf_view(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     try:
         ids = fichas.objects.get(cod_expediente=codi, numero=num,usuario_creador=request.user.id,completada=0)
@@ -532,7 +533,7 @@ def moyersinf_view(request, codi, num):
 
 def moyersinf_editar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     if request.user.rol==1:
         try:
@@ -615,7 +616,7 @@ def moyersinf_editar(request, codi, num):
 
 def moyersinf_consultar(request, codi, num):
     str(codi)
-    nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+    nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
     try:
         genero = datos_generales.objects.get(cod_expediente=codi)

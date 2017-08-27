@@ -18,7 +18,7 @@ def tipo_perfil(request):
 
 def tipo_perfil_view(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num,completada=0)
@@ -67,7 +67,7 @@ def tipo_perfil_view(request,codi,num):
 
 
 def tipo_perfil_list(request):
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	tipo_perfil = TipoPerfil.objects.all().order_by('fichas')
 	contexto = {'tipo_perfiles': tipo_perfil, 'nombreUser':nombreUser}
@@ -78,7 +78,7 @@ def tipo_perfil_list(request):
 
 def tipo_perfil_edit(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -153,7 +153,7 @@ def tipo_perfil_edit(request,codi,num):
 
 def tipo_perfil_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)

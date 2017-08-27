@@ -22,7 +22,7 @@ def index(request):
 
 def img_paciente_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -62,7 +62,7 @@ def img_paciente_crear(request,codi,num):
 
 def img_paciente_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -91,7 +91,7 @@ def img_paciente_editar(request,codi,num):
 
 def img_paciente_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)
@@ -137,7 +137,7 @@ class MostrarPaciente2(TemplateView):
 
 def img_radiograficas_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -169,7 +169,7 @@ def img_radiograficas_crear(request,codi,num):
 
 def img_radiograficas_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		pass
@@ -193,7 +193,7 @@ def img_radiograficas_editar(request,codi,num):
 
 def img_radiograficas_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)
@@ -221,7 +221,7 @@ class MostrarRadiograficas(TemplateView):
 
 def img_modelo_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -253,7 +253,7 @@ def img_modelo_crear(request,codi,num):
 
 def img_modelo_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol == 1:
 		try:
@@ -276,7 +276,7 @@ def img_modelo_editar(request,codi,num):
 
 def img_modelo_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)
@@ -304,7 +304,7 @@ class MostrarModelo(TemplateView):
 
 def img_aparato_crear(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi, numero=num)
@@ -336,7 +336,7 @@ def img_aparato_crear(request,codi,num):
 
 def img_aparato_editar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	if request.user.rol==1:
 		try:
@@ -359,7 +359,7 @@ def img_aparato_editar(request,codi,num):
 
 def img_aparato_consultar(request,codi,num):
 	str(codi)
-	nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+	nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
 	try:
 		ids = fichas.objects.get(cod_expediente=codi,numero=num)

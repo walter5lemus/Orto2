@@ -308,7 +308,7 @@ class ReporteImagenes(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -393,7 +393,7 @@ class ReporteImagenes2(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -477,7 +477,7 @@ class ReporteImagenes_Modelo(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -547,7 +547,7 @@ class ReporteImagenes_Radiograficas_panoramica_inicial(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -605,7 +605,7 @@ class ReporteImagenes_Radiograficas_panoramica_trazados(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -662,7 +662,7 @@ class ReporteImagenes_Radiograficas_panoramica_seguimiento(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -719,7 +719,7 @@ class ReporteImagenes_Radiograficas_cefalometrica_inicial(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -778,7 +778,7 @@ class ReporteImagenes_Radiograficas_cefalometrica_trazados(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
@@ -837,7 +837,7 @@ class ReporteImagenes_Radiograficas_cefalometrica_seguimiento(View):
     def get(self,request, *args, **kwargs):
         codigo = self.kwargs['codigo']
         numero = self.kwargs['num']
-        nombreUser = str(request.user.first_name) + " " + str(request.user.last_name)
+        nombreUser = str(request.user.first_name.encode('utf-8')) + " " + str(request.user.last_name.encode('utf-8'))
 
         try:
             if fichas.objects.filter(cod_expediente=codigo, numero=numero).exists(): 
